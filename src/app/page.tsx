@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { WhoWeAreSection } from '@/components/who-we-are-section';
-import { OurStorySection } from '@/components/our-story-section';
+import { WhyChooseUsSection } from '@/components/our-story-section';
 import { OurVisionSection } from '@/components/our-vision-section';
 import { OurMissionSection } from '@/components/our-mission-section';
 import { OurTeamSection } from '@/components/our-team-section';
@@ -74,7 +74,7 @@ export default function Home() {
       <div className="bg-[#1A1C20] relative">
         <WhoWeAreSection />
         <AnimateOnScroll>
-          <OurStorySection />
+          <WhyChooseUsSection />
         </AnimateOnScroll>
         <AnimateOnScroll>
           <OurVisionSection />

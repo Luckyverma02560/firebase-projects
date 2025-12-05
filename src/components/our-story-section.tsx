@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { useRef, useEffect } from 'react';
@@ -6,7 +7,7 @@ import { AnimateOnScroll } from './animate-on-scroll';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-export const OurStorySection = () => {
+export const WhyChooseUsSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const storyImage = PlaceHolderImages.find(p => p.id === 'our-story');
 
@@ -56,11 +57,11 @@ export const OurStorySection = () => {
                 <AnimateOnScroll animationClasses="animate-fade-in-up">
                     <h2 className="section-label mb-4">
                         <span className="inline-block relative overflow-hidden">
-                           <span className="inline-block heading-sweep">Our Story</span> 
+                           <span className="inline-block heading-sweep">Why Choose Us</span> 
                         </span>
                     </h2>
                     <div className="w-24 h-0.5 bg-gold-accent mx-auto mb-8 shadow-[0_0_15px_2px_rgba(199,164,91,0.4)]" />
-                    <h3 className="section-heading mb-6">From Complexity to Clarity</h3>
+                    <h3 className="section-heading mb-6">Your Strategic Advantage</h3>
                     <p className="font-inter text-muted-foreground text-lg leading-relaxed">
                         Founded in 2021 by a collective of seasoned investment bankers and research analysts, LoQ Capital Markets was born from a shared vision: to democratize access to institutional-grade financial intelligence. We witnessed firsthand the struggle for clear, independent insights amidst market noise. Our story is one of building a bridge—connecting ambition with actionable data and empowering financial institutions to navigate the complexities of capital markets with newfound confidence.
                     </p>
