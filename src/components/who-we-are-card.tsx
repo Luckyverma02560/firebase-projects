@@ -12,8 +12,8 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
 
     const glowStyle: CSSProperties = {
         boxShadow: `
-            0px 0px 40px -10px #8A2BE2,
-            0px 0px 40px -10px #CA2A30
+            0px 0px 40px -10px #f093fb,
+            0px 0px 40px -10px #f5576c
         `,
         transition: 'box-shadow 0.3s ease-out'
     };
