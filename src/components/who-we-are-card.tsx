@@ -9,24 +9,11 @@ interface WhoWeAreCardProps {
 }
 
 export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
-    
-    const shadowX = -rotation.rotateY * 0.7;
-    const shadowY = rotation.rotateX * 0.7;
-
-    const cardStyle: CSSProperties = {
-        transform: transform,
-        boxShadow: `
-            ${shadowX - 10}px ${shadowY - 5}px 35px rgba(138, 43, 226, 0.4),
-            ${shadowX + 10}px ${shadowY + 5}px 35px rgba(202, 42, 48, 0.4),
-            inset 0 0 15px rgba(202, 42, 48, 0.1)
-        `,
-        willChange: 'transform, box-shadow'
-    };
 
     return (
         <div
-            className="bg-[rgba(30,30,32,0.65)] backdrop-blur-xl rounded-2xl border border-[rgba(199,164,91,0.3)] text-center p-8 md:p-16 transition-all duration-100 ease-out"
-            style={cardStyle}
+            className="bg-[rgba(30,30,32,0.65)] backdrop-blur-xl rounded-2xl border border-[rgba(199,164,91,0.3)] text-center p-8 md:p-16 transition-all duration-100 ease-out animated-glow"
+            style={{ transform }}
         >
             <div className="relative">
                 <div className="light-streak"></div>
@@ -45,6 +32,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
                             <span className="text-2xl font-bold text-white">1</span>
                         </div>
+                        <h4 className="font-headline text-gold-accent text-lg mb-3">Choose Your Plan</h4>
                         <p>
                             We provide a broad range of research and analytics (R&A) services, including equity research, credit analysis, and financial modeling for global institutions.
                         </p>
@@ -53,6 +41,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
                             <span className="text-2xl font-bold text-white">2</span>
                         </div>
+                        <h4 className="font-headline text-gold-accent text-lg mb-3">Pay via QR</h4>
                         <p>
                             Our team of over 50 experienced professionals, headquartered in New Delhi, has a deep understanding of the capital markets and is committed to excellence.
                         </p>
@@ -61,6 +50,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
                             <span className="text-2xl font-bold text-white">3</span>
                         </div>
+                        <h4 className="font-headline text-gold-accent text-lg mb-3">Rapid Activation</h4>
                         <p>
                             We offer dedicated support for investment banking activities, helping clients navigate complex transactions and market dynamics with confidence.
                         </p>
