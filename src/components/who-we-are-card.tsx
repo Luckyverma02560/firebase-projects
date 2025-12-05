@@ -34,7 +34,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                         </div>
                         <h4 className="font-headline text-gold-accent text-lg mb-3">Choose Your Plan</h4>
                         <p>
-                            We provide a broad range of research and analytics (R&A) services, including equity research, credit analysis, and financial modeling for global institutions.
+                            Choose Your Desired OTT/Softwares and Add To Cart OR Hit Buy.
                         </p>
                     </div>
                     <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.4s' }}>
@@ -43,7 +43,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                         </div>
                         <h4 className="font-headline text-gold-accent text-lg mb-3">Pay via QR</h4>
                         <p>
-                            Our team of over 50 experienced professionals, headquartered in New Delhi, has a deep understanding of the capital markets and is committed to excellence.
+                            Quick And Secure Payment Via UPI And Whatsapp.
                         </p>
                     </div>
                     <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.6s' }}>
@@ -52,7 +52,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                         </div>
                         <h4 className="font-headline text-gold-accent text-lg mb-3">Rapid Activation</h4>
                         <p>
-                            We offer dedicated support for investment banking activities, helping clients navigate complex transactions and market dynamics with confidence.
+                           Get Your Login Details And start Streaming 4K In Minutes.
                         </p>
                     </div>
                 </div>
