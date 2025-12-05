@@ -20,6 +20,7 @@ export default {
         handwriting: ['"Tangerine"', 'cursive'],
         helvetica: ['"Helvetica"', 'sans-serif'],
         'noto-serif': ['"Noto Serif"', 'serif'],
+        brillant: ['Brillant', 'cursive'],
       },
       colors: {
         'gold-accent': 'hsl(var(--accent))',
