@@ -65,7 +65,7 @@ export default function Home() {
               EL<span className="text-[1.2em]">11</span>VEN HUB
             </h1>
             <div className="w-32 h-0.5 mx-auto mt-8 mb-6 bg-gold-accent opacity-0 animate-divider-in shadow-[0_0_15px_3px_rgba(199,164,91,0.4)]" />
-            <p className="font-brillant text-xl md:text-2xl tracking-wider text-[#B0B0B2] max-w-2xl mx-auto opacity-0 animate-subheading-in">
+            <p className="font-brillant text-lg md:text-xl font-medium tracking-wider text-[#B0B0B2] max-w-4xl mx-auto opacity-0 animate-subheading-in">
                 Your Gateway to Digital Excellence and Innovation.
             </p>
         </div>
