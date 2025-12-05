@@ -61,7 +61,7 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 p-4" style={transformStyle}>
-            <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in heading-light-sweep">
+            <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in hero-heading-sweep">
               EL<span className="text-[1.2em]">11</span>VEN HUB
             </h1>
             <div className="w-32 h-0.5 mx-auto mt-8 mb-6 bg-gold-accent opacity-0 animate-divider-in shadow-[0_0_15px_3px_rgba(199,164,91,0.4)]" />

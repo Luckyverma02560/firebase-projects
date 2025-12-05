@@ -232,6 +232,25 @@ body {
   }
 }
 
+.hero-heading-sweep {
+    position: relative;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(90deg, #8A2BE2, #CA2A30);
+}
+
+.hero-heading-sweep::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: sweep-light 2s ease-in-out 1.2s forwards;
+}
+
 .heading-light-sweep {
     position: relative;
     color: transparent;
