@@ -41,20 +41,26 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                     Bridging Insight and Intelligence in Global Capital Markets
                 </p>
                 <div className="grid md:grid-cols-3 gap-8 text-subtle-text/90 text-sm leading-relaxed mt-12">
-                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
-                        <h4 className="font-headline text-gold-accent text-lg mb-3">Comprehensive Analytics</h4>
+                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.2s' }}>
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
+                            <span className="text-2xl font-bold text-white">1</span>
+                        </div>
                         <p>
                             We provide a broad range of research and analytics (R&A) services, including equity research, credit analysis, and financial modeling for global institutions.
                         </p>
                     </div>
-                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '1.4s' }}>
-                        <h4 className="font-headline text-gold-accent text-lg mb-3">Expert Team</h4>
+                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.4s' }}>
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
+                            <span className="text-2xl font-bold text-white">2</span>
+                        </div>
                         <p>
                             Our team of over 50 experienced professionals, headquartered in New Delhi, has a deep understanding of the capital markets and is committed to excellence.
                         </p>
                     </div>
-                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '1.6s' }}>
-                        <h4 className="font-headline text-gold-accent text-lg mb-3">Investment Banking Support</h4>
+                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.6s' }}>
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
+                            <span className="text-2xl font-bold text-white">3</span>
+                        </div>
                         <p>
                             We offer dedicated support for investment banking activities, helping clients navigate complex transactions and market dynamics with confidence.
                         </p>
