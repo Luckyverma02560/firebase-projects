@@ -62,7 +62,7 @@ export default function Home() {
         
         <div className="relative z-10 p-4" style={transformStyle}>
             <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in heading-light-sweep">
-              EL<span className="text-[1.2em] align-middle">11</span>VEN HUB
+              EL<span className="text-[1.2em]">11</span>VEN HUB
             </h1>
             <div className="w-32 h-0.5 mx-auto mt-8 mb-6 bg-gold-accent opacity-0 animate-divider-in shadow-[0_0_15px_3px_rgba(199,164,91,0.4)]" />
             <p className="font-inter text-lg md:text-xl text-[#B0B0B2] max-w-2xl mx-auto opacity-0 animate-subheading-in">
@@ -86,7 +86,7 @@ export default function Home() {
           <OurTeamSection teamMembers={teamMembers} placeholderImages={PlaceHolderImages} />
         </AnimateOnScroll>
         <div className="relative bg-[#121315]">
-          <div className="absolute bottom-0 left-0 w-full h-[150%] pointer-events-none opacity-30">
+          <div className="absolute bottom-0 left-0 w-full h-[150%] pointer-events-none">
             <FooterParticles />
           </div>
           <div className="relative z-10">
