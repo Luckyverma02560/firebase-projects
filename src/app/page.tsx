@@ -62,11 +62,11 @@ export default function Home() {
         
         <div className="relative z-10 p-4" style={transformStyle}>
             <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in heading-light-sweep">
-              About Us
+              EL11VEN HUB
             </h1>
             <div className="w-32 h-0.5 mx-auto mt-8 mb-6 bg-gold-accent opacity-0 animate-divider-in shadow-[0_0_15px_3px_rgba(199,164,91,0.4)]" />
             <p className="font-inter text-lg md:text-xl text-[#B0B0B2] max-w-2xl mx-auto opacity-0 animate-subheading-in">
-                Bridging Insight and Intelligence in Global Capital Markets.
+                Your Gateway to Digital Excellence and Innovation.
             </p>
         </div>
       </section>
@@ -85,12 +85,14 @@ export default function Home() {
         <AnimateOnScroll>
           <OurTeamSection teamMembers={teamMembers} placeholderImages={PlaceHolderImages} />
         </AnimateOnScroll>
-        <div className="relative bg-[#121315] overflow-hidden">
-            <FooterParticles />
+        <div className="relative bg-[#121315]">
+          <FooterParticles />
+          <div className="relative z-10">
             <AnimateOnScroll>
-                <DisclaimerSection />
+              <DisclaimerSection />
             </AnimateOnScroll>
             <Footer />
+          </div>
         </div>
       </div>
     </>
