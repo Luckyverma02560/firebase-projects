@@ -21,6 +21,7 @@ export default {
         helvetica: ['"Helvetica"', 'sans-serif'],
         'noto-serif': ['"Noto Serif"', 'serif'],
         brillant: ['Brillant', 'cursive'],
+        'orange-avenue': ['Orange Avenue', 'sans-serif'],
       },
       colors: {
         'gold-accent': 'hsl(var(--accent))',
@@ -124,3 +125,5 @@ export default {
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
+
+    
