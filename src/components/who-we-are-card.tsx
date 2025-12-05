@@ -40,19 +40,25 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                 <p className="font-inter text-lg text-subtle-text max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
                     Bridging Insight and Intelligence in Global Capital Markets
                 </p>
-                <div className="grid md:grid-cols-2 gap-8 text-subtle-text/70 text-base leading-relaxed mt-12 animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
-                    <p>
-                        LoQ Capital Markets is a premier provider of research and
-                        analytics (R&A) services for financial institutions across the globe. We
-                        provide a broad range of services, including equity research, credit
-                        research, investment banking support, and financial modeling.
-                    </p>
-                    <p>
-                        Our team of experienced professionals has a deep understanding of the
-                        capital markets and is committed to providing our clients with the
-                        highest quality of service. We are headquartered in New Delhi, India,
-                        and have a team of over 50 professionals.
-                    </p>
+                <div className="grid md:grid-cols-3 gap-8 text-subtle-text/90 text-sm leading-relaxed mt-12">
+                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
+                        <h4 className="font-headline text-gold-accent text-lg mb-3">Comprehensive Analytics</h4>
+                        <p>
+                            We provide a broad range of research and analytics (R&A) services, including equity research, credit analysis, and financial modeling for global institutions.
+                        </p>
+                    </div>
+                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '1.4s' }}>
+                        <h4 className="font-headline text-gold-accent text-lg mb-3">Expert Team</h4>
+                        <p>
+                            Our team of over 50 experienced professionals, headquartered in New Delhi, has a deep understanding of the capital markets and is committed to excellence.
+                        </p>
+                    </div>
+                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '1.6s' }}>
+                        <h4 className="font-headline text-gold-accent text-lg mb-3">Investment Banking Support</h4>
+                        <p>
+                            We offer dedicated support for investment banking activities, helping clients navigate complex transactions and market dynamics with confidence.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
