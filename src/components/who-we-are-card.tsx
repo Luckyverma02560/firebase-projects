@@ -16,8 +16,9 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
     const cardStyle: CSSProperties = {
         transform: transform,
         boxShadow: `
-            ${shadowX}px ${shadowY}px 30px rgba(0, 191, 255, 0.3),
-            inset 0 0 15px rgba(0, 191, 255, 0.1)
+            ${shadowX - 10}px ${shadowY - 5}px 35px rgba(138, 43, 226, 0.4),
+            ${shadowX + 10}px ${shadowY + 5}px 35px rgba(202, 42, 48, 0.4),
+            inset 0 0 15px rgba(202, 42, 48, 0.1)
         `,
         willChange: 'transform, box-shadow'
     };
