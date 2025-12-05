@@ -33,7 +33,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                     className="font-headline text-5xl md:text-6xl font-bold text-heading-text tracking-[2px] animate-fade-in-up transition-all duration-300 ease-out" 
                     style={{ animationDelay: '0.2s' }}
                 >
-                    WHO WE ARE
+                    <span className="heading-light-sweep">HOW IT WORKS</span>
                 </h2>
                 <div className="w-32 h-0.5 mx-auto my-6 gold-divider" />
                 <p className="font-inter text-lg text-subtle-text max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
