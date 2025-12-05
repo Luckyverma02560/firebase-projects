@@ -28,7 +28,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                     Bridging Insight and Intelligence in Global Capital Markets
                 </p>
                 <div className="grid md:grid-cols-3 gap-8 text-subtle-text/90 text-sm leading-relaxed mt-12">
-                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.2s' }}>
+                    <div className="bg-black/20 border border-gold-accent/50 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.2s' }}>
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
                             <span className="text-2xl font-bold text-white">1</span>
                         </div>
@@ -37,7 +37,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                             Choose Your Desired OTT/Softwares and Add To Cart OR Hit Buy.
                         </p>
                     </div>
-                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.4s' }}>
+                    <div className="bg-black/20 border border-gold-accent/50 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.4s' }}>
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
                             <span className="text-2xl font-bold text-white">2</span>
                         </div>
@@ -46,7 +46,7 @@ export const WhoWeAreCard = ({ transform, rotation }: WhoWeAreCardProps) => {
                             Quick And Secure Payment Via UPI And Whatsapp.
                         </p>
                     </div>
-                    <div className="bg-black/20 border border-border/20 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.6s' }}>
+                    <div className="bg-black/20 border border-gold-accent/50 rounded-lg p-6 animate-fade-in-up flex flex-col items-center" style={{ animationDelay: '1.6s' }}>
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center mb-4">
                             <span className="text-2xl font-bold text-white">3</span>
                         </div>
