@@ -237,7 +237,7 @@ body {
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    background-image: linear-gradient(90deg, #7028e4, #e5b2ca);
+    background-image: linear-gradient(90deg, #8A2BE2, #1D97D2);
 }
 
 .heading-light-sweep::after {
