@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { WhoWeAreSection } from '@/components/who-we-are-section';
 import { WhyChooseUsSection } from '@/components/our-story-section';
@@ -10,11 +10,7 @@ import { OurMissionSection } from '@/components/our-mission-section';
 import { OurTeamSection } from '@/components/our-team-section';
 import { DisclaimerSection } from '@/components/disclaimer-section';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { cn } from '@/lib/utils';
-import { HeroParticles } from '@/components/hero-particles';
 import Footer from '@/components/footer';
-import { FooterParticles } from '@/components/footer-particles';
-import { WhoWeAreParticles } from '@/components/who-we-are-particles';
 
 const teamMembers = [
   { id: 'team1', name: 'Harshit Verma', role: 'Founder & CEO' },
@@ -53,11 +49,6 @@ export default function Home() {
   return (
     <>
       <div className="relative bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-            <HeroParticles />
-            <WhoWeAreParticles />
-        </div>
-        
         <div className="relative z-10">
           <section 
             className="h-screen w-full flex items-center justify-center text-center text-white overflow-hidden"
@@ -92,9 +83,6 @@ export default function Home() {
         <OurTeamSection teamMembers={teamMembers} placeholderImages={PlaceHolderImages} />
       </AnimateOnScroll>
       <div className="relative bg-[#121315]">
-        <div className="absolute bottom-0 left-0 w-full h-[150%] pointer-events-none">
-          <FooterParticles />
-        </div>
         <div className="relative z-10">
           <AnimateOnScroll>
             <DisclaimerSection />
