@@ -22,8 +22,8 @@ export const UpwardNeonParticles = () => {
         return {
             left: `${Math.random() * 100}%`,
             size: `${Math.random() * 2.5 + 1}px`,
-            delay: `${Math.random() * 20}s`,
-            duration: `${Math.random() * 15 + 10}s`,
+            delay: `${Math.random() * 25}s`,
+            duration: `${Math.random() * 10 + 25}s`,
             color: color,
             opacity: Math.random() * 0.5 + 0.4
         }
