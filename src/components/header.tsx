@@ -19,6 +19,7 @@ import {
 
 const homeLink = { href: '/', label: 'Home' };
 const plansLink = { href: '/about', label: 'Plans' };
+const getStartedLink = { href: '#', label: 'Get Started' };
 
 const navLinks = [
   { href: '#', label: 'Payment' },
@@ -56,13 +57,13 @@ export default function Header() {
     );
   };
   
-  const MobileNavLink = ({ href, label }: { href: string; label: string; }) => {
+  const MobileNavLink = ({ href, label, isButton = false }: { href: string; label: string; isButton?: boolean }) => {
      const isActive = pathname === href;
     return (
         <SheetClose asChild>
           <Link href={href} className={cn(
-            "block py-3 text-xl text-center font-headline font-headline",
-            isActive ? "text-bright-accent" : "text-foreground"
+            "block py-3 text-xl text-center font-headline",
+            isButton ? "bg-gold-accent text-accent-foreground rounded-md" : (isActive ? "text-bright-accent" : "text-foreground")
             )}>
               {label}
           </Link>
@@ -78,7 +79,7 @@ export default function Header() {
     )}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-24">
-          <div className="flex-1">
+          <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               {logo && (
                 <Image
@@ -111,6 +112,12 @@ export default function Header() {
               />
             ))}
           </nav>
+          
+          <div className="hidden md:flex flex-shrink-0 justify-end">
+             <Button asChild variant="default" className="font-headline text-base uppercase tracking-wider bg-gold-accent text-accent-foreground hover:bg-gold-accent/90 hover:scale-105 transition-transform">
+                <Link href={getStartedLink.href}>{getStartedLink.label}</Link>
+            </Button>
+          </div>
 
           <div className="md:hidden flex-1 flex justify-end">
             <Sheet>
@@ -122,6 +129,9 @@ export default function Header() {
               <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md">
                  <div className="mt-12 flex flex-col gap-4">
                     {[homeLink, plansLink, ...navLinks].map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
+                    <div className="pt-4">
+                      <MobileNavLink href={getStartedLink.href} label={getStartedLink.label} isButton />
+                    </div>
                  </div>
               </SheetContent>
             </Sheet>
