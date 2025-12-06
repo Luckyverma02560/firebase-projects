@@ -65,7 +65,7 @@ export default function Home() {
         <div 
           className="relative z-2"
         >
-          <section className="h-screen w-full flex items-center justify-center text-center text-white overflow-hidden">
+          <section className="relative h-screen w-full flex items-center justify-center text-center text-white overflow-hidden">
             <div className="relative z-10 p-4" style={transformStyle}>
                 <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in hero-heading-sweep">
                   EL<span className="text-[1.2em]">11</span>VEN HUB
