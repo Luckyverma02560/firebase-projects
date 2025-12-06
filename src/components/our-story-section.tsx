@@ -65,12 +65,11 @@ export const WhyChooseUsSection = () => {
                 }
             );
 
-            // Stagger animation will only run if no card is selected
-             if (selectedCard === null) {
+            if (selectedCard === null) {
                 gsap.fromTo(cardEls,
                     { opacity: 0, y: 50, scale: 0.95 },
                     {
-                        opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out', stagger: 0.2,
+                        opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power4.out', stagger: 0.1,
                         scrollTrigger: {
                             trigger: headingEl,
                             start: 'bottom 80%',
@@ -103,7 +102,7 @@ export const WhyChooseUsSection = () => {
             <div className="relative text-center max-w-6xl mx-auto z-10">
                 <h2 ref={headingRef} className={cn("section-heading mb-12")}>Why Choose Us</h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
                     {advantageCards.map((card, index) => {
                         const Icon = card.icon;
                         const isSelected = selectedCard === index;
