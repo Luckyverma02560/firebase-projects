@@ -2,8 +2,9 @@
 "use client";
 
 const Marquee = () => {
-    const message = "Instant Activation, 100% Uptime, Secure Payment";
-    const spacedMessage = `${message} \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 ${message} \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 `;
+    const separator = '\u00A0'.repeat(10);
+    const message = `Instant Activation${separator}100% Uptime${separator}Secure Payment`;
+    const spacedMessage = `${message}${separator}${message}${separator}`;
 
     return (
         <div className="marquee-container">
