@@ -38,58 +38,62 @@ const advantageCards = [
 export const WhyChooseUsSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
-    const cardsRef = useRef<HTMLDivElement[]>([]);
+    const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const storyImage = PlaceHolderImages.find(p => p.id === 'our-story');
 
     useLayoutEffect(() => {
-        const sectionEl = sectionRef.current;
-        const headingEl = headingRef.current;
-        const cardEls = cardsRef.current;
-        const imageEl = sectionEl?.querySelector('.bg-image');
+        const ctx = gsap.context(() => {
+            const sectionEl = sectionRef.current;
+            const headingEl = headingRef.current;
+            const cardEls = cardsRef.current.filter(el => el !== null) as HTMLDivElement[];
+            const imageEl = sectionEl?.querySelector('.bg-image');
 
-        if (!sectionEl || !headingEl || !cardEls.length || !imageEl) return;
-        
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: sectionEl,
-                start: 'top center',
-                end: 'bottom bottom',
-                scrub: 1,
-            }
-        });
-        
-        // Background image Ken Burns effect
-        tl.fromTo(imageEl, 
-            { scale: 1.1, y: '-5%' },
-            { scale: 1, y: '5%', ease: 'none' },
-            0 
-        );
-
-        // Heading animation
-        gsap.fromTo(headingEl,
-            { opacity: 0, y: 50 },
-            { 
-                opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+            if (!sectionEl || !headingEl || !cardEls.length || !imageEl) return;
+            
+            const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: sectionEl,
-                    start: 'top 60%',
-                    toggleActions: 'play none none none'
+                    start: 'top center',
+                    end: 'bottom bottom',
+                    scrub: 1,
                 }
-            }
-        );
+            });
+            
+            // Background image Ken Burns effect
+            tl.fromTo(imageEl, 
+                { scale: 1.1, y: '-5%' },
+                { scale: 1, y: '5%', ease: 'none' },
+                0 
+            );
+
+            // Heading animation
+            gsap.fromTo(headingEl,
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: sectionEl,
+                        start: 'top 60%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+            
+            // Cards animation
+            gsap.fromTo(cardEls,
+                { opacity: 0, y: 50, scale: 0.95 },
+                { 
+                    opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out', stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: headingEl,
+                        start: 'bottom 80%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        }, sectionRef);
         
-        // Cards animation
-        gsap.fromTo(cardEls,
-            { opacity: 0, y: 50, scale: 0.95 },
-            { 
-                opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out', stagger: 0.2,
-                scrollTrigger: {
-                    trigger: headingEl,
-                    start: 'bottom 80%',
-                    toggleActions: 'play none none none'
-                }
-            }
-        );
+        return () => ctx.revert();
 
     }, []);
 
@@ -120,7 +124,7 @@ export const WhyChooseUsSection = () => {
                         return (
                             <div 
                                 key={card.title}
-                                ref={el => cardsRef.current[index] = el!}
+                                ref={el => cardsRef.current[index] = el}
                             >
                                 <div className="bg-secondary/30 backdrop-blur-sm border border-border/20 rounded-xl p-6 h-full flex flex-col items-center text-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30">
                                     <div className="bg-primary/10 p-4 rounded-full mb-4 ring-2 ring-primary/20">

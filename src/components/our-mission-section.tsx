@@ -1,9 +1,13 @@
 
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { AnimateOnScroll } from './animate-on-scroll';
 import { ShieldCheck, Target, TrendingUp, Lightbulb } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const iconMap = {
     ShieldCheck,
@@ -38,6 +42,25 @@ const missionCards = [
 export const OurMissionSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
 
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            const cards = gsap.utils.toArray('.mission-card');
+            gsap.from(cards, {
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 70%',
+                    toggleActions: 'play none none none',
+                }
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
         <section
             ref={sectionRef}
@@ -69,10 +92,9 @@ export const OurMissionSection = () => {
                     {missionCards.map((card, index) => {
                         const Icon = iconMap[card.icon as keyof typeof iconMap];
                         return (
-                            <AnimateOnScroll
+                            <div
                                 key={card.title}
-                                className={`animation-delay-${index * 200}`}
-                                animationClasses="animate-fade-in-up"
+                                className="mission-card" // Class for GSAP targeting
                             >
                                 <div className="bg-secondary/30 backdrop-blur-sm border border-[#23C6D9]/30 rounded-xl p-6 h-full flex flex-col items-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#23C6D9]/40 hover:border-[#23C6D9]/60">
                                     <div className="bg-gold-accent/10 p-4 rounded-full mb-4 ring-2 ring-gold-accent/20">
@@ -81,7 +103,7 @@ export const OurMissionSection = () => {
                                     <h4 className="text-xl font-bold text-heading-text mb-2">{card.title}</h4>
                                     <p className="text-muted-foreground text-sm">{card.description}</p>
                                 </div>
-                            </AnimateOnScroll>
+                            </div>
                         );
                     })}
                 </div>
@@ -89,5 +111,3 @@ export const OurMissionSection = () => {
         </section>
     );
 };
-
-    

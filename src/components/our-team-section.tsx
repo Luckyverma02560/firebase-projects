@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useLayoutEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,6 +9,10 @@ import { Linkedin, Facebook, Twitter } from 'lucide-react';
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { cn } from '@/lib/utils';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TeamMember {
   id: string;
@@ -21,8 +26,32 @@ interface OurTeamSectionProps {
 }
 
 export const OurTeamSection = ({ teamMembers, placeholderImages }: OurTeamSectionProps) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('.team-card-image');
+      cards.forEach((card) => {
+        gsap.fromTo(card,
+          { clipPath: 'inset(48% 48% 48% 48%)' },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: 1.2,
+            ease: 'power4.out',
+            scrollTrigger: {
+              trigger: card as gsap.DOMTarget,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            }
+          }
+        );
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative pt-20 md:pt-32 pb-10 md:pb-16 px-4 bg-gradient-to-b from-[#121315] to-[#1B1C1E]">
+    <section ref={sectionRef} className="relative pt-20 md:pt-32 pb-10 md:pb-16 px-4 bg-gradient-to-b from-[#121315] to-[#1B1C1E]">
        <div className="absolute inset-0 z-0">
            <div className="absolute top-1/4 left-1/4 w-2/3 h-2/3 bg-gold-accent/10 rounded-full filter blur-[100px] animate-pulse-slow" />
            <div className="absolute bottom-1/4 right-1/4 w-2/3 h-2/3 bg-accent/10 rounded-full filter blur-[100px] animate-pulse-slow animation-delay-600" />
@@ -49,7 +78,7 @@ export const OurTeamSection = ({ teamMembers, placeholderImages }: OurTeamSectio
                 <Card className="group overflow-hidden text-center bg-secondary/20 backdrop-blur-sm border border-border/10 transition-all duration-300 hover:-translate-y-2 hover:border-gold-accent/30 hover:shadow-lg hover:shadow-gold-accent/20">
                   <CardContent className="p-0">
                     <div className="relative aspect-square overflow-hidden">
-                      <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-105">
+                      <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-105 team-card-image">
                         {image && (
                           <Image
                             src={image.imageUrl}
