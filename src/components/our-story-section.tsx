@@ -80,7 +80,7 @@ export const WhyChooseUsSection = () => {
             ref={sectionRef}
             className="relative w-full flex items-center justify-center py-20 md:py-32 px-4"
         >
-            <div className="relative text-center max-w-6xl mx-auto z-10">
+            <div className="relative text-center max-w-6xl mx-auto">
                 <h2 ref={headingRef} className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

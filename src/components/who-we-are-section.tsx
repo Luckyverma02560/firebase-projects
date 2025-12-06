@@ -28,7 +28,7 @@ export const WhoWeAreSection = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="relative container mx-auto px-4 z-10">
+            <div className="relative container mx-auto px-4">
                 <WhoWeAreCard transform={transform} rotation={rotation} />
             </div>
         </section>

@@ -73,11 +73,15 @@ export default function Home() {
       </section>
 
       <div className="relative bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] overflow-hidden">
-        <WhoWeAreParticles />
-        <WhoWeAreSection />
-        <AnimateOnScroll>
-          <WhyChooseUsSection />
-        </AnimateOnScroll>
+        <div className="absolute inset-0 z-0">
+          <WhoWeAreParticles />
+        </div>
+        <div className="relative z-10">
+          <WhoWeAreSection />
+          <AnimateOnScroll>
+            <WhyChooseUsSection />
+          </AnimateOnScroll>
+        </div>
 
         <AnimateOnScroll>
           <OurVisionSection />

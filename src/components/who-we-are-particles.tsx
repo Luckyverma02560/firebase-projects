@@ -19,8 +19,8 @@ export const WhoWeAreParticles = () => {
                     height: `${size}px`,
                     backgroundColor: color,
                     boxShadow: `0 0 8px ${color}, 0 0 12px ${color}66`,
-                    animationDuration: `${Math.random() * 15 + 15}s`,
-                    animationDelay: `-${Math.random() * 20}s`,
+                    animationDuration: `${Math.random() * 25 + 20}s`,
+                    animationDelay: `-${Math.random() * 30}s`,
                 };
                 return <div key={i} className="particle" style={style} />;
             });
