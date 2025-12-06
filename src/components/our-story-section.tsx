@@ -34,8 +34,8 @@ const advantageCards = [
 
 const gradients = [
     'linear-gradient(to right, #009fff, #ec2f4b)',
-    'linear-gradient(to right, #ec2f4b, #ffaf19)',
-    'linear-gradient(to right, #ffaf19, #ec2f4b)',
+    'linear-gradient(to right, #ec2f4b, #e94057, #f27121)',
+    'linear-gradient(to right, #f27121, #e94057, #ec2f4b)',
     'linear-gradient(to right, #ec2f4b, #009fff)',
 ];
 
