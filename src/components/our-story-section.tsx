@@ -69,7 +69,7 @@ export const WhyChooseUsSection = () => {
                 gsap.fromTo(cardEls,
                     { opacity: 0, y: 50, scale: 0.95 },
                     {
-                        opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power4.out', stagger: 0.1,
+                        opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power4.out', stagger: 0.2,
                         scrollTrigger: {
                             trigger: headingEl,
                             start: 'bottom 80%',
