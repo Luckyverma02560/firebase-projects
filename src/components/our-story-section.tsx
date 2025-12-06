@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { Users, Target, BrainCircuit, TrendingUp } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { WhoWeAreParticles } from './who-we-are-particles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,37 +40,19 @@ export const WhyChooseUsSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-    const storyImage = PlaceHolderImages.find(p => p.id === 'our-story');
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             const sectionEl = sectionRef.current;
             const headingEl = headingRef.current;
             const cardEls = cardsRef.current.filter(el => el !== null) as HTMLDivElement[];
-            const imageEl = sectionEl?.querySelector('.bg-image');
 
-            if (!sectionEl || !headingEl || !cardEls.length || !imageEl) return;
-            
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionEl,
-                    start: 'top center',
-                    end: 'bottom bottom',
-                    scrub: 1,
-                }
-            });
-            
-            // Background image Ken Burns effect
-            tl.fromTo(imageEl, 
-                { scale: 1.1, y: '-5%' },
-                { scale: 1, y: '5%', ease: 'none' },
-                0 
-            );
+            if (!sectionEl || !headingEl || !cardEls.length) return;
 
             // Heading animation
             gsap.fromTo(headingEl,
                 { opacity: 0, y: 50 },
-                { 
+                {
                     opacity: 1, y: 0, duration: 1, ease: 'power3.out',
                     scrollTrigger: {
                         trigger: sectionEl,
@@ -78,11 +61,11 @@ export const WhyChooseUsSection = () => {
                     }
                 }
             );
-            
+
             // Cards animation
             gsap.fromTo(cardEls,
                 { opacity: 0, y: 50, scale: 0.95 },
-                { 
+                {
                     opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out', stagger: 0.2,
                     scrollTrigger: {
                         trigger: headingEl,
@@ -92,7 +75,7 @@ export const WhyChooseUsSection = () => {
                 }
             );
         }, sectionRef);
-        
+
         return () => ctx.revert();
 
     }, []);
@@ -100,29 +83,17 @@ export const WhyChooseUsSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden min-h-screen"
+            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden min-h-screen bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E]"
         >
-            <div className="absolute inset-0 bg-black/20 z-0">
-                {storyImage && (
-                    <Image
-                        src={storyImage.imageUrl}
-                        alt="Financial workspace"
-                        fill
-                        priority
-                        className="object-cover opacity-20 filter blur-[2px] bg-image"
-                    />
-                )}
-                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
-            </div>
-
+            <WhoWeAreParticles />
             <div className="relative text-center max-w-6xl mx-auto z-10">
                 <h2 ref={headingRef} className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {advantageCards.map((card, index) => {
                         const Icon = card.icon;
                         return (
-                            <div 
+                            <div
                                 key={card.title}
                                 ref={el => cardsRef.current[index] = el}
                             >
