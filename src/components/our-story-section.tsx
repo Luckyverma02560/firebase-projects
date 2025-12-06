@@ -89,7 +89,7 @@ export const WhyChooseUsSection = () => {
             <div className="relative text-center max-w-6xl mx-auto z-10">
                 <h2 ref={headingRef} className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {advantageCards.map((card, index) => {
                         const Icon = card.icon;
                         return (
