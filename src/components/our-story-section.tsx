@@ -3,7 +3,7 @@
 
 import { useState, useRef, useLayoutEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Tv, Power, Users, Server } from 'lucide-react';
+import { Tv, Zap, Users, Server } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -16,7 +16,7 @@ const advantageCards = [
         description: 'Stream on your phone, tablet, laptop, or TV'
     },
     {
-        icon: Power,
+        icon: Zap,
         title: 'No Bandwidth Limits',
         description: 'Unlimited streaming in crystal-clear 4K'
     },
