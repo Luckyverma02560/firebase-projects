@@ -12,6 +12,7 @@ import { DisclaimerSection } from '@/components/disclaimer-section';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Footer from '@/components/footer';
 import { HeroParticles } from '@/components/hero-particles';
+import { WhoWeAreParticles } from '@/components/who-we-are-particles';
 
 const teamMembers = [
   { id: 'team1', name: 'Harshit Verma', role: 'Founder & CEO' },
@@ -49,14 +50,20 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] overflow-hidden">
-        <HeroParticles />
-        <div className="relative z-10">
-          <section 
-            className="h-screen w-full flex items-center justify-center text-center text-white overflow-hidden"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] z-0" />
+        <div className="absolute inset-0 z-1">
+            <HeroParticles />
+            <div className="relative" style={{top: '100vh'}}>
+              <WhoWeAreParticles />
+            </div>
+        </div>
+        <div 
+          className="relative z-2"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          <section className="h-screen w-full flex items-center justify-center text-center text-white overflow-hidden">
             <div className="relative z-10 p-4" style={transformStyle}>
                 <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in hero-heading-sweep">
                   EL<span className="text-[1.2em]">11</span>VEN HUB

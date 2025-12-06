@@ -2,7 +2,6 @@
 "use client";
 import { useState } from 'react';
 import { WhoWeAreCard } from '@/components/who-we-are-card';
-import { WhoWeAreParticles } from '@/components/who-we-are-particles';
 
 export const WhoWeAreSection = () => {
     const [rotation, setRotation] = useState({ rotateX: 0, rotateY: 0 });
@@ -29,7 +28,6 @@ export const WhoWeAreSection = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <WhoWeAreParticles />
             <div className="relative container mx-auto px-4">
                 <WhoWeAreCard transform={transform} rotation={rotation} />
             </div>
