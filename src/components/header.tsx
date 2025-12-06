@@ -59,7 +59,7 @@ export default function Header() {
     const isActive = pathname === href;
     return (
       <Link href={href} className={cn(
-        "relative group font-headline text-sm uppercase tracking-wider transition-colors whitespace-nowrap",
+        "relative group font-headline text-base uppercase tracking-wider transition-colors whitespace-nowrap",
         "text-white hover:text-bright-accent",
         isActive ? "text-bright-accent font-bold" : "font-normal",
         className
@@ -78,7 +78,7 @@ export default function Header() {
     return (
         <SheetClose asChild>
           <Link href={href} className={cn(
-            "block py-3 text-lg text-center font-headline font-headline",
+            "block py-3 text-xl text-center font-headline font-headline",
             isActive ? "text-bright-accent" : "text-foreground"
             )}>
               {label}
@@ -94,7 +94,7 @@ export default function Header() {
       isScrolled ? "bg-black/40 shadow-md backdrop-blur-[20px]" : "bg-transparent"
     )}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           <div className="flex-1">
             <Link href="/" className="flex items-center">
               {logo && (
@@ -102,8 +102,8 @@ export default function Header() {
                   src={logo.imageUrl}
                   alt={logo.description}
                   data-ai-hint={logo.imageHint}
-                  width={40}
-                  height={40}
+                  width={48}
+                  height={48}
                   priority
                   className={cn('brightness-0 invert rounded-full')}
                 />
@@ -117,7 +117,7 @@ export default function Header() {
                 href={homeLink.href}
                 label={homeLink.label}
               />
-            <Button asChild className="font-headline text-sm uppercase tracking-wider bg-gradient-plans text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
+            <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-plans text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
                 <Link href={plansLink.href}>{plansLink.label}</Link>
             </Button>
             {navLinks.map(link => (
@@ -129,7 +129,7 @@ export default function Header() {
             ))}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative group font-headline text-sm uppercase tracking-wider transition-colors text-white hover:text-bright-accent font-normal focus-visible:ring-0 focus-visible:ring-offset-0 p-0 hover:bg-transparent">
+                <Button variant="ghost" className="relative group font-headline text-base uppercase tracking-wider transition-colors text-white hover:text-bright-accent font-normal focus-visible:ring-0 focus-visible:ring-offset-0 p-0 hover:bg-transparent">
                   More
                   <span className={cn(
                       "absolute -bottom-1 left-0 h-0.5 bg-bright-accent transition-all duration-300 ease-in-out w-0 group-hover:w-full"
@@ -142,7 +142,7 @@ export default function Header() {
                         {moreLinksCol1.map(link => (
                             <li key={link.label}>
                                 <DropdownMenuItem asChild className="p-0 focus:bg-transparent">
-                                    <NavLink href={link.href} label={link.label} className="text-white"/>
+                                    <NavLink href={link.href} label={link.label} className="text-white text-base"/>
                                 </DropdownMenuItem>
                             </li>
                         ))}
@@ -151,7 +151,7 @@ export default function Header() {
                         {moreLinksCol2.map(link => (
                              <li key={link.label}>
                                 <DropdownMenuItem asChild className="p-0 focus:bg-transparent">
-                                    <NavLink href={link.href} label={link.label} className="text-white"/>
+                                    <NavLink href={link.href} label={link.label} className="text-white text-base"/>
                                 </DropdownMenuItem>
                             </li>
                         ))}
@@ -165,7 +165,7 @@ export default function Header() {
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className={cn('text-white hover:text-bright-accent hover:bg-transparent')}>
-                  <Menu size={28} />
+                  <Menu size={32} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md">
