@@ -8,7 +8,8 @@ const Marquee = () => {
     return (
         <div className="marquee-container">
             <div className="marquee-content">
-                <span>{message}</span>
+                <span>{message}{separator}</span>
+                <span>{message}{separator}</span>
             </div>
         </div>
     );

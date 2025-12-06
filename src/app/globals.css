@@ -455,17 +455,23 @@ body {
 }
 
 .marquee-content {
-    display: inline-block;
-    white-space: nowrap;
+    display: flex;
+    width: 200%;
     animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee-content span {
+    flex-shrink: 0;
+    width: 100%;
+    text-align: center;
 }
 
 @keyframes marquee-scroll {
     from {
-        transform: translateX(100vw);
+        transform: translateX(0);
     }
     to {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
 }
     
@@ -473,6 +479,7 @@ body {
     
 
     
+
 
 
 
