@@ -12,23 +12,23 @@ gsap.registerPlugin(ScrollTrigger);
 const advantageCards = [
     {
         icon: Tv,
-        title: 'Expert-Led',
-        description: 'Direct access to insights from seasoned analysts and former investment bankers.'
+        title: 'Watch on Any Device',
+        description: 'Stream on your phone, tablet, laptop, or TV'
     },
     {
         icon: Power,
-        title: 'Precision Analytics',
-        description: 'Leverage our proprietary models for data-driven, high-conviction strategies.'
+        title: 'No Bandwidth Limits',
+        description: 'Unlimited streaming in crystal-clear 4K'
     },
     {
         icon: Users,
-        title: 'Actionable Intelligence',
-        description: 'We translate complex market data into clear, executable advice for our clients.'
+        title: 'Family Sharing',
+        description: 'Share with family members safely'
     },
     {
         icon: Server,
-        title: 'Proven Track Record',
-        description: 'Our history of successful calls and market foresight speaks for itself.'
+        title: 'Indian Servers',
+        description: 'Faster streaming with local servers'
     }
 ];
 
