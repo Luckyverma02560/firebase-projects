@@ -391,56 +391,6 @@ body {
   box-shadow: 0 0 5px hsl(var(--accent)), 0 0 10px hsl(var(--accent));
 }
     
-.animated-glow {
-    position: relative;
-    overflow: hidden;
-}
-
-.animated-glow::before,
-.animated-glow::after {
-    content: '';
-    position: absolute;
-    left: -50%;
-    top: -50%;
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
-
-.animated-glow::before {
-    background-image: conic-gradient(
-        #f64f59,
-        #c471ed,
-        #12c2e9,
-        transparent,
-        transparent
-    );
-    animation: rotate-glow 4s linear infinite;
-}
-
-.animated-glow::after {
-    background-image: conic-gradient(
-        transparent,
-        transparent,
-        transparent,
-        #12c2e9,
-        #c471ed,
-        #f64f59
-    );
-    animation: rotate-glow 4s linear infinite -2s; /* Offset animation */
-}
-
-@keyframes rotate-glow {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-    
 
     
 
@@ -455,3 +405,4 @@ body {
 
 
     
+
