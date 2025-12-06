@@ -24,7 +24,7 @@ export const WhoWeAreSection = () => {
 
     return (
         <section
-            className="relative py-24 md:py-32"
+            className="relative py-24 md:py-32 bg-transparent"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
