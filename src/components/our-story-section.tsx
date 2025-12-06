@@ -85,14 +85,13 @@ export const WhyChooseUsSection = () => {
 
     }, [selectedCard]);
 
-    const handleCardClick = (index: number) => {
+    const handleCardClick = (e: React.MouseEvent, index: number) => {
+        e.stopPropagation();
         setSelectedCard(prev => (prev === index ? null : index));
     };
 
-    const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === sectionRef.current) {
-            setSelectedCard(null);
-        }
+    const handleBackgroundClick = () => {
+        setSelectedCard(null);
     };
 
     return (
@@ -114,7 +113,7 @@ export const WhyChooseUsSection = () => {
                             <div
                                 key={card.title}
                                 ref={el => cardsRef.current[index] = el}
-                                onClick={() => handleCardClick(index)}
+                                onClick={(e) => handleCardClick(e, index)}
                                 className={cn(
                                     "rounded-xl p-6 h-full flex flex-col items-center text-center transform transition-all duration-500 text-white cursor-pointer",
                                     isSelected ? "scale-110 z-20" : "hover:-translate-y-2",
