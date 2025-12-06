@@ -111,7 +111,7 @@ body {
 
   .text-gradient-wiretap {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, #8a2387, #e94057, #f27121);
+    background-image: linear-gradient(to right, #009fff, #ec2f4b);
   }
 }
 
@@ -435,6 +435,8 @@ body {
         transform: rotate(360deg);
     }
 }
+    
+
     
 
     
