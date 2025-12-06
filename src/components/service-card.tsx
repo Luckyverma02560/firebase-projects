@@ -28,7 +28,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     className="object-contain"
                 />
                 <div>
-                    <h3 className="text-2xl font-bold text-white">{name}</h3>
+                    <h3 className="text-4xl font-bold text-white">{name}</h3>
                 </div>
             </div>
             <div className="flex items-center gap-4">
