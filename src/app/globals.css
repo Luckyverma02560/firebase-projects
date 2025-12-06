@@ -439,11 +439,47 @@ body {
         transform: rotate(360deg);
     }
 }
+
+/* Marquee styles */
+.marquee-container {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+}
+
+.marquee-content {
+    display: flex;
+    width: 200%;
+    animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee-content span {
+    flex: 1 0 100%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
     
 
     
 
     
+
 
 
 
