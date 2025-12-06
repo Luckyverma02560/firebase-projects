@@ -3,7 +3,7 @@
 
 import { useState, useRef, useLayoutEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Tv, Target, BrainCircuit, TrendingUp } from 'lucide-react';
+import { Tv, Power, Users, Server } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -16,17 +16,17 @@ const advantageCards = [
         description: 'Direct access to insights from seasoned analysts and former investment bankers.'
     },
     {
-        icon: Target,
+        icon: Power,
         title: 'Precision Analytics',
         description: 'Leverage our proprietary models for data-driven, high-conviction strategies.'
     },
     {
-        icon: BrainCircuit,
+        icon: Users,
         title: 'Actionable Intelligence',
         description: 'We translate complex market data into clear, executable advice for our clients.'
     },
     {
-        icon: TrendingUp,
+        icon: Server,
         title: 'Proven Track Record',
         description: 'Our history of successful calls and market foresight speaks for itself.'
     }
