@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { HeroParticles } from '@/components/hero-particles';
 import Footer from '@/components/footer';
 import { FooterParticles } from '@/components/footer-particles';
+import { WhoWeAreParticles } from '@/components/who-we-are-particles';
 
 const teamMembers = [
   { id: 'team1', name: 'Harshit Verma', role: 'Founder & CEO' },
@@ -71,11 +72,13 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="bg-[#1A1C20] relative">
+      <div className="relative bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] overflow-hidden">
+        <WhoWeAreParticles />
         <WhoWeAreSection />
         <AnimateOnScroll>
           <WhyChooseUsSection />
         </AnimateOnScroll>
+
         <AnimateOnScroll>
           <OurVisionSection />
         </AnimateOnScroll>
@@ -100,5 +103,3 @@ export default function Home() {
     </>
   );
 }
-
-    

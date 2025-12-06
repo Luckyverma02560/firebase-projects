@@ -1,14 +1,11 @@
 
 "use client";
 
-import { useRef, useEffect, useLayoutEffect } from 'react';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useRef, useLayoutEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Users, Target, BrainCircuit, TrendingUp } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { WhoWeAreParticles } from './who-we-are-particles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,7 +46,6 @@ export const WhyChooseUsSection = () => {
 
             if (!sectionEl || !headingEl || !cardEls.length) return;
 
-            // Heading animation
             gsap.fromTo(headingEl,
                 { opacity: 0, y: 50 },
                 {
@@ -62,7 +58,6 @@ export const WhyChooseUsSection = () => {
                 }
             );
 
-            // Cards animation
             gsap.fromTo(cardEls,
                 { opacity: 0, y: 50, scale: 0.95 },
                 {
@@ -83,9 +78,8 @@ export const WhyChooseUsSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden min-h-screen bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E]"
+            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4"
         >
-            <WhoWeAreParticles />
             <div className="relative text-center max-w-6xl mx-auto z-10">
                 <h2 ref={headingRef} className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
 
