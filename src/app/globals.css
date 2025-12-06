@@ -108,6 +108,11 @@ body {
   .section-subheading {
     @apply font-inter text-muted-foreground max-w-3xl mx-auto;
   }
+
+  .text-gradient-wiretap {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #8a2387, #e94057, #f27121);
+  }
 }
 
 /* Particle animation styles */
@@ -430,5 +435,6 @@ body {
         transform: rotate(360deg);
     }
 }
+    
 
     

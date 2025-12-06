@@ -6,6 +6,7 @@ import { useRef, useEffect } from 'react';
 import { AnimateOnScroll } from './animate-on-scroll';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { cn } from '@/lib/utils';
 
 export const WhyChooseUsSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -55,7 +56,7 @@ export const WhyChooseUsSection = () => {
 
             <div className="relative text-center max-w-4xl mx-auto z-10">
                 <AnimateOnScroll animationClasses="animate-fade-in-up">
-                    <h2 className="section-heading mb-6">Why Choose Us</h2>
+                    <h2 className={cn("section-heading mb-6", "text-gradient-wiretap")}>Why Choose Us</h2>
                     <h3 className="section-heading mb-6">Your Strategic Advantage</h3>
                     <p className="font-inter text-muted-foreground text-lg leading-relaxed">
                         Founded in 2021 by a collective of seasoned investment bankers and research analysts, LoQ Capital Markets was born from a shared vision: to democratize access to institutional-grade financial intelligence. We witnessed firsthand the struggle for clear, independent insights amidst market noise. Our story is one of building a bridge—connecting ambition with actionable data and empowering financial institutions to navigate the complexities of capital markets with newfound confidence.
@@ -65,3 +66,5 @@ export const WhyChooseUsSection = () => {
         </section>
     );
 };
+
+    
