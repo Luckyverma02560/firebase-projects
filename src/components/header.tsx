@@ -21,26 +21,9 @@ const homeLink = { href: '/', label: 'Home' };
 const plansLink = { href: '/about', label: 'Plans' };
 
 const navLinks = [
-  { href: '#', label: 'Services' },
-  { href: '#', label: 'Pricing' },
   { href: '#', label: 'Payment' },
-  { href: '#', label: 'Investor Charter' },
   { href: '#', label: 'Contact Us' },
-  { href: '#', label: 'Blog' },
 ];
-
-const moreLinksCol1 = [
-    { href: '#', label: 'Complaints' },
-    { href: '#', label: 'Disclaimer' },
-    { href: '#', label: 'Disclosure' },
-];
-
-const moreLinksCol2 = [
-    { href: '#', label: 'Performance & Reports' },
-    { href: '#', label: 'Refund Policy' },
-    { href: '#', label: 'Terms & Conditions' },
-];
-
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -127,38 +110,6 @@ export default function Header() {
                 label={link.label}
               />
             ))}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative group font-headline text-base uppercase tracking-wider transition-colors text-white hover:text-bright-accent font-normal focus-visible:ring-0 focus-visible:ring-offset-0 p-0 hover:bg-transparent">
-                  More
-                  <span className={cn(
-                      "absolute -bottom-1 left-0 h-0.5 bg-bright-accent transition-all duration-300 ease-in-out w-0 group-hover:w-full"
-                  )}></span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-black/70 border-gray-700 p-4 min-w-[30rem]">
-                <div className="grid grid-cols-2 gap-x-8">
-                    <ul className="space-y-2">
-                        {moreLinksCol1.map(link => (
-                            <li key={link.label}>
-                                <DropdownMenuItem asChild className="p-0 focus:bg-transparent">
-                                    <NavLink href={link.href} label={link.label} className="text-white text-base"/>
-                                </DropdownMenuItem>
-                            </li>
-                        ))}
-                    </ul>
-                    <ul className="space-y-2">
-                        {moreLinksCol2.map(link => (
-                             <li key={link.label}>
-                                <DropdownMenuItem asChild className="p-0 focus:bg-transparent">
-                                    <NavLink href={link.href} label={link.label} className="text-white text-base"/>
-                                </DropdownMenuItem>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </nav>
 
           <div className="md:hidden flex-1 flex justify-end">
@@ -170,7 +121,7 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md">
                  <div className="mt-12 flex flex-col gap-4">
-                    {[homeLink, plansLink, ...navLinks, ...moreLinksCol1, ...moreLinksCol2].map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
+                    {[homeLink, plansLink, ...navLinks].map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
                  </div>
               </SheetContent>
             </Sheet>
