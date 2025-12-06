@@ -3,7 +3,7 @@
     {
       "id": "logo",
       "description": "LoQ Capital Markets Logo",
-      "imageUrl": "https://i.postimg.cc/13f01z5y/demystify-logo.png",
+      "imageUrl": "https://images.unsplash.com/photo-1562705121-e624542c7b9b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y29tcGFueSUyMGxvZ298ZW58MHx8fHwxNzY0OTMwNDM3fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "company logo"
     },
     {
@@ -14,8 +14,8 @@
     },
     {
       "id": "our-story",
-      "description": "Oil spill on brick wall surface texture",
-      "imageUrl": "https://i.postimg.cc/k40wVpL3/f-T0s-Zla.jpg",
+      "description": "Abstract texture for the background",
+      "imageUrl": "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhYnN0cmFjdCUyMHRleHR1cmV8ZW58MHx8fHwxNzY0OTk3ODc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract texture"
     },
     {
@@ -57,25 +57,25 @@
     {
       "id": "team6",
       "description": "Team member Ankit J.",
-      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team7",
       "description": "Team member Nupur A.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496358961-3c82861ab8f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496358961-3c82861ab8f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team8",
       "description": "Team member Aastha G.",
-      "imageUrl": "https://images.unsplash.com/photo-1595211877493-41a4e5f236b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1595211877493-41a4e5f236b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team9",
       "description": "Team member Poonam P.",
-      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     }
   ]
