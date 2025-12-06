@@ -32,8 +32,8 @@ export default function Home() {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const rotateX = (y / rect.height - 0.5) * -4;
-    const rotateY = (x / rect.width - 0.5) * 4;
+    const rotateX = (y / rect.height - 0.5) * -8;
+    const rotateY = (x / rect.width - 0.5) * 8;
     setRotation({ rotateX, rotateY });
   };
 
