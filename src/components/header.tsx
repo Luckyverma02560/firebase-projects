@@ -57,13 +57,15 @@ export default function Header() {
     );
   };
   
-  const MobileNavLink = ({ href, label, isButton = false }: { href: string; label: string; isButton?: boolean }) => {
+  const MobileNavLink = ({ href, label, isButton = false, isGetStarted = false }: { href: string; label: string; isButton?: boolean; isGetStarted?: boolean; }) => {
      const isActive = pathname === href;
     return (
         <SheetClose asChild>
           <Link href={href} className={cn(
-            "block py-3 text-xl text-center font-headline",
-            isButton ? "bg-gold-accent text-accent-foreground rounded-md" : (isActive ? "text-bright-accent" : "text-foreground")
+            "block py-3 text-xl text-center font-headline rounded-md",
+            isButton ? "bg-gradient-plans text-white" : 
+            (isGetStarted ? "bg-gradient-get-started text-white" : 
+            (isActive ? "text-bright-accent" : "text-foreground"))
             )}>
               {label}
           </Link>
@@ -114,7 +116,7 @@ export default function Header() {
           </nav>
           
           <div className="hidden md:flex flex-shrink-0 justify-end">
-             <Button asChild variant="default" className="font-headline text-base uppercase tracking-wider bg-gold-accent text-accent-foreground hover:bg-gold-accent/90 hover:scale-105 transition-transform">
+             <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
                 <Link href={getStartedLink.href}>{getStartedLink.label}</Link>
             </Button>
           </div>
@@ -128,9 +130,11 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md">
                  <div className="mt-12 flex flex-col gap-4">
-                    {[homeLink, plansLink, ...navLinks].map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
+                    <MobileNavLink key={homeLink.label} href={homeLink.href} label={homeLink.label} />
+                    <MobileNavLink key={plansLink.label} href={plansLink.href} label={plansLink.label} isButton />
+                    {navLinks.map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
                     <div className="pt-4">
-                      <MobileNavLink href={getStartedLink.href} label={getStartedLink.label} isButton />
+                      <MobileNavLink href={getStartedLink.href} label={getStartedLink.label} isGetStarted />
                     </div>
                  </div>
               </SheetContent>
