@@ -151,7 +151,6 @@ export const PlansSection = () => {
                         {netflixLogo &&
                             <ServiceCard
                                 name="Netflix"
-                                description="Streaming service with a vast library of movies, TV shows, and original content."
                                 logoUrl={netflixLogo.imageUrl}
                                 logoHint={netflixLogo.imageHint}
                                 onButtonClick={handleViewPlans}

@@ -8,13 +8,12 @@ import { MessageSquare } from 'lucide-react';
 
 interface ServiceCardProps {
     name: string;
-    description: string;
     logoUrl: string;
     logoHint: string;
     onButtonClick: () => void;
 }
 
-export const ServiceCard = ({ name, description, logoUrl, logoHint, onButtonClick }: ServiceCardProps) => {
+export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceCardProps) => {
     return (
         <div className={cn(
             "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex items-center justify-between transition-all duration-300 hover:border-white/30 w-full"
@@ -30,7 +29,6 @@ export const ServiceCard = ({ name, description, logoUrl, logoHint, onButtonClic
                 />
                 <div>
                     <h3 className="text-2xl font-bold text-white">{name}</h3>
-                    <p className="text-gray-400 text-sm mt-1 max-w-xs">{description}</p>
                 </div>
             </div>
             <div className="flex items-center gap-4">
