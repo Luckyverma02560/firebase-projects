@@ -3,7 +3,7 @@
 
 import { useState, useRef, useLayoutEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Users, Target, BrainCircuit, TrendingUp } from 'lucide-react';
+import { Tv, Target, BrainCircuit, TrendingUp } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const advantageCards = [
     {
-        icon: Users,
+        icon: Tv,
         title: 'Expert-Led',
         description: 'Direct access to insights from seasoned analysts and former investment bankers.'
     },
