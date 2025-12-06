@@ -88,8 +88,8 @@ export default function Header() {
                   src={logo.imageUrl}
                   alt={logo.description}
                   data-ai-hint={logo.imageHint}
-                  width={48}
-                  height={48}
+                  width={72}
+                  height={72}
                   priority
                   className={cn('')}
                 />
