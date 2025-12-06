@@ -35,8 +35,8 @@ const advantageCards = [
 const gradients = [
     'linear-gradient(to right, #009fff, #ec2f4b)',
     'linear-gradient(to right, #ec2f4b, #ffaf19)',
-    'linear-gradient(to right, #ffaf19, #4A148C)',
-    'linear-gradient(to right, #4A148C, #0d8eff)',
+    'linear-gradient(to right, #ffaf19, #ec2f4b)',
+    'linear-gradient(to right, #ec2f4b, #009fff)',
 ];
 
 export const WhyChooseUsSection = () => {
