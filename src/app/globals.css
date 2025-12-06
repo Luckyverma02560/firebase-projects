@@ -411,9 +411,9 @@ body {
 
 .animated-glow::before {
     background-image: conic-gradient(
-        #8A2BE2,
-        #CA2A30,
-        transparent,
+        #f64f59,
+        #c471ed,
+        #12c2e9,
         transparent,
         transparent
     );
@@ -425,8 +425,9 @@ body {
         transparent,
         transparent,
         transparent,
-        #CA2A30,
-        #8A2BE2
+        #12c2e9,
+        #c471ed,
+        #f64f59
     );
     animation: rotate-glow 4s linear infinite -2s; /* Offset animation */
 }

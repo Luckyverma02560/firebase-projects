@@ -90,8 +90,9 @@ export const WhyChooseUsSection = () => {
                             <div
                                 key={card.title}
                                 ref={el => cardsRef.current[index] = el}
+                                className="animated-glow rounded-xl"
                             >
-                                <div className="bg-secondary/30 backdrop-blur-sm border border-border/20 rounded-xl p-6 h-full flex flex-col items-center text-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30">
+                                <div className="bg-secondary/80 backdrop-blur-sm rounded-xl p-6 h-full flex flex-col items-center text-center transform transition-all duration-500 hover:-translate-y-2">
                                     <div className="bg-primary/10 p-4 rounded-full mb-4 ring-2 ring-primary/20">
                                         <Icon className="w-8 h-8 text-primary" />
                                     </div>
