@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Users, Target, BrainCircuit, TrendingUp } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { WhoWeAreParticles } from './who-we-are-particles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,9 +79,12 @@ export const WhyChooseUsSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4"
+            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E]"
         >
-            <div className="relative text-center max-w-6xl mx-auto">
+            <div className="absolute inset-0 z-0">
+                <WhoWeAreParticles />
+            </div>
+            <div className="relative text-center max-w-6xl mx-auto z-10">
                 <h2 ref={headingRef} className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
