@@ -69,7 +69,7 @@ export const WhyChooseUsSection = () => {
                 gsap.fromTo(cardEls,
                     { opacity: 0, y: 50, scale: 0.95 },
                     {
-                        opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power4.out', stagger: 0.2,
+                        opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.4)', stagger: 0.15,
                         scrollTrigger: {
                             trigger: headingEl,
                             start: 'bottom 80%',
@@ -86,7 +86,7 @@ export const WhyChooseUsSection = () => {
 
     const handleCardClick = (e: React.MouseEvent, index: number) => {
         e.stopPropagation();
-        setSelectedCard(prev => (prev === index ? null : index));
+        setSelectedCard(prev => (prev === index ? null : prev));
     };
 
     const handleBackgroundClick = () => {
