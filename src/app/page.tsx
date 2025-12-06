@@ -12,7 +12,8 @@ import { DisclaimerSection } from '@/components/disclaimer-section';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Footer from '@/components/footer';
 import { HeroParticles } from '@/components/hero-particles';
-import { WhoWeAreParticles } from '@/components/who-we-are-particles';
+import { UpwardNeonParticles } from '@/components/upward-neon-particles';
+
 
 const teamMembers = [
   { id: 'team1', name: 'Harshit Verma', role: 'Founder & CEO' },
@@ -34,8 +35,8 @@ export default function Home() {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const rotateX = (y / rect.height - 0.5) * -8;
-    const rotateY = (x / rect.width - 0.5) * 8;
+    const rotateX = (y / rect.height - 0.5) * -12;
+    const rotateY = (x / rect.width - 0.5) * 12;
     setRotation({ rotateX, rotateY });
   };
 
@@ -50,18 +51,18 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative overflow-hidden">
+      <div 
+        className="relative overflow-hidden"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] z-0" />
-        <div className="absolute inset-0 z-1">
+        <div className="absolute inset-0 z-1 pointer-events-none">
             <HeroParticles />
-            <div className="relative" style={{top: '100vh'}}>
-              <WhoWeAreParticles />
-            </div>
+            <UpwardNeonParticles />
         </div>
         <div 
           className="relative z-2"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
         >
           <section className="h-screen w-full flex items-center justify-center text-center text-white overflow-hidden">
             <div className="relative z-10 p-4" style={transformStyle}>
