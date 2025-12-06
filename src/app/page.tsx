@@ -11,6 +11,7 @@ import { OurTeamSection } from '@/components/our-team-section';
 import { DisclaimerSection } from '@/components/disclaimer-section';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Footer from '@/components/footer';
+import { HeroParticles } from '@/components/hero-particles';
 
 const teamMembers = [
   { id: 'team1', name: 'Harshit Verma', role: 'Founder & CEO' },
@@ -49,6 +50,7 @@ export default function Home() {
   return (
     <>
       <div className="relative bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] overflow-hidden">
+        <HeroParticles />
         <div className="relative z-10">
           <section 
             className="h-screen w-full flex items-center justify-center text-center text-white overflow-hidden"
