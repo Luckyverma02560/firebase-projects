@@ -111,7 +111,7 @@ body {
 
   .text-gradient-wiretap {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+    background-image: linear-gradient(to right, #fc466b, #3f5efb);
   }
 }
 
@@ -405,5 +405,6 @@ body {
 
 
     
+
 
 
