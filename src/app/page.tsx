@@ -5,27 +5,10 @@ import { useState } from 'react';
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { WhoWeAreSection } from '@/components/who-we-are-section';
 import { WhyChooseUsSection } from '@/components/our-story-section';
-import { OurVisionSection } from '@/components/our-vision-section';
-import { OurMissionSection } from '@/components/our-mission-section';
-import { OurTeamSection } from '@/components/our-team-section';
-import { DisclaimerSection } from '@/components/disclaimer-section';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Footer from '@/components/footer';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 
-
-const teamMembers = [
-  { id: 'team1', name: 'Harshit Verma', role: 'Founder & CEO' },
-  { id: 'team2', name: 'Amit A.', role: 'Co-Founder & COO' },
-  { id: 'team3', name: 'Ankit M.', role: 'Head of Operations' },
-  { id: 'team4', name: 'Riddhima B.', role: 'Talent Acquisition Lead' },
-  { id: 'team5', name: 'Nishant G.', role: 'Senior Manager' },
-  { id: 'team6', name: 'Ankit J.', role: 'Senior Manager' },
-  { id: 'team7', name: 'Nupur A.', role: 'Manager' },
-  { id: 'team8', name: 'Aastha G.', role: 'Manager' },
-  { id: 'team9', name: 'Poonam P.', role: 'Assistant Manager' },
-];
 
 export default function Home() {
   const [rotation, setRotation] = useState({ rotateX: 0, rotateY: 0 });
@@ -82,21 +65,8 @@ export default function Home() {
           </AnimateOnScroll>
         </div>
       </div>
-
-      <AnimateOnScroll>
-        <OurVisionSection />
-      </AnimateOnScroll>
-      <AnimateOnScroll>
-        <OurMissionSection />
-      </AnimateOnScroll>
-      <AnimateOnScroll>
-        <OurTeamSection teamMembers={teamMembers} placeholderImages={PlaceHolderImages} />
-      </AnimateOnScroll>
       <div className="relative bg-[#121315]">
         <div className="relative z-10">
-          <AnimateOnScroll>
-            <DisclaimerSection />
-          </AnimateOnScroll>
           <Footer />
         </div>
       </div>

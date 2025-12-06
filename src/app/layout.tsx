@@ -25,6 +25,7 @@ export default function RootLayout({
       <body className="font-body antialiased" suppressHydrationWarning>
           <Header />
           <main>{children}</main>
+          <Footer />
           <Toaster />
           <ScrollToTopButton />
       </body>
