@@ -13,7 +13,6 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Footer from '@/components/footer';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
-import Marquee from '@/components/marquee';
 
 
 const teamMembers = [
@@ -75,7 +74,6 @@ export default function Home() {
                     Your Gateway to Digital Excellence and Innovation.
                 </p>
             </div>
-            <Marquee />
           </section>
 
           <WhoWeAreSection />
