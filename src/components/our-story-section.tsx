@@ -3,7 +3,7 @@
 
 import { useState, useRef, useLayoutEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Tv, Zap, Users, Server } from 'lucide-react';
+import { Tv, Zap, HeartHandshake, Server } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -21,7 +21,7 @@ const advantageCards = [
         description: 'Unlimited streaming in crystal-clear 4K'
     },
     {
-        icon: Users,
+        icon: HeartHandshake,
         title: 'Family Sharing',
         description: 'Share with family members safely'
     },
