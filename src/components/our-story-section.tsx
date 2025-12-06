@@ -7,6 +7,31 @@ import { AnimateOnScroll } from './animate-on-scroll';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
+import { Users, Target, BrainCircuit, TrendingUp } from 'lucide-react';
+
+const advantageCards = [
+    {
+        icon: Users,
+        title: 'Expert-Led',
+        description: 'Direct access to insights from seasoned analysts and former investment bankers.'
+    },
+    {
+        icon: Target,
+        title: 'Precision Analytics',
+        description: 'Leverage our proprietary models for data-driven, high-conviction strategies.'
+    },
+    {
+        icon: BrainCircuit,
+        title: 'Actionable Intelligence',
+        description: 'We translate complex market data into clear, executable advice for our clients.'
+    },
+    {
+        icon: TrendingUp,
+        title: 'Proven Track Record',
+        description: 'Our history of successful calls and market foresight speaks for itself.'
+    }
+];
+
 
 export const WhyChooseUsSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -39,7 +64,7 @@ export const WhyChooseUsSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden"
+            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden"
         >
             <div className="absolute inset-0 bg-black/20 z-0">
                 {storyImage && (
@@ -54,17 +79,32 @@ export const WhyChooseUsSection = () => {
                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
             </div>
 
-            <div className="relative text-center max-w-4xl mx-auto z-10">
+            <div className="relative text-center max-w-6xl mx-auto z-10">
                 <AnimateOnScroll animationClasses="animate-fade-in-up">
-                    <h2 className={cn("section-heading mb-6", "text-gradient-wiretap")}>Why Choose Us</h2>
-                    <h3 className="section-heading mb-6">Your Strategic Advantage</h3>
-                    <p className="font-inter text-muted-foreground text-lg leading-relaxed">
-                        Founded in 2021 by a collective of seasoned investment bankers and research analysts, LoQ Capital Markets was born from a shared vision: to democratize access to institutional-grade financial intelligence. We witnessed firsthand the struggle for clear, independent insights amidst market noise. Our story is one of building a bridge—connecting ambition with actionable data and empowering financial institutions to navigate the complexities of capital markets with newfound confidence.
-                    </p>
+                    <h2 className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
                 </AnimateOnScroll>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {advantageCards.map((card, index) => {
+                        const Icon = card.icon;
+                        return (
+                            <AnimateOnScroll
+                                key={card.title}
+                                className={`animation-delay-${index * 200}`}
+                                animationClasses="animate-fade-in-up"
+                            >
+                                <div className="bg-secondary/30 backdrop-blur-sm border border-border/20 rounded-xl p-6 h-full flex flex-col items-center text-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30">
+                                    <div className="bg-primary/10 p-4 rounded-full mb-4 ring-2 ring-primary/20">
+                                        <Icon className="w-8 h-8 text-primary" />
+                                    </div>
+                                    <h4 className="text-xl font-bold text-heading-text mb-2">{card.title}</h4>
+                                    <p className="text-muted-foreground text-sm">{card.description}</p>
+                                </div>
+                            </AnimateOnScroll>
+                        );
+                    })}
+                </div>
             </div>
         </section>
     );
 };
-
-    
