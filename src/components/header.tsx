@@ -17,8 +17,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+const homeLink = { href: '/', label: 'Home' };
+const plansLink = { href: '/about', label: 'Plans' };
+
 const navLinks = [
-  { href: '/', label: 'Home' },
   { href: '#', label: 'Services' },
   { href: '#', label: 'Pricing' },
   { href: '#', label: 'Payment' },
@@ -26,8 +28,6 @@ const navLinks = [
   { href: '#', label: 'Contact Us' },
   { href: '#', label: 'Blog' },
 ];
-
-const plansLink = { href: '/about', label: 'Plans' };
 
 const moreLinksCol1 = [
     { href: '#', label: 'Complaints' },
@@ -112,6 +112,14 @@ export default function Header() {
           </div>
 
           <nav className="hidden md:flex flex-1 justify-center items-center space-x-6">
+            <NavLink 
+                key={homeLink.label}
+                href={homeLink.href}
+                label={homeLink.label}
+              />
+            <Button asChild className="font-headline text-sm uppercase tracking-wider bg-gradient-plans text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
+                <Link href={plansLink.href}>{plansLink.label}</Link>
+            </Button>
             {navLinks.map(link => (
               <NavLink 
                 key={link.label}
@@ -119,9 +127,6 @@ export default function Header() {
                 label={link.label}
               />
             ))}
-             <Button asChild className="font-headline text-sm uppercase tracking-wider bg-gradient-plans text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
-                <Link href={plansLink.href}>{plansLink.label}</Link>
-            </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative group font-headline text-sm uppercase tracking-wider transition-colors text-white hover:text-bright-accent font-normal focus-visible:ring-0 focus-visible:ring-offset-0 p-0 hover:bg-transparent">
@@ -165,7 +170,7 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md">
                  <div className="mt-12 flex flex-col gap-4">
-                    {[...navLinks, plansLink, ...moreLinksCol1, ...moreLinksCol2].map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
+                    {[homeLink, plansLink, ...navLinks, ...moreLinksCol1, ...moreLinksCol2].map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
                  </div>
               </SheetContent>
             </Sheet>
