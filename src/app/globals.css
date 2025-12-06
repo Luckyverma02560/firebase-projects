@@ -113,6 +113,10 @@ body {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(to right, #fc466b, #3f5efb);
   }
+
+  .bg-gradient-plans {
+    background-image: linear-gradient(to right, #fc466b, #3f5efb);
+  }
 }
 
 /* Particle animation styles */
@@ -405,6 +409,7 @@ body {
 
 
     
+
 
 
 
