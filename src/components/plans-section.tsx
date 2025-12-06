@@ -6,6 +6,8 @@ import { PricingCard } from './pricing-card';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { cn } from '@/lib/utils';
+import { ServiceCard } from './service-card';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const plans = [
     {
@@ -65,65 +67,97 @@ const plans = [
     }
 ];
 
+const services = [
+    {
+        name: 'Netflix',
+        logoId: 'netflix-logo',
+    }
+]
+
 type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
 
 export const PlansSection = () => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
+    const [showPlans, setShowPlans] = useState(false);
+
+    const netflixLogo = PlaceHolderImages.find(p => p.id === 'netflix-logo');
+
+    const handleViewPlans = () => {
+        setShowPlans(true);
+    };
 
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
             <div className="relative text-center max-w-6xl mx-auto z-10">
                 <h2 className="section-heading mb-4 text-gradient-wiretap">
-                    Subscription Plans
+                    {showPlans ? 'Subscription Plans' : 'Choose Your Service'}
                 </h2>
                 <p className="section-subheading mb-8">
-                    Choose the plan that's right for you and unlock a world of entertainment.
+                    {showPlans 
+                        ? "Choose the plan that's right for you and unlock a world of entertainment."
+                        : "Select your favorite streaming service to see available subscription plans."
+                    }
                 </p>
 
-                <RadioGroup
-                    defaultValue="monthly"
-                    onValueChange={(value: string) => setBillingCycle(value as BillingCycle)}
-                    className="flex items-center justify-center space-x-2 md:space-x-4 mb-12"
-                >
-                    <div className="flex items-center space-x-2">
-                         <RadioGroupItem value="monthly" id="monthly" className="peer sr-only" />
-                         <Label htmlFor="monthly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
-                            billingCycle === 'monthly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                         )}>
-                           Monthly
-                         </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="half-yearly" id="half-yearly" className="peer sr-only" />
-                         <Label htmlFor="half-yearly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
-                            billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                         )}>
-                           Half Year
-                         </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yearly" id="yearly" className="peer sr-only" />
-                         <Label htmlFor="yearly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
-                            billingCycle === 'yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                         )}>
-                           Yearly
-                         </Label>
-                    </div>
-                </RadioGroup>
+                {showPlans ? (
+                    <>
+                        <RadioGroup
+                            defaultValue="monthly"
+                            onValueChange={(value: string) => setBillingCycle(value as BillingCycle)}
+                            className="flex items-center justify-center space-x-2 md:space-x-4 mb-12"
+                        >
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="monthly" id="monthly" className="peer sr-only" />
+                                <Label htmlFor="monthly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
+                                    billingCycle === 'monthly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                )}>
+                                Monthly
+                                </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="half-yearly" id="half-yearly" className="peer sr-only" />
+                                <Label htmlFor="half-yearly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
+                                    billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                )}>
+                                Half Year
+                                </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="yearly" id="yearly" className="peer sr-only" />
+                                <Label htmlFor="yearly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
+                                    billingCycle === 'yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                )}>
+                                Yearly
+                                </Label>
+                            </div>
+                        </RadioGroup>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {plans.map((plan, index) => {
-                        const {price, period} = plan.prices[billingCycle];
-                        return (
-                           <PricingCard 
-                                key={index} 
-                                {...plan}
-                                price={price}
-                                pricePeriod={period}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {plans.map((plan, index) => {
+                                const {price, period} = plan.prices[billingCycle];
+                                return (
+                                <PricingCard 
+                                        key={index} 
+                                        {...plan}
+                                        price={price}
+                                        pricePeriod={period}
+                                    />
+                                )
+                            })}
+                        </div>
+                    </>
+                ) : (
+                    <div className="flex justify-center">
+                        {netflixLogo &&
+                            <ServiceCard
+                                name="Netflix"
+                                logoUrl={netflixLogo.imageUrl}
+                                logoHint={netflixLogo.imageHint}
+                                onButtonClick={handleViewPlans}
                             />
-                        )
-                    })}
-                </div>
+                        }
+                    </div>
+                )}
             </div>
         </section>
     );
