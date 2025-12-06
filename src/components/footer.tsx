@@ -9,8 +9,8 @@ export default function Footer() {
   const logo = PlaceHolderImages.find(p => p.id === 'logo');
 
   const quickLinks = [
-    { href: '#', label: 'Home' },
-    { href: '/', label: 'About Us' },
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About Us' },
     { href: '#', label: 'Services' },
     { href: '#', label: 'Pricing' },
     { href: '#', label: 'Payment' },

@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { WhoWeAreSection } from '@/components/who-we-are-section';
 import { WhyChooseUsSection } from '@/components/our-story-section';
-import Footer from '@/components/footer';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 
@@ -67,7 +66,6 @@ export default function Home() {
       </div>
       <div className="relative bg-[#121315]">
         <div className="relative z-10">
-          <Footer />
         </div>
       </div>
     </>
