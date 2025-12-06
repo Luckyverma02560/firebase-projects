@@ -91,7 +91,7 @@ export default function Header() {
                   width={48}
                   height={48}
                   priority
-                  className={cn('brightness-0 invert rounded-full')}
+                  className={cn('')}
                 />
               )}
             </Link>
