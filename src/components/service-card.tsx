@@ -23,8 +23,8 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={80}
-                    height={80}
+                    width={96}
+                    height={96}
                     className="object-contain"
                 />
                 <svg viewBox="0 0 400 100" className="w-48 h-auto overflow-visible -ml-2">
