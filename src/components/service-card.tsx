@@ -57,7 +57,6 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                      <div className="flex flex-col justify-center ml-4">
                         <span className="font-disney text-3xl tracking-wider flex items-center">
                             <span className="text-white">Disney+ </span>
-                            <span className="text-hotstar-blue">Hotstar</span>
                         </span>
                     </div>
                 )}
@@ -100,3 +99,6 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
     
 
+
+
+    
