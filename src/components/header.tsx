@@ -91,7 +91,7 @@ export default function Header() {
                   width={72}
                   height={72}
                   priority
-                  className={cn('')}
+                  className={cn('rounded-full')}
                 />
               )}
             </Link>
