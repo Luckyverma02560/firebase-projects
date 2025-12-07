@@ -14,6 +14,7 @@ interface ServiceCardProps {
 }
 
 export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceCardProps) => {
+    const isPrime = name === 'Prime Video';
     return (
         <div className={cn(
             "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto"
@@ -23,20 +24,22 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={96}
-                    height={96}
+                    width={isPrime ? 128 : 96}
+                    height={isPrime ? 128 : 96}
                     className="object-contain"
                 />
-                <svg viewBox="0 0 400 100" className="w-48 h-auto overflow-visible -ml-2">
-                    <defs>
-                        <path id="curve" d="M 20,90 C 100,70 300,70 380,90" />
-                    </defs>
-                    <text className="font-bebas-neue text-6xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
-                        <textPath href="#curve" startOffset="50%" text-anchor="middle">
-                            Netflix
-                        </textPath>
-                    </text>
-                </svg>
+                {name === 'Netflix' && (
+                    <svg viewBox="0 0 400 100" className="w-48 h-auto overflow-visible -ml-2">
+                        <defs>
+                            <path id="curve" d="M 20,90 C 100,70 300,70 380,90" />
+                        </defs>
+                        <text className="font-bebas-neue text-6xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
+                            <textPath href="#curve" startOffset="50%" text-anchor="middle">
+                                Netflix
+                            </textPath>
+                        </text>
+                    </svg>
+                )}
             </div>
             <div className="flex items-center gap-4">
                 <Button variant="outline" className="bg-transparent text-white border-white/20 hover:bg-white/10 hover:text-white">
