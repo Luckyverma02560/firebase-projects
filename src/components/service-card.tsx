@@ -42,7 +42,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {name === 'Prime Video' && (
                     <div className="flex flex-col -ml-2 h-[100px] justify-center">
-                        <span className="font-bebas-neue text-6xl tracking-wider">
+                        <span className="font-bebas-neue text-5xl tracking-wider">
                             <span className="text-prime-blue">prime</span>
                             <span className="text-white"> video</span>
                         </span>
