@@ -59,6 +59,12 @@ const nextConfig: NextConfig = {
         hostname: '1000logos.net',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.citypng.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
