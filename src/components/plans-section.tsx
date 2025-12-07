@@ -71,8 +71,8 @@ const serviceIds = [
     'netflix-logo',
     'prime-video-logo',
     'hotstar-logo',
-    'sony-liv-logo',
     'zee5-logo',
+    'youtube-premium-logo',
     'voot-logo',
     'alt-balaji-logo',
     'hoichoi-logo',
@@ -168,3 +168,5 @@ export const PlansSection = () => {
         </section>
     );
 };
+
+    

@@ -24,6 +24,8 @@ export default {
         'orange-avenue': ['Orange Avenue', 'sans-serif'],
         'bebas-neue': ['Bebas Neue', 'sans-serif'],
         'sharp-sans': ['Sharp Sans', 'sans-serif'],
+        disney: ['Disney', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
       },
       colors: {
         'gold-accent': 'hsl(var(--accent))',
@@ -32,6 +34,9 @@ export default {
         'secondary-panel': '#16171A',
         'netflix-red': '#E50914',
         'prime-blue': '#00A8E1',
+        'hotstar-blue': '#101c4f',
+        'zee-purple': '#7D00FF',
+        'youtube-red': '#FF0000',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -129,3 +134,5 @@ export default {
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
+
+    

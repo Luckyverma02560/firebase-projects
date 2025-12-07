@@ -31,6 +31,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Disney';
+  src: url('/fonts/disney.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -438,3 +452,4 @@ body {
 
     
 
+    

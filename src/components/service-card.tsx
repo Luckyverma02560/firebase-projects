@@ -15,6 +15,10 @@ interface ServiceCardProps {
 
 export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceCardProps) => {
     const isPrime = name === 'Prime Video';
+    const isHotstar = name === 'Disney+ Hotstar';
+    const isZee = name === 'ZEE5';
+    const isYoutube = name === 'Youtube Premium';
+
     return (
         <div className={cn(
             "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto"
@@ -24,9 +28,9 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={isPrime ? 80 : 96}
-                    height={isPrime ? 80 : 96}
-                    className="object-contain"
+                    width={isHotstar || isZee ? 80 : (isPrime || isYoutube ? 64 : 96)}
+                    height={isHotstar || isZee ? 80 : (isPrime || isYoutube ? 64 : 96)}
+                    className={cn("object-contain", isYoutube ? 'rounded-full' : '')}
                 />
                 {name === 'Netflix' && (
                     <svg viewBox="0 0 400 100" className="w-48 h-auto overflow-visible -ml-2">
@@ -34,19 +38,43 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                             <path id="curve" d="M 20,100 C 100,80 300,80 380,100" />
                         </defs>
                         <text className="font-bebas-neue text-6xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
-                            <textPath href="#curve" startOffset="50%" text-anchor="middle">
+                            <textPath href="#curve" startOffset="52%" text-anchor="middle">
                                 Netflix
                             </textPath>
                         </text>
                     </svg>
                 )}
-                {name === 'Prime Video' && (
+                {isPrime && (
                     <div className="flex flex-col h-[100px] justify-center ml-4">
                         <span className="font-sharp-sans text-3xl tracking-wider flex items-center gap-1">
                             <span className="text-prime-blue">prime</span>
                             <span className="text-white">video</span>
                         </span>
                     </div>
+                )}
+                {isHotstar && (
+                     <div className="flex flex-col h-[100px] justify-center ml-4">
+                        <span className="font-disney text-5xl tracking-wider flex items-center">
+                            <span className="text-white">Disney+ </span>
+                            <span className="text-hotstar-blue">Hotstar</span>
+                        </span>
+                    </div>
+                )}
+                {isZee && (
+                     <div className="flex flex-col h-[100px] justify-center ml-4">
+                        <span className="font-roboto font-bold text-5xl tracking-wider flex items-center">
+                            <span className="text-zee-purple">ZEE</span>
+                            <span className="text-white">5</span>
+                        </span>
+                    </div>
+                )}
+                {isYoutube && (
+                    <div className="flex flex-col h-[100px] justify-center ml-4">
+                       <span className="font-roboto font-bold text-4xl tracking-wider flex items-center">
+                           <span className="text-white">YouTube</span>
+                           <span className="text-youtube-red"> Premium</span>
+                       </span>
+                   </div>
                 )}
             </div>
             <div className="flex items-center gap-4">
@@ -68,3 +96,5 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
         </div>
     );
 };
+
+    
