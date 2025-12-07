@@ -53,6 +53,12 @@ const nextConfig: NextConfig = {
         hostname: 'image.similarpng.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '1000logos.net',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
