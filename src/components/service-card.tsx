@@ -16,19 +16,28 @@ interface ServiceCardProps {
 export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceCardProps) => {
     return (
         <div className={cn(
-            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex items-center justify-between transition-all duration-300 hover:border-white/30 w-full"
+            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto"
         )}>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 mb-4 md:mb-0">
                 <Image
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={120}
-                    height={60}
+                    width={80}
+                    height={80}
                     className="object-contain"
                 />
-                <div>
-                    <h3 className="font-bebas-neue text-5xl font-bold text-netflix-red uppercase tracking-wider" style={{ textShadow: '0 0 5px rgba(0,0,0,0.7)', transform: 'perspective(500px) rotateX(10deg)' }}>{name}</h3>
+                <div className="w-48 h-12">
+                     <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <path id="curve" d="M 10 40 C 40 20, 160 20, 190 40" />
+                        </defs>
+                        <text className="font-bebas-neue text-[38px] font-bold fill-netflix-red tracking-wider uppercase" style={{textShadow: '0px 2px 4px rgba(0,0,0,0.5)'}}>
+                            <textPath href="#curve" startOffset="50%" textAnchor="middle">
+                                {name}
+                            </textPath>
+                        </text>
+                    </svg>
                 </div>
             </div>
             <div className="flex items-center gap-4">
