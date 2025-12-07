@@ -18,6 +18,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
     const isHotstar = name === 'Disney+ Hotstar';
     const isZee = name === 'ZEE5';
     const isYoutube = name === 'Youtube Premium';
+    const isNetflix = name === 'Netflix';
 
     return (
         <div className={cn(
@@ -28,8 +29,8 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={isHotstar || isZee ? 64 : (isPrime || isYoutube ? 64 : 96)}
-                    height={isHotstar || isZee ? 64 : (isPrime || isYoutube ? 64 : 96)}
+                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix ? 64 : 96}
+                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix ? 64 : 96}
                     className={cn("object-contain", isYoutube ? 'rounded-full' : '')}
                 />
                 {name === 'Netflix' && (
@@ -98,3 +99,4 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 };
 
     
+
