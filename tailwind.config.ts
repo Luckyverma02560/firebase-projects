@@ -23,6 +23,7 @@ export default {
         brillant: ['Brillant', 'cursive'],
         'orange-avenue': ['Orange Avenue', 'sans-serif'],
         'bebas-neue': ['Bebas Neue', 'sans-serif'],
+        'sharp-sans': ['Sharp Sans', 'sans-serif'],
       },
       colors: {
         'gold-accent': 'hsl(var(--accent))',
