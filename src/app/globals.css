@@ -149,6 +149,10 @@ body {
   .bg-gradient-get-started {
     background-image: linear-gradient(to right, #ee0979, #ff6a00);
   }
+
+  .bg-gradient-view-plans {
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
 }
 
 /* Particle animation styles */

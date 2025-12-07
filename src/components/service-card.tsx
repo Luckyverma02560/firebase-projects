@@ -87,7 +87,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     size="lg"
                     onClick={onButtonClick}
                     className={cn(
-                        "font-bold text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl from-purple-500 to-violet-600",
+                        "font-bold text-lg text-white transition-all duration-300 hover:shadow-xl bg-gradient-view-plans",
                         'hover:scale-105'
                     )}
                 >
@@ -99,4 +99,3 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 };
 
     
-
