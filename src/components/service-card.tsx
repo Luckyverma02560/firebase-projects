@@ -31,15 +31,15 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     data-ai-hint={logoHint}
                     width={isHotstar || isZee || isPrime || isYoutube || isNetflix ? 64 : 96}
                     height={isHotstar || isZee || isPrime || isYoutube || isNetflix ? 64 : 96}
-                    className={cn("object-contain", isYoutube ? 'rounded-full' : '')}
+                    className={cn("object-contain", isYoutube ? 'rounded-full' : '', isNetflix ? 'w-12 h-12' : '')}
                 />
-                {name === 'Netflix' && (
-                    <svg viewBox="0 0 400 100" className="w-48 h-auto overflow-visible -ml-2">
+                {isNetflix && (
+                    <svg viewBox="0 0 400 120" className="w-48 h-auto overflow-visible -ml-2">
                         <defs>
-                            <path id="curve" d="M 20,100 C 100,80 300,80 380,100" />
+                            <path id="netflix-curve" d="M 20,115 C 100,95 300,95 380,115" />
                         </defs>
                         <text className="font-bebas-neue text-6xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
-                            <textPath href="#curve" startOffset="52%" text-anchor="middle">
+                            <textPath href="#netflix-curve" startOffset="50%" text-anchor="middle">
                                 Netflix
                             </textPath>
                         </text>
@@ -55,14 +55,14 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {isHotstar && (
                      <div className="flex flex-col justify-center ml-4">
-                        <span className="font-disney text-3xl tracking-wider flex items-center">
+                        <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
                             <span className="text-white">Disney+</span>
                         </span>
                     </div>
                 )}
                 {isZee && (
                      <div className="flex flex-col justify-center ml-4">
-                        <span className="font-roboto font-bold text-3xl tracking-wider flex items-center">
+                        <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
                             <span className="text-white">ZEE</span>
                             <span className="text-white">5</span>
                         </span>
@@ -70,7 +70,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {isYoutube && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-roboto font-bold text-2xl tracking-wider flex items-center">
+                       <span className="font-sharp-sans text-2xl tracking-wider flex items-center">
                            <span className="text-white">YouTube</span>
                            <span className="text-youtube-red ml-1">Premium</span>
                        </span>
@@ -102,3 +102,4 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
 
     
+
