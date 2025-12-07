@@ -27,18 +27,6 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     height={80}
                     className="object-contain"
                 />
-                <div className="w-48 h-12">
-                     <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <path id="curve" d="M 10 40 C 50 30, 150 30, 190 40" />
-                        </defs>
-                        <text className="font-bebas-neue text-[38px] font-bold fill-netflix-red tracking-wider uppercase" style={{textShadow: '0px 2px 4px rgba(0,0,0,0.5)'}}>
-                            <textPath href="#curve" startOffset="50%" textAnchor="middle">
-                                {name}
-                            </textPath>
-                        </text>
-                    </svg>
-                </div>
             </div>
             <div className="flex items-center gap-4">
                 <Button variant="outline" className="bg-transparent text-white border-white/20 hover:bg-white/10 hover:text-white">
