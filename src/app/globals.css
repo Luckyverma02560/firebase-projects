@@ -142,6 +142,11 @@ body {
     background-image: linear-gradient(to right, #fc466b, #3f5efb);
   }
 
+  .text-gradient-subscription {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #ee0979, #ff6a00);
+  }
+
   .bg-gradient-plans {
     background-image: linear-gradient(to right, #ff00cc, #333399);
   }
@@ -451,6 +456,8 @@ body {
 
 
 
+
+    
 
     
 

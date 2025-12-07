@@ -94,7 +94,7 @@ export const PlansSection = () => {
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
             <div className="relative text-center max-w-6xl mx-auto z-10 w-full">
-                <h2 className="section-heading mb-4 text-gradient-wiretap">
+                <h2 className={cn("section-heading mb-4", showPlans ? "text-gradient-subscription" : "text-gradient-wiretap")}>
                     {showPlans ? 'Subscription Plans' : 'Choose Your Service'}
                 </h2>
                 <p className="section-subheading mb-8">
@@ -168,5 +168,7 @@ export const PlansSection = () => {
         </section>
     );
 };
+
+    
 
     
