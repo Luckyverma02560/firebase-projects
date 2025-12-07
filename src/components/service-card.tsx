@@ -28,7 +28,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     className="object-contain"
                 />
                 <div>
-                    <h3 className="font-bebas-neue text-6xl font-bold text-netflix-red uppercase tracking-wider" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.4)' }}>{name}</h3>
+                    <h3 className="font-bebas-neue text-5xl font-bold text-netflix-red uppercase tracking-wider" style={{ textShadow: '0 0 5px rgba(0,0,0,0.7)', transform: 'perspective(500px) rotateX(10deg)' }}>{name}</h3>
                 </div>
             </div>
             <div className="flex items-center gap-4">
@@ -50,5 +50,3 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
         </div>
     );
 };
-
-    
