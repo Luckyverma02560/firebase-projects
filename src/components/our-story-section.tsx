@@ -86,7 +86,7 @@ export const WhyChooseUsSection = () => {
 
     const handleCardClick = (e: React.MouseEvent, index: number) => {
         e.stopPropagation();
-        setSelectedCard(prev => (prev === index ? null : prev));
+        setSelectedCard(prev => (prev === index ? null : index));
     };
 
     const handleBackgroundClick = () => {
