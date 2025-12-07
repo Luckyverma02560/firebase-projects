@@ -19,7 +19,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
         <div className={cn(
             "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto"
         )}>
-            <div className="flex items-center justify-start gap-4 md:gap-6 mb-4 md:mb-0 flex-1">
+            <div className="flex items-center justify-start gap-4 md:gap-2 mb-4 md:mb-0 flex-1">
                 <Image
                     src={logoUrl}
                     alt={`${name} logo`}
@@ -39,6 +39,11 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                             </textPath>
                         </text>
                     </svg>
+                )}
+                {name === 'Prime Video' && (
+                    <div className="flex flex-col -ml-2">
+                        <span className="font-bold text-white text-3xl tracking-tight">prime video</span>
+                    </div>
                 )}
             </div>
             <div className="flex items-center gap-4">

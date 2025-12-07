@@ -30,6 +30,7 @@ export default {
         'heading-text': 'hsl(var(--foreground))',
         'secondary-panel': '#16171A',
         'netflix-red': '#E50914',
+        'prime-blue': '#00A8E1',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
