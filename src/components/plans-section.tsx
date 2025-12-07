@@ -67,12 +67,17 @@ const plans = [
     }
 ];
 
-const services = [
-    {
-        name: 'Netflix',
-        logoId: 'netflix-logo',
-    }
-]
+const serviceIds = [
+    'netflix-logo',
+    'prime-video-logo',
+    'hotstar-logo',
+    'sony-liv-logo',
+    'zee5-logo',
+    'voot-logo',
+    'alt-balaji-logo',
+    'hoichoi-logo',
+    'aha-logo'
+];
 
 type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
 
@@ -80,7 +85,7 @@ export const PlansSection = () => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
     const [showPlans, setShowPlans] = useState(false);
 
-    const netflixLogo = PlaceHolderImages.find(p => p.id === 'netflix-logo');
+    const services = serviceIds.map(id => PlaceHolderImages.find(p => p.id === id)).filter(Boolean);
 
     const handleViewPlans = () => {
         setShowPlans(true);
@@ -147,15 +152,16 @@ export const PlansSection = () => {
                         </div>
                     </>
                 ) : (
-                    <div className="flex justify-center px-4 md:px-0">
-                        {netflixLogo &&
-                            <ServiceCard
-                                name="Netflix"
-                                logoUrl={netflixLogo.imageUrl}
-                                logoHint={netflixLogo.imageHint}
+                    <div className="flex flex-col items-center gap-6 px-4 md:px-0">
+                        {services.map((service) => (
+                           service && <ServiceCard
+                                key={service.id}
+                                name={service.description}
+                                logoUrl={service.imageUrl}
+                                logoHint={service.imageHint}
                                 onButtonClick={handleViewPlans}
                             />
-                        }
+                        ))}
                     </div>
                 )}
             </div>
