@@ -30,7 +30,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 <div className="w-48 h-12">
                      <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <path id="curve" d="M 10 40 C 40 20, 160 20, 190 40" />
+                            <path id="curve" d="M 10 40 C 50 30, 150 30, 190 40" />
                         </defs>
                         <text className="font-bebas-neue text-[38px] font-bold fill-netflix-red tracking-wider uppercase" style={{textShadow: '0px 2px 4px rgba(0,0,0,0.5)'}}>
                             <textPath href="#curve" startOffset="50%" textAnchor="middle">
