@@ -36,7 +36,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 {isNetflix && (
                     <svg viewBox="0 0 400 120" className="w-48 h-auto overflow-visible -ml-2">
                         <defs>
-                            <path id="netflix-curve" d="M 20,125 C 100,105 300,105 380,125" />
+                            <path id="netflix-curve" d="M 20,95 C 100,75 300,75 380,95" />
                         </defs>
                         <text className="font-bebas-neue text-6xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
                             <textPath href="#netflix-curve" startOffset="50%" text-anchor="middle">
@@ -102,6 +102,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
 
     
+
 
 
 
