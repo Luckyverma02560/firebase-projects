@@ -28,8 +28,8 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={isHotstar || isZee ? 80 : (isPrime || isYoutube ? 64 : 96)}
-                    height={isHotstar || isZee ? 80 : (isPrime || isYoutube ? 64 : 96)}
+                    width={isHotstar || isZee ? 64 : (isPrime || isYoutube ? 64 : 96)}
+                    height={isHotstar || isZee ? 64 : (isPrime || isYoutube ? 64 : 96)}
                     className={cn("object-contain", isYoutube ? 'rounded-full' : '')}
                 />
                 {name === 'Netflix' && (
@@ -45,7 +45,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     </svg>
                 )}
                 {isPrime && (
-                    <div className="flex flex-col h-[100px] justify-center ml-4">
+                    <div className="flex flex-col justify-center ml-4">
                         <span className="font-sharp-sans text-3xl tracking-wider flex items-center gap-1">
                             <span className="text-prime-blue">prime</span>
                             <span className="text-white">video</span>
@@ -53,24 +53,24 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     </div>
                 )}
                 {isHotstar && (
-                     <div className="flex flex-col h-[100px] justify-center ml-4">
-                        <span className="font-disney text-5xl tracking-wider flex items-center">
+                     <div className="flex flex-col justify-center ml-4">
+                        <span className="font-disney text-3xl tracking-wider flex items-center">
                             <span className="text-white">Disney+ </span>
                             <span className="text-hotstar-blue">Hotstar</span>
                         </span>
                     </div>
                 )}
                 {isZee && (
-                     <div className="flex flex-col h-[100px] justify-center ml-4">
-                        <span className="font-roboto font-bold text-5xl tracking-wider flex items-center">
+                     <div className="flex flex-col justify-center ml-4">
+                        <span className="font-roboto font-bold text-3xl tracking-wider flex items-center">
                             <span className="text-zee-purple">ZEE</span>
                             <span className="text-white">5</span>
                         </span>
                     </div>
                 )}
                 {isYoutube && (
-                    <div className="flex flex-col h-[100px] justify-center ml-4">
-                       <span className="font-roboto font-bold text-4xl tracking-wider flex items-center">
+                    <div className="flex flex-col justify-center ml-4">
+                       <span className="font-roboto font-bold text-2xl tracking-wider flex items-center">
                            <span className="text-white">YouTube</span>
                            <span className="text-youtube-red"> Premium</span>
                        </span>
