@@ -63,7 +63,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 {isZee && (
                      <div className="flex flex-col justify-center ml-4">
                         <span className="font-roboto font-bold text-3xl tracking-wider flex items-center">
-                            <span className="text-zee-purple">ZEE</span>
+                            <span className="text-white">ZEE</span>
                             <span className="text-white">5</span>
                         </span>
                     </div>
