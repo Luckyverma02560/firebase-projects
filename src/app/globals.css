@@ -17,6 +17,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/fonts/bebasneue.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -419,5 +426,7 @@ body {
 
 
 
+
+    
 
     

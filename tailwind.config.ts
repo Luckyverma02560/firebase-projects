@@ -22,12 +22,14 @@ export default {
         'noto-serif': ['"Noto Serif"', 'serif'],
         brillant: ['Brillant', 'cursive'],
         'orange-avenue': ['Orange Avenue', 'sans-serif'],
+        'bebas-neue': ['Bebas Neue', 'sans-serif'],
       },
       colors: {
         'gold-accent': 'hsl(var(--accent))',
         'subtle-text': 'hsl(var(--muted-foreground))',
         'heading-text': 'hsl(var(--foreground))',
         'secondary-panel': '#16171A',
+        'netflix-red': '#E50914',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -125,5 +127,7 @@ export default {
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
+
+    
 
     
