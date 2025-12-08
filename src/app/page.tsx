@@ -7,6 +7,8 @@ import { WhoWeAreSection } from '@/components/who-we-are-section';
 import { WhyChooseUsSection } from '@/components/our-story-section';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 
 export default function Home() {
@@ -55,6 +57,11 @@ export default function Home() {
                 <p className="font-orange-avenue text-lg md:text-xl font-medium tracking-wider text-[#B0B0B2] max-w-4xl mx-auto opacity-0 animate-subheading-in">
                     Your Gateway to Ultimate Streaming Experience
                 </p>
+                <div className="mt-8 opacity-0 animate-subheading-in md:hidden">
+                    <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-view-plans text-white font-bold shadow-[0_0_15px_rgba(142,45,226,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(74,0,224,0.8)] hover:scale-105">
+                        <Link href="/about">View Plans</Link>
+                    </Button>
+                </div>
             </div>
           </section>
 
