@@ -71,7 +71,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {isYoutube && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-sharp-sans text-3xl font-semibold tracking-wider flex items-center">
+                       <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
                            <span className="text-white">YouTube</span>
                            <span className="text-youtube-red ml-1">Premium</span>
                        </span>
@@ -110,6 +110,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
 
     
+
 
 
 
