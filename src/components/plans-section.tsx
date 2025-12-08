@@ -167,7 +167,3 @@ export const PlansSection = () => {
         </section>
     );
 };
-
-    
-
-    
