@@ -25,7 +25,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
     return (
         <div className={cn(
-            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto h-28"
+            "relative bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto h-28"
         )}>
             <div className="flex items-center justify-start gap-4 md:gap-2 mb-4 md:mb-0 flex-1">
                 <Image
