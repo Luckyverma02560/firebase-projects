@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 
-const NUM_PARTICLES = 60;
+const NUM_PARTICLES = 150;
 const NEON_COLORS = [
     '#39FF14', // Neon Green
     '#FF073A', // Neon Red
