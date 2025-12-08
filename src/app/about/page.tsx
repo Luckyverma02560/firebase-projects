@@ -4,6 +4,7 @@
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 import { PlansSection } from '@/components/plans-section';
+import { StarfieldAnimation } from '@/components/starfield-animation';
 
 export default function AboutPage() {
 
@@ -15,6 +16,12 @@ export default function AboutPage() {
             <HeroParticles />
             <UpwardNeonParticles />
         </div>
+        <div className="aurora-background">
+          <div className="aurora-layer" style={{ top: '10%', left: '20%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(48, 8, 96, 0.5) 0%, transparent 70%)', animationDuration: '20s' }}></div>
+          <div className="aurora-layer" style={{ top: '50%', left: '70%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(10, 50, 120, 0.5) 0%, transparent 70%)', animationDuration: '30s', animationDelay: '5s' }}></div>
+          <div className="aurora-layer" style={{ top: '80%', left: '30%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(80, 10, 60, 0.5) 0%, transparent 70%)', animationDuration: '25s', animationDelay: '10s' }}></div>
+        </div>
+        <StarfieldAnimation />
         <div className="relative z-2">
           <PlansSection />
         </div>
