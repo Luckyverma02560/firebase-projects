@@ -25,8 +25,9 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
     return (
         <div className={cn(
-            "relative service-card-bg backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto h-28"
+            "relative group overflow-hidden bg-gradient-angled backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto h-28"
         )}>
+            <div className="light-streak" />
             <div className="flex items-center justify-start gap-4 md:gap-2 mb-4 md:mb-0 flex-1">
                 <Image
                     src={logoUrl}
@@ -81,7 +82,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                  {isSony && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-clarendon text-2xl tracking-wider flex items-center">
+                       <span className="font-clarendon text-3xl tracking-wider flex items-center">
                            <span className="text-white">SONY</span>
                        </span>
                    </div>

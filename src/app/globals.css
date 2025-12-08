@@ -168,12 +168,6 @@ body {
 
   .service-card-bg {
     background-color: #111;
-    background-image: 
-        radial-gradient(ellipse at center, rgba(68, 76, 95, 0.2) 0%, transparent 70%),
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 100% 100%, 20px 20px, 20px 20px;
-    transition: background-color 0.3s ease;
   }
 
   .service-card-bg:hover {
@@ -226,20 +220,17 @@ body {
     background: linear-gradient(
       to right,
       transparent 0%,
-      rgba(173, 181, 189, 0.08) 50%,
+      rgba(255, 255, 255, 0.05) 50%,
       transparent 100%
     );
-    animation: sweep 10s linear infinite;
+    transform: skewX(-25deg);
+    transition: left 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@keyframes sweep {
-  0% {
-    transform: translateX(0) skewX(-20deg);
-  }
-  100% {
-    transform: translateX(250%) skewX(-20deg);
-  }
+.group:hover .light-streak {
+    left: 150%;
 }
+
 
 /* Gold Divider */
 .gold-divider {
