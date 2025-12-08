@@ -41,7 +41,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                         <defs>
                             <path id="netflix-curve" d="M 0,95 C 60,75 120,75 180,95" />
                         </defs>
-                        <text className="font-bebas-neue text-5xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
+                        <text className="font-bebas-neue text-4xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
                             <textPath href="#netflix-curve" startOffset="50%" textAnchor="middle">
                                 NETFLIX
                             </textPath>
