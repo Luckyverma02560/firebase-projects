@@ -73,7 +73,6 @@ const serviceIds = [
     'hotstar-logo',
     'zee5-logo',
     'youtube-premium-logo',
-    'voot-logo',
     'alt-balaji-logo',
     'hoichoi-logo',
     'aha-logo'

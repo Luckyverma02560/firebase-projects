@@ -45,7 +45,7 @@
     {
       "id": "team4",
       "description": "Team member Riddhima B.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
@@ -106,12 +106,6 @@
       "id": "youtube-premium-logo",
       "description": "Youtube Premium",
       "imageUrl": "https://i.postimg.cc/pTm2XLTD/Untitled-ddddesign.png",
-      "imageHint": "company logo"
-    },
-    {
-      "id": "voot-logo",
-      "description": "Voot",
-      "imageUrl": "https://images-eu.ssl-images-amazon.com/images/I/31U0hgCzYlL._AC_UL600_SR600,600_.jpg",
       "imageHint": "company logo"
     },
     {
