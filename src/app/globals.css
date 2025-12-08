@@ -165,6 +165,20 @@ body {
   .bg-gradient-view-plans {
     background-image: linear-gradient(to right, #8e2de2, #4a00e0);
   }
+
+  .service-card-bg {
+    background-color: #111;
+    background-image: 
+        radial-gradient(ellipse at center, rgba(68, 76, 95, 0.2) 0%, transparent 70%),
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 20px 20px, 20px 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .service-card-bg:hover {
+      background-color: #151515;
+  }
 }
 
 /* Particle animation styles */
