@@ -37,11 +37,11 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     className={cn("object-contain w-16 h-16", isYoutube ? 'rounded-full' : '', isSony ? 'rounded-full' : '', isCanva ? 'rounded-full' : '')}
                 />
                 {isNetflix && (
-                    <svg viewBox="0 0 400 120" className="w-48 h-auto overflow-visible -ml-2">
+                    <svg viewBox="0 0 120 120" className="w-32 h-auto overflow-visible -ml-2">
                         <defs>
-                            <path id="netflix-curve" d="M 20,95 C 100,75 300,75 380,95" />
+                            <path id="netflix-curve" d="M 0,95 C 60,75 120,75 180,95" />
                         </defs>
-                        <text className="font-bebas-neue text-6xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
+                        <text className="font-bebas-neue text-5xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
                             <textPath href="#netflix-curve" startOffset="50%" textAnchor="middle">
                                 NETFLIX
                             </textPath>
@@ -58,14 +58,14 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {isHotstar && (
                      <div className="flex flex-col justify-center ml-4">
-                        <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                        <span className="font-sharp-sans text-2xl tracking-wider flex items-center">
                             <span className="text-white">Disney+</span>
                         </span>
                     </div>
                 )}
                 {isZee && (
                      <div className="flex flex-col justify-center ml-4">
-                        <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                        <span className="font-sharp-sans text-2xl tracking-wider flex items-center">
                             <span className="text-white">ZEE</span>
                             <span className="text-white">5</span>
                         </span>
@@ -73,7 +73,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {isYoutube && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-bebas-neue text-3xl tracking-wider flex items-center font-semibold">
+                       <span className="font-sharp-sans text-2xl tracking-wider flex items-center font-semibold">
                            <span className="text-white">YouTube</span>
                            <span className="text-youtube-red ml-1">Premium</span>
                        </span>
@@ -81,14 +81,14 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                  {isSony && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                       <span className="font-sharp-sans text-2xl tracking-wider flex items-center">
                            <span className="text-white">SONY</span>
                        </span>
                    </div>
                 )}
                  {isPlayBox && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                       <span className="font-sharp-sans text-2xl tracking-wider flex items-center">
                            <span className="text-white font-bold">Play</span>
                            <span className="text-white">Box</span>
                            <span className="text-white font-bold ml-2">TV</span>
@@ -97,7 +97,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                  {isCanva && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                       <span className="font-sharp-sans text-2xl tracking-wider flex items-center">
                            <span className="text-white">Canva</span>
                        </span>
                    </div>
