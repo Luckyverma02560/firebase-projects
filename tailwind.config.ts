@@ -26,6 +26,7 @@ export default {
         'sharp-sans': ['Sharp Sans', 'sans-serif'],
         disney: ['Disney', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
+        clarendon: ['Clarendon', 'serif'],
       },
       colors: {
         'gold-accent': 'hsl(var(--accent))',

@@ -19,6 +19,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
     const isZee = name === 'ZEE5';
     const isYoutube = name === 'Youtube Premium';
     const isNetflix = name === 'Netflix';
+    const isSony = name === 'SONY';
 
     return (
         <div className={cn(
@@ -29,9 +30,9 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix ? 64 : 96}
-                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix ? 64 : 96}
-                    className={cn("object-contain w-16 h-16", isYoutube ? 'rounded-full' : '')}
+                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony ? 64 : 96}
+                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony ? 64 : 96}
+                    className={cn("object-contain w-16 h-16", isYoutube ? 'rounded-full' : '', isSony ? 'rounded-full' : '')}
                 />
                 {isNetflix && (
                     <svg viewBox="0 0 400 120" className="w-48 h-auto overflow-visible -ml-2">
@@ -76,6 +77,13 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                        </span>
                    </div>
                 )}
+                 {isSony && (
+                    <div className="flex flex-col justify-center ml-4">
+                       <span className="font-clarendon text-3xl tracking-wider flex items-center">
+                           <span className="text-white">SONY</span>
+                       </span>
+                   </div>
+                )}
             </div>
             <div className="flex items-center gap-4">
                 <Button variant="outline" className="bg-transparent text-white border-white/20 hover:bg-white/10 hover:text-white">
@@ -102,6 +110,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
 
     
+
 
 
 
