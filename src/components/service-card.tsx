@@ -89,7 +89,9 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                  {isPlayBox && (
                     <div className="flex flex-col justify-center ml-4">
                        <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
-                           <span className="text-white">PlayBox TV</span>
+                           <span className="text-white font-bold">Play</span>
+                           <span className="text-white">Box</span>
+                           <span className="text-white font-bold ml-2">TV</span>
                        </span>
                    </div>
                 )}
