@@ -77,6 +77,12 @@ const nextConfig: NextConfig = {
         hostname: 'images-eu.ssl-images-amazon.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'downloadr2.apkmirror.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
