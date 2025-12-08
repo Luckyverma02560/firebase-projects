@@ -20,6 +20,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
     const isYoutube = name === 'Youtube Premium';
     const isNetflix = name === 'Netflix';
     const isSony = name === 'SONY';
+    const isPlayBox = name === 'PlayBox TV';
 
     return (
         <div className={cn(
@@ -30,8 +31,8 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony ? 64 : 96}
-                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony ? 64 : 96}
+                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox ? 64 : 96}
+                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox ? 64 : 96}
                     className={cn("object-contain w-16 h-16", isYoutube ? 'rounded-full' : '', isSony ? 'rounded-full' : '')}
                 />
                 {isNetflix && (
@@ -71,7 +72,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {isYoutube && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                       <span className="font-bebas-neue text-3xl tracking-wider flex items-center">
                            <span className="text-white">YouTube</span>
                            <span className="text-youtube-red ml-1">Premium</span>
                        </span>
@@ -81,6 +82,13 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     <div className="flex flex-col justify-center ml-4">
                        <span className="font-clarendon text-3xl tracking-wider flex items-center">
                            <span className="text-white">SONY</span>
+                       </span>
+                   </div>
+                )}
+                 {isPlayBox && (
+                    <div className="flex flex-col justify-center ml-4">
+                       <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                           <span className="text-white">PlayBox TV</span>
                        </span>
                    </div>
                 )}
@@ -110,6 +118,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
 
     
+
 
 
 
