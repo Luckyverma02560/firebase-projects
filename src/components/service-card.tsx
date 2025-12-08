@@ -39,7 +39,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 {isNetflix && (
                     <svg viewBox="0 0 120 40" className="w-32 h-auto overflow-visible -ml-2">
                         <defs>
-                            <path id="netflix-curve" d="M -5,25 C 60,5 120,5 185,25" />
+                            <path id="netflix-curve" d="M -5,30 C 60,10 120,10 185,30" />
                         </defs>
                         <text className="font-bebas-neue text-3xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
                             <textPath href="#netflix-curve" startOffset="50%" textAnchor="middle">
@@ -89,9 +89,9 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                  {isPlayBox && (
                     <div className="flex flex-col justify-center ml-4">
                        <span className="font-sharp-sans text-2xl tracking-wider flex items-center">
-                           <span className="text-white font-bold">Play</span>
-                           <span className="text-white">Box</span>
-                           <span className="text-white font-bold ml-2">TV</span>
+                           <span className="font-bold">Play</span>
+                           <span>Box</span>
+                           <span className="font-bold ml-1">TV</span>
                        </span>
                    </div>
                 )}
