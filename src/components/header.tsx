@@ -132,8 +132,8 @@ export default function Header() {
                   <Menu size={32} />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md">
-                 <div className="mt-12 flex flex-col gap-4">
+              <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md flex flex-col justify-center">
+                 <div className="flex flex-col gap-4">
                     <MobileNavLink key={homeLink.label} href={homeLink.href} label={homeLink.label} />
                     <MobileNavLink key={plansLink.label} href={plansLink.href} label={plansLink.label} isButton />
                     {navLinks.map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}

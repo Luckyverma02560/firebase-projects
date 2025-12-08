@@ -25,10 +25,10 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
 
     return (
         <div className={cn(
-            "relative group overflow-hidden bg-gradient-angled backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto h-28"
+            "relative group overflow-hidden bg-gradient-angled backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto gap-4 md:h-28"
         )}>
             <div className="light-streak" />
-            <div className="flex items-center justify-start gap-4 md:gap-2 mb-4 md:mb-0 flex-1">
+            <div className="flex items-center justify-start gap-4 md:gap-2 mb-4 md:mb-0 flex-1 w-full md:w-auto">
                 <Image
                     src={logoUrl}
                     alt={`${name} logo`}
@@ -104,8 +104,8 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                    </div>
                 )}
             </div>
-            <div className="flex items-center gap-4">
-                <Button variant="outline" className="bg-transparent text-white border-white/20 hover:bg-white/10 hover:text-white">
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                <Button variant="outline" className="bg-transparent text-white border-white/20 hover:bg-white/10 hover:text-white w-full sm:w-auto">
                     <MessageSquare className="mr-2 h-4 w-4" />
                     Chat Support
                 </Button>
@@ -113,7 +113,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     size="lg"
                     onClick={onButtonClick}
                     className={cn(
-                        "font-bold text-lg text-white transition-all duration-300 hover:shadow-xl bg-gradient-view-plans",
+                        "font-bold text-lg text-white transition-all duration-300 hover:shadow-xl bg-gradient-view-plans w-full sm:w-auto",
                         'hover:scale-105'
                     )}
                 >
