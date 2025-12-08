@@ -74,7 +74,6 @@ const serviceIds = [
     'zee5-logo',
     'youtube-premium-logo',
     'sony-logo',
-    'hoichoi-logo',
     'aha-logo',
     'canva-logo'
 ];
