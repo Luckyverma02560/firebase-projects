@@ -21,6 +21,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
     const isNetflix = name === 'Netflix';
     const isSony = name === 'SONY';
     const isPlayBox = name === 'PlayBox TV';
+    const isCanva = name === 'Canva';
 
     return (
         <div className={cn(
@@ -31,9 +32,9 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox ? 64 : 96}
-                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox ? 64 : 96}
-                    className={cn("object-contain w-16 h-16", isYoutube ? 'rounded-full' : '', isSony ? 'rounded-full' : '')}
+                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 64 : 96}
+                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 64 : 96}
+                    className={cn("object-contain w-16 h-16", isYoutube ? 'rounded-full' : '', isSony ? 'rounded-full' : '', isCanva ? 'rounded-full' : '')}
                 />
                 {isNetflix && (
                     <svg viewBox="0 0 400 120" className="w-48 h-auto overflow-visible -ml-2">
@@ -41,7 +42,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                             <path id="netflix-curve" d="M 20,95 C 100,75 300,75 380,95" />
                         </defs>
                         <text className="font-bebas-neue text-6xl font-bold fill-netflix-red uppercase tracking-wider" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.4)" }}>
-                            <textPath href="#netflix-curve" startOffset="50%" text-anchor="middle">
+                            <textPath href="#netflix-curve" startOffset="50%" textAnchor="middle">
                                 NETFLIX
                             </textPath>
                         </text>
@@ -72,7 +73,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                 {isYoutube && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-bebas-neue text-3xl tracking-wider flex items-center">
+                       <span className="font-bebas-neue text-3xl tracking-wider flex items-center font-semibold">
                            <span className="text-white">YouTube</span>
                            <span className="text-youtube-red ml-1">Premium</span>
                        </span>
@@ -80,7 +81,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 )}
                  {isSony && (
                     <div className="flex flex-col justify-center ml-4">
-                       <span className="font-clarendon text-3xl tracking-wider flex items-center">
+                       <span className="font-clarendon text-3xl tracking-wider flex items-center font-semibold">
                            <span className="text-white">SONY</span>
                        </span>
                    </div>
@@ -89,6 +90,13 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                     <div className="flex flex-col justify-center ml-4">
                        <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
                            <span className="text-white">PlayBox TV</span>
+                       </span>
+                   </div>
+                )}
+                 {isCanva && (
+                    <div className="flex flex-col justify-center ml-4">
+                       <span className="font-sharp-sans text-3xl tracking-wider flex items-center">
+                           <span className="text-white">Canva</span>
                        </span>
                    </div>
                 )}
@@ -112,18 +120,3 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
         </div>
     );
 };
-
-    
-
-
-
-    
-
-
-
-
-
-
-
-
-
