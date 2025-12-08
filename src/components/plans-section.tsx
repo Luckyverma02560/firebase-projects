@@ -75,7 +75,8 @@ const serviceIds = [
     'youtube-premium-logo',
     'sony-logo',
     'hoichoi-logo',
-    'aha-logo'
+    'aha-logo',
+    'canva-logo'
 ];
 
 type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';

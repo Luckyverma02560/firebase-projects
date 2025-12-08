@@ -125,6 +125,12 @@
       "description": "Aha",
       "imageUrl": "https://images.unsplash.com/photo-1620786523910-8a71b694901f?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "company logo"
+    },
+    {
+      "id": "canva-logo",
+      "description": "Canva",
+      "imageUrl": "https://i.postimg.cc/02CNwcTT/canva-logo-hd.png",
+      "imageHint": "company logo"
     }
   ]
 }
