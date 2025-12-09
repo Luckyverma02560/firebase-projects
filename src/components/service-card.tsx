@@ -10,7 +10,7 @@ interface ServiceCardProps {
     name: string;
     logoUrl: string;
     logoHint: string;
-    onButtonClick: () => void;
+    onButtonClick: (name: string) => void;
 }
 
 export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceCardProps) => {
@@ -111,7 +111,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint, onButtonClick }: ServiceC
                 </Button>
                 <Button
                     size="lg"
-                    onClick={onButtonClick}
+                    onClick={() => onButtonClick(name)}
                     className={cn(
                         "font-bold text-lg text-white transition-all duration-300 hover:shadow-xl bg-gradient-view-plans w-full sm:w-auto",
                         'hover:scale-105'

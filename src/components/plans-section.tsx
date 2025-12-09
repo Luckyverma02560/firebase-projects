@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { ServiceCard } from './service-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-const plans = [
+const allPlans = [
     {
         name: 'Basic Plan',
         description: 'Ideal for individuals starting out',
@@ -101,13 +101,17 @@ type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
 
 interface PlansSectionProps {
     showPlans: boolean;
-    onShowPlans: () => void;
+    onShowPlans: (serviceName: string) => void;
+    selectedService: string | null;
 }
 
-export const PlansSection = ({ showPlans, onShowPlans }: PlansSectionProps) => {
+export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansSectionProps) => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
 
     const services = serviceIds.map(id => PlaceHolderImages.find(p => p.id === id)).filter(Boolean);
+
+    const plansToShow = (selectedService === 'Netflix' || selectedService === 'Prime Video') ? allPlans : allPlans.slice(0, 3);
+    const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
 
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
@@ -157,8 +161,8 @@ export const PlansSection = ({ showPlans, onShowPlans }: PlansSectionProps) => {
                             </div>
                         </RadioGroup>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {plans.map((plan, index) => {
+                        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8", gridColsClass)}>
+                            {plansToShow.map((plan, index) => {
                                 const {price, period} = plan.prices[billingCycle];
                                 return (
                                 <PricingCard 
@@ -179,7 +183,7 @@ export const PlansSection = ({ showPlans, onShowPlans }: PlansSectionProps) => {
                                 name={service.description}
                                 logoUrl={service.imageUrl}
                                 logoHint={service.imageHint}
-                                onButtonClick={onShowPlans}
+                                onButtonClick={() => onShowPlans(service.description)}
                             />
                         ))}
                     </div>

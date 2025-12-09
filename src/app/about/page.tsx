@@ -13,15 +13,17 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 
 export default function AboutPage() {
-  const [showPlans, setShowPlans] = useState(false);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
 
-  const handleViewPlans = () => {
-      setShowPlans(true);
+  const handleViewPlans = (serviceName: string) => {
+      setSelectedService(serviceName);
   };
 
   const handleGoBack = () => {
-      setShowPlans(false);
+      setSelectedService(null);
   };
+
+  const showPlans = selectedService !== null;
 
   return (
     <>
@@ -56,7 +58,7 @@ export default function AboutPage() {
         </div>
         <StarfieldAnimation />
         <div className="relative z-2">
-          <PlansSection showPlans={showPlans} onShowPlans={handleViewPlans} />
+          <PlansSection showPlans={showPlans} onShowPlans={handleViewPlans} selectedService={selectedService} />
         </div>
       </div>
       <Footer />
