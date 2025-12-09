@@ -64,6 +64,25 @@ const plans = [
         buttonText: 'Choose Premium',
         gradient: 'from-red-500 to-orange-600',
         shadow: 'shadow-red-500/30'
+    },
+    {
+        name: 'Super Premium',
+        description: 'For power users and large families',
+        features: [
+            'Access to 12 devices',
+            '8K streaming available',
+            'Personal concierge support',
+            'Offline downloads on all devices',
+            'Gift subscriptions included'
+        ],
+        prices: {
+            monthly: { price: '₹799', period: '/month' },
+            'half-yearly': { price: '₹4599', period: '/6mo' },
+            yearly: { price: '₹8999', period: '/yr' }
+        },
+        buttonText: 'Choose Super Premium',
+        gradient: 'from-green-500 to-teal-600',
+        shadow: 'shadow-green-500/30'
     }
 ];
 
@@ -92,7 +111,7 @@ export const PlansSection = ({ showPlans, onShowPlans }: PlansSectionProps) => {
 
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
-            <div className="relative text-center max-w-6xl mx-auto z-10 w-full">
+            <div className="relative text-center max-w-7xl mx-auto z-10 w-full">
                 <div className="flex justify-center items-center mb-4">
                     <h2 className={cn("section-heading", showPlans ? "text-gradient-subscription" : "text-gradient-wiretap")}>
                         {showPlans ? 'Subscription Plans' : 'Choose Your Service'}
@@ -138,7 +157,7 @@ export const PlansSection = ({ showPlans, onShowPlans }: PlansSectionProps) => {
                             </div>
                         </RadioGroup>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {plans.map((plan, index) => {
                                 const {price, period} = plan.prices[billingCycle];
                                 return (
