@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Check } from 'lucide-react';
+import { Check, ShoppingCart } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 
@@ -45,13 +45,22 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                     ))}
                 </ul>
             </div>
-            <Button size="lg" className={cn(
-                "w-full font-bold text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
-                gradient,
-                'hover:scale-105'
-            )}>
-                {buttonText}
-            </Button>
+            <div className="flex items-center gap-2">
+                <Button size="lg" className={cn(
+                    "w-full font-bold text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
+                    gradient,
+                    'hover:scale-105'
+                )}>
+                    {buttonText}
+                </Button>
+                <Button size="icon" className={cn(
+                    "h-12 w-12 flex-shrink-0 bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
+                    gradient,
+                    'hover:scale-105'
+                )} aria-label="Add to cart">
+                    <ShoppingCart />
+                </Button>
+            </div>
         </div>
     );
 };
