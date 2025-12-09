@@ -33,9 +33,9 @@ const allPlans = [
         description: 'Perfect for families and small groups',
         features: [
             '1 Device access',
-            'Full customer support',
-            '4K streaming quality',
-            'Shared account access'
+            'Profile Login',
+            '4k streaming quality',
+            'Limited sharing'
         ],
         prices: {
             monthly: { price: '₹130', period: '/month' },
