@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label"
 import { cn } from '@/lib/utils';
 import { ServiceCard } from './service-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Button } from './ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 const plans = [
     {
@@ -90,12 +92,30 @@ export const PlansSection = () => {
         setShowPlans(true);
     };
 
+    const handleGoBack = () => {
+        setShowPlans(false);
+    };
+
+
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
             <div className="relative text-center max-w-6xl mx-auto z-10 w-full">
-                <h2 className={cn("section-heading mb-4", showPlans ? "text-gradient-subscription" : "text-gradient-wiretap")}>
-                    {showPlans ? 'Subscription Plans' : 'Choose Your Service'}
-                </h2>
+                <div className="flex justify-center items-center mb-4">
+                    {showPlans && (
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={handleGoBack}
+                            className="mr-4 text-white hover:bg-white/10"
+                            aria-label="Go back to service selection"
+                        >
+                            <ArrowLeft className="h-6 w-6" />
+                        </Button>
+                    )}
+                    <h2 className={cn("section-heading", showPlans ? "text-gradient-subscription" : "text-gradient-wiretap")}>
+                        {showPlans ? 'Subscription Plans' : 'Choose Your Service'}
+                    </h2>
+                </div>
                 <p className="section-subheading mb-8">
                     {showPlans 
                         ? "Choose the plan that's right for you and unlock a world of entertainment."
