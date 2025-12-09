@@ -23,7 +23,7 @@ const plans = [
             'half-yearly': { price: '₹849', period: '/6mo' },
             yearly: { price: '₹1599', period: '/yr' }
         },
-        buttonText: 'Choose Basic',
+        buttonText: 'BUY NOW',
         gradient: 'from-blue-500 to-indigo-600',
         shadow: 'shadow-blue-500/30'
     },
@@ -41,7 +41,7 @@ const plans = [
             'half-yearly': { price: '₹1699', period: '/6mo' },
             yearly: { price: '₹3299', period: '/yr' }
         },
-        buttonText: 'Choose Standard',
+        buttonText: 'BUY NOW',
         gradient: 'from-purple-500 to-violet-600',
         shadow: 'shadow-purple-500/30',
         isPopular: true
@@ -61,7 +61,7 @@ const plans = [
             'half-yearly': { price: '₹2899', period: '/6mo' },
             yearly: { price: '₹5499', period: '/yr' }
         },
-        buttonText: 'Choose Premium',
+        buttonText: 'BUY NOW',
         gradient: 'from-red-500 to-orange-600',
         shadow: 'shadow-red-500/30'
     },
@@ -80,7 +80,7 @@ const plans = [
             'half-yearly': { price: '₹4599', period: '/6mo' },
             yearly: { price: '₹8999', period: '/yr' }
         },
-        buttonText: 'Choose Super Premium',
+        buttonText: 'BUY NOW',
         gradient: 'from-green-500 to-teal-600',
         shadow: 'shadow-green-500/30'
     }
