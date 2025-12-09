@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -20,6 +20,8 @@ import {
 const homeLink = { href: '/', label: 'Home' };
 const plansLink = { href: '/about', label: 'Plans' };
 const getStartedLink = { href: '#', label: 'Get Started' };
+const cartLink = { href: '/cart', label: 'View Cart' };
+
 
 const navLinks = [
   { href: '#', label: 'Payment' },
@@ -119,9 +121,15 @@ export default function Header() {
             ))}
           </nav>
           
-          <div className="hidden md:flex flex-shrink-0 justify-end">
-             <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
+          <div className="hidden md:flex flex-shrink-0 justify-end items-center gap-4">
+            <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
                 <Link href={getStartedLink.href}>{getStartedLink.label}</Link>
+            </Button>
+            <Button asChild variant="outline" size="icon" className="text-white border-gold-accent hover:bg-gold-accent/20 hover:text-white transition-colors duration-300">
+                <Link href={cartLink.href}>
+                    <ShoppingCart />
+                    <span className="sr-only">{cartLink.label}</span>
+                </Link>
             </Button>
           </div>
 
@@ -137,6 +145,12 @@ export default function Header() {
                     <MobileNavLink key={homeLink.label} href={homeLink.href} label={homeLink.label} />
                     <MobileNavLink key={plansLink.label} href={plansLink.href} label={plansLink.label} isButton />
                     {navLinks.map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
+                     <SheetClose asChild>
+                        <Link href={cartLink.href} className="flex items-center justify-center gap-2 py-3 text-xl text-center font-headline rounded-md text-foreground">
+                            <ShoppingCart />
+                            <span>{cartLink.label}</span>
+                        </Link>
+                    </SheetClose>
                     <div className="pt-4">
                       <MobileNavLink href={getStartedLink.href} label={getStartedLink.label} isGetStarted />
                     </div>

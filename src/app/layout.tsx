@@ -1,9 +1,11 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { ScrollToTopButton } from '@/components/scroll-to-top-button';
+import { CartProvider } from '@/context/cart-context';
 
 export const metadata: Metadata = {
   title: 'LoQ Capital Markets Clone',
@@ -23,11 +25,13 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600&family=Noto+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
+        <CartProvider>
           <Header />
           <main>{children}</main>
           <Footer />
           <Toaster />
           <ScrollToTopButton />
+        </CartProvider>
       </body>
     </html>
   );

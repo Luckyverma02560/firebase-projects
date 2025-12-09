@@ -27,7 +27,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <Header />
       <div className="relative overflow-hidden">
         {showPlans && (
             <div className="absolute top-28 left-4 md:left-8 z-30">
@@ -61,7 +60,6 @@ export default function AboutPage() {
           <PlansSection showPlans={showPlans} onShowPlans={handleViewPlans} selectedService={selectedService} />
         </div>
       </div>
-      <Footer />
     </>
   );
 }

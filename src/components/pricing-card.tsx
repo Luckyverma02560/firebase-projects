@@ -4,6 +4,8 @@
 import { Check, ShoppingCart } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
+import { useCart } from '@/context/cart-context';
+import { useToast } from '@/hooks/use-toast';
 
 interface PricingCardProps {
     name: string;
@@ -18,9 +20,27 @@ interface PricingCardProps {
 }
 
 export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false }: PricingCardProps) => {
+    const { addToCart } = useCart();
+    const { toast } = useToast();
+
+    const handleAddToCart = () => {
+        const item = {
+            id: `${name}-${price}`,
+            name,
+            price: parseFloat(price.replace('₹', '')),
+            period: pricePeriod,
+            quantity: 1,
+        };
+        addToCart(item);
+        toast({
+            title: "Added to cart",
+            description: `${name} has been added to your cart.`,
+        });
+    };
+    
     return (
         <div className={cn(
-            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 md:p-6 flex flex-col transition-all duration-300 hover:border-white/30 hover:scale-105",
+            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 md:p-4 flex flex-col transition-all duration-300 hover:border-white/30 hover:scale-105",
             shadow,
             isPopular ? 'border-purple-500 border-2 shadow-lg shadow-purple-500/40' : 'hover:shadow-lg'
         )}>
@@ -30,16 +50,16 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                 </div>
             )}
             <div className="flex-grow">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2">{name}</h3>
-                <p className="text-gray-400 text-xs md:text-sm mb-3 md:mb-4">{description}</p>
-                <div className="mb-4 md:mb-6">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1">{name}</h3>
+                <p className="text-gray-400 text-xs md:text-sm mb-2">{description}</p>
+                <div className="mb-3">
                     <span className="text-3xl md:text-4xl font-extrabold text-white">{price}</span>
-                    <span className="text-sm md:text-base text-gray-400">{pricePeriod}</span>
+                    <span className="text-sm text-gray-400">{pricePeriod}</span>
                 </div>
-                <ul className="space-y-2 text-left mb-4 md:mb-6">
+                <ul className="space-y-1 text-left mb-4">
                     {features.map((feature, index) => (
                         <li key={index} className="flex items-center text-gray-300 text-sm">
-                            <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                            <Check className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
                             <span>{feature}</span>
                         </li>
                     ))}
@@ -53,11 +73,16 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                 )}>
                     {buttonText}
                 </Button>
-                <Button size="icon" className={cn(
-                    "h-11 w-11 flex-shrink-0 bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
-                    gradient,
-                    'hover:scale-105'
-                )} aria-label="Add to cart">
+                <Button 
+                    size="icon" 
+                    className={cn(
+                        "h-11 w-11 flex-shrink-0 bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
+                        gradient,
+                        'hover:scale-105'
+                    )} 
+                    aria-label="Add to cart"
+                    onClick={handleAddToCart}
+                >
                     <ShoppingCart className="h-5 w-5" />
                 </Button>
             </div>
