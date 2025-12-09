@@ -19,7 +19,7 @@ const allPlans = [
             'Basic support'
         ],
         prices: {
-            monthly: { price: '₹149', period: '/month' },
+            monthly: { price: '₹100', period: '/month' },
             'half-yearly': { price: '₹849', period: '/6mo' },
             yearly: { price: '₹1599', period: '/yr' }
         },
@@ -37,7 +37,7 @@ const allPlans = [
             'Early access to new shows'
         ],
         prices: {
-            monthly: { price: '₹299', period: '/month' },
+            monthly: { price: '₹130', period: '/month' },
             'half-yearly': { price: '₹1699', period: '/6mo' },
             yearly: { price: '₹3299', period: '/yr' }
         },
@@ -57,7 +57,7 @@ const allPlans = [
             'Exclusive content access'
         ],
         prices: {
-            monthly: { price: '₹499', period: '/month' },
+            monthly: { price: '₹150', period: '/month' },
             'half-yearly': { price: '₹2899', period: '/6mo' },
             yearly: { price: '₹5499', period: '/yr' }
         },
@@ -76,7 +76,7 @@ const allPlans = [
             'Gift subscriptions included'
         ],
         prices: {
-            monthly: { price: '₹799', period: '/month' },
+            monthly: { price: '₹170', period: '/month' },
             'half-yearly': { price: '₹4599', period: '/6mo' },
             yearly: { price: '₹8999', period: '/yr' }
         },
