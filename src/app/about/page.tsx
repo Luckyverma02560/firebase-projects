@@ -28,7 +28,7 @@ export default function AboutPage() {
       <Header />
       <div className="relative overflow-hidden">
         {showPlans && (
-            <div className="absolute top-28 left-1/2 -translate-x-1/2 z-30">
+            <div className="absolute top-28 left-4 md:left-8 z-30">
                  <Button
                     onClick={handleGoBack}
                     variant="ghost"
