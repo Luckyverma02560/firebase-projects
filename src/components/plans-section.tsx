@@ -14,9 +14,10 @@ const allPlans = [
         name: 'Basic Plan',
         description: 'Ideal for individuals starting out',
         features: [
-            'Access to 2 devices',
-            'Full HD (1080p) streaming',
-            'Basic support'
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
         ],
         prices: {
             monthly: { price: '₹100', period: '/month' },
@@ -31,10 +32,10 @@ const allPlans = [
         name: 'Standard Plan',
         description: 'Perfect for families and small groups',
         features: [
-            'Access to 4 devices',
-            'Ultra HD (4K) streaming',
-            'Priority support',
-            'Early access to new shows'
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
         ],
         prices: {
             monthly: { price: '₹130', period: '/month' },
@@ -50,11 +51,10 @@ const allPlans = [
         name: 'Premium Plan',
         description: 'For the ultimate streaming enthusiasts',
         features: [
-            'Access to 8 devices',
-            'Ultra HD (4K) + HDR streaming',
-            '24/7 dedicated support',
-            'Offline downloads',
-            'Exclusive content access'
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
         ],
         prices: {
             monthly: { price: '₹150', period: '/month' },
@@ -69,11 +69,10 @@ const allPlans = [
         name: 'Super Premium',
         description: 'For power users and large families',
         features: [
-            'Access to 12 devices',
-            '8K streaming available',
-            'Personal concierge support',
-            'Offline downloads on all devices',
-            'Gift subscriptions included'
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
         ],
         prices: {
             monthly: { price: '₹170', period: '/month' },
