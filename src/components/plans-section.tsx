@@ -8,8 +8,6 @@ import { Label } from "@/components/ui/label"
 import { cn } from '@/lib/utils';
 import { ServiceCard } from './service-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Button } from './ui/button';
-import { ArrowLeft } from 'lucide-react';
 
 const plans = [
     {
@@ -82,36 +80,20 @@ const serviceIds = [
 
 type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
 
-export const PlansSection = () => {
+interface PlansSectionProps {
+    showPlans: boolean;
+    onShowPlans: () => void;
+}
+
+export const PlansSection = ({ showPlans, onShowPlans }: PlansSectionProps) => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
-    const [showPlans, setShowPlans] = useState(false);
 
     const services = serviceIds.map(id => PlaceHolderImages.find(p => p.id === id)).filter(Boolean);
-
-    const handleViewPlans = () => {
-        setShowPlans(true);
-    };
-
-    const handleGoBack = () => {
-        setShowPlans(false);
-    };
-
 
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
             <div className="relative text-center max-w-6xl mx-auto z-10 w-full">
                 <div className="flex justify-center items-center mb-4">
-                    {showPlans && (
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={handleGoBack}
-                            className="mr-4 text-white hover:bg-white/10"
-                            aria-label="Go back to service selection"
-                        >
-                            <ArrowLeft className="h-6 w-6" />
-                        </Button>
-                    )}
                     <h2 className={cn("section-heading", showPlans ? "text-gradient-subscription" : "text-gradient-wiretap")}>
                         {showPlans ? 'Subscription Plans' : 'Choose Your Service'}
                     </h2>
@@ -178,7 +160,7 @@ export const PlansSection = () => {
                                 name={service.description}
                                 logoUrl={service.imageUrl}
                                 logoHint={service.imageHint}
-                                onButtonClick={handleViewPlans}
+                                onButtonClick={onShowPlans}
                             />
                         ))}
                     </div>
