@@ -45,7 +45,7 @@ export default function CartPage() {
                                         <div className="flex items-center gap-4">
                                             <div>
                                                 <h2 className="text-lg font-bold">{item.name}</h2>
-                                                <p className="text-gray-400 text-sm">{item.price.toFixed(2)} INR {item.period}</p>
+                                                <p className="text-gray-400 text-sm">₹{item.price.toFixed(2)} {item.period}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4">
@@ -69,7 +69,7 @@ export default function CartPage() {
                                 <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
                                 <div className="flex justify-between mb-2">
                                     <span>Subtotal</span>
-                                    <span>{total.toFixed(2)} INR</span>
+                                    <span>₹{total.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between mb-4">
                                     <span>Taxes & Fees</span>
@@ -78,7 +78,7 @@ export default function CartPage() {
                                 <div className="border-t border-white/20 my-4"></div>
                                 <div className="flex justify-between font-bold text-xl mb-6">
                                     <span>Total</span>
-                                    <span>{total.toFixed(2)} INR</span>
+                                    <span>₹{total.toFixed(2)}</span>
                                 </div>
                                 <Button size="lg" className="w-full font-bold bg-gradient-to-r from-purple-500 to-violet-600 text-white hover:scale-105 transition-transform">
                                     Buy Now
