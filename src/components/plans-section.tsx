@@ -20,9 +20,9 @@ const allPlans = [
             'Shared account access'
         ],
         prices: {
-            monthly: { price: '₹100', period: '/month' },
-            'half-yearly': { price: '₹849', period: '/6mo' },
-            yearly: { price: '₹1599', period: '/yr' }
+            monthly: { price: 'INR 100', period: '/month' },
+            'half-yearly': { price: 'INR 849', period: '/6mo' },
+            yearly: { price: 'INR 1599', period: '/yr' }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-blue-500 to-indigo-600',
@@ -38,9 +38,9 @@ const allPlans = [
             'Limited sharing'
         ],
         prices: {
-            monthly: { price: '₹130', period: '/month' },
-            'half-yearly': { price: '₹1699', period: '/6mo' },
-            yearly: { price: '₹3299', period: '/yr' }
+            monthly: { price: 'INR 130', period: '/month' },
+            'half-yearly': { price: 'INR 1699', period: '/6mo' },
+            yearly: { price: 'INR 3299', period: '/yr' }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-purple-500 to-violet-600',
@@ -57,9 +57,9 @@ const allPlans = [
             'Shared account access'
         ],
         prices: {
-            monthly: { price: '₹150', period: '/month' },
-            'half-yearly': { price: '₹2899', period: '/6mo' },
-            yearly: { price: '₹5499', period: '/yr' }
+            monthly: { price: 'INR 150', period: '/month' },
+            'half-yearly': { price: 'INR 2899', period: '/6mo' },
+            yearly: { price: 'INR 5499', period: '/yr' }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-red-500 to-orange-600',
@@ -75,9 +75,9 @@ const allPlans = [
             'Shared account access'
         ],
         prices: {
-            monthly: { price: '₹170', period: '/month' },
-            'half-yearly': { price: '₹4599', period: '/6mo' },
-            yearly: { price: '₹8999', period: '/yr' }
+            monthly: { price: 'INR 170', period: '/month' },
+            'half-yearly': { price: 'INR 4599', period: '/6mo' },
+            yearly: { price: 'INR 8999', period: '/yr' }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-green-500 to-teal-600',
@@ -191,3 +191,5 @@ export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansS
         </section>
     );
 };
+
+    

@@ -27,7 +27,7 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
         const item = {
             id: `${name}-${price}`,
             name,
-            price: parseFloat(price.replace('₹', '')),
+            price: parseFloat(price.replace('INR ', '')),
             period: pricePeriod,
             quantity: 1,
         };
@@ -89,3 +89,5 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
         </div>
     );
 };
+
+    
