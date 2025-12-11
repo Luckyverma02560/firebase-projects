@@ -37,10 +37,14 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
             description: `${name} has been added to your cart.`,
         });
     };
+
+    const priceParts = price.split(' ');
+    const currency = priceParts.length > 1 ? priceParts[0] : '';
+    const amount = priceParts.length > 1 ? priceParts.slice(1).join(' ') : price;
     
     return (
         <div className={cn(
-            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 md:p-4 flex flex-col transition-all duration-300 hover:border-white/30 hover:scale-105",
+            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex flex-col transition-all duration-300 hover:border-white/30 hover:scale-105",
             shadow,
             isPopular ? 'border-purple-500 border-2 shadow-lg shadow-purple-500/40' : 'hover:shadow-lg'
         )}>
@@ -50,10 +54,13 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                 </div>
             )}
             <div className="flex-grow">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-1">{name}</h3>
-                <p className="text-gray-400 text-xs md:text-sm mb-2">{description}</p>
+                <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
+                <p className="text-gray-400 text-sm mb-2">{description}</p>
                 <div className="mb-3">
-                    <span className="text-3xl md:text-4xl font-extrabold text-white">{price}</span>
+                    <span className="text-4xl font-extrabold text-white">
+                        {currency && <span className="font-headline text-3xl mr-1">{currency}</span>}
+                        {amount}
+                    </span>
                     <span className="text-sm text-gray-400">{pricePeriod}</span>
                 </div>
                 <ul className="space-y-1 text-left mb-4">
@@ -67,7 +74,7 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
             </div>
             <div className="flex items-center gap-2">
                 <Button size="lg" className={cn(
-                    "w-full font-bold text-base md:text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
+                    "w-full font-bold text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
                     gradient,
                     'hover:scale-105'
                 )}>
@@ -89,5 +96,3 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
         </div>
     );
 };
-
-    
