@@ -70,7 +70,7 @@ export default function Header() {
         <SheetClose asChild>
           <Link href={href} className={cn(
             "block py-3 text-xl text-center font-headline rounded-md",
-            isButton ? "bg-gradient-plans text-white" : 
+            isButton ? "bg-gradient-plans-header text-white" : 
             (isGetStarted ? "bg-gradient-get-started text-white" : 
             (isActive ? "text-bright-accent" : "text-foreground"))
             )}>
@@ -110,7 +110,7 @@ export default function Header() {
                 href={homeLink.href}
                 label={homeLink.label}
               />
-            <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-plans text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
+            <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-plans-header text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
                 <Link href={plansLink.href}>{plansLink.label}</Link>
             </Button>
             {navLinks.map(link => (
@@ -176,3 +176,5 @@ export default function Header() {
     </header>
   );
 }
+
+    

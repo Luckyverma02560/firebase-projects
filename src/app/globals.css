@@ -154,8 +154,12 @@ body {
     background-image: linear-gradient(to right, #ee0979, #ff6a00);
   }
 
+  .bg-gradient-plans-header {
+    background-image: linear-gradient(to right, #fc00ff, #00dbde);
+  }
+
   .bg-gradient-plans {
-    background-image: linear-gradient(to right, #24c6dc, #514a9d);
+    background-image: linear-gradient(to right, #a770ef, #cf8bf3, #fdb99b);
   }
   
   .bg-gradient-get-started {
