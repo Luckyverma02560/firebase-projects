@@ -69,10 +69,10 @@ const allPlans = [
         name: 'Super Premium',
         description: 'For power users and large families',
         features: [
-            '1 Device access',
-            'Full customer support',
+            '2 Device Access',
+            'Profile Login',
             '4K streaming quality',
-            'Shared account access'
+            'Private Account Access'
         ],
         prices: {
             monthly: { price: 'INR 170', period: '/month' },
