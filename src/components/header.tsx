@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import { Menu, X, ShoppingCart, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -21,6 +21,7 @@ const homeLink = { href: '/', label: 'Home' };
 const plansLink = { href: '/about', label: 'Plans' };
 const getStartedLink = { href: '#', label: 'Get Started' };
 const cartLink = { href: '/cart', label: 'View Cart' };
+const whatsappLink = { href: 'https://wa.me/918600070638', label: 'Whatsapp' };
 
 
 const navLinks = [
@@ -131,6 +132,12 @@ export default function Header() {
                     <span className="sr-only">{cartLink.label}</span>
                 </Link>
             </Button>
+            <Button asChild variant="outline" size="icon" className="text-white border-green-500 bg-green-500/10 hover:bg-green-500/20 hover:text-white transition-colors duration-300">
+                <Link href={whatsappLink.href} target="_blank">
+                    <MessageCircle />
+                    <span className="sr-only">{whatsappLink.label}</span>
+                </Link>
+            </Button>
           </div>
 
           <div className="md:hidden flex-1 flex justify-end">
@@ -149,6 +156,12 @@ export default function Header() {
                         <Link href={cartLink.href} className="flex items-center justify-center gap-2 py-3 text-xl text-center font-headline rounded-md text-foreground">
                             <ShoppingCart />
                             <span>{cartLink.label}</span>
+                        </Link>
+                    </SheetClose>
+                     <SheetClose asChild>
+                        <Link href={whatsappLink.href} target="_blank" className="flex items-center justify-center gap-2 py-3 text-xl text-center font-headline rounded-md text-green-500">
+                            <MessageCircle />
+                            <span>{whatsappLink.label}</span>
                         </Link>
                     </SheetClose>
                     <div className="pt-4">

@@ -6,6 +6,7 @@ import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { useCart } from '@/context/cart-context';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 interface PricingCardProps {
     name: string;
@@ -17,16 +18,18 @@ interface PricingCardProps {
     gradient: string;
     shadow: string;
     isPopular?: boolean;
+    serviceName: string | null;
+    billingCycle: string;
 }
 
-export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false }: PricingCardProps) => {
+export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false, serviceName, billingCycle }: PricingCardProps) => {
     const { addToCart } = useCart();
     const { toast } = useToast();
 
     const handleAddToCart = () => {
         const item = {
-            id: `${name}-${price}`,
-            name,
+            id: `${serviceName}-${name}-${price}`,
+            name: `${serviceName} - ${name}`,
             price: parseFloat(price.replace('INR ', '')),
             period: pricePeriod,
             quantity: 1,
@@ -41,6 +44,10 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
     const priceParts = price.split(' ');
     const currency = priceParts.length > 1 ? priceParts[0] : '';
     const amount = priceParts.length > 1 ? priceParts.slice(1).join(' ') : price;
+
+    const whatsappNumber = "918600070638";
+    const message = `Hey, I Need the ${serviceName} ${name} (${billingCycle}). Kindly Reach Me Soon.`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     
     return (
         <div className={cn(
@@ -53,7 +60,7 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                     Most Popular
                 </div>
             )}
-            <div className="flex-grow">
+            <div className="flex-grow p-2 sm:p-0">
                 <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
                 <p className="text-gray-400 text-sm mb-2">{description}</p>
                 <div className="mb-3">
@@ -73,12 +80,14 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                 </ul>
             </div>
             <div className="flex items-center gap-2">
-                <Button size="lg" className={cn(
+                <Button asChild size="lg" className={cn(
                     "w-full font-bold text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
                     gradient,
                     'hover:scale-105'
                 )}>
-                    {buttonText}
+                     <Link href={whatsappUrl} target="_blank">
+                        {buttonText}
+                    </Link>
                 </Button>
                 <Button 
                     size="icon" 

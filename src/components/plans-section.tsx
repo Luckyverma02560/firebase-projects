@@ -34,7 +34,7 @@ const allPlans = [
         features: [
             '1 Device access',
             'Profile Login',
-            '4K streaming quality',
+            '4k streaming quality',
             'Limited sharing'
         ],
         prices: {
@@ -169,6 +169,8 @@ export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansS
                                         {...plan}
                                         price={price}
                                         pricePeriod={period}
+                                        serviceName={selectedService}
+                                        billingCycle={billingCycle}
                                     />
                                 )
                             })}
@@ -191,7 +193,3 @@ export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansS
         </section>
     );
 };
-
-    
-
-    
