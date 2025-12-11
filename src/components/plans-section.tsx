@@ -34,7 +34,7 @@ const allPlans = [
         features: [
             '1 Device access',
             'Profile Login',
-            '4k streaming quality',
+            '4K streaming quality',
             'Limited sharing'
         ],
         prices: {
@@ -51,10 +51,10 @@ const allPlans = [
         name: 'Premium Plan',
         description: 'For the ultimate streaming enthusiasts',
         features: [
-            '1 Device access',
-            'Full customer support',
-            '4K streaming quality',
-            'Shared account access'
+            '1 Device Access',
+            'Profile Login',
+            '4K Streaming Quality',
+            'Private Account Access'
         ],
         prices: {
             monthly: { price: 'INR 150', period: '/month' },
@@ -191,5 +191,7 @@ export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansS
         </section>
     );
 };
+
+    
 
     
