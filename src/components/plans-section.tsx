@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { cn } from '@/lib/utils';
 import { ServiceCard } from './service-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import Link from 'next/link';
 
 const allPlans = [
     {
@@ -100,11 +101,10 @@ type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
 
 interface PlansSectionProps {
     showPlans: boolean;
-    onShowPlans: (serviceName: string) => void;
     selectedService: string | null;
 }
 
-export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansSectionProps) => {
+export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
 
     const services = serviceIds.map(id => PlaceHolderImages.find(p => p.id === id)).filter(Boolean);
@@ -179,13 +179,15 @@ export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansS
                 ) : (
                     <div className="flex flex-col items-center gap-6 px-4 md:px-0">
                         {services.map((service) => (
-                           service && <ServiceCard
-                                key={service.id}
-                                name={service.description}
-                                logoUrl={service.imageUrl}
-                                logoHint={service.imageHint}
-                                onButtonClick={() => onShowPlans(service.description)}
-                            />
+                           service && (
+                             <Link key={service.id} href={`/about?service=${encodeURIComponent(service.description)}`} className="w-full max-w-4xl">
+                               <ServiceCard
+                                    name={service.description}
+                                    logoUrl={service.imageUrl}
+                                    logoHint={service.imageHint}
+                                />
+                            </Link>
+                           )
                         ))}
                     </div>
                 )}

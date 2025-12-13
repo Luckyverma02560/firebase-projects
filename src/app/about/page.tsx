@@ -1,8 +1,9 @@
 
 "use client"
 
-import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 import { PlansSection } from '@/components/plans-section';
@@ -10,33 +11,18 @@ import { StarfieldAnimation } from '@/components/starfield-animation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import Header from '@/components/header';
-import Footer from '@/components/footer';
-import { useRouter } from 'next/navigation';
 
 function AboutPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const serviceQueryParam = searchParams.get('service');
-  
-  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const selectedService = searchParams.get('service');
 
-  useEffect(() => {
-    setSelectedService(serviceQueryParam);
-  }, [serviceQueryParam]);
-
-  const handleViewPlans = (serviceName: string) => {
-      // Use router.push to update the URL without a full page reload
-      router.push(`/about?service=${encodeURIComponent(serviceName)}`, { scroll: false });
-  };
+  const showPlans = !!selectedService;
 
   const handleGoBack = () => {
-      // Use router.push to navigate back to the service selection view
-      router.push('/about', { scroll: false });
+    // A simple back navigation is more robust
+    router.back();
   };
-
-  // Determine if we should show plans based on the state, which is derived from the URL query param
-  const showPlans = selectedService !== null;
 
   return (
     <>
@@ -70,17 +56,23 @@ function AboutPageContent() {
         </div>
         <StarfieldAnimation />
         <div className="relative z-2">
-          <PlansSection showPlans={showPlans} onShowPlans={handleViewPlans} selectedService={selectedService} />
+          <PlansSection
+            showPlans={showPlans}
+            selectedService={selectedService}
+          />
         </div>
       </div>
     </>
   );
 }
 
-export default function AboutPage() {
+// A wrapper component to ensure useSearchParams is used within a Suspense boundary
+function AboutPageWrapper() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <AboutPageContent />
     </Suspense>
-  )
+  );
 }
+
+export default AboutPageWrapper;
