@@ -117,7 +117,7 @@ export const PlansSection = ({ showPlans, onShowPlans, selectedService }: PlansS
             <div className="relative text-center max-w-7xl mx-auto z-10 w-full">
                 <div className="flex justify-center items-center mb-4">
                     <h2 className={cn("section-heading", showPlans ? "text-gradient-subscription" : "text-gradient-wiretap")}>
-                        {showPlans ? 'Subscription Plans' : 'Choose Your Service'}
+                        {showPlans ? `${selectedService} Plans` : 'Choose Your Service'}
                     </h2>
                 </div>
                 <p className="section-subheading mb-8">

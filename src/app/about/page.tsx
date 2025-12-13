@@ -12,28 +12,25 @@ import { ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import { useRouter } from 'next/navigation';
 
 function AboutPageContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const serviceQueryParam = searchParams.get('service');
   
   const [selectedService, setSelectedService] = useState<string | null>(serviceQueryParam);
 
   useEffect(() => {
-    // If the query param changes (e.g., user navigates from one search result to another)
-    if (serviceQueryParam) {
-      setSelectedService(serviceQueryParam);
-    }
+    setSelectedService(serviceQueryParam);
   }, [serviceQueryParam]);
 
   const handleViewPlans = (serviceName: string) => {
-      setSelectedService(serviceName);
+      router.push(`/about?service=${encodeURIComponent(serviceName)}`, { scroll: false });
   };
 
   const handleGoBack = () => {
-      setSelectedService(null);
-      // Optional: remove the query parameter from the URL
-      window.history.pushState({}, '', '/about');
+      router.push('/about', { scroll: false });
   };
 
   const showPlans = selectedService !== null;
