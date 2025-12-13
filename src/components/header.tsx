@@ -130,7 +130,8 @@ export default function Header() {
             </Button>
           </div>
 
-          <div className="md:hidden flex-1 flex justify-end">
+          <div className="md:hidden flex-1 flex justify-end items-center gap-2">
+             <SearchComponent />
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className={cn('text-white hover:text-bright-accent hover:bg-transparent')}>
