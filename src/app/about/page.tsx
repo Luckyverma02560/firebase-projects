@@ -1,7 +1,8 @@
 
 "use client"
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 import { PlansSection } from '@/components/plans-section';
@@ -12,8 +13,18 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 
-export default function AboutPage() {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
+function AboutPageContent() {
+  const searchParams = useSearchParams();
+  const serviceQueryParam = searchParams.get('service');
+  
+  const [selectedService, setSelectedService] = useState<string | null>(serviceQueryParam);
+
+  useEffect(() => {
+    // If the query param changes (e.g., user navigates from one search result to another)
+    if (serviceQueryParam) {
+      setSelectedService(serviceQueryParam);
+    }
+  }, [serviceQueryParam]);
 
   const handleViewPlans = (serviceName: string) => {
       setSelectedService(serviceName);
@@ -21,6 +32,8 @@ export default function AboutPage() {
 
   const handleGoBack = () => {
       setSelectedService(null);
+      // Optional: remove the query parameter from the URL
+      window.history.pushState({}, '', '/about');
   };
 
   const showPlans = selectedService !== null;
@@ -62,4 +75,12 @@ export default function AboutPage() {
       </div>
     </>
   );
+}
+
+export default function AboutPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AboutPageContent />
+    </Suspense>
+  )
 }

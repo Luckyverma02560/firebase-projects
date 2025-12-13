@@ -89,7 +89,7 @@ export const SearchComponent = () => {
                 <ul className="absolute top-12 left-0 w-64 bg-gray-900 border border-green-500/50 rounded-lg shadow-lg z-10">
                     {searchResults.map((result, index) => (
                         <li key={index} className="px-4 py-2 hover:bg-gray-800 cursor-pointer text-white">
-                           <Link href="/about" onClick={handleResultClick}>
+                           <Link href={`/about?service=${encodeURIComponent(result)}`} onClick={handleResultClick}>
                                 {result}
                             </Link>
                         </li>
