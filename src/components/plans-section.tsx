@@ -53,7 +53,7 @@ const allPlans = [
         features: [
             '1 Device Access',
             'Profile Login',
-            '4K Streaming Quality',
+            '4K  Streaming Quality',
             'Private Account Access'
         ],
         prices: {

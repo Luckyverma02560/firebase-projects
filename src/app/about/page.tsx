@@ -19,20 +19,23 @@ function AboutPageContent() {
   const searchParams = useSearchParams();
   const serviceQueryParam = searchParams.get('service');
   
-  const [selectedService, setSelectedService] = useState<string | null>(serviceQueryParam);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
 
   useEffect(() => {
     setSelectedService(serviceQueryParam);
   }, [serviceQueryParam]);
 
   const handleViewPlans = (serviceName: string) => {
+      // Use router.push to update the URL without a full page reload
       router.push(`/about?service=${encodeURIComponent(serviceName)}`, { scroll: false });
   };
 
   const handleGoBack = () => {
+      // Use router.push to navigate back to the service selection view
       router.push('/about', { scroll: false });
   };
 
+  // Determine if we should show plans based on the state, which is derived from the URL query param
   const showPlans = selectedService !== null;
 
   return (
