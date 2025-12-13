@@ -427,4 +427,8 @@ body {
     100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.5); opacity: 0.3; }
 }
 
-    
+/* Search Component */
+.search-container {
+    position: relative;
+    transition: width 0.4s ease-in-out;
+}

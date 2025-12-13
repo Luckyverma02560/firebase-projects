@@ -10,12 +10,8 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { SearchComponent } from './search-component';
+
 
 const homeLink = { href: '/', label: 'Home' };
 const plansLink = { href: '/about', label: 'Plans' };
@@ -122,6 +118,7 @@ export default function Header() {
           </nav>
           
           <div className="hidden md:flex flex-shrink-0 justify-end items-center gap-4">
+            <SearchComponent />
             <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
                 <Link href={getStartedLink.href}>{getStartedLink.label}</Link>
             </Button>
