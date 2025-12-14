@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogFooter } from "@/components/ui/alert-dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogFooter, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
@@ -148,7 +148,7 @@ export default function AdminPage() {
         updatedPlans[billing][plan].features[featureIndex] = value;
     }
     
-    setter({ ...target, plans: updatedPlans });
+    setter({ ...target, plans: updatedPlans } as Service | Omit<Service, 'id'>);
   };
 
 
@@ -201,7 +201,7 @@ export default function AdminPage() {
             </div>
           );
         case 'services':
-            const renderPlanForm = (serviceData: Omit<Service, 'id'>, isEditing: boolean) => (
+            const renderPlanForm = (serviceData: Omit<Service, 'id'> | Service, isEditing: boolean) => (
                 <Tabs defaultValue="monthly" className="w-full">
                     <TabsList className="grid w-full grid-cols-3">
                         <TabsTrigger value="monthly">Monthly</TabsTrigger>
@@ -531,5 +531,7 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    
 
     
