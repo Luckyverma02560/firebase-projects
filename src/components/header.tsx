@@ -20,7 +20,7 @@ const cartLink = { href: '/cart', label: 'View Cart' };
 
 
 const navLinks = [
-  { href: '#', label: 'Payment' },
+  { href: '/payment', label: 'Payment' },
   { href: '#', label: 'Contact Us' },
 ];
 

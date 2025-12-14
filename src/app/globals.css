@@ -479,4 +479,17 @@ body {
     transition: width 0.4s ease-in-out;
 }
 
+/* Payment Icons Animation */
+.animate-scroll-x {
+  animation: scroll-x 20s linear infinite;
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
     

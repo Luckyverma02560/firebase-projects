@@ -45,7 +45,7 @@
     {
       "id": "team4",
       "description": "Team member Riddhima B.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
@@ -125,6 +125,42 @@
       "description": "Canva",
       "imageUrl": "https://i.postimg.cc/02CNwcTT/canva-logo-hd.png",
       "imageHint": "company logo"
+    },
+    {
+      "id": "phonepe-logo",
+      "description": "PhonePe",
+      "imageUrl": "https://i.postimg.cc/638Y9W58/phonepe-logo-icon.png",
+      "imageHint": "payment logo"
+    },
+    {
+      "id": "paytm-logo",
+      "description": "Paytm",
+      "imageUrl": "https://i.postimg.cc/BvW4d1rW/paytm-logo-6-1.png",
+      "imageHint": "payment logo"
+    },
+    {
+      "id": "bhim-logo",
+      "description": "BHIM",
+      "imageUrl": "https://i.postimg.cc/L82S0MLY/BHIM-UPI-Logo-Dark-Background-2048x2048.png",
+      "imageHint": "payment logo"
+    },
+    {
+      "id": "upi-logo",
+      "description": "UPI",
+      "imageUrl": "https://i.postimg.cc/J4yP13xK/1200px-UPI-Logo-vector-svg.png",
+      "imageHint": "payment logo"
+    },
+    {
+      "id": "netbanking-logo",
+      "description": "Netbanking",
+      "imageUrl": "https://i.postimg.cc/44Yn94j3/621295-removebg-preview.png",
+      "imageHint": "payment logo"
+    },
+    {
+      "id": "qr-code-placeholder",
+      "description": "QR Code Placeholder",
+      "imageUrl": "https://i.postimg.cc/C1Q1Lcx1/Screenshot-2025-10-31-194823.png",
+      "imageHint": "qr code"
     }
   ]
 }
