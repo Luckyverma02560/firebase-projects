@@ -14,7 +14,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, AlertDialogFooter } from "@/components/ui/alert-dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogFooter } from "@/components/ui/alert-dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
 // Mock data
@@ -49,26 +50,53 @@ const serviceLogoIds = [
     'canva-logo'
 ];
 
-const initialServices = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.id)).map((p, index) => ({
-    id: index + 1,
-    name: p.description,
-    icon: p.imageUrl,
-    features: [
-        `Feature 1 for ${p.description}`,
-        `Feature 2 for ${p.description}`,
-        `Feature 3 for ${p.description}`,
-        `Feature 4 for ${p.description}`,
-    ]
-}));
+type PlanName = 'Basic' | 'Standard' | 'Premium' | 'Super Premium';
+type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
 
-type AdminView = 'dashboard' | 'services' | 'pricing' | 'security' | 'analytics';
+interface PlanDetails {
+    price: string;
+    features: string[];
+}
+
+type ServicePlans = Record<BillingCycle, Record<PlanName, PlanDetails>>;
 
 interface Service {
     id: number;
     name: string;
     icon: string;
-    features: string[];
+    plans: ServicePlans;
 }
+
+const generateDefaultPlans = (): ServicePlans => ({
+    monthly: {
+        'Basic': { price: '100', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Standard': { price: '130', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Premium': { price: '150', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Super Premium': { price: '170', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] }
+    },
+    'half-yearly': {
+        'Basic': { price: '550', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Standard': { price: '700', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Premium': { price: '850', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Super Premium': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] }
+    },
+    yearly: {
+        'Basic': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Standard': { price: '1300', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Premium': { price: '1500', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
+        'Super Premium': { price: '1800', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] }
+    }
+});
+
+
+const initialServices: Service[] = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.id)).map((p, index) => ({
+    id: index + 1,
+    name: p.description,
+    icon: p.imageUrl,
+    plans: generateDefaultPlans(),
+}));
+
+type AdminView = 'dashboard' | 'services' | 'security' | 'analytics';
 
 export default function AdminPage() {
   const [username, setUsername] = useState('');
@@ -78,12 +106,14 @@ export default function AdminPage() {
   const [currentView, setCurrentView] = useState<AdminView>('dashboard');
 
   const [analyticsTimespan, setAnalyticsTimespan] = useState<'daily' | 'monthly' | 'yearly'>('monthly');
-  const [selectedServiceForPricing, setSelectedServiceForPricing] = useState<string>(initialServices[0]?.name || '');
 
   const [services, setServices] = useState<Service[]>(initialServices);
-  const [newServiceName, setNewServiceName] = useState('');
-  const [newServiceIcon, setNewServiceIcon] = useState('');
-  const [newServiceFeatures, setNewServiceFeatures] = useState(['', '', '', '']);
+  
+  const [newService, setNewService] = useState<Omit<Service, 'id'>>({
+      name: '',
+      icon: '',
+      plans: generateDefaultPlans(),
+  });
 
   const [editingService, setEditingService] = useState<Service | null>(null);
 
@@ -104,35 +134,37 @@ export default function AdminPage() {
     setCurrentView('dashboard');
   };
     
-  const handleFeatureChange = (index: number, value: string, isEditing: boolean = false) => {
-    if (isEditing && editingService) {
-        const updatedFeatures = [...editingService.features];
-        updatedFeatures[index] = value;
-        setEditingService({ ...editingService, features: updatedFeatures });
+  const handlePlanChange = (billing: BillingCycle, plan: PlanName, field: 'price' | `feature${number}`, value: string, isEditing: boolean) => {
+    const target = isEditing ? editingService : newService;
+    const setter = isEditing ? setEditingService : setNewService;
+    if (!target) return;
+
+    const updatedPlans = JSON.parse(JSON.stringify(target.plans)); // Deep copy
+
+    if (field === 'price') {
+        updatedPlans[billing][plan].price = value;
     } else {
-        const updatedFeatures = [...newServiceFeatures];
-        updatedFeatures[index] = value;
-        setNewServiceFeatures(updatedFeatures);
+        const featureIndex = parseInt(field.replace('feature', '')) - 1;
+        updatedPlans[billing][plan].features[featureIndex] = value;
     }
+    
+    setter({ ...target, plans: updatedPlans });
   };
+
 
   const handleAddService = (e: FormEvent<HTMLFormEvent>) => {
     e.preventDefault();
-    if (!newServiceName || !newServiceIcon || newServiceFeatures.some(f => f === '')) {
-        alert('Please fill out all fields for the new service.');
+    if (!newService.name || !newService.icon) {
+        alert('Please fill out the service name and icon URL.');
         return;
     }
-    const newService: Service = {
+    const serviceToAdd: Service = {
         id: services.length > 0 ? Math.max(...services.map(s => s.id)) + 1 : 1,
-        name: newServiceName,
-        icon: newServiceIcon,
-        features: newServiceFeatures
+        ...newService
     };
-    setServices(prev => [...prev, newService]);
+    setServices(prev => [...prev, serviceToAdd]);
     // Reset form
-    setNewServiceName('');
-    setNewServiceIcon('');
-    setNewServiceFeatures(['', '', '', '']);
+    setNewService({ name: '', icon: '', plans: generateDefaultPlans() });
   };
 
   const handleUpdateService = (e: FormEvent<HTMLFormEvent>) => {
@@ -155,13 +187,7 @@ export default function AdminPage() {
     }
   }, [analyticsTimespan]);
 
-  const planOptions = useMemo(() => {
-    const basePlans = ['Basic', 'Standard', 'Premium'];
-    if (selectedServiceForPricing === 'Netflix' || selectedServiceForPricing === 'Prime Video') {
-        return [...basePlans, 'Super Premium'];
-    }
-    return basePlans;
-  }, [selectedServiceForPricing]);
+  const planNames: PlanName[] = ['Basic', 'Standard', 'Premium', 'Super Premium'];
   
   if (isLoggedIn) {
     const renderContent = () => {
@@ -170,17 +196,64 @@ export default function AdminPage() {
           return (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <DashboardCard title="Manage Services" description="Add, edit, or remove OTT services and their details." icon={Settings} onClick={() => setCurrentView('services')} />
-                <DashboardCard title="Update Pricing" description="Adjust subscription plan prices for each service." icon={DollarSign} onClick={() => setCurrentView('pricing')} />
                 <DashboardCard title="Security" description="Change admin password and manage access." icon={ShieldCheck} onClick={() => setCurrentView('security')} />
                 <DashboardCard title="Site Analytics" description="View visitor traffic and user engagement metrics." icon={BarChart3} onClick={() => setCurrentView('analytics')} />
             </div>
           );
         case 'services':
+            const renderPlanForm = (serviceData: Omit<Service, 'id'>, isEditing: boolean) => (
+                <Tabs defaultValue="monthly" className="w-full">
+                    <TabsList className="grid w-full grid-cols-3">
+                        <TabsTrigger value="monthly">Monthly</TabsTrigger>
+                        <TabsTrigger value="half-yearly">Half Yearly</TabsTrigger>
+                        <TabsTrigger value="yearly">Yearly</TabsTrigger>
+                    </TabsList>
+                    {(['monthly', 'half-yearly', 'yearly'] as BillingCycle[]).map(billing => (
+                        <TabsContent key={billing} value={billing} className="space-y-6">
+                            {planNames.map(plan => {
+                                const plansForService = (serviceData.name === 'Netflix' || serviceData.name === 'Prime Video') ? planNames : planNames.slice(0, 3);
+                                if (!plansForService.includes(plan)) return null;
+
+                                return (
+                                    <div key={plan} className="p-4 border border-white/20 rounded-lg">
+                                        <h4 className="text-lg font-bold text-purple-400 mb-2">{plan} Plan</h4>
+                                        <div className="grid md:grid-cols-3 gap-4">
+                                            <div className="space-y-2 md:col-span-1">
+                                                <Label htmlFor={`${billing}-${plan}-price`}>Price (INR)</Label>
+                                                <Input 
+                                                    id={`${billing}-${plan}-price`} 
+                                                    value={serviceData.plans[billing][plan].price} 
+                                                    onChange={(e) => handlePlanChange(billing, plan, 'price', e.target.value, isEditing)}
+                                                    className="bg-gray-800/50 border-white/20"
+                                                />
+                                            </div>
+                                            <div className="space-y-4 md:col-span-2">
+                                                {serviceData.plans[billing][plan].features.map((feature, index) => (
+                                                    <div key={index} className="space-y-2">
+                                                        <Label htmlFor={`${billing}-${plan}-feature${index+1}`}>Feature {index + 1}</Label>
+                                                        <Input 
+                                                            id={`${billing}-${plan}-feature${index+1}`} 
+                                                            value={feature}
+                                                            onChange={(e) => handlePlanChange(billing, plan, `feature${index+1}` as any, e.target.value, isEditing)}
+                                                            className="bg-gray-800/50 border-white/20"
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </TabsContent>
+                    ))}
+                </Tabs>
+            );
+
             return (
                 <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2"><Settings /> Manage Services</CardTitle>
-                        <CardDescription>Add a new service or edit existing ones.</CardDescription>
+                        <CardDescription>Add a new service or edit existing ones, including their detailed plans.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-8">
                         <div>
@@ -189,27 +262,14 @@ export default function AdminPage() {
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label htmlFor="ottName">OTT Name</Label>
-                                        <Input id="ottName" placeholder="e.g., Netflix" className="bg-gray-800/50 border-white/20" value={newServiceName} onChange={(e) => setNewServiceName(e.target.value)} />
+                                        <Input id="ottName" placeholder="e.g., Netflix" className="bg-gray-800/50 border-white/20" value={newService.name} onChange={(e) => setNewService(s => ({...s, name: e.target.value}))} />
                                     </div>
                                     <div className="space-y-2">
                                         <Label htmlFor="iconUrl">Icon Image URL</Label>
-                                        <Input id="iconUrl" placeholder="https://path/to/icon.png" className="bg-gray-800/50 border-white/20" value={newServiceIcon} onChange={(e) => setNewServiceIcon(e.target.value)} />
+                                        <Input id="iconUrl" placeholder="https://path/to/icon.png" className="bg-gray-800/50 border-white/20" value={newService.icon} onChange={(e) => setNewService(s => ({...s, icon: e.target.value}))} />
                                     </div>
                                 </div>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    {newServiceFeatures.map((feature, index) => (
-                                         <div key={index} className="space-y-2">
-                                            <Label htmlFor={`feature${index+1}`}>Feature {index + 1}</Label>
-                                            <Input 
-                                                id={`feature${index+1}`} 
-                                                placeholder={`Feature point ${index + 1}`} 
-                                                className="bg-gray-800/50 border-white/20" 
-                                                value={feature} 
-                                                onChange={(e) => handleFeatureChange(index, e.target.value)} 
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
+                                {renderPlanForm(newService, false)}
                                 <Button type="submit" className="bg-gradient-to-r from-purple-500 to-violet-600">Add Service</Button>
                             </form>
                         </div>
@@ -221,7 +281,7 @@ export default function AdminPage() {
                                         <TableRow>
                                             <TableHead>Icon</TableHead>
                                             <TableHead>Name</TableHead>
-                                            <TableHead>Features</TableHead>
+                                            <TableHead>Sample Price (Monthly Basic)</TableHead>
                                             <TableHead className="text-right">Actions</TableHead>
                                         </TableRow>
                                     </TableHeader>
@@ -230,40 +290,32 @@ export default function AdminPage() {
                                             <TableRow key={service.id}>
                                                 <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
                                                 <TableCell className="font-medium">{service.name}</TableCell>
-                                                <TableCell>{service.features[0].substring(0,30)}...</TableCell>
+                                                <TableCell>INR {service.plans.monthly.Basic.price}</TableCell>
                                                 <TableCell className="text-right flex justify-end gap-2">
                                                     <Dialog onOpenChange={(open) => !open && setEditingService(null)}>
                                                         <DialogTrigger asChild>
-                                                            <Button variant="ghost" size="icon" onClick={() => setEditingService(service)}>
+                                                            <Button variant="ghost" size="icon" onClick={() => setEditingService(JSON.parse(JSON.stringify(service)))}>
                                                                 <Pencil className="h-4 w-4" />
                                                             </Button>
                                                         </DialogTrigger>
                                                         {editingService?.id === service.id && (
-                                                            <DialogContent className="bg-gray-900 border-purple-500 text-white">
+                                                            <DialogContent className="bg-gray-900 border-purple-500 text-white max-w-4xl h-[90vh] flex flex-col">
                                                                 <DialogHeader>
                                                                     <DialogTitle>Edit {editingService.name}</DialogTitle>
                                                                 </DialogHeader>
-                                                                <form onSubmit={handleUpdateService} className="space-y-4">
-                                                                    <div className="space-y-2">
-                                                                        <Label htmlFor="editOttName">OTT Name</Label>
-                                                                        <Input id="editOttName" value={editingService.name} onChange={(e) => setEditingService({...editingService, name: e.target.value})} className="bg-gray-800/50 border-white/20"/>
-                                                                    </div>
-                                                                    <div className="space-y-2">
-                                                                        <Label htmlFor="editIconUrl">Icon Image URL</Label>
-                                                                        <Input id="editIconUrl" value={editingService.icon} onChange={(e) => setEditingService({...editingService, icon: e.target.value})} className="bg-gray-800/50 border-white/20"/>
-                                                                    </div>
-                                                                    {editingService.features.map((feature, index) => (
-                                                                        <div key={index} className="space-y-2">
-                                                                            <Label htmlFor={`editFeature${index + 1}`}>Feature {index + 1}</Label>
-                                                                            <Input
-                                                                                id={`editFeature${index + 1}`}
-                                                                                value={feature}
-                                                                                onChange={(e) => handleFeatureChange(index, e.target.value, true)}
-                                                                                className="bg-gray-800/50 border-white/20"
-                                                                            />
+                                                                <form onSubmit={handleUpdateService} className="space-y-4 overflow-y-auto flex-grow pr-6">
+                                                                    <div className="grid md:grid-cols-2 gap-4">
+                                                                        <div className="space-y-2">
+                                                                            <Label htmlFor="editOttName">OTT Name</Label>
+                                                                            <Input id="editOttName" value={editingService.name} onChange={(e) => setEditingService({...editingService, name: e.target.value})} className="bg-gray-800/50 border-white/20"/>
                                                                         </div>
-                                                                    ))}
-                                                                    <DialogFooter>
+                                                                        <div className="space-y-2">
+                                                                            <Label htmlFor="editIconUrl">Icon Image URL</Label>
+                                                                            <Input id="editIconUrl" value={editingService.icon} onChange={(e) => setEditingService({...editingService, icon: e.target.value})} className="bg-gray-800/50 border-white/20"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    {renderPlanForm(editingService, true)}
+                                                                    <DialogFooter className="sticky bottom-0 bg-gray-900 py-4">
                                                                         <DialogClose asChild>
                                                                             <Button type="submit" className="bg-gradient-to-r from-green-500 to-teal-600">Save Changes</Button>
                                                                         </DialogClose>
@@ -305,51 +357,6 @@ export default function AdminPage() {
                                 </Table>
                             </div>
                         </div>
-                    </CardContent>
-                </Card>
-            );
-        case 'pricing':
-            return (
-                <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-2"><DollarSign /> Update Pricing</CardTitle>
-                        <CardDescription>Change subscription plan prices.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <form className="space-y-4 p-4 border border-white/10 rounded-lg">
-                            <div className="grid md:grid-cols-3 gap-4">
-                                <div className="space-y-2">
-                                    <Label>Service</Label>
-                                    <Select onValueChange={setSelectedServiceForPricing} defaultValue={selectedServiceForPricing}>
-                                        <SelectTrigger className="bg-gray-800/50 border-white/20"><SelectValue placeholder="Select a service" /></SelectTrigger>
-                                        <SelectContent>{services.map(s => <SelectItem key={s.id} value={s.name}>{s.name}</SelectItem>)}</SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="space-y-2">
-                                    <Label>Billing Cycle</Label>
-                                    <Select>
-                                        <SelectTrigger className="bg-gray-800/50 border-white/20"><SelectValue placeholder="Select cycle" /></SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="monthly">Monthly</SelectItem>
-                                            <SelectItem value="half-yearly">Half Yearly</SelectItem>
-                                            <SelectItem value="yearly">Yearly</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="space-y-2">
-                                    <Label>Plan</Label>
-                                    <Select>
-                                        <SelectTrigger className="bg-gray-800/50 border-white/20"><SelectValue placeholder="Select a plan" /></SelectTrigger>
-                                        <SelectContent>{planOptions.map(p => <SelectItem key={p} value={p.toLowerCase()}>{p}</SelectItem>)}</SelectContent>
-                                    </Select>
-                                </div>
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="newPrice">New Price (INR)</Label>
-                                <Input id="newPrice" type="number" placeholder="e.g., 150" className="bg-gray-800/50 border-white/20"/>
-                            </div>
-                            <Button className="bg-gradient-to-r from-green-500 to-teal-600 w-full">Update Price</Button>
-                        </form>
                     </CardContent>
                 </Card>
             );
@@ -524,3 +531,5 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    
