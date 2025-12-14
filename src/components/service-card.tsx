@@ -29,7 +29,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
 
     return (
         <div className={cn(
-            "relative group overflow-hidden bg-gradient-angled backdrop-blur-sm border border-white/10 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full mx-auto gap-4"
+            "relative group overflow-hidden bg-gradient-angled backdrop-blur-sm border border-white/10 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between transition-all duration-300 hover:border-white/30 w-full max-w-4xl mx-auto gap-4"
         )}>
             <div className="light-streak" />
             <div className="flex items-center justify-start gap-4 md:gap-2 mb-4 md:mb-0 flex-1 w-full md:w-auto">
@@ -116,13 +116,16 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     </Link>
                 </Button>
                 <Button
+                    asChild
                     size="sm"
                     className={cn(
                         "font-bold text-base text-white transition-all duration-300 hover:shadow-xl bg-gradient-view-plans w-full sm:w-auto",
                         'hover:scale-105'
                     )}
                 >
-                    View Plans <ArrowRight className="ml-2 h-4 w-4" />
+                    <Link href={`/about?service=${encodeURIComponent(name)}`}>
+                        View Plans <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                 </Button>
             </div>
         </div>

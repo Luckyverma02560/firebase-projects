@@ -141,7 +141,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                         >
                             <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="monthly" id="monthly" className="peer sr-only" />
-                                <Label htmlFor="monthly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
+                                <Label htmlFor="monthly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'monthly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
                                 Monthly
@@ -149,7 +149,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                             </div>
                             <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="half-yearly" id="half-yearly" className="peer sr-only" />
-                                <Label htmlFor="half-yearly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
+                                <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
                                 Half Year
@@ -157,7 +157,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                             </div>
                             <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="yearly" id="yearly" className="peer sr-only" />
-                                <Label htmlFor="yearly" className={cn("px-6 py-3 rounded-full border-2 border-transparent cursor-pointer transition-all",
+                                <Label htmlFor="yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
                                 Yearly
@@ -185,13 +185,12 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                     <div className="flex flex-col items-center gap-6 px-4 md:px-0">
                         {services.map((service) => (
                            service && (
-                             <Link key={service.id} href={`/about?service=${encodeURIComponent(service.name)}`} className="w-full max-w-4xl">
-                               <ServiceCard
-                                    name={service.name}
-                                    logoUrl={service.logoUrl}
-                                    logoHint={service.logoHint}
-                                />
-                            </Link>
+                             <ServiceCard
+                                key={service.id}
+                                name={service.name}
+                                logoUrl={service.logoUrl}
+                                logoHint={service.logoHint}
+                            />
                            )
                         ))}
                     </div>
@@ -200,5 +199,3 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
         </section>
     );
 };
-
-    
