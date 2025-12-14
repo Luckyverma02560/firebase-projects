@@ -34,15 +34,18 @@ export default function PaymentPage() {
                 You can use the details below for payment via any UPI app or Netbanking after confirming your plan on WhatsApp.
               </p>
               
-              <div className="space-y-2">
-                <div className="bg-gray-800/50 border border-white/20 rounded-lg p-4 flex items-center justify-between">
+              <div className="space-y-4">
+                <div className="bg-gray-800/50 border border-white/20 rounded-lg p-3 flex items-center justify-between">
                   <span className="font-mono text-lg text-green-400">+91 86000 70638</span>
                   <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
                     <Copy className="h-5 w-5" />
                   </Button>
                 </div>
-                 <div className="bg-gray-800/50 border border-white/20 rounded-lg p-4 flex items-center justify-between">
-                  <span className="font-mono text-lg text-green-400">8600070638@axl</span>
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <span className="text-gray-300">UPI ID:</span>
+                        <span className="font-mono text-lg text-blue-400">8600070638@axl</span>
+                    </div>
                   <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
                     <Copy className="h-5 w-5" />
                   </Button>
@@ -59,7 +62,7 @@ export default function PaymentPage() {
                 <Image
                   src={qrCodePlaceholder.imageUrl}
                   alt={qrCodePlaceholder.description}
-                  data-ai-hint={qrCodePlaceholder.imageHint}
+                  data-ai-hint={qrCode-placeholder.imageHint}
                   width={230}
                   height={230}
                   className="rounded-md object-contain"
