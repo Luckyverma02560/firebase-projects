@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "logo",
-      "description": "V Logo",
-      "imageUrl": "https://i.postimg.cc/vZgx08XH/Screenshot-2025-12-06-212349.png",
-      "imageHint": "v logo"
+      "description": "EL11VEN HUB Logo",
+      "imageUrl": "https://i.postimg.cc/Qt6qtpH3/EL11Ven-Hub-cropped-processed-by-imagy.png",
+      "imageHint": "el11ven hub logo"
     },
     {
       "id": "about-us-hero",
@@ -33,19 +33,19 @@
     {
       "id": "team2",
       "description": "Team member Amit A.",
-      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team3",
       "description": "Team member Ankit M.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team4",
       "description": "Team member Riddhima B.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
@@ -125,36 +125,6 @@
       "description": "Canva",
       "imageUrl": "https://i.postimg.cc/02CNwcTT/canva-logo-hd.png",
       "imageHint": "company logo"
-    },
-    {
-      "id": "phonepe-logo",
-      "description": "PhonePe",
-      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/phonepe-logo-icon.png",
-      "imageHint": "payment logo"
-    },
-    {
-      "id": "paytm-logo",
-      "description": "Paytm",
-      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/paytm-app-icon.png",
-      "imageHint": "payment logo"
-    },
-    {
-      "id": "bhim-logo",
-      "description": "BHIM",
-      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/bhim-logo.png",
-      "imageHint": "payment logo"
-    },
-    {
-      "id": "upi-logo",
-      "description": "UPI",
-      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/upi-logo.png",
-      "imageHint": "payment logo"
-    },
-    {
-      "id": "netbanking-logo",
-      "description": "Netbanking",
-      "imageUrl": "https://cdn-icons-png.flaticon.com/128/66/66455.png",
-      "imageHint": "payment logo"
     },
     {
       "id": "qr-code-placeholder",
