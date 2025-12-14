@@ -6,6 +6,7 @@ import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const serviceIds = [
     'netflix-logo',
@@ -23,6 +24,7 @@ export const SearchComponent = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState<string[]>([]);
     const searchRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     const services = serviceIds.map(id => PlaceHolderImages.find(p => p.id === id)?.description).filter(Boolean) as string[];
 
@@ -54,7 +56,9 @@ export const SearchComponent = () => {
         };
     }, [handleClickOutside]);
 
-    const handleResultClick = () => {
+    const handleResultClick = (e: React.MouseEvent<HTMLAnchorElement>, result: string) => {
+        e.preventDefault();
+        router.push(`/about?service=${encodeURIComponent(result)}`);
         setIsSearchOpen(false);
         setSearchResults([]);
         setSearchQuery('');
@@ -88,8 +92,12 @@ export const SearchComponent = () => {
             {isSearchOpen && searchResults.length > 0 && (
                 <ul className="absolute top-11 left-0 w-48 sm:w-64 bg-gray-900 border border-green-500/50 rounded-lg shadow-lg z-10">
                     {searchResults.map((result, index) => (
-                        <li key={index} className="px-4 py-2 hover:bg-gray-800 cursor-pointer text-white text-sm">
-                           <Link href={`/about?service=${encodeURIComponent(result)}`} onClick={handleResultClick}>
+                        <li key={index} className="text-white text-sm">
+                           <Link 
+                                href={`/about?service=${encodeURIComponent(result)}`} 
+                                onClick={(e) => handleResultClick(e, result)}
+                                className="block px-4 py-2 hover:bg-gray-800"
+                            >
                                 {result}
                             </Link>
                         </li>
