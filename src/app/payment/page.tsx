@@ -34,11 +34,19 @@ export default function PaymentPage() {
                 You can use the details below for payment via any UPI app or Netbanking after confirming your plan on WhatsApp.
               </p>
               
-              <div className="bg-gray-800/50 border border-white/20 rounded-lg p-4 flex items-center justify-between">
-                <span className="font-mono text-lg text-green-400">+91 86000 70638</span>
-                <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
-                  <Copy className="h-5 w-5" />
-                </Button>
+              <div className="space-y-2">
+                <div className="bg-gray-800/50 border border-white/20 rounded-lg p-4 flex items-center justify-between">
+                  <span className="font-mono text-lg text-green-400">+91 86000 70638</span>
+                  <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
+                    <Copy className="h-5 w-5" />
+                  </Button>
+                </div>
+                 <div className="bg-gray-800/50 border border-white/20 rounded-lg p-4 flex items-center justify-between">
+                  <span className="font-mono text-lg text-green-400">8600070638@axl</span>
+                  <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
+                    <Copy className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
 
                <p className="text-xs text-gray-500 pt-2">
