@@ -32,13 +32,6 @@ const advantageCards = [
     }
 ];
 
-const gradients = [
-    'linear-gradient(to right, #009fff, #ec2f4b)',
-    'linear-gradient(to right, #ec2f4b, #e94057, #f27121)',
-    'linear-gradient(to right, #f27121, #e94057, #ec2f4b)',
-    'linear-gradient(to right, #ec2f4b, #009fff)',
-];
-
 export const WhyChooseUsSection = () => {
     const [selectedCard, setSelectedCard] = useState<number | null>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -102,7 +95,7 @@ export const WhyChooseUsSection = () => {
             <div className="relative text-center max-w-5xl mx-auto z-10">
                 <h2 ref={headingRef} className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {advantageCards.map((card, index) => {
                         const Icon = card.icon;
                         const isSelected = selectedCard === index;
@@ -114,11 +107,10 @@ export const WhyChooseUsSection = () => {
                                 ref={el => cardsRef.current[index] = el}
                                 onClick={(e) => handleCardClick(e, index)}
                                 className={cn(
-                                    "rounded-xl p-6 h-full flex flex-col items-center text-center transform transition-all duration-500 text-white cursor-pointer",
+                                    "why-choose-us-card h-full flex flex-col items-center text-center text-white cursor-pointer",
                                     isSelected ? "scale-110 z-20" : "hover:-translate-y-2",
-                                    isAnotherSelected ? "opacity-10" : "opacity-100"
+                                    isAnotherSelected ? "opacity-30 blur-sm" : "opacity-100"
                                 )}
-                                style={{ background: gradients[index] }}
                             >
                                 <div className="bg-white/20 p-4 rounded-full mb-4 ring-2 ring-white/30">
                                     <Icon className="w-8 h-8 text-white" />

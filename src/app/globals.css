@@ -159,7 +159,7 @@ body {
   }
 
   .bg-gradient-plans {
-    background-image: linear-gradient(to right, #24c6dc, #514a9d);
+    background-image: linear-gradient(to right, #009fff, #ec2f4b);
   }
   
   .bg-gradient-get-started {
@@ -169,6 +169,52 @@ body {
   .bg-gradient-view-plans {
     background-image: linear-gradient(to right, #009fff, #ec2f4b);
   }
+
+  .why-choose-us-card {
+    @apply relative bg-black/30 backdrop-blur-sm p-6 rounded-xl overflow-hidden transition-all duration-300 ease-in-out;
+  }
+
+  .why-choose-us-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.75rem; /* 12px */
+    border: 1px solid transparent;
+    background: linear-gradient(45deg, #3f5efb, #fc466b) border-box;
+    mask: 
+       linear-gradient(#fff 0 0) padding-box, 
+       linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0.4;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .why-choose-us-card:hover::before {
+    opacity: 1;
+    animation: rotate-glow 3s linear infinite;
+  }
+
+  .why-choose-us-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 20px rgba(92, 137, 252, 0.3), 0 0 30px rgba(252, 70, 107, 0.2);
+  }
+
+  @keyframes rotate-glow {
+    0% {
+      background: linear-gradient(45deg, #3f5efb, #fc466b) border-box;
+    }
+    50% {
+      background: linear-gradient(45deg, #fc466b, #3f5efb) border-box;
+    }
+    100% {
+      background: linear-gradient(45deg, #3f5efb, #fc466b) border-box;
+    }
+  }
+
 }
 
 /* Particle animation styles */
@@ -432,5 +478,3 @@ body {
     position: relative;
     transition: width 0.4s ease-in-out;
 }
-
-    
