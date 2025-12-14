@@ -182,8 +182,8 @@ body {
     right: 0;
     bottom: 0;
     border-radius: 0.75rem; /* 12px */
-    border: 1px solid transparent;
-    background: linear-gradient(45deg, #3f5efb, #fc466b) border-box;
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, #2575fc, #6a11cb) border-box;
     mask: 
        linear-gradient(#fff 0 0) padding-box, 
        linear-gradient(#fff 0 0);
@@ -200,18 +200,18 @@ body {
 
   .why-choose-us-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 0 20px rgba(92, 137, 252, 0.3), 0 0 30px rgba(252, 70, 107, 0.2);
+    box-shadow: 0 0 20px rgba(37, 117, 252, 0.3), 0 0 30px rgba(106, 17, 203, 0.2);
   }
 
   @keyframes rotate-glow {
     0% {
-      background: linear-gradient(45deg, #3f5efb, #fc466b) border-box;
+      background: linear-gradient(45deg, #2575fc, #6a11cb) border-box;
     }
     50% {
-      background: linear-gradient(45deg, #fc466b, #3f5efb) border-box;
+      background: linear-gradient(45deg, #6a11cb, #2575fc) border-box;
     }
     100% {
-      background: linear-gradient(45deg, #3f5efb, #fc466b) border-box;
+      background: linear-gradient(45deg, #2575fc, #6a11cb) border-box;
     }
   }
 
@@ -478,3 +478,5 @@ body {
     position: relative;
     transition: width 0.4s ease-in-out;
 }
+
+    
