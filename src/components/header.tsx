@@ -89,10 +89,10 @@ export default function Header() {
                   src={logo.imageUrl}
                   alt={logo.description}
                   data-ai-hint={logo.imageHint}
-                  width={64}
-                  height={64}
+                  width={96}
+                  height={96}
                   priority
-                  className={cn('rounded-full w-12 h-12 md:w-16 md:h-16')}
+                  className={cn('rounded-full w-18 h-18 md:w-24 md:h-24')}
                 />
               )}
             </Link>

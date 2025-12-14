@@ -28,6 +28,9 @@ export default {
         roboto: ['Roboto', 'sans-serif'],
         clarendon: ['Clarendon', 'serif'],
       },
+      spacing: {
+        '18': '4.5rem',
+      },
       fontSize: {
         'xs': '.75rem',
         'sm': '.875rem',
