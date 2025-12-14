@@ -1,21 +1,23 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
-import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon } from 'lucide-react';
+import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon, ArrowLeft, Settings, DollarSign, PlusCircle } from 'lucide-react';
 import { ResponsiveContainer, BarChart as RechartsBarChart, LineChart as RechartsLineChart, PieChart as RechartsPieChart, XAxis, YAxis, Tooltip, Legend, Bar, Line, Pie, Cell } from 'recharts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 
-// Mock data for charts
+// Mock data
+const dailyData = Array.from({ length: 7 }, (_, i) => ({ name: `Day ${i+1}`, visitors: Math.floor(Math.random() * 500) + 100 }));
 const monthlyData = [
   { name: 'Jan', visitors: 4000, active: 2400 },
   { name: 'Feb', visitors: 3000, active: 1398 },
@@ -24,38 +26,38 @@ const monthlyData = [
   { name: 'May', visitors: 1890, active: 4800 },
   { name: 'Jun', visitors: 2390, active: 3800 },
 ];
-
 const yearlyData = [
-  { name: '2022', visitors: 400, active: 240 },
-  { name: '2023', visitors: 300, active: 139 },
-  { name: '2024', visitors: 500, active: 480 },
+  { name: '2022', visitors: 40000, active: 24000 },
+  { name: '2023', visitors: 30000, active: 13980 },
+  { name: '2024', visitors: 50000, active: 48000 },
 ];
-
 const sourceData = [
-  { name: 'Direct', value: 400 },
-  { name: 'Referral', value: 300 },
-  { name: 'Social', value: 300 },
-  { name: 'Organic', value: 200 },
+  { name: 'Direct', value: 400 }, { name: 'Referral', value: 300 },
+  { name: 'Social', value: 300 }, { name: 'Organic', value: 200 },
 ];
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042'];
 
 const mockServices = [
-    { id: 1, name: 'Netflix', icon: '/netflix-logo.png', description: 'Watch movies and TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.' },
-    { id: 2, name: 'Prime Video', icon: '/prime-video-logo.png', description: 'Enjoy exclusive Amazon Originals as well as popular movies and TV shows.' },
+    { id: 1, name: 'Netflix', icon: 'https://i.postimg.cc/KjD4FT6c/Netflix-icon-svg.png', description: 'Watch movies and TV shows online...' },
+    { id: 2, name: 'Prime Video', icon: 'https://i.postimg.cc/yxFdyGsS/amazon-prime-video-app-icon-hd.png', description: 'Enjoy exclusive Amazon Originals...' },
 ];
-
 const mockPricing = [
-    { service: 'Netflix', plan: 'Basic', price: 100 },
-    { service: 'Netflix', plan: 'Standard', price: 130 },
-    { service: 'Prime Video', plan: 'Monthly', price: 100 },
+    { service: 'Netflix', plan: 'Basic', cycle: 'monthly', price: 100 },
+    { service: 'Netflix', plan: 'Super Premium', cycle: 'yearly', price: 8999 },
 ];
 
+type AdminView = 'dashboard' | 'services' | 'pricing' | 'security' | 'analytics';
 
 export default function AdminPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentView, setCurrentView] = useState<AdminView>('dashboard');
+
+  const [analyticsTimespan, setAnalyticsTimespan] = useState<'daily' | 'monthly' | 'yearly'>('monthly');
+  const [selectedServiceForPricing, setSelectedServiceForPricing] = useState<string>('Netflix');
+
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,9 +73,207 @@ export default function AdminPage() {
     setIsLoggedIn(false);
     setUsername('');
     setPassword('');
+    setCurrentView('dashboard');
   };
+
+  const analyticsData = useMemo(() => {
+    switch(analyticsTimespan) {
+        case 'daily': return dailyData;
+        case 'monthly': return monthlyData;
+        case 'yearly': return yearlyData;
+    }
+  }, [analyticsTimespan]);
+
+  const planOptions = useMemo(() => {
+    const basePlans = ['Basic', 'Standard', 'Premium'];
+    if (selectedServiceForPricing === 'Netflix' || selectedServiceForPricing === 'Prime Video') {
+        return [...basePlans, 'Super Premium'];
+    }
+    return basePlans;
+  }, [selectedServiceForPricing]);
   
   if (isLoggedIn) {
+    const renderContent = () => {
+      switch (currentView) {
+        case 'dashboard':
+          return (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <DashboardCard title="Manage Services" description="Add, edit, or remove OTT services and their details." icon={Settings} onClick={() => setCurrentView('services')} />
+                <DashboardCard title="Update Pricing" description="Adjust subscription plan prices for each service." icon={DollarSign} onClick={() => setCurrentView('pricing')} />
+                <DashboardCard title="Security" description="Change admin password and manage access." icon={ShieldCheck} onClick={() => setCurrentView('security')} />
+                <DashboardCard title="Site Analytics" description="View visitor traffic and user engagement metrics." icon={BarChart3} onClick={() => setCurrentView('analytics')} />
+            </div>
+          );
+        case 'services':
+            return (
+                <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2"><Settings /> Manage Services</CardTitle>
+                        <CardDescription>Add a new service or edit existing ones.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-8">
+                        <div>
+                            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400"><PlusCircle /> Add New Service</h3>
+                            <form className="space-y-4 p-4 border border-white/10 rounded-lg">
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="ottName">OTT Name</Label>
+                                        <Input id="ottName" placeholder="e.g., Netflix" className="bg-gray-800/50 border-white/20" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="iconUrl">Icon Image URL</Label>
+                                        <Input id="iconUrl" placeholder="https://path/to/icon.png" className="bg-gray-800/50 border-white/20" />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="description">Description</Label>
+                                    <Textarea id="description" placeholder="Service description" className="bg-gray-800/50 border-white/20" />
+                                </div>
+                                <Button className="bg-gradient-to-r from-purple-500 to-violet-600">Add Service</Button>
+                            </form>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold mb-4 text-purple-400">Current Services</h3>
+                            <div className="border border-white/10 rounded-lg overflow-hidden">
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHead>Icon</TableHead>
+                                            <TableHead>Name</TableHead>
+                                            <TableHead>Description</TableHead>
+                                            <TableHead className="text-right">Actions</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {mockServices.map(service => (
+                                            <TableRow key={service.id}>
+                                                <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
+                                                <TableCell className="font-medium">{service.name}</TableCell>
+                                                <TableCell>{service.description.substring(0,30)}...</TableCell>
+                                                <TableCell className="text-right">
+                                                    <Button variant="ghost" size="sm">Edit</Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+            );
+        case 'pricing':
+            return (
+                <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2"><DollarSign /> Update Pricing</CardTitle>
+                        <CardDescription>Change subscription plan prices.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <form className="space-y-4 p-4 border border-white/10 rounded-lg">
+                            <div className="grid md:grid-cols-3 gap-4">
+                                <div className="space-y-2">
+                                    <Label>Service</Label>
+                                    <Select onValueChange={setSelectedServiceForPricing} defaultValue={selectedServiceForPricing}>
+                                        <SelectTrigger className="bg-gray-800/50 border-white/20"><SelectValue placeholder="Select a service" /></SelectTrigger>
+                                        <SelectContent>{mockServices.map(s => <SelectItem key={s.id} value={s.name}>{s.name}</SelectItem>)}</SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Billing Cycle</Label>
+                                    <Select>
+                                        <SelectTrigger className="bg-gray-800/50 border-white/20"><SelectValue placeholder="Select cycle" /></SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="monthly">Monthly</SelectItem>
+                                            <SelectItem value="half-yearly">Half Yearly</SelectItem>
+                                            <SelectItem value="yearly">Yearly</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Plan</Label>
+                                    <Select>
+                                        <SelectTrigger className="bg-gray-800/50 border-white/20"><SelectValue placeholder="Select a plan" /></SelectTrigger>
+                                        <SelectContent>{planOptions.map(p => <SelectItem key={p} value={p.toLowerCase()}>{p}</SelectItem>)}</SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="newPrice">New Price (INR)</Label>
+                                <Input id="newPrice" type="number" placeholder="e.g., 150" className="bg-gray-800/50 border-white/20"/>
+                            </div>
+                            <Button className="bg-gradient-to-r from-green-500 to-teal-600 w-full">Update Price</Button>
+                        </form>
+                    </CardContent>
+                </Card>
+            );
+        case 'security':
+            return (
+                <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2"><ShieldCheck /> Security</CardTitle>
+                        <CardDescription>Change admin password.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="currentPassword">Current Password</Label>
+                            <Input id="currentPassword" type="password" className="bg-gray-800/50 border-white/20"/>
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="newPassword">New Password</Label>
+                            <Input id="newPassword" type="password" className="bg-gray-800/50 border-white/20"/>
+                        </div>
+                        <Button className="bg-gradient-to-r from-red-500 to-orange-600 w-full">Change Password</Button>
+                    </CardContent>
+                </Card>
+            );
+        case 'analytics':
+            return (
+                 <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2"><BarChart3 /> Site Analytics</CardTitle>
+                        <CardDescription>Visitor and activity metrics.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex justify-center gap-2 mb-6">
+                            <Button variant={analyticsTimespan === 'daily' ? 'default' : 'outline'} onClick={() => setAnalyticsTimespan('daily')}>Daily</Button>
+                            <Button variant={analyticsTimespan === 'monthly' ? 'default' : 'outline'} onClick={() => setAnalyticsTimespan('monthly')}>Monthly</Button>
+                            <Button variant={analyticsTimespan === 'yearly' ? 'default' : 'outline'} onClick={() => setAnalyticsTimespan('yearly')}>Yearly</Button>
+                        </div>
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-sm text-gray-300">
+                            <div className="lg:col-span-2 h-64">
+                                <h3 className="font-bold mb-2 flex items-center capitalize"><LineChart className="mr-2 h-5 w-5 text-purple-400"/>{analyticsTimespan} Visitors</h3>
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <RechartsLineChart data={analyticsData}>
+                                       <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
+                                       <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
+                                       <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
+                                       <Legend />
+                                       <Line type="monotone" dataKey="visitors" stroke="#8884d8" name="Visitors" />
+                                       {analyticsData[0]?.active && <Line type="monotone" dataKey="active" stroke="#82ca9d" name="Active Users" />}
+                                    </RechartsLineChart>
+                                </ResponsiveContainer>
+                            </div>
+                            <div className="h-64">
+                                <h3 className="font-bold mb-2 flex items-center"><PieChartIcon className="mr-2 h-5 w-5 text-yellow-400"/>Traffic Sources</h3>
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <RechartsPieChart>
+                                        <Pie data={sourceData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" label>
+                                            {sourceData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                                        </Pie>
+                                        <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
+                                        <Legend />
+                                    </RechartsPieChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+            );
+        default: return null;
+      }
+    }
+
     return (
        <div className="relative overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] z-0" />
@@ -88,162 +288,14 @@ export default function AdminPage() {
               <LogOut className="mr-2 h-4 w-4" /> Logout
             </Button>
           </div>
+
+          {currentView !== 'dashboard' && (
+            <Button onClick={() => setCurrentView('dashboard')} variant="outline" className="mb-8">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+            </Button>
+          )}
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="bg-black/30 backdrop-blur-lg border border-white/10 md:col-span-2">
-              <CardHeader>
-                <CardTitle>Manage Services</CardTitle>
-                <CardDescription>Edit OTT names, icons, and descriptions.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                 <form className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="ottName">OTT Name</Label>
-                      <Input id="ottName" placeholder="e.g., Netflix" className="bg-gray-800/50 border-white/20" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="iconUrl">Icon URL</Label>
-                      <Input id="iconUrl" placeholder="e.g., /netflix-logo.png" className="bg-gray-800/50 border-white/20" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="description">Description</Label>
-                      <Textarea id="description" placeholder="Service description" className="bg-gray-800/50 border-white/20" />
-                    </div>
-                    <Button className="bg-gradient-to-r from-purple-500 to-violet-600">Save Changes</Button>
-                 </form>
-                 <div className="mt-6">
-                    <h4 className="font-bold mb-2">Current Services</h4>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Description</TableHead>
-                                <TableHead className="text-right">Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {mockServices.map(service => (
-                                <TableRow key={service.id}>
-                                    <TableCell className="font-medium">{service.name}</TableCell>
-                                    <TableCell>{service.description.substring(0,50)}...</TableCell>
-                                    <TableCell className="text-right">
-                                        <Button variant="ghost" size="sm">Edit</Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                 </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
-              <CardHeader>
-                <CardTitle>Update Pricing</CardTitle>
-                <CardDescription>Change subscription plan prices.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <form className="space-y-4">
-                    <div className="space-y-2">
-                        <Label>Service</Label>
-                        <Select>
-                            <SelectTrigger className="bg-gray-800/50 border-white/20">
-                                <SelectValue placeholder="Select a service" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="netflix">Netflix</SelectItem>
-                                <SelectItem value="prime">Prime Video</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                     <div className="space-y-2">
-                        <Label>Plan</Label>
-                        <Select>
-                            <SelectTrigger className="bg-gray-800/50 border-white/20">
-                                <SelectValue placeholder="Select a plan" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="basic">Basic</SelectItem>
-                                <SelectItem value="standard">Standard</SelectItem>
-                                <SelectItem value="premium">Premium</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="newPrice">New Price (INR)</Label>
-                        <Input id="newPrice" type="number" placeholder="e.g., 150" className="bg-gray-800/50 border-white/20"/>
-                    </div>
-                    <Button className="bg-gradient-to-r from-green-500 to-teal-600 w-full">Update Price</Button>
-                </form>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
-              <CardHeader>
-                <CardTitle>Security</CardTitle>
-                <CardDescription>Change admin password.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                    <Label htmlFor="currentPassword">Current Password</Label>
-                    <Input id="currentPassword" type="password" className="bg-gray-800/50 border-white/20"/>
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="newPassword">New Password</Label>
-                    <Input id="newPassword" type="password" className="bg-gray-800/50 border-white/20"/>
-                </div>
-                 <Button className="bg-gradient-to-r from-red-500 to-orange-600 w-full">Change Password</Button>
-              </CardContent>
-            </Card>
-
-             <Card className="md:col-span-2 lg:col-span-3 bg-black/30 backdrop-blur-lg border border-white/10">
-                <CardHeader>
-                    <CardTitle>Site Analytics</CardTitle>
-                    <CardDescription>Visitor and activity metrics.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-sm text-gray-300">
-                    <div className="lg:col-span-2 h-64">
-                       <h3 className="font-bold mb-2 flex items-center"><LineChart className="mr-2 h-5 w-5 text-purple-400"/>Monthly Visitors</h3>
-                      <ResponsiveContainer width="100%" height="100%">
-                        <RechartsLineChart data={monthlyData}>
-                           <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
-                           <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
-                           <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
-                           <Legend />
-                           <Line type="monotone" dataKey="visitors" stroke="#8884d8" />
-                           <Line type="monotone" dataKey="active" stroke="#82ca9d" />
-                        </RechartsLineChart>
-                      </ResponsiveContainer>
-                    </div>
-                    <div className="h-64">
-                       <h3 className="font-bold mb-2 flex items-center"><BarChart3 className="mr-2 h-5 w-5 text-green-400"/>Yearly Overview</h3>
-                      <ResponsiveContainer width="100%" height="100%">
-                         <RechartsBarChart data={yearlyData}>
-                            <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
-                            <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
-                            <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
-                            <Legend />
-                            <Bar dataKey="visitors" fill="#8884d8" />
-                         </RechartsBarChart>
-                      </ResponsiveContainer>
-                    </div>
-                     <div className="h-64 lg:col-span-3">
-                       <h3 className="font-bold mb-2 flex items-center"><PieChartIcon className="mr-2 h-5 w-5 text-yellow-400"/>Traffic Sources</h3>
-                        <ResponsiveContainer width="100%" height="100%">
-                          <RechartsPieChart>
-                             <Pie data={sourceData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} fill="#8884d8" label>
-                                {sourceData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                             </Pie>
-                             <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
-                             <Legend />
-                          </RechartsPieChart>
-                        </ResponsiveContainer>
-                    </div>
-                  </div>
-                </CardContent>
-             </Card>
-          </div>
+          {renderContent()}
         </div>
        </div>
     )
@@ -305,6 +357,26 @@ export default function AdminPage() {
       </div>
     </div>
   );
+}
+
+
+function DashboardCard({ title, description, icon: Icon, onClick }: { title: string; description: string; icon: React.ElementType; onClick: () => void; }) {
+    return (
+        <Card
+            onClick={onClick}
+            className="bg-black/30 backdrop-blur-lg border border-white/10 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group"
+        >
+            <CardHeader className="flex flex-row items-center gap-4">
+                <div className="bg-gradient-to-br from-purple-600 to-violet-700 p-3 rounded-lg">
+                    <Icon className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                    <CardTitle className="text-xl text-white group-hover:text-purple-400 transition-colors">{title}</CardTitle>
+                    <CardDescription className="text-gray-400">{description}</CardDescription>
+                </div>
+            </CardHeader>
+        </Card>
+    )
 }
 
     
