@@ -26,7 +26,7 @@ export default function Footer() {
   return (
     <footer className="bg-transparent text-foreground/90 relative z-10">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Column 1: Logo and About */}
           <div>
             {logo && (
@@ -54,7 +54,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
+          <div className="col-span-1">
             <h3 className="text-lg font-headline text-gold-accent mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map(link => (
@@ -65,8 +65,6 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div />
-
         </div>
       </div>
       <div className="bg-black/20 py-4">
