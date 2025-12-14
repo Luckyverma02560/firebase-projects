@@ -107,7 +107,7 @@ interface PlansSectionProps {
 export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
 
-    const services = PlaceHolderImages.filter(p => p.id.endsWith('-logo')).map(p => ({
+    const services = PlaceHolderImages.filter(p => serviceIds.includes(p.id)).map(p => ({
         id: p.id,
         name: p.description,
         logoUrl: p.imageUrl,
