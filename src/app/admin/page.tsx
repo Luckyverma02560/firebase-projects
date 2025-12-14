@@ -8,12 +8,14 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
-import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon, ArrowLeft, Settings, DollarSign, PlusCircle, Pencil } from 'lucide-react';
+import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon, ArrowLeft, Settings, DollarSign, PlusCircle, Pencil, Trash2 } from 'lucide-react';
 import { ResponsiveContainer, BarChart as RechartsBarChart, LineChart as RechartsLineChart, PieChart as RechartsPieChart, XAxis, YAxis, Tooltip, Legend, Bar, Line, Pie, Cell } from 'recharts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
+
 
 // Mock data
 const dailyData = Array.from({ length: 7 }, (_, i) => ({ name: `Day ${i+1}`, visitors: Math.floor(Math.random() * 500) + 100 }));
@@ -141,6 +143,10 @@ export default function AdminPage() {
     setEditingService(null);
   };
   
+    const handleRemoveService = (id: number) => {
+        setServices(services.filter(s => s.id !== id));
+    };
+
   const analyticsData = useMemo(() => {
     switch(analyticsTimespan) {
         case 'daily': return dailyData;
@@ -225,14 +231,14 @@ export default function AdminPage() {
                                                 <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
                                                 <TableCell className="font-medium">{service.name}</TableCell>
                                                 <TableCell>{service.features[0].substring(0,30)}...</TableCell>
-                                                <TableCell className="text-right">
+                                                <TableCell className="text-right flex justify-end gap-2">
                                                     <Dialog onOpenChange={(open) => !open && setEditingService(null)}>
                                                         <DialogTrigger asChild>
-                                                            <Button variant="ghost" size="sm" onClick={() => setEditingService(service)}>
-                                                                <Pencil className="mr-2 h-4 w-4" /> Edit
+                                                            <Button variant="ghost" size="icon" onClick={() => setEditingService(service)}>
+                                                                <Pencil className="h-4 w-4" />
                                                             </Button>
                                                         </DialogTrigger>
-                                                        {editingService && (
+                                                        {editingService?.id === service.id && (
                                                             <DialogContent className="bg-gray-900 border-purple-500 text-white">
                                                                 <DialogHeader>
                                                                     <DialogTitle>Edit {editingService.name}</DialogTitle>
@@ -266,6 +272,32 @@ export default function AdminPage() {
                                                             </DialogContent>
                                                         )}
                                                     </Dialog>
+                                                     <AlertDialog>
+                                                        <AlertDialogTrigger asChild>
+                                                          <Button variant="ghost" size="icon" className="text-red-500 hover:bg-red-500/10">
+                                                            <Trash2 className="h-4 w-4" />
+                                                          </Button>
+                                                        </AlertDialogTrigger>
+                                                        <AlertDialogContent className="bg-gray-900 border-red-500 text-white">
+                                                          <AlertDialogHeader>
+                                                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                                            <AlertDialogDescription>
+                                                              This action cannot be undone. This will permanently delete the
+                                                              <span className="font-bold"> {service.name} </span>
+                                                              service.
+                                                            </AlertDialogDescription>
+                                                          </AlertDialogHeader>
+                                                          <AlertDialogFooter>
+                                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                            <AlertDialogAction
+                                                              className="bg-red-600 hover:bg-red-700"
+                                                              onClick={() => handleRemoveService(service.id)}
+                                                            >
+                                                              Delete
+                                                            </AlertDialogAction>
+                                                          </AlertDialogFooter>
+                                                        </AlertDialogContent>
+                                                      </AlertDialog>
                                                 </TableCell>
                                             </TableRow>
                                         ))}
@@ -492,5 +524,7 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    
 
     
