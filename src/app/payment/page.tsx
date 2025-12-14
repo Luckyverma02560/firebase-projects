@@ -46,10 +46,17 @@ export default function PaymentPage() {
                </p>
             </div>
 
-            <div className="flex justify-center items-center bg-gray-800/50 rounded-lg p-4 border border-dashed border-white/20 h-52">
-                <div className="w-full h-full flex items-center justify-center">
-                    <p className="text-gray-500">QR Code</p>
-                </div>
+            <div className="flex justify-center items-center bg-gray-800/50 rounded-lg p-4 border border-dashed border-white/20 aspect-square">
+              {qrCodePlaceholder && (
+                <Image
+                  src={qrCodePlaceholder.imageUrl}
+                  alt={qrCodePlaceholder.description}
+                  data-ai-hint={qrCodePlaceholder.imageHint}
+                  width={200}
+                  height={200}
+                  className="rounded-md object-contain"
+                />
+              )}
             </div>
           </div>
 
