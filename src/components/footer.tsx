@@ -25,7 +25,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-transparent text-foreground/90 relative z-10">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Column 1: Logo and About */}
           <div>
@@ -42,7 +42,7 @@ export default function Footer() {
               </Link>
             )}
             <p className="text-sm leading-relaxed mb-6 text-foreground/70">
-              LoQ Capital Markets is a premier provider of research and analytics (R&A) services for financial institutions across the globe.
+              Your Gateway to Ultimate Streaming Experience. Get premium subscriptions at unbeatable prices.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
@@ -55,7 +55,7 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div className="col-span-1">
-            <h3 className="text-lg font-headline text-gold-accent mb-6">Quick Links</h3>
+            <h3 className="text-md font-headline text-gold-accent mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map(link => (
                 <li key={link.label}>
@@ -69,7 +69,7 @@ export default function Footer() {
       </div>
       <div className="bg-black/20 py-4">
         <div className="container mx-auto px-4 text-center text-xs text-foreground/50">
-          <p>Copyright © 2024 LoQ Capital Markets. All rights reserved.</p>
+          <p>Copyright © 2024 EL11VEN HUB. All rights reserved.</p>
         </div>
       </div>
     </footer>

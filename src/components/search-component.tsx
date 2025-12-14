@@ -64,13 +64,13 @@ export const SearchComponent = () => {
         <div ref={searchRef} className="relative flex items-center">
             <div className={cn(
                 'search-container',
-                isSearchOpen ? 'w-64' : 'w-10'
+                isSearchOpen ? 'w-48 sm:w-64' : 'w-10'
             )}>
                 <input
                     type="text"
                     placeholder="Search services..."
                     className={cn(
-                        'w-full h-10 pl-4 pr-10 rounded-full bg-transparent border border-green-500/50 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300',
+                        'w-full h-9 pl-4 pr-10 rounded-full bg-transparent border border-green-500/50 text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300',
                         isSearchOpen ? 'opacity-100' : 'opacity-0'
                     )}
                     value={searchQuery}
@@ -79,16 +79,16 @@ export const SearchComponent = () => {
                 />
                 <button
                     onClick={() => setIsSearchOpen(!isSearchOpen)}
-                    className="absolute right-0 top-0 h-10 w-10 flex items-center justify-center"
+                    className="absolute right-0 top-0 h-9 w-10 flex items-center justify-center"
                 >
-                    <Search className="text-green-400" />
+                    <Search className="text-green-400 h-5 w-5" />
                 </button>
             </div>
             
             {isSearchOpen && searchResults.length > 0 && (
-                <ul className="absolute top-12 left-0 w-64 bg-gray-900 border border-green-500/50 rounded-lg shadow-lg z-10">
+                <ul className="absolute top-11 left-0 w-48 sm:w-64 bg-gray-900 border border-green-500/50 rounded-lg shadow-lg z-10">
                     {searchResults.map((result, index) => (
-                        <li key={index} className="px-4 py-2 hover:bg-gray-800 cursor-pointer text-white">
+                        <li key={index} className="px-4 py-2 hover:bg-gray-800 cursor-pointer text-white text-sm">
                            <Link href={`/about?service=${encodeURIComponent(result)}`} onClick={handleResultClick}>
                                 {result}
                             </Link>

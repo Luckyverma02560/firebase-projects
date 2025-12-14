@@ -16,6 +16,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogFooter, AlertDialogTrigger, AlertDialogTitle } from "@/components/ui/alert-dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useIsMobile } from '@/hooks/use-mobile';
 
 
 // Mock data
@@ -104,6 +105,7 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentView, setCurrentView] = useState<AdminView>('dashboard');
+  const isMobile = useIsMobile();
 
   const [analyticsTimespan, setAnalyticsTimespan] = useState<'daily' | 'monthly' | 'yearly'>('monthly');
 
@@ -194,7 +196,7 @@ export default function AdminPage() {
       switch (currentView) {
         case 'dashboard':
           return (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 <DashboardCard title="Manage Services" description="Add, edit, or remove OTT services and their details." icon={Settings} onClick={() => setCurrentView('services')} />
                 <DashboardCard title="Security" description="Change admin password and manage access." icon={ShieldCheck} onClick={() => setCurrentView('security')} />
                 <DashboardCard title="Site Analytics" description="View visitor traffic and user engagement metrics." icon={BarChart3} onClick={() => setCurrentView('analytics')} />
@@ -209,14 +211,14 @@ export default function AdminPage() {
                         <TabsTrigger value="yearly">Yearly</TabsTrigger>
                     </TabsList>
                     {(['monthly', 'half-yearly', 'yearly'] as BillingCycle[]).map(billing => (
-                        <TabsContent key={billing} value={billing} className="space-y-6">
+                        <TabsContent key={billing} value={billing} className="space-y-4">
                             {planNames.map(plan => {
                                 const plansForService = (serviceData.name === 'Netflix' || serviceData.name === 'Prime Video') ? planNames : planNames.slice(0, 3);
                                 if (!plansForService.includes(plan)) return null;
 
                                 return (
-                                    <div key={plan} className="p-4 border border-white/20 rounded-lg">
-                                        <h4 className="text-lg font-bold text-purple-400 mb-2">{plan} Plan</h4>
+                                    <div key={plan} className="p-3 border border-white/20 rounded-lg">
+                                        <h4 className="text-md md:text-lg font-bold text-purple-400 mb-2">{plan} Plan</h4>
                                         <div className="grid md:grid-cols-3 gap-4">
                                             <div className="space-y-2 md:col-span-1">
                                                 <Label htmlFor={`${billing}-${plan}-price`}>Price (INR)</Label>
@@ -227,9 +229,9 @@ export default function AdminPage() {
                                                     className="bg-gray-800/50 border-white/20"
                                                 />
                                             </div>
-                                            <div className="space-y-4 md:col-span-2">
+                                            <div className="space-y-3 md:col-span-2">
                                                 {serviceData.plans[billing][plan].features.map((feature, index) => (
-                                                    <div key={index} className="space-y-2">
+                                                    <div key={index} className="space-y-1.5">
                                                         <Label htmlFor={`${billing}-${plan}-feature${index+1}`}>Feature {index + 1}</Label>
                                                         <Input 
                                                             id={`${billing}-${plan}-feature${index+1}`} 
@@ -252,12 +254,12 @@ export default function AdminPage() {
             return (
                 <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2"><Settings /> Manage Services</CardTitle>
+                        <CardTitle className="flex items-center gap-2 text-2xl"><Settings /> Manage Services</CardTitle>
                         <CardDescription>Add a new service or edit existing ones, including their detailed plans.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-8">
                         <div>
-                            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400"><PlusCircle /> Add New Service</h3>
+                            <h3 className="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-purple-400"><PlusCircle /> Add New Service</h3>
                             <form onSubmit={handleAddService} className="space-y-4 p-4 border border-white/10 rounded-lg">
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <div className="space-y-2">
@@ -274,8 +276,8 @@ export default function AdminPage() {
                             </form>
                         </div>
                         <div>
-                            <h3 className="text-xl font-bold mb-4 text-purple-400">Current Services</h3>
-                            <div className="border border-white/10 rounded-lg overflow-hidden">
+                            <h3 className="text-lg md:text-xl font-bold mb-4 text-purple-400">Current Services</h3>
+                            <div className="border border-white/10 rounded-lg overflow-x-auto">
                                 <Table>
                                     <TableHeader>
                                         <TableRow>
@@ -291,7 +293,7 @@ export default function AdminPage() {
                                                 <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
                                                 <TableCell className="font-medium">{service.name}</TableCell>
                                                 <TableCell>INR {service.plans.monthly.Basic.price}</TableCell>
-                                                <TableCell className="text-right flex justify-end gap-2">
+                                                <TableCell className="text-right flex justify-end gap-1 md:gap-2">
                                                     <Dialog onOpenChange={(open) => !open && setEditingService(null)}>
                                                         <DialogTrigger asChild>
                                                             <Button variant="ghost" size="icon" onClick={() => setEditingService(JSON.parse(JSON.stringify(service)))}>
@@ -303,7 +305,7 @@ export default function AdminPage() {
                                                                 <DialogHeader>
                                                                     <DialogTitle>Edit {editingService.name}</DialogTitle>
                                                                 </DialogHeader>
-                                                                <form onSubmit={handleUpdateService} className="space-y-4 overflow-y-auto flex-grow pr-6">
+                                                                <form onSubmit={handleUpdateService} className="space-y-4 overflow-y-auto flex-grow pr-2 sm:pr-6">
                                                                     <div className="grid md:grid-cols-2 gap-4">
                                                                         <div className="space-y-2">
                                                                             <Label htmlFor="editOttName">OTT Name</Label>
@@ -364,7 +366,7 @@ export default function AdminPage() {
             return (
                 <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2"><ShieldCheck /> Security</CardTitle>
+                        <CardTitle className="flex items-center gap-2 text-2xl"><ShieldCheck /> Security</CardTitle>
                         <CardDescription>Change admin password.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -384,7 +386,7 @@ export default function AdminPage() {
             return (
                  <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2"><BarChart3 /> Site Analytics</CardTitle>
+                        <CardTitle className="flex items-center gap-2 text-2xl"><BarChart3 /> Site Analytics</CardTitle>
                         <CardDescription>Visitor and activity metrics.</CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -395,7 +397,7 @@ export default function AdminPage() {
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-sm text-gray-300">
                             <div className="lg:col-span-2 h-64">
-                                <h3 className="font-bold mb-2 flex items-center capitalize"><LineChart className="mr-2 h-5 w-5 text-purple-400"/>{analyticsTimespan} Visitors</h3>
+                                <h3 className="font-bold mb-2 flex items-center capitalize text-base"><LineChart className="mr-2 h-5 w-5 text-purple-400"/>{analyticsTimespan} Visitors</h3>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <RechartsLineChart data={analyticsData}>
                                        <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
@@ -408,7 +410,7 @@ export default function AdminPage() {
                                 </ResponsiveContainer>
                             </div>
                             <div className="h-64">
-                                <h3 className="font-bold mb-2 flex items-center"><PieChartIcon className="mr-2 h-5 w-5 text-yellow-400"/>Traffic Sources</h3>
+                                <h3 className="font-bold mb-2 flex items-center text-base"><PieChartIcon className="mr-2 h-5 w-5 text-yellow-400"/>Traffic Sources</h3>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <RechartsPieChart>
                                         <Pie data={sourceData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" label>
@@ -432,11 +434,11 @@ export default function AdminPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] z-0" />
         <div className="absolute inset-0 z-1 pointer-events-none">
             <HeroParticles />
-            <UpwardNeonParticles />
+            {!isMobile && <UpwardNeonParticles />}
         </div>
         <div className="relative z-10 container mx-auto px-4 py-20 text-white">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold heading-light-sweep">Admin Dashboard</h1>
+            <h1 className="text-3xl md:text-4xl font-bold heading-light-sweep">Admin Dashboard</h1>
             <Button onClick={handleLogout} variant="destructive">
               <LogOut className="mr-2 h-4 w-4" /> Logout
             </Button>
@@ -455,11 +457,11 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="relative overflow-hidden min-h-screen flex items-center justify-center">
+    <div className="relative overflow-hidden min-h-screen flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] z-0" />
       <div className="absolute inset-0 z-1 pointer-events-none">
         <HeroParticles />
-        <UpwardNeonParticles />
+        {!isMobile && <UpwardNeonParticles />}
       </div>
       <div className="relative z-10 container mx-auto px-4 text-center">
         <Card className="max-w-md mx-auto bg-black/30 backdrop-blur-lg border border-white/10 shadow-2xl shadow-purple-500/10">
@@ -467,7 +469,7 @@ export default function AdminPage() {
             <div className="mx-auto bg-gradient-to-r from-purple-500 to-violet-600 p-3 rounded-full mb-4 w-fit">
               <Fingerprint className="h-8 w-8 text-white" />
             </div>
-            <CardTitle className="text-3xl font-bold heading-light-sweep">
+            <CardTitle className="text-2xl md:text-3xl font-bold heading-light-sweep">
               Admin Control Panel
             </CardTitle>
             <CardDescription className="text-gray-400">
@@ -519,17 +521,15 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
             onClick={onClick}
             className="bg-black/30 backdrop-blur-lg border border-white/10 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group"
         >
-            <CardHeader className="flex flex-row items-center gap-4">
+            <CardHeader className="flex flex-row items-center gap-4 p-4 md:p-6">
                 <div className="bg-gradient-to-br from-purple-600 to-violet-700 p-3 rounded-lg">
                     <Icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                    <CardTitle className="text-xl text-white group-hover:text-purple-400 transition-colors">{title}</CardTitle>
-                    <CardDescription className="text-gray-400">{description}</CardDescription>
+                    <CardTitle className="text-lg md:text-xl text-white group-hover:text-purple-400 transition-colors">{title}</CardTitle>
+                    <CardDescription className="text-sm text-gray-400">{description}</CardDescription>
                 </div>
             </CardHeader>
         </Card>
     )
 }
-
-    

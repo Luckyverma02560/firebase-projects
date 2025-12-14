@@ -9,13 +9,15 @@ import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 
 export default function Home() {
   const [rotation, setRotation] = useState({ rotateX: 0, rotateY: 0 });
+  const isMobile = useIsMobile();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!e.currentTarget) return;
+    if (isMobile || !e.currentTarget) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -25,6 +27,7 @@ export default function Home() {
   };
 
   const handleMouseLeave = () => {
+    if (isMobile) return;
     setRotation({ rotateX: 0, rotateY: 0 });
   };
 
@@ -43,21 +46,21 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] z-0" />
         <div className="absolute inset-0 z-1 pointer-events-none">
             <HeroParticles />
-            <UpwardNeonParticles />
+            {!isMobile && <UpwardNeonParticles />}
         </div>
         <div 
           className="relative z-2"
         >
           <section className="relative h-screen w-full flex items-center justify-center text-center text-white overflow-hidden">
-            <div className="relative z-10 p-4" style={transformStyle}>
-                <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in hero-heading-sweep">
+            <div className="relative z-10 p-4" style={isMobile ? {} : transformStyle}>
+                <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in hero-heading-sweep">
                   EL<span className="text-[1.2em]">11</span>VEN HUB
                 </h1>
                 <div className="w-32 h-0.5 mx-auto mt-8 mb-6 bg-gold-accent opacity-0 animate-divider-in shadow-[0_0_15px_3px_rgba(199,164,91,0.4)]" />
                 <p className="font-orange-avenue text-lg md:text-xl font-medium tracking-wider text-[#B0B0B2] max-w-4xl mx-auto opacity-0 animate-subheading-in">
                     Your Gateway to Ultimate Streaming Experience
                 </p>
-                <div className="mt-12 opacity-0 animate-subheading-in md:hidden">
+                <div className="mt-12 opacity-0 animate-subheading-in">
                     <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-view-plans text-white font-bold shadow-[0_0_15px_rgba(142,45,226,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(74,0,224,0.8)] hover:scale-105">
                         <Link href="/about">View Plans</Link>
                     </Button>

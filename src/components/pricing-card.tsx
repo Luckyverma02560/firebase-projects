@@ -60,20 +60,20 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                     Most Popular
                 </div>
             )}
-            <div className="flex-grow p-2 sm:p-0">
-                <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
-                <p className="text-gray-400 text-sm mb-2">{description}</p>
+            <div className="flex-grow p-2">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1">{name}</h3>
+                <p className="text-gray-400 text-sm mb-2 h-10">{description}</p>
                 <div className="mb-3">
-                    <span className="text-4xl font-extrabold text-white">
-                        {currency && <span className="font-headline text-3xl mr-1">{currency}</span>}
+                    <span className="text-3xl md:text-4xl font-extrabold text-white">
+                        {currency && <span className="font-headline text-2xl md:text-3xl mr-1">{currency}</span>}
                         {amount}
                     </span>
-                    <span className="text-sm text-gray-400">{pricePeriod}</span>
+                    <span className="text-xs md:text-sm text-gray-400">{pricePeriod}</span>
                 </div>
                 <ul className="space-y-1 text-left mb-4">
                     {features.map((feature, index) => (
-                        <li key={index} className="flex items-center text-gray-300 text-sm">
-                            <Check className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                        <li key={index} className="flex items-center text-gray-300 text-xs md:text-sm">
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
                             <span>{feature}</span>
                         </li>
                     ))}
@@ -81,7 +81,7 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
             </div>
             <div className="flex items-center gap-2">
                 <Button asChild size="lg" className={cn(
-                    "w-full font-bold text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
+                    "w-full font-bold text-base md:text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
                     gradient,
                     'hover:scale-105'
                 )}>

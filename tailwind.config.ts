@@ -28,6 +28,20 @@ export default {
         roboto: ['Roboto', 'sans-serif'],
         clarendon: ['Clarendon', 'serif'],
       },
+      fontSize: {
+        'xs': '.75rem',
+        'sm': '.875rem',
+        'base': '1rem',
+        'lg': '1.125rem',
+        'xl': '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem',
+        '6xl': '3.75rem',
+        '7xl': '4.5rem',
+        '8xl': '6rem',
+      },
       colors: {
         'gold-accent': 'hsl(var(--accent))',
         'subtle-text': 'hsl(var(--muted-foreground))',
@@ -115,7 +129,7 @@ export default {
         'fade-in-up': {
           '0%': {
             opacity: '0',
-            transform: 'translateY(30px) scale(0.98)',
+            transform: 'translateY(20px) scale(0.98)',
           },
           '100%': {
             opacity: '1',
@@ -126,7 +140,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in-up': 'fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       perspective: {
         '1000': '1000px',
@@ -135,5 +149,3 @@ export default {
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
-
-    

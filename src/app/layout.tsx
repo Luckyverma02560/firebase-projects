@@ -8,8 +8,8 @@ import { ScrollToTopButton } from '@/components/scroll-to-top-button';
 import { CartProvider } from '@/context/cart-context';
 
 export const metadata: Metadata = {
-  title: 'LoQ Capital Markets Clone',
-  description: 'A clone of the LoQ Capital Markets About Us page.',
+  title: 'EL11VEN HUB',
+  description: 'Your Gateway to Ultimate Streaming Experience',
 };
 
 export default function RootLayout({

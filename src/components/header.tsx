@@ -44,7 +44,7 @@ export default function Header() {
     const isActive = pathname === href;
     return (
       <Link href={href} className={cn(
-        "relative group font-headline text-base uppercase tracking-wider transition-colors whitespace-nowrap",
+        "relative group font-headline text-sm uppercase tracking-wider transition-colors whitespace-nowrap",
         "text-white hover:text-bright-accent",
         isActive ? "text-bright-accent font-bold" : "font-normal",
         className
@@ -63,7 +63,7 @@ export default function Header() {
     return (
         <SheetClose asChild>
           <Link href={href} className={cn(
-            "block py-3 text-xl text-center font-headline rounded-md",
+            "block py-3 text-lg text-center font-headline rounded-md",
             isButton ? "bg-gradient-plans-header text-white" : 
             (isGetStarted ? "bg-gradient-get-started text-white" : 
             (isActive ? "text-bright-accent" : "text-foreground"))
@@ -78,10 +78,10 @@ export default function Header() {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-black/40 shadow-md backdrop-blur-[20px]" : "bg-transparent"
+      isScrolled ? "bg-black/40 shadow-md backdrop-blur-[12px]" : "bg-transparent"
     )}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-20 md:h-24">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               {logo && (
@@ -89,10 +89,10 @@ export default function Header() {
                   src={logo.imageUrl}
                   alt={logo.description}
                   data-ai-hint={logo.imageHint}
-                  width={72}
-                  height={72}
+                  width={64}
+                  height={64}
                   priority
-                  className={cn('rounded-full')}
+                  className={cn('rounded-full w-12 h-12 md:w-16 md:h-16')}
                 />
               )}
             </Link>
@@ -104,7 +104,7 @@ export default function Header() {
                 href={homeLink.href}
                 label={homeLink.label}
               />
-            <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-plans-header text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
+            <Button asChild size="sm" className="font-headline text-sm uppercase tracking-wider bg-gradient-plans-header text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
                 <Link href={plansLink.href}>{plansLink.label}</Link>
             </Button>
             {navLinks.map(link => (
@@ -116,12 +116,12 @@ export default function Header() {
             ))}
           </nav>
           
-          <div className="hidden md:flex flex-shrink-0 justify-end items-center gap-4">
+          <div className="hidden md:flex flex-shrink-0 justify-end items-center gap-2">
             <SearchComponent />
-            <Button asChild className="font-headline text-base uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
+            <Button asChild size="sm" className="font-headline text-sm uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
                 <Link href={getStartedLink.href}>{getStartedLink.label}</Link>
             </Button>
-            <Button asChild variant="outline" size="icon" className="text-white border-gold-accent hover:bg-gold-accent/20 hover:text-white transition-colors duration-300">
+            <Button asChild variant="outline" size="icon" className="h-9 w-9 text-white border-gold-accent hover:bg-gold-accent/20 hover:text-white transition-colors duration-300">
                 <Link href={cartLink.href}>
                     <ShoppingCart />
                     <span className="sr-only">{cartLink.label}</span>
@@ -134,7 +134,7 @@ export default function Header() {
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className={cn('text-white hover:text-bright-accent hover:bg-transparent')}>
-                  <Menu size={32} />
+                  <Menu size={28} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md flex flex-col justify-center">
@@ -143,7 +143,7 @@ export default function Header() {
                     <MobileNavLink key={plansLink.label} href={plansLink.href} label={plansLink.label} isButton />
                     {navLinks.map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
                      <SheetClose asChild>
-                        <Link href={cartLink.href} className="flex items-center justify-center gap-2 py-3 text-xl text-center font-headline rounded-md text-foreground">
+                        <Link href={cartLink.href} className="flex items-center justify-center gap-2 py-3 text-lg text-center font-headline rounded-md text-foreground">
                             <ShoppingCart />
                             <span>{cartLink.label}</span>
                         </Link>
