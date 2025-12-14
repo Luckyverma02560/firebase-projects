@@ -86,7 +86,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                 )}
                  {isSony && (
                     <div className="flex flex-col justify-center ml-2 md:ml-4">
-                       <span className="font-clarendon text-2xl md:text-3xl tracking-wider flex items-center">
+                       <span className="font-clarendon text-xl md:text-2xl tracking-wider flex items-center">
                            <span className="text-white">SONY</span>
                        </span>
                    </div>
