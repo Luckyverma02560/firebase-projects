@@ -52,8 +52,8 @@ export default function PaymentPage() {
                   src={qrCodePlaceholder.imageUrl}
                   alt={qrCodePlaceholder.description}
                   data-ai-hint={qrCodePlaceholder.imageHint}
-                  width={200}
-                  height={200}
+                  width={230}
+                  height={230}
                   className="rounded-md object-contain"
                 />
               )}
