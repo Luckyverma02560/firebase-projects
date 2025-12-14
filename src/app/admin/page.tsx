@@ -8,12 +8,12 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
-import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon, ArrowLeft, Settings, DollarSign, PlusCircle } from 'lucide-react';
+import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon, ArrowLeft, Settings, DollarSign, PlusCircle, Pencil } from 'lucide-react';
 import { ResponsiveContainer, BarChart as RechartsBarChart, LineChart as RechartsLineChart, PieChart as RechartsPieChart, XAxis, YAxis, Tooltip, Legend, Bar, Line, Pie, Cell } from 'recharts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
 
 // Mock data
 const dailyData = Array.from({ length: 7 }, (_, i) => ({ name: `Day ${i+1}`, visitors: Math.floor(Math.random() * 500) + 100 }));
@@ -52,17 +52,12 @@ const initialServices = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.
     name: p.description,
     icon: p.imageUrl,
     features: [
-        'Feature 1 for ' + p.description,
-        'Feature 2 for ' + p.description,
-        'Feature 3 for ' + p.description,
-        'Feature 4 for ' + p.description,
+        `Feature 1 for ${p.description}`,
+        `Feature 2 for ${p.description}`,
+        `Feature 3 for ${p.description}`,
+        `Feature 4 for ${p.description}`,
     ]
 }));
-
-const mockPricing = [
-    { service: 'Netflix', plan: 'Basic', cycle: 'monthly', price: 100 },
-    { service: 'Netflix', plan: 'Super Premium', cycle: 'yearly', price: 8999 },
-];
 
 type AdminView = 'dashboard' | 'services' | 'pricing' | 'security' | 'analytics';
 
@@ -88,6 +83,7 @@ export default function AdminPage() {
   const [newServiceIcon, setNewServiceIcon] = useState('');
   const [newServiceFeatures, setNewServiceFeatures] = useState(['', '', '', '']);
 
+  const [editingService, setEditingService] = useState<Service | null>(null);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,10 +102,16 @@ export default function AdminPage() {
     setCurrentView('dashboard');
   };
     
-  const handleFeatureChange = (index: number, value: string) => {
-    const updatedFeatures = [...newServiceFeatures];
-    updatedFeatures[index] = value;
-    setNewServiceFeatures(updatedFeatures);
+  const handleFeatureChange = (index: number, value: string, isEditing: boolean = false) => {
+    if (isEditing && editingService) {
+        const updatedFeatures = [...editingService.features];
+        updatedFeatures[index] = value;
+        setEditingService({ ...editingService, features: updatedFeatures });
+    } else {
+        const updatedFeatures = [...newServiceFeatures];
+        updatedFeatures[index] = value;
+        setNewServiceFeatures(updatedFeatures);
+    }
   };
 
   const handleAddService = (e: FormEvent<HTMLFormElement>) => {
@@ -119,7 +121,7 @@ export default function AdminPage() {
         return;
     }
     const newService: Service = {
-        id: services.length + 1,
+        id: services.length > 0 ? Math.max(...services.map(s => s.id)) + 1 : 1,
         name: newServiceName,
         icon: newServiceIcon,
         features: newServiceFeatures
@@ -131,6 +133,14 @@ export default function AdminPage() {
     setNewServiceFeatures(['', '', '', '']);
   };
 
+  const handleUpdateService = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editingService) return;
+
+    setServices(services.map(s => s.id === editingService.id ? editingService : s));
+    setEditingService(null);
+  };
+  
   const analyticsData = useMemo(() => {
     switch(analyticsTimespan) {
         case 'daily': return dailyData;
@@ -216,7 +226,46 @@ export default function AdminPage() {
                                                 <TableCell className="font-medium">{service.name}</TableCell>
                                                 <TableCell>{service.features[0].substring(0,30)}...</TableCell>
                                                 <TableCell className="text-right">
-                                                    <Button variant="ghost" size="sm">Edit</Button>
+                                                    <Dialog onOpenChange={(open) => !open && setEditingService(null)}>
+                                                        <DialogTrigger asChild>
+                                                            <Button variant="ghost" size="sm" onClick={() => setEditingService(service)}>
+                                                                <Pencil className="mr-2 h-4 w-4" /> Edit
+                                                            </Button>
+                                                        </DialogTrigger>
+                                                        {editingService && (
+                                                            <DialogContent className="bg-gray-900 border-purple-500 text-white">
+                                                                <DialogHeader>
+                                                                    <DialogTitle>Edit {editingService.name}</DialogTitle>
+                                                                </DialogHeader>
+                                                                <form onSubmit={handleUpdateService} className="space-y-4">
+                                                                    <div className="space-y-2">
+                                                                        <Label htmlFor="editOttName">OTT Name</Label>
+                                                                        <Input id="editOttName" value={editingService.name} onChange={(e) => setEditingService({...editingService, name: e.target.value})} className="bg-gray-800/50 border-white/20"/>
+                                                                    </div>
+                                                                    <div className="space-y-2">
+                                                                        <Label htmlFor="editIconUrl">Icon Image URL</Label>
+                                                                        <Input id="editIconUrl" value={editingService.icon} onChange={(e) => setEditingService({...editingService, icon: e.target.value})} className="bg-gray-800/50 border-white/20"/>
+                                                                    </div>
+                                                                    {editingService.features.map((feature, index) => (
+                                                                        <div key={index} className="space-y-2">
+                                                                            <Label htmlFor={`editFeature${index + 1}`}>Feature {index + 1}</Label>
+                                                                            <Input
+                                                                                id={`editFeature${index + 1}`}
+                                                                                value={feature}
+                                                                                onChange={(e) => handleFeatureChange(index, e.target.value, true)}
+                                                                                className="bg-gray-800/50 border-white/20"
+                                                                            />
+                                                                        </div>
+                                                                    ))}
+                                                                    <DialogFooter>
+                                                                        <DialogClose asChild>
+                                                                            <Button type="submit" className="bg-gradient-to-r from-green-500 to-teal-600">Save Changes</Button>
+                                                                        </DialogClose>
+                                                                    </DialogFooter>
+                                                                </form>
+                                                            </DialogContent>
+                                                        )}
+                                                    </Dialog>
                                                 </TableCell>
                                             </TableRow>
                                         ))}
