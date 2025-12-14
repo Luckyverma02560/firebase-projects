@@ -62,7 +62,7 @@ export default function PaymentPage() {
                 <Image
                   src={qrCodePlaceholder.imageUrl}
                   alt={qrCodePlaceholder.description}
-                  data-ai-hint={qrCode-placeholder.imageHint}
+                  data-ai-hint={qrCodePlaceholder.imageHint}
                   width={230}
                   height={230}
                   className="rounded-md object-contain"
