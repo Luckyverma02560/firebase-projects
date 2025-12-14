@@ -21,7 +21,6 @@ const cartLink = { href: '/cart', label: 'View Cart' };
 
 const navLinks = [
   { href: '/payment', label: 'Payment' },
-  { href: '#', label: 'Contact Us' },
 ];
 
 export default function Header() {

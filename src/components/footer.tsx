@@ -13,9 +13,8 @@ export default function Footer() {
     { href: '/about', label: 'About Us' },
     { href: '#', label: 'Services' },
     { href: '#', label: 'Pricing' },
-    { href: '#', label: 'Payment' },
+    { href: '/payment', label: 'Payment' },
     { href: '#', label: 'Investor Charter' },
-    { href: '#', label: 'Contact Us' },
     { href: '#', label: 'Blog' },
   ];
 
@@ -36,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="bg-transparent text-foreground/90 relative z-10">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {/* Column 1: Logo and About */}
           <div>
             {logo && (
@@ -87,24 +86,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Contact Info */}
-          <div>
-            <h3 className="text-lg font-headline text-gold-accent mb-6">Contact Info</h3>
-            <ul className="space-y-4 text-sm text-foreground/90">
-              <li className="flex items-start">
-                <MapPin size={20} className="text-accent mt-1 mr-4 shrink-0" />
-                <span>Room No. 001, 1-st Floor, XXXX Residence, Sector 44, Noida - 201020</span>
-              </li>
-              <li className="flex items-center">
-                <Phone size={20} className="text-accent mr-4 shrink-0" />
-                <a href="tel:+918600070638" className="hover:text-accent transition-colors">+91 86000 70638</a>
-              </li>
-              <li className="flex items-center">
-                <Mail size={20} className="text-accent mr-4 shrink-0" />
-                <a href="mailto:kavirajverma1976@gmail.com" className="hover:text-accent transition-colors">kavirajverma1976@gmail.com</a>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
       <div className="bg-black/20 py-4">
