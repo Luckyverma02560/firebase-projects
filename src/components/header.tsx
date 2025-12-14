@@ -15,7 +15,7 @@ import { SearchComponent } from './search-component';
 
 const homeLink = { href: '/', label: 'Home' };
 const plansLink = { href: '/about', label: 'Plans' };
-const getStartedLink = { href: '#', label: 'Get Started' };
+const getStartedLink = { href: '/about', label: 'Get Started' };
 const cartLink = { href: '/cart', label: 'View Cart' };
 
 
