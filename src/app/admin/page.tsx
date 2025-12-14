@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,8 +13,7 @@ import { ResponsiveContainer, BarChart as RechartsBarChart, LineChart as Rechart
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
-
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 // Mock data
 const dailyData = Array.from({ length: 7 }, (_, i) => ({ name: `Day ${i+1}`, visitors: Math.floor(Math.random() * 500) + 100 }));
@@ -37,16 +36,26 @@ const sourceData = [
 ];
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042'];
 
-const mockServices = [
-    { id: 1, name: 'Netflix', icon: 'https://i.postimg.cc/KjD4FT6c/Netflix-icon-svg.png', description: 'Watch movies and TV shows online...' },
-    { id: 2, name: 'Prime Video', icon: 'https://i.postimg.cc/yxFdyGsS/amazon-prime-video-app-icon-hd.png', description: 'Enjoy exclusive Amazon Originals...' },
-];
+const initialServices = PlaceHolderImages.filter(p => p.id.endsWith('-logo')).map((p, index) => ({
+    id: index + 1,
+    name: p.description,
+    icon: p.imageUrl,
+    description: `Description for ${p.description}`
+}));
+
 const mockPricing = [
     { service: 'Netflix', plan: 'Basic', cycle: 'monthly', price: 100 },
     { service: 'Netflix', plan: 'Super Premium', cycle: 'yearly', price: 8999 },
 ];
 
 type AdminView = 'dashboard' | 'services' | 'pricing' | 'security' | 'analytics';
+
+interface Service {
+    id: number;
+    name: string;
+    icon: string;
+    description: string;
+}
 
 export default function AdminPage() {
   const [username, setUsername] = useState('');
@@ -56,7 +65,12 @@ export default function AdminPage() {
   const [currentView, setCurrentView] = useState<AdminView>('dashboard');
 
   const [analyticsTimespan, setAnalyticsTimespan] = useState<'daily' | 'monthly' | 'yearly'>('monthly');
-  const [selectedServiceForPricing, setSelectedServiceForPricing] = useState<string>('Netflix');
+  const [selectedServiceForPricing, setSelectedServiceForPricing] = useState<string>(initialServices[0]?.name || '');
+
+  const [services, setServices] = useState<Service[]>(initialServices);
+  const [newServiceName, setNewServiceName] = useState('');
+  const [newServiceIcon, setNewServiceIcon] = useState('');
+  const [newServiceDesc, setNewServiceDesc] = useState('');
 
 
   const handleLogin = (e: React.FormEvent) => {
@@ -74,6 +88,25 @@ export default function AdminPage() {
     setUsername('');
     setPassword('');
     setCurrentView('dashboard');
+  };
+    
+  const handleAddService = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!newServiceName || !newServiceIcon || !newServiceDesc) {
+        alert('Please fill out all fields for the new service.');
+        return;
+    }
+    const newService: Service = {
+        id: services.length + 1,
+        name: newServiceName,
+        icon: newServiceIcon,
+        description: newServiceDesc
+    };
+    setServices(prev => [...prev, newService]);
+    // Reset form
+    setNewServiceName('');
+    setNewServiceIcon('');
+    setNewServiceDesc('');
   };
 
   const analyticsData = useMemo(() => {
@@ -114,22 +147,22 @@ export default function AdminPage() {
                     <CardContent className="space-y-8">
                         <div>
                             <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400"><PlusCircle /> Add New Service</h3>
-                            <form className="space-y-4 p-4 border border-white/10 rounded-lg">
+                            <form onSubmit={handleAddService} className="space-y-4 p-4 border border-white/10 rounded-lg">
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label htmlFor="ottName">OTT Name</Label>
-                                        <Input id="ottName" placeholder="e.g., Netflix" className="bg-gray-800/50 border-white/20" />
+                                        <Input id="ottName" placeholder="e.g., Netflix" className="bg-gray-800/50 border-white/20" value={newServiceName} onChange={(e) => setNewServiceName(e.target.value)} />
                                     </div>
                                     <div className="space-y-2">
                                         <Label htmlFor="iconUrl">Icon Image URL</Label>
-                                        <Input id="iconUrl" placeholder="https://path/to/icon.png" className="bg-gray-800/50 border-white/20" />
+                                        <Input id="iconUrl" placeholder="https://path/to/icon.png" className="bg-gray-800/50 border-white/20" value={newServiceIcon} onChange={(e) => setNewServiceIcon(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="description">Description</Label>
-                                    <Textarea id="description" placeholder="Service description" className="bg-gray-800/50 border-white/20" />
+                                    <Textarea id="description" placeholder="Service description" className="bg-gray-800/50 border-white/20" value={newServiceDesc} onChange={(e) => setNewServiceDesc(e.target.value)} />
                                 </div>
-                                <Button className="bg-gradient-to-r from-purple-500 to-violet-600">Add Service</Button>
+                                <Button type="submit" className="bg-gradient-to-r from-purple-500 to-violet-600">Add Service</Button>
                             </form>
                         </div>
                         <div>
@@ -145,7 +178,7 @@ export default function AdminPage() {
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
-                                        {mockServices.map(service => (
+                                        {services.map(service => (
                                             <TableRow key={service.id}>
                                                 <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
                                                 <TableCell className="font-medium">{service.name}</TableCell>
@@ -176,7 +209,7 @@ export default function AdminPage() {
                                     <Label>Service</Label>
                                     <Select onValueChange={setSelectedServiceForPricing} defaultValue={selectedServiceForPricing}>
                                         <SelectTrigger className="bg-gray-800/50 border-white/20"><SelectValue placeholder="Select a service" /></SelectTrigger>
-                                        <SelectContent>{mockServices.map(s => <SelectItem key={s.id} value={s.name}>{s.name}</SelectItem>)}</SelectContent>
+                                        <SelectContent>{services.map(s => <SelectItem key={s.id} value={s.name}>{s.name}</SelectItem>)}</SelectContent>
                                     </Select>
                                 </div>
                                 <div className="space-y-2">
@@ -379,4 +412,5 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
     )
 }
 
+    
     

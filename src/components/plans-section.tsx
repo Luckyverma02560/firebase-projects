@@ -107,7 +107,12 @@ interface PlansSectionProps {
 export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
 
-    const services = serviceIds.map(id => PlaceHolderImages.find(p => p.id === id)).filter(Boolean);
+    const services = PlaceHolderImages.filter(p => p.id.endsWith('-logo')).map(p => ({
+        id: p.id,
+        name: p.description,
+        logoUrl: p.imageUrl,
+        logoHint: p.imageHint,
+    }));
 
     const plansToShow = (selectedService === 'Netflix' || selectedService === 'Prime Video') ? allPlans : allPlans.slice(0, 3);
     const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
@@ -180,11 +185,11 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                     <div className="flex flex-col items-center gap-6 px-4 md:px-0">
                         {services.map((service) => (
                            service && (
-                             <Link key={service.id} href={`/about?service=${encodeURIComponent(service.description)}`} className="w-full max-w-4xl">
+                             <Link key={service.id} href={`/about?service=${encodeURIComponent(service.name)}`} className="w-full max-w-4xl">
                                <ServiceCard
-                                    name={service.description}
-                                    logoUrl={service.imageUrl}
-                                    logoHint={service.imageHint}
+                                    name={service.name}
+                                    logoUrl={service.logoUrl}
+                                    logoHint={service.logoHint}
                                 />
                             </Link>
                            )
@@ -195,3 +200,5 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
         </section>
     );
 };
+
+    
