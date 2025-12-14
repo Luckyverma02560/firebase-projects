@@ -167,7 +167,7 @@ body {
   }
 
   .bg-gradient-view-plans {
-    background-image: linear-gradient(to right, #009fff, #ec2f4b);
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
   }
 
   .why-choose-us-card {
@@ -492,4 +492,5 @@ body {
     transform: translateX(-50%);
   }
 }
+    
     
