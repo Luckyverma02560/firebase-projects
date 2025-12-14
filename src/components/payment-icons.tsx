@@ -27,7 +27,8 @@ export const PaymentIcons = () => {
                                 height={40}
                                 className={cn(
                                     "object-contain",
-                                    icon.id === 'netbanking-logo' && 'invert'
+                                    icon.id === 'netbanking-logo' && 'invert',
+                                    (icon.id === 'paytm-logo' || icon.id === 'phonepe-logo' || icon.id === 'netbanking-logo') && 'w-20'
                                 )}
                             />
                         </div>
