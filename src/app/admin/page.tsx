@@ -51,7 +51,12 @@ const initialServices = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.
     id: index + 1,
     name: p.description,
     icon: p.imageUrl,
-    description: `Description for ${p.description}`
+    features: [
+        'Feature 1 for ' + p.description,
+        'Feature 2 for ' + p.description,
+        'Feature 3 for ' + p.description,
+        'Feature 4 for ' + p.description,
+    ]
 }));
 
 const mockPricing = [
@@ -65,7 +70,7 @@ interface Service {
     id: number;
     name: string;
     icon: string;
-    description: string;
+    features: string[];
 }
 
 export default function AdminPage() {
@@ -81,7 +86,7 @@ export default function AdminPage() {
   const [services, setServices] = useState<Service[]>(initialServices);
   const [newServiceName, setNewServiceName] = useState('');
   const [newServiceIcon, setNewServiceIcon] = useState('');
-  const [newServiceDesc, setNewServiceDesc] = useState('');
+  const [newServiceFeatures, setNewServiceFeatures] = useState(['', '', '', '']);
 
 
   const handleLogin = (e: React.FormEvent) => {
@@ -101,9 +106,15 @@ export default function AdminPage() {
     setCurrentView('dashboard');
   };
     
+  const handleFeatureChange = (index: number, value: string) => {
+    const updatedFeatures = [...newServiceFeatures];
+    updatedFeatures[index] = value;
+    setNewServiceFeatures(updatedFeatures);
+  };
+
   const handleAddService = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!newServiceName || !newServiceIcon || !newServiceDesc) {
+    if (!newServiceName || !newServiceIcon || newServiceFeatures.some(f => f === '')) {
         alert('Please fill out all fields for the new service.');
         return;
     }
@@ -111,13 +122,13 @@ export default function AdminPage() {
         id: services.length + 1,
         name: newServiceName,
         icon: newServiceIcon,
-        description: newServiceDesc
+        features: newServiceFeatures
     };
     setServices(prev => [...prev, newService]);
     // Reset form
     setNewServiceName('');
     setNewServiceIcon('');
-    setNewServiceDesc('');
+    setNewServiceFeatures(['', '', '', '']);
   };
 
   const analyticsData = useMemo(() => {
@@ -169,9 +180,19 @@ export default function AdminPage() {
                                         <Input id="iconUrl" placeholder="https://path/to/icon.png" className="bg-gray-800/50 border-white/20" value={newServiceIcon} onChange={(e) => setNewServiceIcon(e.target.value)} />
                                     </div>
                                 </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="description">Description</Label>
-                                    <Textarea id="description" placeholder="Service description" className="bg-gray-800/50 border-white/20" value={newServiceDesc} onChange={(e) => setNewServiceDesc(e.target.value)} />
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    {newServiceFeatures.map((feature, index) => (
+                                         <div key={index} className="space-y-2">
+                                            <Label htmlFor={`feature${index+1}`}>Feature {index + 1}</Label>
+                                            <Input 
+                                                id={`feature${index+1}`} 
+                                                placeholder={`Feature point ${index + 1}`} 
+                                                className="bg-gray-800/50 border-white/20" 
+                                                value={feature} 
+                                                onChange={(e) => handleFeatureChange(index, e.target.value)} 
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
                                 <Button type="submit" className="bg-gradient-to-r from-purple-500 to-violet-600">Add Service</Button>
                             </form>
@@ -184,7 +205,7 @@ export default function AdminPage() {
                                         <TableRow>
                                             <TableHead>Icon</TableHead>
                                             <TableHead>Name</TableHead>
-                                            <TableHead>Description</TableHead>
+                                            <TableHead>Features</TableHead>
                                             <TableHead className="text-right">Actions</TableHead>
                                         </TableRow>
                                     </TableHeader>
@@ -193,7 +214,7 @@ export default function AdminPage() {
                                             <TableRow key={service.id}>
                                                 <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
                                                 <TableCell className="font-medium">{service.name}</TableCell>
-                                                <TableCell>{service.description.substring(0,30)}...</TableCell>
+                                                <TableCell>{service.features[0].substring(0,30)}...</TableCell>
                                                 <TableCell className="text-right">
                                                     <Button variant="ghost" size="sm">Edit</Button>
                                                 </TableCell>
