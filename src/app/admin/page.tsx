@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, AlertDialogFooter } from "@/components/ui/alert-dialog"
 
 
 // Mock data
@@ -116,7 +116,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleAddService = (e: FormEvent<HTMLFormElement>) => {
+  const handleAddService = (e: FormEvent<HTMLFormEvent>) => {
     e.preventDefault();
     if (!newServiceName || !newServiceIcon || newServiceFeatures.some(f => f === '')) {
         alert('Please fill out all fields for the new service.');
@@ -135,7 +135,7 @@ export default function AdminPage() {
     setNewServiceFeatures(['', '', '', '']);
   };
 
-  const handleUpdateService = (e: FormEvent<HTMLFormElement>) => {
+  const handleUpdateService = (e: FormEvent<HTMLFormEvent>) => {
     e.preventDefault();
     if (!editingService) return;
 
@@ -524,7 +524,3 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
-
-    
-
-    
