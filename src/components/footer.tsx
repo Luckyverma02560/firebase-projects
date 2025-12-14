@@ -13,7 +13,7 @@ export default function Footer() {
     { href: '/about', label: 'Plans' },
     { href: '/payment', label: 'Payment' },
     { href: '/cart', label: 'Cart' },
-    { href: '#', label: 'Control Panel' },
+    { href: '/admin', label: 'Control Panel' },
   ];
 
   const socialLinks = [
