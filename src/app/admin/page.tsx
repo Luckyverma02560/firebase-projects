@@ -36,7 +36,18 @@ const sourceData = [
 ];
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042'];
 
-const initialServices = PlaceHolderImages.filter(p => p.id.endsWith('-logo')).map((p, index) => ({
+const serviceLogoIds = [
+    'netflix-logo',
+    'prime-video-logo',
+    'hotstar-logo',
+    'zee5-logo',
+    'youtube-premium-logo',
+    'sony-logo',
+    'aha-logo',
+    'canva-logo'
+];
+
+const initialServices = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.id)).map((p, index) => ({
     id: index + 1,
     name: p.description,
     icon: p.imageUrl,
@@ -412,5 +423,4 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
     )
 }
 
-    
     
