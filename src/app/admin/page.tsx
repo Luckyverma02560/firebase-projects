@@ -8,8 +8,33 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HeroParticles } from '@/components/hero-particles';
 import { UpwardNeonParticles } from '@/components/upward-neon-particles';
-import { Fingerprint, LogOut, ShieldCheck } from 'lucide-react';
-import { BarChart, LineChart, PieChart } from 'recharts';
+import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon } from 'lucide-react';
+import { ResponsiveContainer, BarChart as RechartsBarChart, LineChart as RechartsLineChart, PieChart as RechartsPieChart, XAxis, YAxis, Tooltip, Legend, Bar, Line, Pie, Cell } from 'recharts';
+
+// Mock data for charts
+const monthlyData = [
+  { name: 'Jan', visitors: 4000, active: 2400 },
+  { name: 'Feb', visitors: 3000, active: 1398 },
+  { name: 'Mar', visitors: 2000, active: 9800 },
+  { name: 'Apr', visitors: 2780, active: 3908 },
+  { name: 'May', visitors: 1890, active: 4800 },
+  { name: 'Jun', visitors: 2390, active: 3800 },
+];
+
+const yearlyData = [
+  { name: '2022', visitors: 400, active: 240 },
+  { name: '2023', visitors: 300, active: 139 },
+  { name: '2024', visitors: 500, active: 480 },
+];
+
+const sourceData = [
+  { name: 'Direct', value: 400 },
+  { name: 'Referral', value: 300 },
+  { name: 'Social', value: 300 },
+  { name: 'Organic', value: 200 },
+];
+const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042'];
+
 
 export default function AdminPage() {
   const [username, setUsername] = useState('');
@@ -86,7 +111,45 @@ export default function AdminPage() {
                     <CardDescription>Visitor and activity metrics.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-gray-400 text-sm">This section is under construction. Graphs and data will be displayed here.</p>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-sm text-gray-300">
+                    <div className="lg:col-span-2 h-64">
+                       <h3 className="font-bold mb-2 flex items-center"><LineChart className="mr-2 h-5 w-5 text-purple-400"/>Monthly Visitors</h3>
+                      <ResponsiveContainer width="100%" height="100%">
+                        <RechartsLineChart data={monthlyData}>
+                           <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
+                           <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
+                           <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
+                           <Legend />
+                           <Line type="monotone" dataKey="visitors" stroke="#8884d8" />
+                           <Line type="monotone" dataKey="active" stroke="#82ca9d" />
+                        </RechartsLineChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className="h-64">
+                       <h3 className="font-bold mb-2 flex items-center"><BarChart3 className="mr-2 h-5 w-5 text-green-400"/>Yearly Overview</h3>
+                      <ResponsiveContainer width="100%" height="100%">
+                         <RechartsBarChart data={yearlyData}>
+                            <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
+                            <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false}/>
+                            <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
+                            <Legend />
+                            <Bar dataKey="visitors" fill="#8884d8" />
+                         </RechartsBarChart>
+                      </ResponsiveContainer>
+                    </div>
+                     <div className="h-64 lg:col-span-3">
+                       <h3 className="font-bold mb-2 flex items-center"><PieChartIcon className="mr-2 h-5 w-5 text-yellow-400"/>Traffic Sources</h3>
+                        <ResponsiveContainer width="100%" height="100%">
+                          <RechartsPieChart>
+                             <Pie data={sourceData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} fill="#8884d8" label>
+                                {sourceData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                             </Pie>
+                             <Tooltip contentStyle={{ backgroundColor: '#1B1C1E', border: '1px solid #333' }} />
+                             <Legend />
+                          </RechartsPieChart>
+                        </ResponsiveContainer>
+                    </div>
+                  </div>
                 </CardContent>
              </Card>
           </div>
@@ -152,3 +215,5 @@ export default function AdminPage() {
     </div>
   );
 }
+
+    
