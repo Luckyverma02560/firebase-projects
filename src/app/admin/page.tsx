@@ -90,12 +90,23 @@ const generateDefaultPlans = (): ServicePlans => ({
 });
 
 
-const initialServices: Service[] = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.id)).map((p, index) => ({
-    id: index + 1,
-    name: p.description,
-    icon: p.imageUrl,
-    plans: generateDefaultPlans(),
-}));
+const initialServices: Service[] = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.id)).map((p, index) => {
+    const service: Service = {
+        id: index + 1,
+        name: p.description,
+        icon: p.imageUrl,
+        plans: generateDefaultPlans(),
+    };
+
+    if (p.description === 'Prime Video') {
+        service.plans.monthly['Basic'].price = '90';
+        service.plans.monthly['Standard'].price = '120';
+        service.plans.monthly['Premium'].price = '150';
+        service.plans.monthly['Super Premium'].price = '170';
+    }
+
+    return service;
+});
 
 type AdminView = 'dashboard' | 'services' | 'security' | 'analytics';
 
