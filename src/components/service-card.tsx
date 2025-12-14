@@ -24,7 +24,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
     const isCanva = name === 'Canva';
     
     const whatsappNumber = "918600070638";
-    const message = `Hey, I have a question about the ${name} subscription.`;
+    const message = `Hi EL11VEN HUB, I Want More Information About Your "${name}" Plans.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
     return (
