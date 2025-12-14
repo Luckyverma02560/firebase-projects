@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
+import { AlertCircle } from 'lucide-react';
 
 export default function PaymentPage() {
   const qrCodePlaceholder = PlaceHolderImages.find(p => p.id === 'qr-code-placeholder');
@@ -23,13 +24,15 @@ export default function PaymentPage() {
             Secure & Simple Payments
           </h1>
           <p className="text-gray-400 mb-8 max-w-md mx-auto">
-            Your transactions are safe with us. Pay seamlessly using your favorite UPI app or Netbanking.
+            Your transactions are safe with us. Please follow the steps below to complete your subscription.
           </p>
           
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-4 text-left">
-              <h2 className="text-2xl font-bold text-white">Payment Details</h2>
-              <p className="text-gray-300">Scan the QR code with any UPI app or pay directly to the number below.</p>
+              <h2 className="text-2xl font-bold text-white">Payment Information</h2>
+              <p className="text-gray-300">
+                You can use the details below for payment via any UPI app or Netbanking after confirming your plan on WhatsApp.
+              </p>
               
               <div className="bg-gray-800/50 border border-white/20 rounded-lg p-4 flex items-center justify-between">
                 <span className="font-mono text-lg text-green-400">+91 86000 70638</span>
@@ -38,7 +41,9 @@ export default function PaymentPage() {
                 </Button>
               </div>
 
-               <p className="text-xs text-gray-500 pt-2">After payment, please send a screenshot to our WhatsApp for confirmation to get your account details instantly.</p>
+               <p className="text-xs text-gray-500 pt-2">
+                 <span className="font-bold text-yellow-400">Important:</span> Please chat with us on WhatsApp first to select your subscription plan. After confirmation, you can make the payment and share a screenshot to receive your account details instantly.
+               </p>
             </div>
 
             <div className="flex justify-center items-center bg-gray-800/50 rounded-lg p-4 border border-dashed border-white/20 h-52">
@@ -57,6 +62,16 @@ export default function PaymentPage() {
                     </div>
                 )}
             </div>
+          </div>
+
+          <div className="mt-12 border-t border-white/10 pt-6">
+            <div className="flex items-center justify-center text-yellow-400 mb-2">
+                <AlertCircle className="h-5 w-5 mr-2" />
+                <h3 className="text-lg font-bold">Disclaimer</h3>
+            </div>
+            <p className="text-xs text-gray-400 max-w-lg mx-auto">
+              This service is not licensed or governed by any governmental authority. All payments are secure but non-refundable. The information provided on this page is for payment purposes only. Users must first contact us via WhatsApp to select a specific subscription before making any payment.
+            </p>
           </div>
 
           <div className="mt-12">
