@@ -10,19 +10,10 @@ export default function Footer() {
 
   const quickLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About Us' },
-    { href: '#', label: 'Services' },
-    { href: '#', label: 'Pricing' },
+    { href: '/about', label: 'Plans' },
     { href: '/payment', label: 'Payment' },
-    { href: '#', label: 'Investor Charter' },
-    { href: '#', label: 'Blog' },
-  ];
-
-  const offeringsLinks = [
-    { href: '#', label: 'Equity Research' },
-    { href: '#', label: 'Credit Research' },
-    { href: '#', label: 'Investment Banking Support' },
-    { href: '#', label: 'Financial Modeling' },
+    { href: '/cart', label: 'Cart' },
+    { href: '#', label: 'Control Panel' },
   ];
 
   const socialLinks = [
@@ -63,7 +54,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <h3 className="text-lg font-headline text-gold-accent mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map(link => (
@@ -73,18 +64,8 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-          {/* Column 3: Our Offerings */}
-          <div>
-            <h3 className="text-lg font-headline text-gold-accent mb-6">Our Offerings</h3>
-            <ul className="space-y-3">
-              {offeringsLinks.map(link => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-foreground/90 hover:text-accent transition-colors">{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          
+          <div />
 
         </div>
       </div>
