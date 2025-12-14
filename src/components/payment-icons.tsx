@@ -23,7 +23,7 @@ export const PaymentIcons = () => {
                              <Image
                                 src={icon.imageUrl}
                                 alt={icon.description}
-                                width={80}
+                                width={icon.id === 'netbanking-logo' ? 40 : 80}
                                 height={40}
                                 className="object-contain"
                             />

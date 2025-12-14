@@ -61,7 +61,8 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https'
+        ,
         hostname: 'www.citypng.com',
         port: '',
         pathname: '/**',
@@ -83,6 +84,18 @@ const nextConfig: NextConfig = {
         hostname: 'downloadr2.apkmirror.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.vecteezy.com',
+        port: '',
+        pathname: '/**'
+      },
+      {
+          protocol: 'https',
+          hostname: 'pnghdpro.com',
+          port: '',
+          pathname: '/**'
       }
     ],
   },

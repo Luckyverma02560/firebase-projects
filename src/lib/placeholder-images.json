@@ -45,7 +45,7 @@
     {
       "id": "team4",
       "description": "Team member Riddhima B.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
@@ -129,31 +129,31 @@
     {
       "id": "phonepe-logo",
       "description": "PhonePe",
-      "imageUrl": "https://i.postimg.cc/638Y9W58/phonepe-logo-icon.png",
+      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/phonepe-logo-icon.png",
       "imageHint": "payment logo"
     },
     {
       "id": "paytm-logo",
       "description": "Paytm",
-      "imageUrl": "https://i.postimg.cc/BvW4d1rW/paytm-logo-6-1.png",
+      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/paytm-app-icon.png",
       "imageHint": "payment logo"
     },
     {
       "id": "bhim-logo",
       "description": "BHIM",
-      "imageUrl": "https://i.postimg.cc/L82S0MLY/BHIM-UPI-Logo-Dark-Background-2048x2048.png",
+      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/bhim-logo.png",
       "imageHint": "payment logo"
     },
     {
       "id": "upi-logo",
       "description": "UPI",
-      "imageUrl": "https://i.postimg.cc/J4yP13xK/1200px-UPI-Logo-vector-svg.png",
+      "imageUrl": "https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/upi-logo.png",
       "imageHint": "payment logo"
     },
     {
       "id": "netbanking-logo",
       "description": "Netbanking",
-      "imageUrl": "https://i.postimg.cc/44Yn94j3/621295-removebg-preview.png",
+      "imageUrl": "https://static.vecteezy.com/system/resources/previews/019/938/039/non_2x/bank-icon-bank-and-business-sign-and-symbol-png.png",
       "imageHint": "payment logo"
     },
     {
