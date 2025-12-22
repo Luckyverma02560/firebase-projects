@@ -80,7 +80,7 @@ export const generateDefaultPlans = (): ServicePlans => ({
             '4k streaming quality',
             'Limited sharing'
         ], isAvailable: true },
-        'Premium': { price: '350', features: [
+        'Premium': { price: '400', features: [
             '1 Device Access',
             'Profile Login',
             '4K  Streaming Quality',
@@ -101,12 +101,12 @@ export const generateDefaultPlans = (): ServicePlans => ({
             'Shared account access'
         ], isAvailable: true },
         'Standard': { price: '1300', features: [
-            '1 Device access',
+            '1Device access',
             'Profile Login',
             '4k streaming quality',
             'Limited sharing'
         ], isAvailable: true },
-        'Premium': { price: '1500', features: [
+        'Premium': { price: '800', features: [
             '1 Device Access',
             'Profile Login',
             '4K  Streaming Quality',
