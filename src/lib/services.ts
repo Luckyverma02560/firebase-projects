@@ -85,7 +85,7 @@ export const generateDefaultPlans = (): ServicePlans => ({
             'Profile Login',
             '4K  Streaming Quality',
             'Private Account Access'
-        ], isAvailable: true },
+        ], isAvailable: false },
         'Super Premium': { price: '1000', features: [
             '2 Device Access',
             'Profile Login',
@@ -111,7 +111,7 @@ export const generateDefaultPlans = (): ServicePlans => ({
             'Profile Login',
             '4K  Streaming Quality',
             'Private Account Access'
-        ], isAvailable: true },
+        ], isAvailable: false },
         'Super Premium': { price: '1800', features: [
             '2 Device Access',
             'Profile Login',
