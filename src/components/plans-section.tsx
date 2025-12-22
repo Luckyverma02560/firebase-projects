@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PricingCard } from './pricing-card';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
@@ -9,158 +9,7 @@ import { cn } from '@/lib/utils';
 import { ServiceCard } from './service-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
-
-const allPlans = [
-    {
-        name: 'Basic Plan',
-        description: 'Ideal for individuals starting out',
-        features: [
-            '1 Device access',
-            'Full customer support',
-            '4K streaming quality',
-            'Shared account access'
-        ],
-        prices: {
-            monthly: { price: 'INR 100', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 849', period: '/6mo', isAvailable: false },
-            yearly: { price: 'INR 1599', period: '/yr', isAvailable: false }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-blue-500 to-indigo-600',
-        shadow: 'shadow-blue-500/30'
-    },
-    {
-        name: 'Standard Plan',
-        description: 'Perfect for families and small groups',
-        features: [
-            '1 Device access',
-            'Profile Login',
-            '4k streaming quality',
-            'Limited sharing'
-        ],
-        prices: {
-            monthly: { price: 'INR 130', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 1699', period: '/6mo', isAvailable: false },
-            yearly: { price: 'INR 3299', period: '/yr', isAvailable: false }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-purple-500 to-violet-600',
-        shadow: 'shadow-purple-500/30',
-        isPopular: true
-    },
-    {
-        name: 'Premium Plan',
-        description: 'For the ultimate streaming enthusiasts',
-        features: [
-            '1 Device Access',
-            'Profile Login',
-            '4K  Streaming Quality',
-            'Private Account Access'
-        ],
-        prices: {
-            monthly: { price: 'INR 150', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 2899', period: '/6mo', isAvailable: true },
-            yearly: { price: 'INR 5499', period: '/yr', isAvailable: true }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-red-500 to-orange-600',
-        shadow: 'shadow-red-500/30'
-    },
-    {
-        name: 'Super Premium',
-        description: 'For power users and large families',
-        features: [
-            '2 Device Access',
-            'Profile Login',
-            '4K streaming quality',
-            'Private Account Access'
-        ],
-        prices: {
-            monthly: { price: 'INR 170', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 4599', period: '/6mo', isAvailable: false },
-            yearly: { price: 'INR 8999', period: '/yr', isAvailable: false }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-green-500 to-teal-600',
-        shadow: 'shadow-green-500/30'
-    }
-];
-
-const primePlans = [
-    {
-        name: 'Basic Plan',
-        description: 'Ideal for individuals starting out',
-        features: [
-            '1 Device access',
-            'Full customer support',
-            '4K streaming quality',
-            'Shared account access'
-        ],
-        prices: {
-            monthly: { price: 'INR 90', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 849', period: '/6mo', isAvailable: true },
-            yearly: { price: 'INR 1599', period: '/yr', isAvailable: true }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-blue-500 to-indigo-600',
-        shadow: 'shadow-blue-500/30'
-    },
-    {
-        name: 'Standard Plan',
-        description: 'Perfect for families and small groups',
-        features: [
-            '1 Device access',
-            'Profile Login',
-            '4k streaming quality',
-            'Limited sharing'
-        ],
-        prices: {
-            monthly: { price: 'INR 120', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 1699', period: '/6mo', isAvailable: true },
-            yearly: { price: 'INR 3299', period: '/yr', isAvailable: true }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-purple-500 to-violet-600',
-        shadow: 'shadow-purple-500/30',
-        isPopular: true
-    },
-    {
-        name: 'Premium Plan',
-        description: 'For the ultimate streaming enthusiasts',
-        features: [
-            '1 Device Access',
-            'Profile Login',
-            '4K  Streaming Quality',
-            'Private Account Access'
-        ],
-        prices: {
-            monthly: { price: 'INR 150', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 2899', period: '/6mo', isAvailable: true },
-            yearly: { price: 'INR 5499', period: '/yr', isAvailable: true }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-red-500 to-orange-600',
-        shadow: 'shadow-red-500/30'
-    },
-    {
-        name: 'Super Premium',
-        description: 'For power users and large families',
-        features: [
-            '2 Device Access',
-            'Profile Login',
-            '4K streaming quality',
-            'Private Account Access'
-        ],
-        prices: {
-            monthly: { price: 'INR 170', period: '/month', isAvailable: true },
-            'half-yearly': { price: 'INR 4599', period: '/6mo', isAvailable: true },
-            yearly: { price: 'INR 8999', period: '/yr', isAvailable: true }
-        },
-        buttonText: 'BUY NOW',
-        gradient: 'from-green-500 to-teal-600',
-        shadow: 'shadow-green-500/30'
-    }
-];
+import { initialServices, Service, PlanName, BillingCycle } from '@/lib/services';
 
 const serviceIds = [
     'netflix-logo',
@@ -173,8 +22,6 @@ const serviceIds = [
     'canva-logo'
 ];
 
-type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
-
 interface PlansSectionProps {
     showPlans: boolean;
     selectedService: string | null;
@@ -182,6 +29,7 @@ interface PlansSectionProps {
 
 export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
+    const [currentServices, setCurrentServices] = useState<Service[]>(initialServices);
 
     const services = PlaceHolderImages.filter(p => serviceIds.includes(p.id)).map(p => ({
         id: p.id,
@@ -190,8 +38,50 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
         logoHint: p.imageHint,
     }));
     
-    const plansForService = selectedService === 'Prime Video' ? primePlans : allPlans;
-    const plansToShow = (selectedService === 'Netflix' || selectedService === 'Prime Video') ? plansForService : plansForService.slice(0, 3);
+    const serviceData = currentServices.find(s => s.name === selectedService);
+    const plansToShow = serviceData ? Object.values(serviceData.plans.monthly).map((planDetails, index) => {
+        const planName = Object.keys(serviceData.plans.monthly)[index] as PlanName;
+        // This is a bit of a hack to map the plan data to the old structure for PricingCard
+        // A better approach would be to refactor PricingCard to accept the new structure directly
+        const features = serviceData.plans.monthly[planName].features;
+        const prices = {
+            monthly: serviceData.plans.monthly[planName],
+            'half-yearly': serviceData.plans['half-yearly'][planName],
+            yearly: serviceData.plans.yearly[planName],
+        };
+
+        let gradient = 'from-blue-500 to-indigo-600';
+        let shadow = 'shadow-blue-500/30';
+        let isPopular = false;
+
+        switch(planName) {
+            case 'Standard':
+                gradient = 'from-purple-500 to-violet-600';
+                shadow = 'shadow-purple-500/30';
+                isPopular = true;
+                break;
+            case 'Premium':
+                 gradient = 'from-red-500 to-orange-600';
+                 shadow = 'shadow-red-500/30';
+                break;
+            case 'Super Premium':
+                gradient = 'from-green-500 to-teal-600';
+                shadow = 'shadow-green-500/30';
+                break;
+        }
+
+        return {
+            name: planName,
+            description: 'Description for ' + planName, // Add more descriptive text if needed
+            features,
+            prices,
+            buttonText: 'BUY NOW',
+            gradient,
+            shadow,
+            isPopular
+        };
+    }) : [];
+    
     const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
 
     return (
@@ -242,9 +132,13 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                             </div>
                         </RadioGroup>
 
-                        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8", gridColsClass)}>
+                        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8", plansToShow.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3')}>
                             {plansToShow.map((plan, index) => {
-                                const {price, period, isAvailable} = plan.prices[billingCycle];
+                                const priceInfo = plan.prices[billingCycle];
+                                if (!priceInfo) return null; // Handle cases where a plan might not exist for a cycle
+                                const {price, isAvailable} = priceInfo;
+                                const period = billingCycle === 'monthly' ? '/month' : billingCycle === 'half-yearly' ? '/3mo' : '/6mo';
+                                
                                 return (
                                 <PricingCard 
                                         key={index} 
@@ -276,10 +170,3 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
             </div>
         </section>
     );
-
-    
-
-
-    
-
-    

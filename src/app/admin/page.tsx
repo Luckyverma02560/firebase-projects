@@ -18,6 +18,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Switch } from '@/components/ui/switch';
+import { initialServices, generateDefaultPlans, planNames, billingCycles, type Service, type PlanName, type BillingCycle, type ServicePlans } from '@/lib/services';
 
 
 // Mock data
@@ -40,85 +41,6 @@ const sourceData = [
   { name: 'Social', value: 300 }, { name: 'Organic', value: 200 },
 ];
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042'];
-
-const serviceLogoIds = [
-    'netflix-logo',
-    'prime-video-logo',
-    'hotstar-logo',
-    'zee5-logo',
-    'youtube-premium-logo',
-    'sony-logo',
-    'aha-logo',
-    'canva-logo'
-];
-
-type PlanName = 'Basic' | 'Standard' | 'Premium' | 'Super Premium';
-type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
-
-interface PlanDetails {
-    price: string;
-    features: string[];
-    isAvailable: boolean;
-}
-
-type ServicePlans = Record<BillingCycle, Record<PlanName, PlanDetails>>;
-
-interface Service {
-    id: number;
-    name: string;
-    icon: string;
-    plans: ServicePlans;
-}
-
-const generateDefaultPlans = (): ServicePlans => ({
-    monthly: {
-        'Basic': { price: '100', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Standard': { price: '130', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Premium': { price: '150', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Super Premium': { price: '170', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true }
-    },
-    'half-yearly': {
-        'Basic': { price: '550', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Standard': { price: '700', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Premium': { price: '850', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Super Premium': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true }
-    },
-    yearly: {
-        'Basic': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Standard': { price: '1300', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Premium': { price: '1500', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
-        'Super Premium': { price: '1800', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true }
-    }
-});
-
-
-const initialServices: Service[] = PlaceHolderImages.filter(p => serviceLogoIds.includes(p.id)).map((p, index) => {
-    const service: Service = {
-        id: index + 1,
-        name: p.description,
-        icon: p.imageUrl,
-        plans: generateDefaultPlans(),
-    };
-
-    if (p.description === 'Prime Video') {
-        service.plans.monthly['Basic'].price = '90';
-        service.plans.monthly['Standard'].price = '120';
-        service.plans.monthly['Premium'].price = '150';
-        service.plans.monthly['Super Premium'].price = '170';
-    }
-
-    if (p.description === 'Netflix') {
-        service.plans['half-yearly']['Basic'].isAvailable = false;
-        service.plans['half-yearly']['Standard'].isAvailable = false;
-        service.plans['half-yearly']['Super Premium'].isAvailable = false;
-
-        service.plans['yearly']['Basic'].isAvailable = false;
-        service.plans['yearly']['Standard'].isAvailable = false;
-        service.plans['yearly']['Super Premium'].isAvailable = false;
-    }
-
-    return service;
-});
 
 type AdminView = 'dashboard' | 'services' | 'security' | 'analytics';
 
@@ -214,8 +136,6 @@ export default function AdminPage() {
     }
   }, [analyticsTimespan]);
 
-  const planNames: PlanName[] = ['Basic', 'Standard', 'Premium', 'Super Premium'];
-  
   if (isLoggedIn) {
     const renderContent = () => {
       switch (currentView) {
@@ -232,15 +152,12 @@ export default function AdminPage() {
                 <Tabs defaultValue="monthly" className="w-full">
                     <TabsList className="grid w-full grid-cols-3">
                         <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                        <TabsTrigger value="half-yearly">Half Yearly</TabsTrigger>
-                        <TabsTrigger value="yearly">Yearly</TabsTrigger>
+                        <TabsTrigger value="half-yearly">3 Months</TabsTrigger>
+                        <TabsTrigger value="yearly">Half Yearly</TabsTrigger>
                     </TabsList>
-                    {(['monthly', 'half-yearly', 'yearly'] as BillingCycle[]).map(billing => (
+                    {billingCycles.map(billing => (
                         <TabsContent key={billing} value={billing} className="space-y-4">
                             {planNames.map(plan => {
-                                const plansForService = (serviceData.name === 'Netflix' || serviceData.name === 'Prime Video') ? planNames : planNames.slice(0, 3);
-                                if (!plansForService.includes(plan)) return null;
-
                                 return (
                                     <div key={plan} className="p-3 border border-white/20 rounded-lg">
                                         <div className="flex justify-between items-center mb-2">
@@ -568,5 +485,3 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
-
-    
