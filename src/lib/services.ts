@@ -42,22 +42,82 @@ const defaultFeatures = [
 
 export const generateDefaultPlans = (): ServicePlans => ({
     monthly: {
-        'Basic': { price: '100', features: defaultFeatures, isAvailable: true },
-        'Standard': { price: '130', features: defaultFeatures, isAvailable: true },
-        'Premium': { price: '150', features: defaultFeatures, isAvailable: true },
-        'Super Premium': { price: '170', features: defaultFeatures, isAvailable: true }
+        'Basic': { price: '100', features: [
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
+        ], isAvailable: true },
+        'Standard': { price: '130', features: [
+            '1 Device access',
+            'Profile Login',
+            '4k streaming quality',
+            'Limited sharing'
+        ], isAvailable: true },
+        'Premium': { price: '150', features: [
+            '1 Device Access',
+            'Profile Login',
+            '4K  Streaming Quality',
+            'Private Account Access'
+        ], isAvailable: true },
+        'Super Premium': { price: '170', features: [
+            '2 Device Access',
+            'Profile Login',
+            '4K streaming quality',
+            'Private Account Access'
+        ], isAvailable: true }
     },
     'half-yearly': {
-        'Basic': { price: '550', features: defaultFeatures, isAvailable: true },
-        'Standard': { price: '700', features: defaultFeatures, isAvailable: true },
-        'Premium': { price: '850', features: defaultFeatures, isAvailable: true },
-        'Super Premium': { price: '1000', features: defaultFeatures, isAvailable: true }
+        'Basic': { price: '550', features: [
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
+        ], isAvailable: true },
+        'Standard': { price: '700', features: [
+            '1 Device access',
+            'Profile Login',
+            '4k streaming quality',
+            'Limited sharing'
+        ], isAvailable: true },
+        'Premium': { price: '350', features: [
+            '1 Device Access',
+            'Profile Login',
+            '4K  Streaming Quality',
+            'Private Account Access'
+        ], isAvailable: true },
+        'Super Premium': { price: '1000', features: [
+            '2 Device Access',
+            'Profile Login',
+            '4K streaming quality',
+            'Private Account Access'
+        ], isAvailable: true }
     },
     yearly: {
-        'Basic': { price: '1000', features: defaultFeatures, isAvailable: true },
-        'Standard': { price: '1300', features: defaultFeatures, isAvailable: true },
-        'Premium': { price: '1500', features: defaultFeatures, isAvailable: true },
-        'Super Premium': { price: '1800', features: defaultFeatures, isAvailable: true }
+        'Basic': { price: '1000', features: [
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
+        ], isAvailable: true },
+        'Standard': { price: '1300', features: [
+            '1 Device access',
+            'Profile Login',
+            '4k streaming quality',
+            'Limited sharing'
+        ], isAvailable: true },
+        'Premium': { price: '1500', features: [
+            '1 Device Access',
+            'Profile Login',
+            '4K  Streaming Quality',
+            'Private Account Access'
+        ], isAvailable: true },
+        'Super Premium': { price: '1800', features: [
+            '2 Device Access',
+            'Profile Login',
+            '4K streaming quality',
+            'Private Account Access'
+        ], isAvailable: true }
     }
 });
 
