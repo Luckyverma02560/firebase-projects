@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { Check, ShoppingCart } from 'lucide-react';
@@ -48,7 +49,8 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
     const amount = priceParts.length > 1 ? priceParts.slice(1).join(' ') : price;
 
     const whatsappNumber = "918600070638";
-    const message = `Hey, I Need the ${serviceName} ${name} (${billingCycle}). Kindly Reach Me Soon.`;
+    const billingCycleText = billingCycle === 'monthly' ? 'Monthly' : billingCycle === 'half-yearly' ? '3 Months' : 'Half Yearly';
+    const message = `Hey, I Need the ${serviceName} ${name} (${billingCycleText}) plan. Kindly Reach Me Soon.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     
     return (
