@@ -81,23 +81,25 @@ export default function AdminPage() {
     setCurrentView('dashboard');
   };
     
-  const handlePlanChange = (billing: BillingCycle, plan: PlanName, field: 'price' | `feature${number}` | 'isAvailable', value: string | boolean, isEditing: boolean) => {
-    const target = isEditing ? editingService : newService;
-    const setter = isEditing ? setEditingService : setNewService;
-    if (!target) return;
+  const handlePlanChange = (billing: BillingCycle, plan: PlanName, field: string, value: string | boolean, isEditing: boolean) => {
+      const target = isEditing ? editingService : newService;
+      const setter = isEditing ? setEditingService : setNewService;
+      if (!target) return;
 
-    const updatedPlans = JSON.parse(JSON.stringify(target.plans)); // Deep copy
+      const updatedPlans = JSON.parse(JSON.stringify(target.plans)); // Deep copy
 
-    if (field === 'price') {
-        updatedPlans[billing][plan].price = value as string;
-    } else if (field === 'isAvailable') {
-        updatedPlans[billing][plan].isAvailable = value as boolean;
-    } else {
-        const featureIndex = parseInt(field.replace('feature', '')) - 1;
-        updatedPlans[billing][plan].features[featureIndex] = value as string;
-    }
-    
-    setter({ ...target, plans: updatedPlans } as Service | Omit<Service, 'id'>);
+      if (field === 'price') {
+          updatedPlans[billing][plan].price = value as string;
+      } else if (field === 'isAvailable') {
+          updatedPlans[billing][plan].isAvailable = value as boolean;
+      } else if (field.startsWith('feature')) {
+          const featureIndex = parseInt(field.replace('feature', '')) - 1;
+          if (featureIndex >= 0 && featureIndex < updatedPlans[billing][plan].features.length) {
+              updatedPlans[billing][plan].features[featureIndex] = value as string;
+          }
+      }
+      
+      setter({ ...target, plans: updatedPlans } as Service | Omit<Service, 'id'>);
   };
 
 
@@ -158,6 +160,9 @@ export default function AdminPage() {
                     {billingCycles.map(billing => (
                         <TabsContent key={billing} value={billing} className="space-y-4">
                             {planNames.map(plan => {
+                                const planData = serviceData.plans[billing]?.[plan];
+                                if (!planData) return null; // Skip rendering if plan data doesn't exist
+
                                 return (
                                     <div key={plan} className="p-3 border border-white/20 rounded-lg">
                                         <div className="flex justify-between items-center mb-2">
@@ -166,7 +171,7 @@ export default function AdminPage() {
                                                 <Label htmlFor={`${billing}-${plan}-available`}>Plan Available</Label>
                                                 <Switch 
                                                     id={`${billing}-${plan}-available`} 
-                                                    checked={serviceData.plans[billing][plan].isAvailable}
+                                                    checked={planData.isAvailable}
                                                     onCheckedChange={(checked) => handlePlanChange(billing, plan, 'isAvailable', checked, isEditing)}
                                                 />
                                             </div>
@@ -176,19 +181,19 @@ export default function AdminPage() {
                                                 <Label htmlFor={`${billing}-${plan}-price`}>Price (INR)</Label>
                                                 <Input 
                                                     id={`${billing}-${plan}-price`} 
-                                                    value={serviceData.plans[billing][plan].price} 
+                                                    value={planData.price} 
                                                     onChange={(e) => handlePlanChange(billing, plan, 'price', e.target.value, isEditing)}
                                                     className="bg-gray-800/50 border-white/20"
                                                 />
                                             </div>
                                             <div className="space-y-3 md:col-span-2">
-                                                {serviceData.plans[billing][plan].features.map((feature, index) => (
+                                                {planData.features.map((feature, index) => (
                                                     <div key={index} className="space-y-1.5">
                                                         <Label htmlFor={`${billing}-${plan}-feature${index+1}`}>Feature {index + 1}</Label>
                                                         <Input 
                                                             id={`${billing}-${plan}-feature${index+1}`} 
                                                             value={feature}
-                                                            onChange={(e) => handlePlanChange(billing, plan, `feature${index+1}` as any, e.target.value, isEditing)}
+                                                            onChange={(e) => handlePlanChange(billing, plan, `feature${index+1}`, e.target.value, isEditing)}
                                                             className="bg-gray-800/50 border-white/20"
                                                         />
                                                     </div>
