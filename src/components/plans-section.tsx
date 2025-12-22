@@ -22,6 +22,82 @@ const allPlans = [
         ],
         prices: {
             monthly: { price: 'INR 100', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 849', period: '/6mo', isAvailable: false },
+            yearly: { price: 'INR 1599', period: '/yr', isAvailable: false }
+        },
+        buttonText: 'BUY NOW',
+        gradient: 'from-blue-500 to-indigo-600',
+        shadow: 'shadow-blue-500/30'
+    },
+    {
+        name: 'Standard Plan',
+        description: 'Perfect for families and small groups',
+        features: [
+            '1 Device access',
+            'Profile Login',
+            '4k streaming quality',
+            'Limited sharing'
+        ],
+        prices: {
+            monthly: { price: 'INR 130', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 1699', period: '/6mo', isAvailable: false },
+            yearly: { price: 'INR 3299', period: '/yr', isAvailable: false }
+        },
+        buttonText: 'BUY NOW',
+        gradient: 'from-purple-500 to-violet-600',
+        shadow: 'shadow-purple-500/30',
+        isPopular: true
+    },
+    {
+        name: 'Premium Plan',
+        description: 'For the ultimate streaming enthusiasts',
+        features: [
+            '1 Device Access',
+            'Profile Login',
+            '4K  Streaming Quality',
+            'Private Account Access'
+        ],
+        prices: {
+            monthly: { price: 'INR 150', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 2899', period: '/6mo', isAvailable: true },
+            yearly: { price: 'INR 5499', period: '/yr', isAvailable: true }
+        },
+        buttonText: 'BUY NOW',
+        gradient: 'from-red-500 to-orange-600',
+        shadow: 'shadow-red-500/30'
+    },
+    {
+        name: 'Super Premium',
+        description: 'For power users and large families',
+        features: [
+            '2 Device Access',
+            'Profile Login',
+            '4K streaming quality',
+            'Private Account Access'
+        ],
+        prices: {
+            monthly: { price: 'INR 170', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 4599', period: '/6mo', isAvailable: false },
+            yearly: { price: 'INR 8999', period: '/yr', isAvailable: false }
+        },
+        buttonText: 'BUY NOW',
+        gradient: 'from-green-500 to-teal-600',
+        shadow: 'shadow-green-500/30'
+    }
+];
+
+const primePlans = [
+    {
+        name: 'Basic Plan',
+        description: 'Ideal for individuals starting out',
+        features: [
+            '1 Device access',
+            'Full customer support',
+            '4K streaming quality',
+            'Shared account access'
+        ],
+        prices: {
+            monthly: { price: 'INR 90', period: '/month', isAvailable: true },
             'half-yearly': { price: 'INR 849', period: '/6mo', isAvailable: true },
             yearly: { price: 'INR 1599', period: '/yr', isAvailable: true }
         },
@@ -39,7 +115,7 @@ const allPlans = [
             'Limited sharing'
         ],
         prices: {
-            monthly: { price: 'INR 130', period: '/month', isAvailable: true },
+            monthly: { price: 'INR 120', period: '/month', isAvailable: true },
             'half-yearly': { price: 'INR 1699', period: '/6mo', isAvailable: true },
             yearly: { price: 'INR 3299', period: '/yr', isAvailable: true }
         },
@@ -113,8 +189,9 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
         logoUrl: p.imageUrl,
         logoHint: p.imageHint,
     }));
-
-    const plansToShow = (selectedService === 'Netflix' || selectedService === 'Prime Video') ? allPlans : allPlans.slice(0, 3);
+    
+    const plansForService = selectedService === 'Prime Video' ? primePlans : allPlans;
+    const plansToShow = (selectedService === 'Netflix' || selectedService === 'Prime Video') ? plansForService : plansForService.slice(0, 3);
     const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
 
     return (
@@ -202,5 +279,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
 
     
 
+
+    
 
     
