@@ -20,13 +20,15 @@ interface PricingCardProps {
     isPopular?: boolean;
     serviceName: string | null;
     billingCycle: string;
+    isAvailable: boolean;
 }
 
-export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false, serviceName, billingCycle }: PricingCardProps) => {
+export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false, serviceName, billingCycle, isAvailable }: PricingCardProps) => {
     const { addToCart } = useCart();
     const { toast } = useToast();
 
     const handleAddToCart = () => {
+        if (!isAvailable) return;
         const item = {
             id: `${serviceName}-${name}-${price}`,
             name: `${serviceName} - ${name}`,
@@ -51,11 +53,12 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
     
     return (
         <div className={cn(
-            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex flex-col transition-all duration-300 hover:border-white/30 hover:scale-105",
+            "relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex flex-col transition-all duration-300",
+            isAvailable ? 'hover:border-white/30 hover:scale-105' : 'opacity-60',
             shadow,
-            isPopular ? 'border-purple-500 border-2 shadow-lg shadow-purple-500/40' : 'hover:shadow-lg'
+            isPopular && isAvailable ? 'border-purple-500 border-2 shadow-lg shadow-purple-500/40' : 'hover:shadow-lg'
         )}>
-            {isPopular && (
+            {isPopular && isAvailable && (
                 <div className="absolute top-0 right-4 -translate-y-1/2 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                     Most Popular
                 </div>
@@ -79,29 +82,50 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
                     ))}
                 </ul>
             </div>
-            <div className="flex items-center gap-2">
-                <Button asChild size="lg" className={cn(
-                    "w-full font-bold text-base md:text-lg bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
-                    gradient,
-                    'hover:scale-105'
-                )}>
-                     <Link href={whatsappUrl} target="_blank">
-                        {buttonText}
-                    </Link>
-                </Button>
-                <Button 
-                    size="icon" 
-                    className={cn(
-                        "h-11 w-11 flex-shrink-0 bg-gradient-to-r text-white transition-all duration-300 hover:shadow-xl",
-                        gradient,
-                        'hover:scale-105'
-                    )} 
-                    aria-label="Add to cart"
-                    onClick={handleAddToCart}
-                >
-                    <ShoppingCart className="h-5 w-5" />
-                </Button>
+            <div className="flex flex-col items-center gap-2">
+                <div className="flex items-center gap-2 w-full">
+                    <Button 
+                        asChild={isAvailable}
+                        size="lg" 
+                        className={cn(
+                            "w-full font-bold text-base md:text-lg bg-gradient-to-r text-white transition-all duration-300",
+                            gradient,
+                            isAvailable ? 'hover:scale-105 hover:shadow-xl' : 'cursor-not-allowed'
+                        )}
+                        disabled={!isAvailable}
+                        aria-disabled={!isAvailable}
+                        tabIndex={!isAvailable ? -1 : undefined}
+                    >
+                         {isAvailable ? (
+                            <Link href={whatsappUrl} target="_blank">
+                                {buttonText}
+                            </Link>
+                         ) : (
+                            <span>{buttonText}</span>
+                         )}
+                    </Button>
+                    <Button 
+                        size="icon" 
+                        className={cn(
+                            "h-11 w-11 flex-shrink-0 bg-gradient-to-r text-white transition-all duration-300",
+                            gradient,
+                            isAvailable ? 'hover:scale-105 hover:shadow-xl' : 'cursor-not-allowed'
+                        )} 
+                        aria-label="Add to cart"
+                        onClick={handleAddToCart}
+                        disabled={!isAvailable}
+                    >
+                        <ShoppingCart className="h-5 w-5" />
+                    </Button>
+                </div>
+                {!isAvailable && (
+                    <p className="text-red-500 font-bold text-sm mt-2">
+                        Currently Unavailable
+                    </p>
+                )}
             </div>
         </div>
     );
 };
+
+    

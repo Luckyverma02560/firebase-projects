@@ -21,9 +21,9 @@ const allPlans = [
             'Shared account access'
         ],
         prices: {
-            monthly: { price: 'INR 100', period: '/month' },
-            'half-yearly': { price: 'INR 849', period: '/6mo' },
-            yearly: { price: 'INR 1599', period: '/yr' }
+            monthly: { price: 'INR 100', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 849', period: '/6mo', isAvailable: true },
+            yearly: { price: 'INR 1599', period: '/yr', isAvailable: true }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-blue-500 to-indigo-600',
@@ -39,9 +39,9 @@ const allPlans = [
             'Limited sharing'
         ],
         prices: {
-            monthly: { price: 'INR 130', period: '/month' },
-            'half-yearly': { price: 'INR 1699', period: '/6mo' },
-            yearly: { price: 'INR 3299', period: '/yr' }
+            monthly: { price: 'INR 130', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 1699', period: '/6mo', isAvailable: true },
+            yearly: { price: 'INR 3299', period: '/yr', isAvailable: true }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-purple-500 to-violet-600',
@@ -58,9 +58,9 @@ const allPlans = [
             'Private Account Access'
         ],
         prices: {
-            monthly: { price: 'INR 150', period: '/month' },
-            'half-yearly': { price: 'INR 2899', period: '/6mo' },
-            yearly: { price: 'INR 5499', period: '/yr' }
+            monthly: { price: 'INR 150', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 2899', period: '/6mo', isAvailable: true },
+            yearly: { price: 'INR 5499', period: '/yr', isAvailable: true }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-red-500 to-orange-600',
@@ -76,9 +76,9 @@ const allPlans = [
             'Private Account Access'
         ],
         prices: {
-            monthly: { price: 'INR 170', period: '/month' },
-            'half-yearly': { price: 'INR 4599', period: '/6mo' },
-            yearly: { price: 'INR 8999', period: '/yr' }
+            monthly: { price: 'INR 170', period: '/month', isAvailable: true },
+            'half-yearly': { price: 'INR 4599', period: '/6mo', isAvailable: true },
+            yearly: { price: 'INR 8999', period: '/yr', isAvailable: true }
         },
         buttonText: 'BUY NOW',
         gradient: 'from-green-500 to-teal-600',
@@ -148,16 +148,16 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 </Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="half-yearly" id="3-months" className="peer sr-only" />
-                                <Label htmlFor="3-months" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
+                                <RadioGroupItem value="half-yearly" id="half-yearly" className="peer sr-only" />
+                                <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
                                 3 Months
                                 </Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="yearly" id="half-yearly" className="peer sr-only" />
-                                <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
+                                <RadioGroupItem value="yearly" id="yearly" className="peer sr-only" />
+                                <Label htmlFor="yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
                                 Half Yearly
@@ -167,13 +167,14 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
 
                         <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8", gridColsClass)}>
                             {plansToShow.map((plan, index) => {
-                                const {price, period} = plan.prices[billingCycle];
+                                const {price, period, isAvailable} = plan.prices[billingCycle];
                                 return (
                                 <PricingCard 
                                         key={index} 
                                         {...plan}
                                         price={price}
                                         pricePeriod={period}
+                                        isAvailable={isAvailable}
                                         serviceName={selectedService}
                                         billingCycle={billingCycle}
                                     />
@@ -198,5 +199,8 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
             </div>
         </section>
     );
+
+    
+
 
     

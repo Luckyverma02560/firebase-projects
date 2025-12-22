@@ -17,6 +17,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogFooter, AlertDialogTrigger, AlertDialogTitle } from "@/components/ui/alert-dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Switch } from '@/components/ui/switch';
 
 
 // Mock data
@@ -57,6 +58,7 @@ type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
 interface PlanDetails {
     price: string;
     features: string[];
+    isAvailable: boolean;
 }
 
 type ServicePlans = Record<BillingCycle, Record<PlanName, PlanDetails>>;
@@ -70,22 +72,22 @@ interface Service {
 
 const generateDefaultPlans = (): ServicePlans => ({
     monthly: {
-        'Basic': { price: '100', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Standard': { price: '130', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Premium': { price: '150', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Super Premium': { price: '170', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] }
+        'Basic': { price: '100', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Standard': { price: '130', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Premium': { price: '150', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Super Premium': { price: '170', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true }
     },
     'half-yearly': {
-        'Basic': { price: '550', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Standard': { price: '700', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Premium': { price: '850', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Super Premium': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] }
+        'Basic': { price: '550', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Standard': { price: '700', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Premium': { price: '850', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Super Premium': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true }
     },
     yearly: {
-        'Basic': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Standard': { price: '1300', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Premium': { price: '1500', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] },
-        'Super Premium': { price: '1800', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'] }
+        'Basic': { price: '1000', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Standard': { price: '1300', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Premium': { price: '1500', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true },
+        'Super Premium': { price: '1800', features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'], isAvailable: true }
     }
 });
 
@@ -147,7 +149,7 @@ export default function AdminPage() {
     setCurrentView('dashboard');
   };
     
-  const handlePlanChange = (billing: BillingCycle, plan: PlanName, field: 'price' | `feature${number}`, value: string, isEditing: boolean) => {
+  const handlePlanChange = (billing: BillingCycle, plan: PlanName, field: 'price' | `feature${number}` | 'isAvailable', value: string | boolean, isEditing: boolean) => {
     const target = isEditing ? editingService : newService;
     const setter = isEditing ? setEditingService : setNewService;
     if (!target) return;
@@ -156,6 +158,8 @@ export default function AdminPage() {
 
     if (field === 'price') {
         updatedPlans[billing][plan].price = value;
+    } else if (field === 'isAvailable') {
+        updatedPlans[billing][plan].isAvailable = value;
     } else {
         const featureIndex = parseInt(field.replace('feature', '')) - 1;
         updatedPlans[billing][plan].features[featureIndex] = value;
@@ -229,7 +233,17 @@ export default function AdminPage() {
 
                                 return (
                                     <div key={plan} className="p-3 border border-white/20 rounded-lg">
-                                        <h4 className="text-md md:text-lg font-bold text-purple-400 mb-2">{plan} Plan</h4>
+                                        <div className="flex justify-between items-center mb-2">
+                                            <h4 className="text-md md:text-lg font-bold text-purple-400">{plan} Plan</h4>
+                                            <div className="flex items-center space-x-2">
+                                                <Label htmlFor={`${billing}-${plan}-available`}>Plan Available</Label>
+                                                <Switch 
+                                                    id={`${billing}-${plan}-available`} 
+                                                    checked={serviceData.plans[billing][plan].isAvailable}
+                                                    onCheckedChange={(checked) => handlePlanChange(billing, plan, 'isAvailable', checked, isEditing)}
+                                                />
+                                            </div>
+                                        </div>
                                         <div className="grid md:grid-cols-3 gap-4">
                                             <div className="space-y-2 md:col-span-1">
                                                 <Label htmlFor={`${billing}-${plan}-price`}>Price (INR)</Label>
@@ -544,3 +558,5 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    
