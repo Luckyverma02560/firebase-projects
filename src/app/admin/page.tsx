@@ -188,8 +188,8 @@ export default function AdminPage() {
                 <Tabs defaultValue="monthly" className="w-full">
                     <TabsList className="grid w-full grid-cols-3">
                         <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                        <TabsTrigger value="half-yearly">3 Months</TabsTrigger>
-                        <TabsTrigger value="yearly">Half Yearly</TabsTrigger>
+                        <TabsTrigger value="half-yearly">Half Yearly</TabsTrigger>
+                        <TabsTrigger value="yearly">Yearly</TabsTrigger>
                     </TabsList>
                     {billingCycles.map(billing => (
                         <TabsContent key={billing} value={billing} className="space-y-4">

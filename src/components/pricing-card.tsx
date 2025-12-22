@@ -49,7 +49,18 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
     const amount = priceParts.length > 1 ? priceParts.slice(1).join(' ') : price;
 
     const whatsappNumber = "918600070638";
-    const billingCycleText = billingCycle === 'monthly' ? 'Monthly' : billingCycle === 'half-yearly' ? '3 Months' : 'Half Yearly';
+    
+    let billingCycleText = '';
+    if (serviceName === 'Netflix') {
+        if (billingCycle === 'monthly') billingCycleText = 'Monthly';
+        else if (billingCycle === 'half-yearly') billingCycleText = '3 Months';
+        else if (billingCycle === 'yearly') billingCycleText = 'Half Yearly';
+    } else {
+        if (billingCycle === 'monthly') billingCycleText = 'Monthly';
+        else if (billingCycle === 'half-yearly') billingCycleText = 'Half Yearly';
+        else if (billingCycle === 'yearly') billingCycleText = 'Yearly';
+    }
+
     const message = `Hey, I Need the ${serviceName} ${name} (${billingCycleText}) plan. Kindly Reach Me Soon.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     
