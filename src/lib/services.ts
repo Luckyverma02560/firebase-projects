@@ -61,13 +61,13 @@ export const generateDefaultPlans = (): ServicePlans => ({
         ], isAvailable: true }
     },
     'half-yearly': {
-        'Basic': { price: '550', features: [
+        'Basic': { price: '300', features: [
             '1 Device access',
             'Full customer support',
             '4K streaming quality',
             'Shared account access'
         ], isAvailable: true },
-        'Standard': { price: '700', features: [
+        'Standard': { price: '350', features: [
             '1 Device access',
             'Profile Login',
             '4k streaming quality',
@@ -78,8 +78,8 @@ export const generateDefaultPlans = (): ServicePlans => ({
             'Profile Login',
             '4K  Streaming Quality',
             'Private Account Access'
-        ], isAvailable: false },
-        'Super Premium': { price: '1000', features: [
+        ], isAvailable: true },
+        'Super Premium': { price: '450', features: [
             '2 Device Access',
             'Profile Login',
             '4K streaming quality',
@@ -87,25 +87,25 @@ export const generateDefaultPlans = (): ServicePlans => ({
         ], isAvailable: true }
     },
     yearly: {
-        'Basic': { price: '1000', features: [
+        'Basic': { price: '650', features: [
             '1 Device access',
             'Full customer support',
             '4K streaming quality',
             'Shared account access'
         ], isAvailable: true },
-        'Standard': { price: '1300', features: [
+        'Standard': { price: '700', features: [
             '1Device access',
             'Profile Login',
             '4k streaming quality',
             'Limited sharing'
         ], isAvailable: true },
-        'Premium': { price: '800', features: [
+        'Premium': { price: '750', features: [
             '1 Device Access',
             'Profile Login',
             '4K  Streaming Quality',
             'Private Account Access'
-        ], isAvailable: false },
-        'Super Premium': { price: '1800', features: [
+        ], isAvailable: true },
+        'Super Premium': { price: '800', features: [
             '2 Device Access',
             'Profile Login',
             '4K streaming quality',
@@ -130,28 +130,18 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Netflix') {
-        // Mark 3 month and half-yearly Basic and Super Premium as unavailable
         service.plans['half-yearly']['Basic']!.isAvailable = false;
-        service.plans['half-yearly']['Super Premium']!.isAvailable = false;
-        
         service.plans['yearly']['Basic']!.isAvailable = false;
-        service.plans['yearly']['Super Premium']!.isAvailable = false;
-
-        // Make Standard plan available for 3 and 6 months and popular
+        
         service.plans['half-yearly']['Standard']!.isAvailable = true;
         service.plans['yearly']['Standard']!.isAvailable = true;
-
-        // Make Premium plan unavailable for 3 and 6 months
+        
         service.plans['half-yearly']['Premium']!.isAvailable = false;
         service.plans['yearly']['Premium']!.isAvailable = false;
-    }
-    
-    // Set other prices for Netflix
-    if (p.description === 'Netflix') {
-        service.plans['half-yearly']['Premium']!.price = '400';
-        service.plans['yearly']['Premium']!.price = '800';
-    }
 
+        service.plans['half-yearly']['Super Premium']!.isAvailable = false;
+        service.plans['yearly']['Super Premium']!.isAvailable = false;
+    }
 
     return service;
 });
