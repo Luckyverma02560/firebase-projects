@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { useState, useMemo, FormEvent } from 'react';
@@ -20,6 +19,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Switch } from '@/components/ui/switch';
 import { initialServices, generateDefaultPlans, planNames, billingCycles, type Service, type PlanName, type BillingCycle, type ServicePlans } from '@/lib/services';
+import { useToast } from '@/hooks/use-toast';
 
 
 // Mock data
@@ -46,12 +46,14 @@ const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042'];
 type AdminView = 'dashboard' | 'services' | 'security' | 'analytics';
 
 export default function AdminPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [adminCredentials, setAdminCredentials] = useState({ username: 'lucky', password: 'Lucky02560' });
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentView, setCurrentView] = useState<AdminView>('dashboard');
   const isMobile = useIsMobile();
+  const { toast } = useToast();
 
   const [analyticsTimespan, setAnalyticsTimespan] = useState<'daily' | 'monthly' | 'yearly'>('monthly');
 
@@ -65,9 +67,11 @@ export default function AdminPage() {
 
   const [editingService, setEditingService] = useState<Service | null>(null);
 
+  const [passwordChange, setPasswordChange] = useState({ current: '', new: '' });
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'lucky' && password === 'Lucky02560') {
+    if (loginUsername === adminCredentials.username && loginPassword === adminCredentials.password) {
       setIsLoggedIn(true);
       setError('');
     } else {
@@ -77,9 +81,35 @@ export default function AdminPage() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUsername('');
-    setPassword('');
+    setLoginUsername('');
+    setLoginPassword('');
     setCurrentView('dashboard');
+  };
+
+  const handlePasswordChange = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordChange.current !== adminCredentials.password) {
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Current password is not correct.",
+        });
+        return;
+    }
+    if (passwordChange.new.length < 6) {
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "New password must be at least 6 characters long.",
+        });
+        return;
+    }
+    setAdminCredentials(prev => ({...prev, password: passwordChange.new}));
+    setPasswordChange({current: '', new: ''});
+    toast({
+        title: "Success",
+        description: "Your password has been changed successfully.",
+    });
   };
     
   const handlePlanChange = (billing: BillingCycle, plan: PlanName, field: string, value: string | boolean, isEditing: boolean) => {
@@ -107,7 +137,7 @@ export default function AdminPage() {
   const handleAddService = (e: FormEvent<HTMLFormEvent>) => {
     e.preventDefault();
     if (!newService.name || !newService.icon) {
-        alert('Please fill out the service name and icon URL.');
+        toast({ variant: 'destructive', title: 'Please fill out the service name and icon URL.'});
         return;
     }
     const serviceToAdd: Service = {
@@ -115,8 +145,8 @@ export default function AdminPage() {
         ...newService
     };
     setServices(prev => [...prev, serviceToAdd]);
-    // Reset form
     setNewService({ name: '', icon: '', plans: generateDefaultPlans() });
+    toast({ title: 'Service Added', description: `${serviceToAdd.name} has been successfully added.`});
   };
 
   const handleUpdateService = (e: FormEvent<HTMLFormEvent>) => {
@@ -125,10 +155,13 @@ export default function AdminPage() {
 
     setServices(services.map(s => s.id === editingService.id ? editingService : s));
     setEditingService(null);
+    toast({ title: 'Service Updated', description: `${editingService.name} has been successfully updated.`});
   };
   
     const handleRemoveService = (id: number) => {
+        const serviceName = services.find(s => s.id === id)?.name;
         setServices(services.filter(s => s.id !== id));
+        toast({ title: 'Service Removed', description: `${serviceName} has been removed.`});
     };
 
   const analyticsData = useMemo(() => {
@@ -327,16 +360,32 @@ export default function AdminPage() {
                         <CardTitle className="flex items-center gap-2 text-2xl"><ShieldCheck /> Security</CardTitle>
                         <CardDescription>Change admin password.</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="currentPassword">Current Password</Label>
-                            <Input id="currentPassword" type="password" className="bg-gray-800/50 border-white/20"/>
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="newPassword">New Password</Label>
-                            <Input id="newPassword" type="password" className="bg-gray-800/50 border-white/20"/>
-                        </div>
-                        <Button className="bg-gradient-to-r from-red-500 to-orange-600 w-full">Change Password</Button>
+                    <CardContent>
+                         <form onSubmit={handlePasswordChange} className="space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="currentPassword">Current Password</Label>
+                                <Input 
+                                    id="currentPassword" 
+                                    type="password" 
+                                    className="bg-gray-800/50 border-white/20"
+                                    value={passwordChange.current}
+                                    onChange={(e) => setPasswordChange(p => ({...p, current: e.target.value}))}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="newPassword">New Password</Label>
+                                <Input 
+                                    id="newPassword" 
+                                    type="password" 
+                                    className="bg-gray-800/50 border-white/20"
+                                    value={passwordChange.new}
+                                    onChange={(e) => setPasswordChange(p => ({...p, new: e.target.value}))}
+                                    required
+                                />
+                            </div>
+                            <Button type="submit" className="bg-gradient-to-r from-red-500 to-orange-600 w-full">Change Password</Button>
+                        </form>
                     </CardContent>
                 </Card>
             );
@@ -442,8 +491,8 @@ export default function AdminPage() {
                   id="username"
                   type="text"
                   placeholder="lucky"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={loginUsername}
+                  onChange={(e) => setLoginUsername(e.target.value)}
                   className="bg-gray-800/50 border-white/20 focus:ring-purple-500"
                   required
                 />
@@ -454,8 +503,8 @@ export default function AdminPage() {
                   id="password"
                   type="password"
                   placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
                   className="bg-gray-800/50 border-white/20 focus:ring-purple-500"
                   required
                 />
