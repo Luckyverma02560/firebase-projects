@@ -148,19 +148,19 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 </Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="half-yearly" id="half-yearly" className="peer sr-only" />
-                                <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
+                                <RadioGroupItem value="3-months" id="3-months" className="peer sr-only" />
+                                <Label htmlFor="3-months" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
-                                Half Year
+                                3 Months
                                 </Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="yearly" id="yearly" className="peer sr-only" />
-                                <Label htmlFor="yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
+                                <RadioGroupItem value="half-yearly" id="half-yearly" className="peer sr-only" />
+                                <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
-                                Yearly
+                                Half Yearly
                                 </Label>
                             </div>
                         </RadioGroup>
@@ -198,4 +198,5 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
             </div>
         </section>
     );
-};
+
+    
