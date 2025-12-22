@@ -33,13 +33,6 @@ export interface Service {
 export const planNames: PlanName[] = ['Basic', 'Standard', 'Premium', 'Super Premium'];
 export const billingCycles: BillingCycle[] = ['monthly', 'half-yearly', 'yearly'];
 
-const defaultFeatures = [
-    '1 Device access',
-    'Full customer support',
-    '4K streaming quality',
-    'Shared account access'
-];
-
 export const generateDefaultPlans = (): ServicePlans => ({
     monthly: {
         'Basic': { price: '100', features: [
@@ -137,14 +130,28 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Netflix') {
+        // Mark 3 month and half-yearly Basic and Super Premium as unavailable
         service.plans['half-yearly']['Basic']!.isAvailable = false;
-        service.plans['half-yearly']['Standard']!.isAvailable = false;
         service.plans['half-yearly']['Super Premium']!.isAvailable = false;
         
         service.plans['yearly']['Basic']!.isAvailable = false;
-        service.plans['yearly']['Standard']!.isAvailable = false;
         service.plans['yearly']['Super Premium']!.isAvailable = false;
+
+        // Make Standard plan available for 3 and 6 months and popular
+        service.plans['half-yearly']['Standard']!.isAvailable = true;
+        service.plans['yearly']['Standard']!.isAvailable = true;
+
+        // Make Premium plan unavailable for 3 and 6 months
+        service.plans['half-yearly']['Premium']!.isAvailable = false;
+        service.plans['yearly']['Premium']!.isAvailable = false;
     }
+    
+    // Set other prices for Netflix
+    if (p.description === 'Netflix') {
+        service.plans['half-yearly']['Premium']!.price = '400';
+        service.plans['yearly']['Premium']!.price = '800';
+    }
+
 
     return service;
 });

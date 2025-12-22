@@ -48,7 +48,9 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
             case 'Standard':
                 gradient = 'from-purple-500 to-violet-600';
                 shadow = 'shadow-purple-500/30';
-                isPopular = true;
+                isPopular = serviceData.name === 'Netflix' ? 
+                    (billingCycle === 'monthly' || billingCycle === 'half-yearly' || billingCycle === 'yearly') : 
+                    billingCycle === 'monthly';
                 description = 'Perfect for families and small groups';
                 break;
             case 'Premium':
