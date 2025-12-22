@@ -107,6 +107,16 @@ const initialServices: Service[] = PlaceHolderImages.filter(p => serviceLogoIds.
         service.plans.monthly['Super Premium'].price = '170';
     }
 
+    if (p.description === 'Netflix') {
+        service.plans['half-yearly']['Basic'].isAvailable = false;
+        service.plans['half-yearly']['Standard'].isAvailable = false;
+        service.plans['half-yearly']['Super Premium'].isAvailable = false;
+
+        service.plans['yearly']['Basic'].isAvailable = false;
+        service.plans['yearly']['Standard'].isAvailable = false;
+        service.plans['yearly']['Super Premium'].isAvailable = false;
+    }
+
     return service;
 });
 
@@ -157,12 +167,12 @@ export default function AdminPage() {
     const updatedPlans = JSON.parse(JSON.stringify(target.plans)); // Deep copy
 
     if (field === 'price') {
-        updatedPlans[billing][plan].price = value;
+        updatedPlans[billing][plan].price = value as string;
     } else if (field === 'isAvailable') {
-        updatedPlans[billing][plan].isAvailable = value;
+        updatedPlans[billing][plan].isAvailable = value as boolean;
     } else {
         const featureIndex = parseInt(field.replace('feature', '')) - 1;
-        updatedPlans[billing][plan].features[featureIndex] = value;
+        updatedPlans[billing][plan].features[featureIndex] = value as string;
     }
     
     setter({ ...target, plans: updatedPlans } as Service | Omit<Service, 'id'>);
