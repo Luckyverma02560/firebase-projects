@@ -185,7 +185,15 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 </div>
                             </div>
                         ) : (
-                            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length === 3 ? "lg:grid-cols-3" : (plansToShow.length >= 4 ? 'lg:grid-cols-4' : (plansToShow.length > 0 ? `lg:grid-cols-${plansToShow.length}`: '')))}>
+                            <div className={cn(
+                                "grid grid-cols-1 gap-8",
+                                plansToShow.length > 1 && "md:grid-cols-2",
+                                plansToShow.length === 1 && "max-w-sm mx-auto",
+                                {
+                                    "lg:grid-cols-3": plansToShow.length === 3,
+                                    "lg:grid-cols-4": plansToShow.length >= 4
+                                }
+                            )}>
                                 {plansToShow.map((plan) => {
                                     if (!plan) return null;
                                     let period = '/month';
