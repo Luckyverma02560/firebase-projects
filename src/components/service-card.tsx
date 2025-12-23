@@ -64,7 +64,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                 {isHotstar && (
                      <div className="flex flex-col justify-center ml-2 md:ml-4">
                         <span className="font-sharp-sans text-xl md:text-2xl tracking-wider flex items-center">
-                            <span className="text-white">Disney+</span>
+                            <span className="text-white">Jio Hotstar</span>
                         </span>
                     </div>
                 )}
