@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, FormEvent } from 'react';
@@ -236,7 +235,7 @@ export default function AdminPage() {
                     <TabsList className="grid w-full grid-cols-3">
                         <TabsTrigger value="monthly">Monthly</TabsTrigger>
                         <TabsTrigger value="half-yearly">
-                            {serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5' ? '3/6 Months' : 
+                            {serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5' || serviceData.name === 'Sony Liv' ? '3/6 Months' : 
                              serviceData.name === 'Netflix' ? '3 Months' : 'Half Yearly'}
                         </TabsTrigger>
                         <TabsTrigger value="yearly">
@@ -245,7 +244,7 @@ export default function AdminPage() {
                     </TabsList>
                     {billingCycles.map(billing => (
                         <TabsContent key={billing} value={billing} className="space-y-4">
-                            {(serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5') && billing === 'half-yearly' ? (
+                            {(serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5' || serviceData.name === 'Sony Liv') && billing === 'half-yearly' ? (
                                 <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
                                     {/* 3 Months Branch */}
                                     <div className="flex flex-col items-center gap-4 w-full">
@@ -572,3 +571,5 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    

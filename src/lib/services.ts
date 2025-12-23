@@ -1,4 +1,3 @@
-
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const serviceLogoIds = [
@@ -258,13 +257,10 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         };
 
         // Yearly
-        service.plans.yearly['Basic']!.price = '450';
         service.plans.yearly['Basic']!.isAvailable = false;
         service.plans.yearly['Standard']!.price = '500';
         service.plans.yearly['Standard']!.isPopular = true;
-        service.plans.yearly['Premium']!.price = '550';
         service.plans.yearly['Premium']!.isAvailable = false;
-        service.plans.yearly['Super Premium']!.price = '600';
         service.plans.yearly['Super Premium']!.isAvailable = false;
     }
 
@@ -342,5 +338,22 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Super Premium']!.isAvailable = false;
     }
 
+    if (p.description === 'Sony Liv') {
+        service.plans.monthly['Basic']!.isAvailable = false;
+        service.plans.monthly['Standard']!.isAvailable = false;
+        service.plans.monthly['Premium']!.isAvailable = false;
+        service.plans.monthly['Super Premium']!.isAvailable = false;
+        service.plans['half-yearly']!['Basic']!.isAvailable = false;
+        service.plans['half-yearly']!['Standard']!.isAvailable = false;
+        service.plans['half-yearly']!['Premium']!.isAvailable = false;
+        service.plans['half-yearly']!['Super Premium']!.isAvailable = false;
+        service.plans.yearly['Basic']!.isAvailable = false;
+        service.plans.yearly['Standard']!.isAvailable = false;
+        service.plans.yearly['Premium']!.isAvailable = false;
+        service.plans.yearly['Super Premium']!.isAvailable = false;
+    }
+
     return service;
 });
+
+    

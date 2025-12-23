@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -19,7 +18,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
     const isZee = name === 'ZEE5';
     const isYoutube = name === 'Youtube Premium';
     const isNetflix = name === 'Netflix';
-    const isSony = name === 'SONY';
+    const isSony = name === 'Sony Liv';
     const isPlayBox = name === 'PlayBox TV';
     const isCanva = name === 'Canva';
     
@@ -87,7 +86,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                  {isSony && (
                     <div className="flex flex-col justify-center ml-2 md:ml-4">
                        <span className="font-clarendon text-xl md:text-2xl tracking-wider flex items-center">
-                           <span className="text-white">SONY</span>
+                           <span className="text-white">Sony Liv</span>
                        </span>
                    </div>
                 )}
