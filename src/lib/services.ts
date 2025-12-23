@@ -289,7 +289,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                     '1 Device Access',
                     'Profile Login',
                     '4K  Streaming Quality',
-                    'Private Account Access'
+                    'Limited Sharing'
                 ], 
                 isAvailable: true,
                 isPopular: true
@@ -309,18 +309,18 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         
         service.plans['6-months'] = {
             'Premium': { 
-                price: '350', 
+                price: '300', 
                 features: [
                     '1 Device Access',
                     'Profile Login',
                     '4K  Streaming Quality',
-                    'Private Account Access'
+                    'Limited Sharing'
                 ], 
                 isAvailable: true,
                 isPopular: true
             },
              'Super Premium': {
-                price: '400',
+                price: '350',
                 features: [
                     '2 Device Access',
                     'Profile Login',
