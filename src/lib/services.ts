@@ -128,6 +128,8 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Standard']!.price = '120';
         service.plans.monthly['Premium']!.price = '150';
         service.plans.monthly['Super Premium']!.price = '170';
+        service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
+
 
         service.plans['half-yearly']['Basic']!.price = '150';
         service.plans['half-yearly']['Basic']!.isAvailable = false;
@@ -174,6 +176,20 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Premium']!.features[3] = 'Limited Sharing';
         service.plans.monthly['Super Premium']!.price = '120';
         service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
+        
+        service.plans['half-yearly']['Premium']!.price = '300'; // 3 months
+        service.plans['half-yearly']['Super Premium']!.price = '350'; // 3 months
+        service.plans['half-yearly']['Premium']!.features[3] = 'Limited Sharing';
+        service.plans['half-yearly']['Super Premium']!.features[0] = '1 Device Access';
+
+        const sixMonthPremium = JSON.parse(JSON.stringify(service.plans['half-yearly']['Premium']));
+        sixMonthPremium.price = '400';
+        sixMonthPremium.features[3] = 'Limited Sharing';
+
+        const sixMonthSuperPremium = JSON.parse(JSON.stringify(service.plans['half-yearly']['Super Premium']));
+        sixMonthSuperPremium.price = '450';
+        sixMonthSuperPremium.features[0] = '1 Device Access';
+
     }
 
     return service;
