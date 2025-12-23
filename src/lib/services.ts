@@ -174,21 +174,21 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     if (p.description === 'Jio Hotstar') {
         // Monthly
         service.plans.monthly['Basic']!.price = '80';
+        service.plans.monthly['Basic']!.isAvailable = true;
         service.plans.monthly['Basic']!.features = [
             '1 Device Access',
             'No. Activation',
             '4K  Streaming Quality',
             'Limited Sharing'
         ];
-        service.plans.monthly['Basic']!.isAvailable = true;
 
-        service.plans.monthly['Standard']!.price = '80';
+        service.plans.monthly['Standard']!.price = '120';
         service.plans.monthly['Standard']!.isPopular = true;
         service.plans.monthly['Standard']!.features = [
             '1 Device Access',
-            'No. Activation',
-            '4K  Streaming Quality',
-            'Limited Sharing'
+            'Profile Login',
+            '4K streaming quality',
+            'Private Account Access'
         ];
 
         service.plans.monthly['Premium']!.price = '120';
@@ -199,8 +199,9 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             '4K streaming quality',
             'Private Account Access'
         ];
-        service.plans.monthly['Super Premium']!.price = '120';
-        service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
+
+        service.plans.monthly['Super Premium']!.price = '150';
+        service.plans.monthly['Super Premium']!.features[0] = '5 Device Access';
         service.plans.monthly['Super Premium']!.isPopular = false;
         
         // 3 & 6 Months
@@ -221,7 +222,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             'Super Premium': { 
                 price: '350', 
                 features: [
-                    '1 Device Access',
+                    '2 Device Access',
                     'Profile Login',
                     '4K streaming quality',
                     'Private Account Access'
@@ -269,3 +270,4 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
 
     return service;
 });
+
