@@ -194,7 +194,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Premium']!.price = '120';
         service.plans.monthly['Premium']!.isPopular = false;
         service.plans.monthly['Premium']!.features = [
-            '2 Device Access',
+            '5 Device Access',
             'Profile Login',
             '4K streaming quality',
             'Private Account Access'
@@ -309,7 +309,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         
         service.plans['6-months'] = {
             'Premium': { 
-                price: '300', 
+                price: '250', 
                 features: [
                     '1 Device Access',
                     'Profile Login',
@@ -320,7 +320,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 isPopular: true
             },
              'Super Premium': {
-                price: '350',
+                price: '300',
                 features: [
                     '2 Device Access',
                     'Profile Login',
@@ -332,7 +332,14 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             }
         };
 
-        service.plans.yearly['Premium']!.isPopular = true;
+        service.plans.yearly['Basic']!.price = '300';
+        service.plans.yearly['Basic']!.isAvailable = false;
+        service.plans.yearly['Standard']!.price = '350';
+        service.plans.yearly['Standard']!.isPopular = true;
+        service.plans.yearly['Premium']!.price = '400';
+        service.plans.yearly['Premium']!.isAvailable = false;
+        service.plans.yearly['Super Premium']!.price = '450';
+        service.plans.yearly['Super Premium']!.isAvailable = false;
     }
 
     return service;
