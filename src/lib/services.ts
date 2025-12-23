@@ -235,6 +235,10 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 isPopular: false
             }
         };
+        service.plans.yearly['Basic']!.price = '450';
+        service.plans.yearly['Standard']!.price = '500';
+        service.plans.yearly['Premium']!.price = '550';
+        service.plans.yearly['Super Premium']!.price = '600';
         service.plans.yearly.Premium!.isPopular = false;
 
     }
