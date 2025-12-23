@@ -173,7 +173,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     
     if (p.description === 'Jio Hotstar') {
         service.plans.monthly['Basic']!.price = '60';
-        service.plans.monthly['Basic']!.isAvailable = false;
+        service.plans.monthly['Basic']!.isAvailable = true;
         service.plans.monthly['Standard']!.price = '70';
         service.plans.monthly['Premium']!.price = '80';
         service.plans.monthly['Premium']!.isPopular = true;
@@ -183,7 +183,6 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
         service.plans.monthly['Super Premium']!.isPopular = false;
         
-        // Clear half-yearly and define 3-months/6-months
         service.plans['half-yearly'] = {};
         
         service.plans['3-months'] = {
@@ -235,6 +234,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 isPopular: false
             }
         };
+
         service.plans.yearly['Basic']!.price = '450';
         service.plans.yearly['Basic']!.isAvailable = false;
         service.plans.yearly['Standard']!.price = '500';
