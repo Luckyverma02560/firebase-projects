@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -38,7 +39,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     data-ai-hint={logoHint}
                     width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
                     height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
-                    className={cn("object-contain w-14 h-14", isYoutube ? 'rounded-full' : '', isSony ? 'rounded-full' : '', isCanva ? 'rounded-full' : '')}
+                    className={cn("object-contain w-14 h-14", isYoutube ? 'rounded-full' : '', isCanva ? 'rounded-full' : '')}
                 />
                 {isNetflix && (
                     <svg viewBox="0 0 120 40" className="w-28 md:w-32 h-auto overflow-visible -ml-2">
