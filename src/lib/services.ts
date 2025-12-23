@@ -173,7 +173,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Standard']!.price = '70';
         service.plans.monthly['Standard']!.isPopular = false;
         service.plans.monthly['Premium']!.price = '80';
-        service.plans.monthly['Premium']!.isPopular = false;
+        service.plans.monthly['Premium']!.isPopular = true;
         service.plans.monthly['Premium']!.features[1] = 'No. Activation';
         service.plans.monthly['Premium']!.features[3] = 'Limited Sharing';
         service.plans.monthly['Super Premium']!.price = '120';
@@ -200,14 +200,12 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         // For the sake of the current structure, these will effectively overwrite the 3 month values when "6 months" is selected by logic, but the data setup is here.
         const sixMonthPremium = service.plans['half-yearly']['Premium'];
         if(sixMonthPremium) {
-            // Price for 6 months if it were different
-             // sixMonthPremium.price = '400';
+             sixMonthPremium.price = '400';
         }
         
         const sixMonthSuperPremium = service.plans['half-yearly']['Super Premium'];
         if(sixMonthSuperPremium) {
-             // Price for 6 months if it were different
-            // sixMonthSuperPremium.price = '450';
+             sixMonthSuperPremium.price = '450';
         }
 
     }
