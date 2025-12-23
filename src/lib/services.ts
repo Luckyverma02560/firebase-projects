@@ -337,6 +337,8 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             }
         };
 
+        service.plans.yearly['Basic']!.isAvailable = false;
+
         service.plans.yearly['Standard']!.price = '320';
         service.plans.yearly['Standard']!.isAvailable = false;
         service.plans.yearly['Standard']!.features[2] = 'FHD Streaming Quality';
@@ -352,18 +354,30 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Sony Liv') {
+        service.plans.monthly['Basic']!.price = '60';
+        service.plans.monthly['Standard']!.price = '80';
+        service.plans.monthly['Premium']!.price = '100';
+        service.plans.monthly['Super Premium']!.price = '120';
+        
         service.plans.monthly['Basic']!.isAvailable = false;
-        service.plans.monthly['Standard']!.isAvailable = false;
+        service.plans.monthly['Standard']!.isAvailable = true;
         service.plans.monthly['Premium']!.isAvailable = false;
         service.plans.monthly['Super Premium']!.isAvailable = false;
+
+        service.plans.yearly['Basic']!.price = '200';
+        service.plans.yearly['Standard']!.price = '250';
+        service.plans.yearly['Premium']!.price = '300';
+        service.plans.yearly['Super Premium']!.price = '400';
+
+        service.plans.yearly['Basic']!.isAvailable = false;
+        service.plans.yearly['Standard']!.isAvailable = false;
+        service.plans.yearly['Premium']!.isAvailable = true;
+        service.plans.yearly['Super Premium']!.isAvailable = true;
+
         service.plans['half-yearly']!['Basic']!.isAvailable = false;
         service.plans['half-yearly']!['Standard']!.isAvailable = false;
         service.plans['half-yearly']!['Premium']!.isAvailable = false;
         service.plans['half-yearly']!['Super Premium']!.isAvailable = false;
-        service.plans.yearly['Basic']!.isAvailable = false;
-        service.plans.yearly['Standard']!.isAvailable = false;
-        service.plans.yearly['Premium']!.isAvailable = false;
-        service.plans.yearly['Super Premium']!.isAvailable = false;
     }
 
     if (p.description === 'Canva') {
@@ -382,10 +396,6 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Youtube Premium') {
-        delete service.plans.monthly['Super Premium'];
-        service.plans['half-yearly'] = {};
-        service.plans.yearly = {};
-        
         service.plans.monthly['Basic']!.price = '60';
         service.plans.monthly['Basic']!.features = [
             '1 Device access',
@@ -407,6 +417,10 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             'Ad-Free Experience',
             '100% Guarenteed Service'
         ];
+
+        delete service.plans.monthly['Super Premium'];
+        service.plans['half-yearly'] = {};
+        service.plans.yearly = {};
     }
     
     return service;
