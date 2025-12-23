@@ -120,6 +120,11 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                         All Prime Video Plans Are Ad-Free Plans
                     </p>
                 )}
+                 {showPlans && isJioHotstar && (
+                    <p className="text-sm text-gray-400 -mt-4 mb-8">
+                        All Jio Hotstar Plans Are 4K
+                    </p>
+                )}
 
                 {showPlans ? (
                     <>
