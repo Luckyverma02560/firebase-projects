@@ -336,17 +336,19 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Basic']!.price = '300';
         service.plans.yearly['Basic']!.features[2] = 'FHD Streaming Quality';
         service.plans.yearly['Basic']!.isAvailable = false;
+        
         service.plans.yearly['Standard']!.price = '320';
-        service.plans.yearly['Standard']!.features[2] = 'FHD Streaming Quality';
-        service.plans.yearly['Standard']!.isPopular = false;
         service.plans.yearly['Standard']!.isAvailable = false;
+        service.plans.yearly['Standard']!.features[2] = 'FHD Streaming Quality';
+        
         service.plans.yearly['Premium']!.price = '350';
+        service.plans.yearly['Premium']!.isAvailable = true;
         service.plans.yearly['Premium']!.isPopular = true;
         service.plans.yearly['Premium']!.features[2] = 'FHD Streaming Quality';
-        service.plans.yearly['Premium']!.isAvailable = true;
+
         service.plans.yearly['Super Premium']!.price = '400';
-        service.plans.yearly['Super Premium']!.features[2] = 'FHD Streaming Quality';
         service.plans.yearly['Super Premium']!.isAvailable = true;
+        service.plans.yearly['Super Premium']!.features[2] = 'FHD Streaming Quality';
     }
 
     if (p.description === 'Sony Liv') {
@@ -377,6 +379,12 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Standard']!.isAvailable = false;
         service.plans.yearly['Premium']!.isAvailable = false;
         service.plans.yearly['Super Premium']!.isAvailable = false;
+    }
+
+    if (p.description === 'Youtube Premium') {
+        service.plans.monthly['Super Premium']!.isAvailable = false;
+        service.plans['half-yearly'] = {};
+        service.plans.yearly = {};
     }
     
     return service;
