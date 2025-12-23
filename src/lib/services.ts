@@ -178,8 +178,8 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Basic']!.features = [
             '1 Device Access',
             'Profile Login',
-            '4K streaming quality',
-            'Private Account Access'
+            '4K  Streaming Quality',
+            'Limited Sharing'
         ];
 
         service.plans.monthly['Standard']!.price = '80';
@@ -188,15 +188,15 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             '2 Device Access',
             'No. Activation',
             '4K streaming quality',
-            'Private Account Access'
+            'Limited Sharing'
         ];
 
         service.plans.monthly['Premium']!.price = '120';
         service.plans.monthly['Premium']!.isPopular = false;
         service.plans.monthly['Premium']!.features = [
-            '1 Device Access',
+            '2 Device Access',
             'Profile Login',
-            '4K  Streaming Quality',
+            '4K streaming quality',
             'Private Account Access'
         ];
 
