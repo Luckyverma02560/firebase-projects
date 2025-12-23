@@ -173,16 +173,17 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     
     if (p.description === 'Jio Hotstar') {
         // Monthly
-        service.plans.monthly['Basic']!.price = '70';
+        service.plans.monthly['Basic']!.price = '80';
         service.plans.monthly['Basic']!.features = [
-            '1 Device access',
-            'Profile Login',
-            '4k streaming quality',
-            'Limited sharing'
+            '1 Device Access',
+            'No. Activation',
+            '4K  Streaming Quality',
+            'Limited Sharing'
         ];
         service.plans.monthly['Basic']!.isAvailable = true;
 
         service.plans.monthly['Standard']!.price = '80';
+        service.plans.monthly['Standard']!.isPopular = true;
         service.plans.monthly['Standard']!.features = [
             '1 Device Access',
             'No. Activation',
@@ -190,10 +191,14 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             'Limited Sharing'
         ];
 
-        service.plans.monthly['Premium']!.price = '80';
-        service.plans.monthly['Premium']!.isPopular = true;
-        service.plans.monthly['Premium']!.features[1] = 'No. Activation';
-        service.plans.monthly['Premium']!.features[3] = 'Limited Sharing';
+        service.plans.monthly['Premium']!.price = '120';
+        service.plans.monthly['Premium']!.isPopular = false;
+        service.plans.monthly['Premium']!.features = [
+            '1 Device Access',
+            'Profile Login',
+            '4K streaming quality',
+            'Private Account Access'
+        ];
         service.plans.monthly['Super Premium']!.price = '120';
         service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
         service.plans.monthly['Super Premium']!.isPopular = false;
@@ -264,5 +269,3 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
 
     return service;
 });
-
-    
