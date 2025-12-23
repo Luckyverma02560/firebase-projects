@@ -33,7 +33,7 @@
     {
       "id": "team2",
       "description": "Team member Amit A.",
-      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
@@ -112,12 +112,6 @@
       "id": "sony-logo",
       "description": "Sony Liv",
       "imageUrl": "https://i.postimg.cc/YqDjczNh/unnamed.png",
-      "imageHint": "company logo"
-    },
-    {
-      "id": "aha-logo",
-      "description": "PlayBox TV",
-      "imageUrl": "https://downloadr2.apkmirror.com/wp-content/uploads/2024/04/65/6628d7b5bda61_playboxtv.tv.android.in.png",
       "imageHint": "company logo"
     },
     {

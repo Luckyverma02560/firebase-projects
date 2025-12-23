@@ -20,7 +20,6 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
     const isYoutube = name === 'Youtube Premium';
     const isNetflix = name === 'Netflix';
     const isSony = name === 'Sony Liv';
-    const isPlayBox = name === 'PlayBox TV';
     const isCanva = name === 'Canva';
     
     const whatsappNumber = "918600070638";
@@ -37,8 +36,8 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     src={logoUrl}
                     alt={`${name} logo`}
                     data-ai-hint={logoHint}
-                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
-                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
+                    width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isCanva ? 56 : 80}
+                    height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isCanva ? 56 : 80}
                     className={cn(
                         "object-contain w-14 h-14",
                         isCanva ? 'rounded-full' : ''
@@ -91,15 +90,6 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     <div className="flex flex-col justify-center ml-2 md:ml-4">
                        <span className="font-sharp-sans text-xl md:text-2xl tracking-wider flex items-center">
                            <span className="text-white">Sony Liv</span>
-                       </span>
-                   </div>
-                )}
-                 {isPlayBox && (
-                    <div className="flex flex-col justify-center ml-2 md:ml-4">
-                       <span className="font-sharp-sans text-xl md:text-2xl tracking-wider flex items-center">
-                           <span className="font-bold">Play</span>
-                           <span>Box</span>
-                           <span className="font-bold ml-1">TV</span>
                        </span>
                    </div>
                 )}

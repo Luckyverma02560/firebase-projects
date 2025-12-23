@@ -8,7 +8,6 @@ const serviceLogoIds = [
     'zee5-logo',
     'youtube-premium-logo',
     'sony-logo',
-    'aha-logo',
     'canva-logo'
 ];
 
@@ -429,5 +428,3 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     
     return service;
 });
-
-    
