@@ -285,19 +285,51 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans['3-months'] = {
             'Premium': { 
                 price: '200', 
-                features: ['Feature 1', 'Feature 2'], 
+                features: [
+                    '1 Device Access',
+                    'Profile Login',
+                    '4K  Streaming Quality',
+                    'Private Account Access'
+                ], 
                 isAvailable: true,
                 isPopular: true
             },
+            'Super Premium': {
+                price: '250',
+                features: [
+                    '2 Device Access',
+                    'Profile Login',
+                    '4K streaming quality',
+                    'Private Account Access'
+                ],
+                isAvailable: true,
+                isPopular: false
+            }
         };
         
         service.plans['6-months'] = {
             'Premium': { 
                 price: '350', 
-                features: ['Feature 1', 'Feature 2'], 
+                features: [
+                    '1 Device Access',
+                    'Profile Login',
+                    '4K  Streaming Quality',
+                    'Private Account Access'
+                ], 
                 isAvailable: true,
                 isPopular: true
             },
+             'Super Premium': {
+                price: '400',
+                features: [
+                    '2 Device Access',
+                    'Profile Login',
+                    '4K streaming quality',
+                    'Private Account Access'
+                ],
+                isAvailable: true,
+                isPopular: false
+            }
         };
 
         service.plans.yearly['Premium']!.isPopular = true;
