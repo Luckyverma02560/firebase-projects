@@ -135,6 +135,15 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans['half-yearly']['Super Premium']!.price = '400';
         service.plans['half-yearly']['Super Premium']!.isAvailable = true;
         service.plans['half-yearly']['Super Premium']!.features[0] = '5 Device Access';
+
+        service.plans.yearly['Basic']!.price = '350';
+        service.plans.yearly['Basic']!.isAvailable = false;
+        service.plans.yearly['Standard']!.price = '400';
+        service.plans.yearly['Standard']!.isAvailable = false;
+        service.plans.yearly['Premium']!.price = '450';
+        service.plans.yearly['Premium']!.isAvailable = false;
+        service.plans.yearly['Super Premium']!.price = '500';
+        service.plans.yearly['Super Premium']!.features[0] = '500';
     }
 
     if (p.description === 'Netflix') {
