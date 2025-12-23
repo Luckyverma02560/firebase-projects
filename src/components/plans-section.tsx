@@ -69,6 +69,12 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                 isPopular = true;
             }
         }
+        
+        if (serviceData.name === 'Prime Video') {
+            if (planName === 'Premium' && billingCycle === 'half-yearly') {
+                isPopular = true;
+            }
+        }
 
         return {
             name: planName,
