@@ -19,6 +19,7 @@ export interface PlanDetails {
     price: string;
     features: string[];
     isAvailable: boolean;
+    isPopular?: boolean;
 }
 
 export type ServicePlans = Record<BillingCycle, Partial<Record<PlanName, PlanDetails>>>;
@@ -161,6 +162,18 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
 
         service.plans['half-yearly']['Super Premium']!.isAvailable = false;
         service.plans['yearly']['Super Premium']!.isAvailable = false;
+    }
+    
+    if (p.description === 'Jio Hotstar') {
+        service.plans.monthly['Basic']!.price = '60';
+        service.plans.monthly['Basic']!.isAvailable = false;
+        service.plans.monthly['Standard']!.price = '70';
+        service.plans.monthly['Premium']!.price = '80';
+        service.plans.monthly['Premium']!.isPopular = true;
+        service.plans.monthly['Premium']!.features[1] = 'No. Activation';
+        service.plans.monthly['Premium']!.features[3] = 'Limited Sharing';
+        service.plans.monthly['Super Premium']!.price = '120';
+        service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
     }
 
     return service;
