@@ -42,8 +42,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     className={cn(
                         "object-contain w-14 h-14",
                         isYoutube ? 'rounded-full' : '',
-                        isCanva ? 'rounded-full' : '',
-                        isSony ? 'scale-125' : ''
+                        isCanva ? 'rounded-full' : ''
                     )}
                 />
                 {isNetflix && (
@@ -83,7 +82,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                 )}
                 {isYoutube && (
                     <div className="flex flex-col justify-center ml-2 md:ml-4">
-                       <span className="font-sharp-sans text-xl md:text-2xl tracking-wider flex items-center font-semibold">
+                       <span className="font-sharp-sans text-xl md:text-2xl tracking-wider flex items-center">
                            <span className="text-white">YouTube</span>
                            <span className="text-youtube-red ml-1">Premium</span>
                        </span>
@@ -136,5 +135,3 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
         </div>
     );
 };
-
-    
