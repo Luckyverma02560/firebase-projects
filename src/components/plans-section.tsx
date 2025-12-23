@@ -76,8 +76,13 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
             }
             if (planName === 'Super Premium' && billingCycle === 'yearly') {
                 isPopular = true;
-            }
+}
         }
+
+        if (serviceData.name === 'Jio Hotstar' && planName === 'Premium' && billingCycle === 'monthly') {
+            isPopular = true;
+        }
+
 
         return {
             name: planName,
@@ -95,6 +100,34 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
 
     const isNetflix = selectedService === 'Netflix';
     const isPrimeVideo = selectedService === 'Prime Video';
+    const isJioHotstar = selectedService === 'Jio Hotstar';
+
+    const renderPlan = (plan: any) => {
+        const priceInfo = plan.prices[billingCycle];
+        if (!priceInfo) return null;
+        
+        const {price, isAvailable, features} = priceInfo;
+        let period = '/month';
+        if (billingCycle === 'half-yearly') {
+            period = isNetflix ? '/3mo' : '/6mo';
+        } else if (billingCycle === 'yearly') {
+            period = isNetflix ? '/6mo' : '/12mo';
+        }
+        
+        return (
+        <PricingCard 
+                key={plan.name} 
+                {...plan}
+                price={`INR ${price}`}
+                features={features}
+                pricePeriod={period}
+                isAvailable={isAvailable}
+                serviceName={selectedService}
+                billingCycle={billingCycle}
+            />
+        )
+    };
+
 
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
@@ -136,7 +169,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
-                                {isNetflix ? '3 Months' : 'Half Yearly'}
+                                {isNetflix ? '3 Months' : (isJioHotstar ? '3/6 Months' : 'Half Yearly')}
                                 </Label>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -149,33 +182,32 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                             </div>
                         </RadioGroup>
 
-                        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length >= 4 ? 'lg:grid-cols-4' : `lg:grid-cols-${plansToShow.length}`)}>
-                            {plansToShow.map((plan, index) => {
-                                const priceInfo = plan.prices[billingCycle];
-                                if (!priceInfo) return null;
-                                
-                                const {price, isAvailable, features} = priceInfo;
-                                let period = '/month';
-                                if (billingCycle === 'half-yearly') {
-                                    period = isNetflix ? '/3mo' : '/6mo';
-                                } else if (billingCycle === 'yearly') {
-                                    period = isNetflix ? '/6mo' : '/12mo';
-                                }
-                                
-                                return (
-                                <PricingCard 
-                                        key={index} 
-                                        {...plan}
-                                        price={`INR ${price}`}
-                                        features={features}
-                                        pricePeriod={period}
-                                        isAvailable={isAvailable}
-                                        serviceName={selectedService}
-                                        billingCycle={billingCycle}
-                                    />
-                                )
-                            })}
-                        </div>
+                        {isJioHotstar && billingCycle === 'half-yearly' ? (
+                            <div className="flex flex-col items-center gap-12">
+                                {/* 3 Months Branch */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500">3 Months</div>
+                                    <div className="w-px h-8 bg-purple-500"></div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
+                                        {renderPlan(plansToShow.find(p => p.name === 'Basic'))}
+                                        {renderPlan(plansToShow.find(p => p.name === 'Standard'))}
+                                    </div>
+                                </div>
+                                {/* 6 Months Branch */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500">6 Months</div>
+                                    <div className="w-px h-8 bg-green-500"></div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
+                                        {renderPlan(plansToShow.find(p => p.name === 'Premium'))}
+                                        {renderPlan(plansToShow.find(p => p.name === 'Super Premium'))}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length >= 4 ? 'lg:grid-cols-4' : `lg:grid-cols-${plansToShow.length}`)}>
+                                {plansToShow.map((plan) => renderPlan(plan))}
+                            </div>
+                        )}
                     </>
                 ) : (
                     <div className="flex flex-col items-center gap-6 px-4 md:px-0">
@@ -195,5 +227,4 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
         </section>
     );
 
-    
-    
+};
