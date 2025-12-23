@@ -15,7 +15,7 @@ interface ServiceCardProps {
 
 export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
     const isPrime = name === 'Prime Video';
-    const isHotstar = name === 'Disney+ Hotstar';
+    const isHotstar = name === 'Jio Hotstar';
     const isZee = name === 'ZEE5';
     const isYoutube = name === 'Youtube Premium';
     const isNetflix = name === 'Netflix';
@@ -131,3 +131,5 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
         </div>
     );
 };
+
+    
