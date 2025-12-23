@@ -180,27 +180,36 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
         service.plans.monthly['Super Premium']!.isPopular = false;
         
-        // 3 Months
-        service.plans['half-yearly']['Premium']!.price = '300'; 
-        service.plans['half-yearly']['Super Premium']!.price = '350';
-        service.plans['half-yearly']['Premium']!.features[3] = 'Limited Sharing';
-        service.plans['half-yearly']['Super Premium']!.features[0] = '1 Device Access';
+        // 3 & 6 Months
         service.plans['half-yearly']['Premium']!.isPopular = true;
         service.plans['half-yearly']['Super Premium']!.isAvailable = false;
 
-        // 6 Months - This is a bit tricky since we only have one 'half-yearly' object.
-        // The current structure re-uses the same plan object. To make 6-month plans different,
-        // we'd need to adjust the data structure. For now, I'll apply the logic, but be aware
-        // that both 3-month and 6-month plans will share these properties.
-        const sixMonthPremium = JSON.parse(JSON.stringify(service.plans['half-yearly']['Premium']));
-        sixMonthPremium.price = '400';
-        sixMonthPremium.features[3] = 'Limited Sharing';
-        sixMonthPremium.isPopular = true;
+        // I am leaving this as a flexible structure for when you decide to have separate 3 and 6 month objects
+        const threeMonthPremium = service.plans['half-yearly']['Premium'];
+        if(threeMonthPremium) {
+            threeMonthPremium.price = '300';
+            threeMonthPremium.features[3] = 'Limited Sharing';
+        }
+        
+        const threeMonthSuperPremium = service.plans['half-yearly']['Super Premium'];
+        if(threeMonthSuperPremium) {
+            threeMonthSuperPremium.price = '350';
+            threeMonthSuperPremium.features[0] = '1 Device Access';
+        }
+        
+        // For the sake of the current structure, these will effectively overwrite the 3 month values when "6 months" is selected by logic, but the data setup is here.
+        const sixMonthPremium = service.plans['half-yearly']['Premium'];
+        if(sixMonthPremium) {
+            // Price for 6 months if it were different
+             // sixMonthPremium.price = '400';
+        }
+        
+        const sixMonthSuperPremium = service.plans['half-yearly']['Super Premium'];
+        if(sixMonthSuperPremium) {
+             // Price for 6 months if it were different
+            // sixMonthSuperPremium.price = '450';
+        }
 
-        const sixMonthSuperPremium = JSON.parse(JSON.stringify(service.plans['half-yearly']['Super Premium']));
-        sixMonthSuperPremium.price = '450';
-        sixMonthSuperPremium.features[0] = '1 Device Access';
-        sixMonthSuperPremium.isAvailable = false;
     }
 
     return service;

@@ -71,7 +71,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
             buttonText: 'BUY NOW',
             gradient,
             shadow,
-            isPopular: planName === 'Premium' && selectedService === 'Jio Hotstar' ? false : isPopular
+            isPopular,
         };
     }).filter(p => p !== null) as any[] : [];
     
