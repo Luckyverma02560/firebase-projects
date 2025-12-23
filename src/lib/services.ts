@@ -176,9 +176,9 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Basic']!.price = '70';
         service.plans.monthly['Basic']!.isAvailable = true;
         service.plans.monthly['Basic']!.features = [
-            '1 Device Access',
+            '2 Device Access',
             'Profile Login',
-            '4K  Streaming Quality',
+            '4K streaming quality',
             'Limited Sharing'
         ];
 
@@ -278,10 +278,30 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Premium']!.features[3] = 'Limited Sharing';
         service.plans.monthly['Super Premium']!.price = '120';
         service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
+        
+        // 3 & 6 Months for ZEE5
+        service.plans['half-yearly'] = {};
+        
+        service.plans['3-months'] = {
+            'Premium': { 
+                price: '200', 
+                features: ['Feature 1', 'Feature 2'], 
+                isAvailable: true,
+                isPopular: true
+            },
+        };
+        
+        service.plans['6-months'] = {
+            'Premium': { 
+                price: '350', 
+                features: ['Feature 1', 'Feature 2'], 
+                isAvailable: true,
+                isPopular: true
+            },
+        };
+
+        service.plans.yearly['Premium']!.isPopular = true;
     }
 
     return service;
 });
-
-
-    

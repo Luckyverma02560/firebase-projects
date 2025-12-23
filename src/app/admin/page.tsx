@@ -236,7 +236,7 @@ export default function AdminPage() {
                     <TabsList className="grid w-full grid-cols-3">
                         <TabsTrigger value="monthly">Monthly</TabsTrigger>
                         <TabsTrigger value="half-yearly">
-                            {serviceData.name === 'Jio Hotstar' ? '3/6 Months' : 
+                            {serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5' ? '3/6 Months' : 
                              serviceData.name === 'Netflix' ? '3 Months' : 'Half Yearly'}
                         </TabsTrigger>
                         <TabsTrigger value="yearly">
@@ -245,14 +245,13 @@ export default function AdminPage() {
                     </TabsList>
                     {billingCycles.map(billing => (
                         <TabsContent key={billing} value={billing} className="space-y-4">
-                            {serviceData.name === 'Jio Hotstar' && billing === 'half-yearly' ? (
+                            {(serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5') && billing === 'half-yearly' ? (
                                 <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
                                     {/* 3 Months Branch */}
                                     <div className="flex flex-col items-center gap-4 w-full">
                                         <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500 w-full text-center">3 Months</div>
                                         <div className="space-y-4 w-full">
-                                            {renderPlanFields(billing, 'Premium', serviceData, isEditing, '3-months')}
-                                            {renderPlanFields(billing, 'Super Premium', serviceData, isEditing, '3-months')}
+                                            {planNames.map(plan => serviceData.plans['3-months']?.[plan] && renderPlanFields(billing, plan, serviceData, isEditing, '3-months'))}
                                         </div>
                                     </div>
 
@@ -263,8 +262,7 @@ export default function AdminPage() {
                                     <div className="flex flex-col items-center gap-4 w-full">
                                         <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500 w-full text-center">6 Months</div>
                                         <div className="space-y-4 w-full">
-                                            {renderPlanFields(billing, 'Premium', serviceData, isEditing, '6-months')}
-                                            {renderPlanFields(billing, 'Super Premium', serviceData, isEditing, '6-months')}
+                                            {planNames.map(plan => serviceData.plans['6-months']?.[plan] && renderPlanFields(billing, plan, serviceData, isEditing, '6-months'))}
                                         </div>
                                     </div>
                                 </div>
@@ -574,11 +572,3 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
-
-    
-
-    
-
-    
-
-    

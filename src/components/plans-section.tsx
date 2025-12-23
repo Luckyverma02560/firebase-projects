@@ -72,6 +72,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     const isNetflix = selectedService === 'Netflix';
     const isPrimeVideo = selectedService === 'Prime Video';
     const isJioHotstar = selectedService === 'Jio Hotstar';
+    const isZee5 = selectedService === 'ZEE5';
 
     const renderPlan = (plan: any, period: string, billingCycleForMessage: string) => {
         if (!plan) return null;
@@ -89,11 +90,12 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     };
 
     const monthlyPlans = serviceData ? (Object.keys(serviceData.plans.monthly) as PlanName[]).map(p => getPlanDetails(p, 'monthly')) : [];
-    const halfYearlyPlans = serviceData ? (Object.keys(serviceData.plans['half-yearly']) as PlanName[]).map(p => getPlanDetails(p, 'half-yearly')) : [];
+    const halfYearlyPlans = serviceData ? (Object.keys(serviceData.plans['half-yearly'] || {}) as PlanName[]).map(p => getPlanDetails(p, 'half-yearly')) : [];
     const yearlyPlans = serviceData ? (Object.keys(serviceData.plans.yearly) as PlanName[]).map(p => getPlanDetails(p, 'yearly')) : [];
 
-    const jio3MonthPlans = serviceData && isJioHotstar ? (Object.keys(serviceData.plans['3-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '3-months')) : [];
-    const jio6MonthPlans = serviceData && isJioHotstar ? (Object.keys(serviceData.plans['6-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '6-months')) : [];
+    const jio3MonthPlans = serviceData && (isJioHotstar || isZee5) ? (Object.keys(serviceData.plans['3-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '3-months')) : [];
+    const jio6MonthPlans = serviceData && (isJioHotstar || isZee5) ? (Object.keys(serviceData.plans['6-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '6-months')) : [];
+
 
     const plansToShow = billingCycle === 'monthly' ? monthlyPlans 
         : billingCycle === 'half-yearly' ? halfYearlyPlans 
@@ -120,9 +122,9 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                         All Prime Video Plans Are Ad-Free Plans
                     </p>
                 )}
-                 {showPlans && isJioHotstar && (
+                 {showPlans && (isJioHotstar || isZee5) && (
                     <p className="text-sm text-gray-400 -mt-4 mb-8">
-                        All Jio Hotstar Plans Are 4K
+                        All {selectedService} Plans Are 4K
                     </p>
                 )}
 
@@ -146,7 +148,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
                                     billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                 )}>
-                                {isNetflix ? '3 Months' : (isJioHotstar ? '3/6 Months' : 'Half Yearly')}
+                                {isNetflix ? '3 Months' : (isJioHotstar || isZee5) ? '3/6 Months' : 'Half Yearly'}
                                 </Label>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -159,12 +161,12 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                             </div>
                         </RadioGroup>
 
-                        {isJioHotstar && billingCycle === 'half-yearly' ? (
+                        {(isJioHotstar || isZee5) && billingCycle === 'half-yearly' ? (
                             <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
                                 {/* 3 Months Branch */}
                                 <div className="flex flex-col items-center gap-4 w-full">
                                     <div className="w-auto bg-gray-800 text-purple-400 font-bold text-lg px-8 py-2 rounded-full border-2 border-purple-500 text-center">3 Months</div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
+                                    <div className={`grid grid-cols-1 ${jio3MonthPlans.length > 1 ? 'sm:grid-cols-2' : ''} gap-8 w-full`}>
                                         {jio3MonthPlans.map(plan => renderPlan(plan, '/3mo', '3 Months'))}
                                     </div>
                                 </div>
@@ -175,13 +177,13 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 {/* 6 Months Branch */}
                                 <div className="flex flex-col items-center gap-4 w-full">
                                     <div className="w-auto bg-gray-800 text-green-400 font-bold text-lg px-8 py-2 rounded-full border-2 border-green-500 text-center">6 Months</div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
+                                    <div className={`grid grid-cols-1 ${jio6MonthPlans.length > 1 ? 'sm:grid-cols-2' : ''} gap-8 w-full`}>
                                         {jio6MonthPlans.map(plan => renderPlan(plan, '/6mo', '6 Months'))}
                                     </div>
                                 </div>
                             </div>
                         ) : (
-                            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length >= 4 ? 'lg:grid-cols-4' : `lg:grid-cols-${plansToShow.length}`)}>
+                            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length >= 4 ? 'lg:grid-cols-4' : (plansToShow.length > 0 ? `lg:grid-cols-${plansToShow.length}`: ''))}>
                                 {plansToShow.map((plan) => {
                                     if (!plan) return null;
                                     let period = '/month';
