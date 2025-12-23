@@ -39,7 +39,12 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     data-ai-hint={logoHint}
                     width={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
                     height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
-                    className={cn("object-contain w-14 h-14", isYoutube ? 'rounded-full' : '', isCanva ? 'rounded-full' : '')}
+                    className={cn(
+                        "object-contain w-14 h-14",
+                        isYoutube ? 'rounded-full' : '',
+                        isCanva ? 'rounded-full' : '',
+                        isSony ? 'scale-125' : ''
+                    )}
                 />
                 {isNetflix && (
                     <svg viewBox="0 0 120 40" className="w-28 md:w-32 h-auto overflow-visible -ml-2">
@@ -86,7 +91,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                 )}
                  {isSony && (
                     <div className="flex flex-col justify-center ml-2 md:ml-4">
-                       <span className="font-clarendon text-xl md:text-2xl tracking-wider flex items-center">
+                       <span className="font-sharp-sans text-xl md:text-2xl tracking-wider flex items-center">
                            <span className="text-white">Sony Liv</span>
                        </span>
                    </div>
