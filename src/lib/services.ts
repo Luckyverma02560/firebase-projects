@@ -181,7 +181,15 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             'Limited sharing'
         ];
         service.plans.monthly['Basic']!.isAvailable = true;
-        service.plans.monthly['Standard']!.price = '70';
+
+        service.plans.monthly['Standard']!.price = '80';
+        service.plans.monthly['Standard']!.features = [
+            '1 Device Access',
+            'No. Activation',
+            '4K  Streaming Quality',
+            'Limited Sharing'
+        ];
+
         service.plans.monthly['Premium']!.price = '80';
         service.plans.monthly['Premium']!.isPopular = true;
         service.plans.monthly['Premium']!.features[1] = 'No. Activation';
@@ -256,3 +264,5 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
 
     return service;
 });
+
+    
