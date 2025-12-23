@@ -181,6 +181,8 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Super Premium']!.isPopular = false;
         
         // 3 & 6 Months
+        service.plans['half-yearly']['Premium']!.price = '300';
+        service.plans['half-yearly']['Super Premium']!.price = '350';
         service.plans['half-yearly']['Premium']!.isPopular = true;
         service.plans['half-yearly']['Super Premium']!.isAvailable = false;
 
