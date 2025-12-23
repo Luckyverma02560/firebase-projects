@@ -302,7 +302,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                     '4K streaming quality',
                     'Private Account Access'
                 ],
-                isAvailable: true,
+                isAvailable: false,
                 isPopular: false
             }
         };
@@ -327,7 +327,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                     '4K streaming quality',
                     'Private Account Access'
                 ],
-                isAvailable: true,
+                isAvailable: false,
                 isPopular: false
             }
         };
