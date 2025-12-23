@@ -127,6 +127,13 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Standard']!.price = '120';
         service.plans.monthly['Premium']!.price = '150';
         service.plans.monthly['Super Premium']!.price = '170';
+
+        service.plans['half-yearly']['Basic']!.price = '200';
+        service.plans['half-yearly']['Basic']!.isAvailable = false;
+        service.plans['half-yearly']['Standard']!.price = '250';
+        service.plans['half-yearly']['Premium']!.price = '300';
+        service.plans['half-yearly']['Super Premium']!.price = '350';
+        service.plans['half-yearly']['Super Premium']!.isAvailable = false;
     }
 
     if (p.description === 'Netflix') {
@@ -134,10 +141,14 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans['yearly']['Basic']!.isAvailable = false;
         
         service.plans['half-yearly']['Standard']!.isAvailable = true;
+        service.plans['half-yearly']['Standard']!.price = '700';
         service.plans['yearly']['Standard']!.isAvailable = true;
+        service.plans['yearly']['Standard']!.price = '1300';
         
         service.plans['half-yearly']['Premium']!.isAvailable = false;
+        service.plans['half-yearly']['Premium']!.price = '400';
         service.plans['yearly']['Premium']!.isAvailable = false;
+        service.plans['yearly']['Premium']!.price = '800';
 
         service.plans['half-yearly']['Super Premium']!.isAvailable = false;
         service.plans['yearly']['Super Premium']!.isAvailable = false;
@@ -145,5 +156,3 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
 
     return service;
 });
-
-    
