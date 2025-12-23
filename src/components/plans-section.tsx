@@ -73,6 +73,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     const isPrimeVideo = selectedService === 'Prime Video';
     const isJioHotstar = selectedService === 'Jio Hotstar';
     const isZee5 = selectedService === 'ZEE5';
+    const isYoutubePremium = selectedService === 'Youtube Premium';
 
     const renderPlan = (plan: any, period: string, billingCycleForMessage: string) => {
         if (!plan) return null;
@@ -130,37 +131,22 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
 
                 {showPlans ? (
                     <>
-                        <RadioGroup
-                            defaultValue="monthly"
-                            onValueChange={(value: string) => setBillingCycle(value as BillingCycle)}
-                            className="flex items-center justify-center space-x-2 md:space-x-4 mb-12"
-                        >
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="monthly" id="monthly" className="peer sr-only" />
-                                <Label htmlFor="monthly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
-                                    billingCycle === 'monthly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                                )}>
-                                Monthly
-                                </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="half-yearly" id="half-yearly" className="peer sr-only" />
-                                <Label htmlFor="half-yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
-                                    billingCycle === 'half-yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                                )}>
-                                {isNetflix ? '3 Months' : (isJioHotstar || isZee5) ? '3/6 Months' : 'Half Yearly'}
-                                </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="yearly" id="yearly" className="peer sr-only" />
-                                <Label htmlFor="yearly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
-                                    billingCycle === 'yearly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                                )}>
-                                {isNetflix ? 'Half Yearly' : 'Yearly'}
-                                </Label>
-                            </div>
-                        </RadioGroup>
-
+                        {!isYoutubePremium && (
+                            <RadioGroup
+                                defaultValue="monthly"
+                                onValueChange={(value: string) => setBillingCycle(value as BillingCycle)}
+                                className="flex items-center justify-center space-x-2 md:space-x-4 mb-12"
+                            >
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="monthly" id="monthly" className="peer sr-only" />
+                                    <Label htmlFor="monthly" className={cn("px-4 md:px-6 py-2 md:py-3 rounded-full border-2 border-transparent cursor-pointer transition-all text-sm md:text-base",
+                                        billingCycle === 'monthly' ? 'bg-purple-600 text-white border-purple-400 shadow-lg' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                    )}>
+                                    Monthly
+                                    </Label>
+                                </div>
+                            </RadioGroup>
+                        )}
                         {(isJioHotstar || isZee5) && billingCycle === 'half-yearly' ? (
                             <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
                                 {/* 3 Months Branch */}
