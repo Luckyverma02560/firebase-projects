@@ -162,10 +162,10 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans['half-yearly']['Standard']!.isPopular = true;
         service.plans['half-yearly']['Premium']!.isAvailable = false;
 
-        service.plans['yearly']['Basic']!.isAvailable = false;
-        service.plans['yearly']['Standard']!.isAvailable = true;
-        service.plans['yearly']['Standard']!.isPopular = true;
-        service.plans['yearly']['Premium']!.isAvailable = false;
+        service.plans.yearly['Basic']!.isAvailable = false;
+        service.plans.yearly['Standard']!.isAvailable = true;
+        service.plans.yearly['Standard']!.isPopular = true;
+        service.plans.yearly['Premium']!.isAvailable = false;
 
         service.plans['half-yearly']['Super Premium']!.isAvailable = false;
         service.plans['yearly']['Super Premium']!.isAvailable = false;
@@ -185,7 +185,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Standard']!.price = '80';
         service.plans.monthly['Standard']!.isPopular = true;
         service.plans.monthly['Standard']!.features = [
-            '1 Device Access',
+            '2 Device Access',
             'No. Activation',
             '4K streaming quality',
             'Private Account Access'
@@ -194,9 +194,9 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Premium']!.price = '120';
         service.plans.monthly['Premium']!.isPopular = false;
         service.plans.monthly['Premium']!.features = [
-            '2 Device Access',
+            '1 Device Access',
             'Profile Login',
-            '4K streaming quality',
+            '4K  Streaming Quality',
             'Private Account Access'
         ];
 
@@ -266,6 +266,18 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Premium']!.isAvailable = false;
         service.plans.yearly['Super Premium']!.price = '600';
         service.plans.yearly['Super Premium']!.isAvailable = false;
+    }
+
+    if (p.description === 'ZEE5') {
+        service.plans.monthly['Basic']!.price = '60';
+        service.plans.monthly['Basic']!.isAvailable = false;
+        service.plans.monthly['Standard']!.price = '70';
+        service.plans.monthly['Premium']!.price = '80';
+        service.plans.monthly['Premium']!.isPopular = true;
+        service.plans.monthly['Premium']!.features[1] = 'No. Activation';
+        service.plans.monthly['Premium']!.features[3] = 'Limited Sharing';
+        service.plans.monthly['Super Premium']!.price = '120';
+        service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
     }
 
     return service;
