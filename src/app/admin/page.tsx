@@ -184,6 +184,53 @@ export default function AdminPage() {
             </div>
           );
         case 'services':
+            const renderPlanFields = (billing: BillingCycle, plan: PlanName, serviceData: Omit<Service, 'id'> | Service, isEditing: boolean, jioDuration?: string) => {
+                const planData = serviceData.plans[billing]?.[plan];
+                if (!planData) return null;
+
+                const idPrefix = jioDuration ? `${billing}-${plan}-${jioDuration}` : `${billing}-${plan}`;
+
+                return (
+                    <div key={idPrefix} className="p-3 border border-white/20 rounded-lg">
+                        <div className="flex justify-between items-center mb-2">
+                            <h4 className="text-md md:text-lg font-bold text-purple-400">{plan} Plan</h4>
+                            <div className="flex items-center space-x-2">
+                                <Label htmlFor={`${idPrefix}-available`}>Plan Available</Label>
+                                <Switch 
+                                    id={`${idPrefix}-available`}
+                                    checked={planData.isAvailable}
+                                    onCheckedChange={(checked) => handlePlanChange(billing, plan, 'isAvailable', checked, isEditing)}
+                                />
+                            </div>
+                        </div>
+                        <div className="grid md:grid-cols-3 gap-4">
+                            <div className="space-y-2 md:col-span-1">
+                                <Label htmlFor={`${idPrefix}-price`}>Price (INR)</Label>
+                                <Input 
+                                    id={`${idPrefix}-price`}
+                                    value={planData.price} 
+                                    onChange={(e) => handlePlanChange(billing, plan, 'price', e.target.value, isEditing)}
+                                    className="bg-gray-800/50 border-white/20"
+                                />
+                            </div>
+                            <div className="space-y-3 md:col-span-2">
+                                {planData.features.map((feature, index) => (
+                                    <div key={index} className="space-y-1.5">
+                                        <Label htmlFor={`${idPrefix}-feature${index+1}`}>Feature {index + 1}</Label>
+                                        <Input 
+                                            id={`${idPrefix}-feature${index+1}`}
+                                            value={feature}
+                                            onChange={(e) => handlePlanChange(billing, plan, `feature${index+1}`, e.target.value, isEditing)}
+                                            className="bg-gray-800/50 border-white/20"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )
+            };
+
             const renderPlanForm = (serviceData: Omit<Service, 'id'> | Service, isEditing: boolean) => (
                 <Tabs defaultValue="monthly" className="w-full">
                     <TabsList className="grid w-full grid-cols-3">
@@ -193,50 +240,32 @@ export default function AdminPage() {
                     </TabsList>
                     {billingCycles.map(billing => (
                         <TabsContent key={billing} value={billing} className="space-y-4">
-                            {planNames.map(plan => {
-                                const planData = serviceData.plans[billing]?.[plan];
-                                if (!planData) return null; // Skip rendering if plan data doesn't exist
-
-                                return (
-                                    <div key={plan} className="p-3 border border-white/20 rounded-lg">
-                                        <div className="flex justify-between items-center mb-2">
-                                            <h4 className="text-md md:text-lg font-bold text-purple-400">{plan} Plan</h4>
-                                            <div className="flex items-center space-x-2">
-                                                <Label htmlFor={`${billing}-${plan}-available`}>Plan Available</Label>
-                                                <Switch 
-                                                    id={`${billing}-${plan}-available`} 
-                                                    checked={planData.isAvailable}
-                                                    onCheckedChange={(checked) => handlePlanChange(billing, plan, 'isAvailable', checked, isEditing)}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="grid md:grid-cols-3 gap-4">
-                                            <div className="space-y-2 md:col-span-1">
-                                                <Label htmlFor={`${billing}-${plan}-price`}>Price (INR)</Label>
-                                                <Input 
-                                                    id={`${billing}-${plan}-price`} 
-                                                    value={planData.price} 
-                                                    onChange={(e) => handlePlanChange(billing, plan, 'price', e.target.value, isEditing)}
-                                                    className="bg-gray-800/50 border-white/20"
-                                                />
-                                            </div>
-                                            <div className="space-y-3 md:col-span-2">
-                                                {planData.features.map((feature, index) => (
-                                                    <div key={index} className="space-y-1.5">
-                                                        <Label htmlFor={`${billing}-${plan}-feature${index+1}`}>Feature {index + 1}</Label>
-                                                        <Input 
-                                                            id={`${billing}-${plan}-feature${index+1}`} 
-                                                            value={feature}
-                                                            onChange={(e) => handlePlanChange(billing, plan, `feature${index+1}`, e.target.value, isEditing)}
-                                                            className="bg-gray-800/50 border-white/20"
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
+                            {serviceData.name === 'Jio Hotstar' && billing === 'half-yearly' ? (
+                                <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
+                                    {/* 3 Months Branch */}
+                                    <div className="flex flex-col items-center gap-4 w-full">
+                                        <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500 w-full text-center">3 Months</div>
+                                        <div className="space-y-4 w-full">
+                                            {renderPlanFields(billing, 'Premium', serviceData, isEditing, '3-months')}
+                                            {renderPlanFields(billing, 'Super Premium', serviceData, isEditing, '3-months')}
                                         </div>
                                     </div>
-                                );
-                            })}
+
+                                    <div className="w-full h-px bg-white/10 lg:hidden" />
+                                    <div className="w-px h-auto bg-white/10 hidden lg:block self-stretch mx-4" />
+                                    
+                                    {/* 6 Months Branch */}
+                                    <div className="flex flex-col items-center gap-4 w-full">
+                                        <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500 w-full text-center">6 Months</div>
+                                        <div className="space-y-4 w-full">
+                                            {renderPlanFields(billing, 'Premium', serviceData, isEditing, '6-months')}
+                                            {renderPlanFields(billing, 'Super Premium', serviceData, isEditing, '6-months')}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                planNames.map(plan => renderPlanFields(billing, plan, serviceData, isEditing))
+                            )}
                         </TabsContent>
                     ))}
                 </Tabs>
@@ -540,6 +569,8 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    
 
     
 
