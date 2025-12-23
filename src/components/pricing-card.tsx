@@ -22,9 +22,10 @@ interface PricingCardProps {
     serviceName: string | null;
     billingCycle: string;
     isAvailable: boolean;
+    jioHotstarDuration?: '3 Months' | '6 Months';
 }
 
-export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false, serviceName, billingCycle, isAvailable }: PricingCardProps) => {
+export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false, serviceName, billingCycle, isAvailable, jioHotstarDuration }: PricingCardProps) => {
     const { addToCart } = useCart();
     const { toast } = useToast();
 
@@ -55,6 +56,8 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
         if (billingCycle === 'monthly') billingCycleText = 'Monthly';
         else if (billingCycle === 'half-yearly') billingCycleText = '3 Months';
         else if (billingCycle === 'yearly') billingCycleText = 'Half Yearly';
+    } else if (serviceName === 'Jio Hotstar' && billingCycle === 'half-yearly' && jioHotstarDuration) {
+        billingCycleText = jioHotstarDuration;
     } else {
         if (billingCycle === 'monthly') billingCycleText = 'Monthly';
         else if (billingCycle === 'half-yearly') billingCycleText = 'Half Yearly';
@@ -140,5 +143,7 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
         </div>
     );
 };
+
+    
 
     

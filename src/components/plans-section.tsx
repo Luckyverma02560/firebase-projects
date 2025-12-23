@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { useState } from 'react';
@@ -102,21 +103,27 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     const isPrimeVideo = selectedService === 'Prime Video';
     const isJioHotstar = selectedService === 'Jio Hotstar';
 
-    const renderPlan = (plan: any) => {
+    const renderPlan = (plan: any, jioHotstarDuration?: '3 Months' | '6 Months') => {
         const priceInfo = plan.prices[billingCycle];
         if (!priceInfo) return null;
         
         const {price, isAvailable, features} = priceInfo;
         let period = '/month';
         if (billingCycle === 'half-yearly') {
-            period = isNetflix ? '/3mo' : '/6mo';
+            if (isNetflix) {
+                period = '/3mo';
+            } else if (isJioHotstar) {
+                period = jioHotstarDuration === '3 Months' ? '/3mo' : '/6mo';
+            } else {
+                period = '/6mo';
+            }
         } else if (billingCycle === 'yearly') {
             period = isNetflix ? '/6mo' : '/12mo';
         }
         
         return (
         <PricingCard 
-                key={plan.name} 
+                key={`${plan.name}-${jioHotstarDuration || ''}`} 
                 {...plan}
                 price={`INR ${price}`}
                 features={features}
@@ -124,6 +131,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                 isAvailable={isAvailable}
                 serviceName={selectedService}
                 billingCycle={billingCycle}
+                jioHotstarDuration={jioHotstarDuration}
             />
         )
     };
@@ -189,8 +197,8 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                     <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500">3 Months</div>
                                     <div className="w-full lg:w-px h-px lg:h-8 bg-purple-500/50"></div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl">
-                                        {renderPlan(plansToShow.find(p => p.name === 'Premium'))}
-                                        {renderPlan(plansToShow.find(p => p.name === 'Super Premium'))}
+                                        {renderPlan(plansToShow.find(p => p.name === 'Premium'), '3 Months')}
+                                        {renderPlan(plansToShow.find(p => p.name === 'Super Premium'), '3 Months')}
                                     </div>
                                 </div>
 
@@ -202,8 +210,8 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                     <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500">6 Months</div>
                                     <div className="w-full lg:w-px h-px lg:h-8 bg-green-500/50"></div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl">
-                                        {renderPlan(plansToShow.find(p => p.name === 'Premium'))}
-                                        {renderPlan(plansToShow.find(p => p.name === 'Super Premium'))}
+                                        {renderPlan(plansToShow.find(p => p.name === 'Premium'), '6 Months')}
+                                        {renderPlan(plansToShow.find(p => p.name === 'Super Premium'), '6 Months')}
                                     </div>
                                 </div>
                             </div>
@@ -232,3 +240,5 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     );
 
 };
+
+    

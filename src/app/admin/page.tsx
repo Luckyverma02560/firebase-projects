@@ -188,7 +188,7 @@ export default function AdminPage() {
                 <Tabs defaultValue="monthly" className="w-full">
                     <TabsList className="grid w-full grid-cols-3">
                         <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                        <TabsTrigger value="half-yearly">Half Yearly</TabsTrigger>
+                        <TabsTrigger value="half-yearly">{serviceData.name === 'Jio Hotstar' ? '3/6 Months' : 'Half Yearly'}</TabsTrigger>
                         <TabsTrigger value="yearly">Yearly</TabsTrigger>
                     </TabsList>
                     {billingCycles.map(billing => (
@@ -540,5 +540,7 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    
 
     
