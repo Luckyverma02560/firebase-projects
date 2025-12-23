@@ -234,7 +234,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         
         service.plans['6-months'] = {
             'Premium': { 
-                price: '400', 
+                price: '250', 
                 features: [
                     '1 Device Access',
                     'Profile Login',
@@ -245,7 +245,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 isPopular: true 
             },
             'Super Premium': { 
-                price: '450', 
+                price: '300', 
                 features: [
                     '2 Device Access',
                     'Profile Login',
@@ -338,9 +338,10 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Basic']!.isAvailable = false;
         service.plans.yearly['Standard']!.price = '320';
         service.plans.yearly['Standard']!.features[2] = 'FHD Streaming Quality';
-        service.plans.yearly['Standard']!.isPopular = true;
+        service.plans.yearly['Standard']!.isPopular = false;
         service.plans.yearly['Standard']!.isAvailable = false;
         service.plans.yearly['Premium']!.price = '350';
+        service.plans.yearly['Premium']!.isPopular = true;
         service.plans.yearly['Premium']!.features[2] = 'FHD Streaming Quality';
         service.plans.yearly['Premium']!.isAvailable = true;
         service.plans.yearly['Super Premium']!.price = '400';
