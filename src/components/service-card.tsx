@@ -41,8 +41,8 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
                     className={cn(
                         "object-contain w-14 h-14",
-                        isYoutube ? 'rounded-full' : '',
-                        isCanva ? 'rounded-full' : ''
+                        isCanva ? 'rounded-full' : '',
+                        isSony ? 'scale-125' : ''
                     )}
                 />
                 {isNetflix && (
@@ -84,7 +84,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     <div className="flex flex-col justify-center ml-2 md:ml-4">
                        <span className="font-sharp-sans text-xl md:text-2xl tracking-wider flex items-center">
                            <span className="text-white">YouTube</span>
-                           <span className="text-youtube-red ml-1">Premium</span>
+                           <span className="text-youtube-red ml-1 font-semibold">Premium</span>
                        </span>
                    </div>
                 )}
