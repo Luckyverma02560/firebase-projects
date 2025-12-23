@@ -74,6 +74,9 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
             if (planName === 'Premium' && billingCycle === 'half-yearly') {
                 isPopular = true;
             }
+            if (planName === 'Super Premium' && billingCycle === 'yearly') {
+                isPopular = true;
+            }
         }
 
         return {
