@@ -91,7 +91,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
 
     const monthlyPlans = serviceData ? (Object.keys(serviceData.plans.monthly) as PlanName[]).map(p => getPlanDetails(p, 'monthly')) : [];
     const halfYearlyPlans = serviceData ? (Object.keys(serviceData.plans['half-yearly'] || {}) as PlanName[]).map(p => getPlanDetails(p, 'half-yearly')) : [];
-    const yearlyPlans = serviceData ? (Object.keys(serviceData.plans.yearly) as PlanName[]).map(p => getPlanDetails(p, 'yearly')) : [];
+    const yearlyPlans = serviceData ? (Object.keys(serviceData.plans.yearly || {}) as PlanName[]).map(p => getPlanDetails(p, 'yearly')) : [];
 
     const jio3MonthPlans = serviceData && (isJioHotstar || isZee5) ? (Object.keys(serviceData.plans['3-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '3-months')) : [];
     const jio6MonthPlans = serviceData && (isJioHotstar || isZee5) ? (Object.keys(serviceData.plans['6-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '6-months')) : [];
@@ -183,7 +183,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 </div>
                             </div>
                         ) : (
-                            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length >= 4 ? 'lg:grid-cols-4' : (plansToShow.length > 0 ? `lg:grid-cols-${plansToShow.length}`: ''))}>
+                            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length === 3 ? "lg:grid-cols-3" : (plansToShow.length >= 4 ? 'lg:grid-cols-4' : (plansToShow.length > 0 ? `lg:grid-cols-${plansToShow.length}`: '')))}>
                                 {plansToShow.map((plan) => {
                                     if (!plan) return null;
                                     let period = '/month';

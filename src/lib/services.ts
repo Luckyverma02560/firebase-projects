@@ -213,7 +213,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 features: [
                     '1 Device Access',
                     'Profile Login',
-                    '4K Streaming Quality',
+                    'FHD Streaming Quality',
                     'Limited Sharing'
                 ], 
                 isAvailable: true, 
@@ -238,7 +238,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 features: [
                     '1 Device Access',
                     'Profile Login',
-                    '4K Streaming Quality',
+                    'FHD Streaming Quality',
                     'Limited Sharing'
                 ], 
                 isAvailable: true, 
@@ -333,8 +333,6 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             }
         };
 
-        service.plans.yearly['Basic']!.price = '300';
-        service.plans.yearly['Basic']!.features[2] = 'FHD Streaming Quality';
         service.plans.yearly['Basic']!.isAvailable = false;
         
         service.plans.yearly['Standard']!.price = '320';
@@ -382,7 +380,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Youtube Premium') {
-        service.plans.monthly['Super Premium']!.isAvailable = false;
+        delete service.plans.monthly['Super Premium'];
         service.plans['half-yearly'] = {};
         service.plans.yearly = {};
     }
