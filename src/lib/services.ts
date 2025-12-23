@@ -416,7 +416,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Basic']!.price = '60';
         service.plans.monthly['Basic']!.features = [
             '1 Device access',
-            'Invite Login',
+            'Invite Based Activation',
             'Ad-Free Experience',
             'Enjoy uninterrupted streaming'
         ];
