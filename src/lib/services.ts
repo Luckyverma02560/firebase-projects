@@ -337,16 +337,13 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         };
 
         service.plans.yearly['Basic']!.isAvailable = false;
-
         service.plans.yearly['Standard']!.price = '320';
         service.plans.yearly['Standard']!.isAvailable = false;
         service.plans.yearly['Standard']!.features[2] = 'FHD Streaming Quality';
-        
         service.plans.yearly['Premium']!.price = '350';
         service.plans.yearly['Premium']!.isAvailable = true;
         service.plans.yearly['Premium']!.isPopular = true;
         service.plans.yearly['Premium']!.features[2] = 'FHD Streaming Quality';
-
         service.plans.yearly['Super Premium']!.price = '400';
         service.plans.yearly['Super Premium']!.isAvailable = true;
         service.plans.yearly['Super Premium']!.features[2] = 'FHD Streaming Quality';
@@ -384,18 +381,35 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Canva') {
-        service.plans.monthly['Basic']!.isAvailable = false;
-        service.plans.monthly['Standard']!.isAvailable = false;
-        service.plans.monthly['Premium']!.isAvailable = false;
-        service.plans.monthly['Super Premium']!.isAvailable = false;
-        service.plans['half-yearly']!['Basic']!.isAvailable = false;
-        service.plans['half-yearly']!['Standard']!.isAvailable = false;
-        service.plans['half-yearly']!['Premium']!.isAvailable = false;
-        service.plans['half-yearly']!['Super Premium']!.isAvailable = false;
-        service.plans.yearly['Basic']!.isAvailable = false;
-        service.plans.yearly['Standard']!.isAvailable = false;
-        service.plans.yearly['Premium']!.isAvailable = false;
-        service.plans.yearly['Super Premium']!.isAvailable = false;
+        service.plans = {
+            monthly: {
+                'Premium': {
+                    price: '150',
+                    features: [
+                        'Canva Pro features',
+                        'Invite based activation',
+                        'Full customer support',
+                        'Private account access'
+                    ],
+                    isAvailable: true,
+                    isPopular: true
+                }
+            },
+            'half-yearly': {},
+            yearly: {
+                 'Premium': {
+                    price: '500',
+                    features: [
+                        'Canva Pro features',
+                        'Invite based activation',
+                        'Full customer support',
+                        'Private account access'
+                    ],
+                    isAvailable: true,
+                    isPopular: true
+                }
+            }
+        };
     }
 
     if (p.description === 'Youtube Premium') {
