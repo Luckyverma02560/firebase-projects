@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { useState } from 'react';
@@ -86,6 +85,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
 
     const isNetflix = selectedService === 'Netflix';
+    const isPrimeVideo = selectedService === 'Prime Video';
 
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
@@ -101,6 +101,11 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                         : "Select your favorite streaming service to see available subscription plans."
                     }
                 </p>
+                {showPlans && isPrimeVideo && (
+                    <p className="text-sm text-gray-400 -mt-4 mb-8">
+                        All Prime Video Plans Are Ad-Free Plans
+                    </p>
+                )}
 
                 {showPlans ? (
                     <>
@@ -181,4 +186,5 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
         </section>
     );
 
+    
     
