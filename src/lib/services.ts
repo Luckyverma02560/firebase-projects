@@ -374,6 +374,10 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Premium']!.isAvailable = true;
         service.plans.yearly['Super Premium']!.isAvailable = true;
 
+        service.plans.yearly['Premium']!.features[1] = 'No. Activation';
+        service.plans.yearly['Super Premium']!.features[0] = '5 Device Access';
+        service.plans.yearly['Super Premium']!.features[1] = 'No. Activation';
+
         service.plans['half-yearly']!['Basic']!.isAvailable = false;
         service.plans['half-yearly']!['Standard']!.isAvailable = false;
         service.plans['half-yearly']!['Premium']!.isAvailable = false;
