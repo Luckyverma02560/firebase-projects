@@ -157,10 +157,14 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     if (p.description === 'Netflix') {
         service.plans.monthly.Standard!.isPopular = true;
         
+        service.plans['half-yearly']['Basic']!.price = '600';
         service.plans['half-yearly']['Basic']!.isAvailable = false;
+        service.plans['half-yearly']['Standard']!.price = '650';
         service.plans['half-yearly']['Standard']!.isAvailable = true;
         service.plans['half-yearly']['Standard']!.isPopular = true;
+        service.plans['half-yearly']['Premium']!.price = '700';
         service.plans['half-yearly']['Premium']!.isAvailable = false;
+        service.plans['half-yearly']['Super Premium']!.price = '750';
 
         service.plans.yearly['Basic']!.isAvailable = false;
         service.plans.yearly['Standard']!.isAvailable = true;
@@ -168,7 +172,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Premium']!.isAvailable = false;
 
         service.plans['half-yearly']['Super Premium']!.isAvailable = false;
-        service.plans['yearly']['Super Premium']!.isAvailable = false;
+        service.plans.yearly['Super Premium']!.isAvailable = false;
     }
     
     if (p.description === 'Jio Hotstar') {
@@ -378,9 +382,9 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Youtube Premium') {
+        delete service.plans.monthly['Super Premium'];
         service.plans['half-yearly'] = {};
         service.plans.yearly = {};
-        delete service.plans.monthly['Super Premium'];
         
         service.plans.monthly['Basic']!.price = '60';
         service.plans.monthly['Basic']!.features = [
