@@ -41,8 +41,7 @@ export const ServiceCard = ({ name, logoUrl, logoHint }: ServiceCardProps) => {
                     height={isHotstar || isZee || isPrime || isYoutube || isNetflix || isSony || isPlayBox || isCanva ? 56 : 80}
                     className={cn(
                         "object-contain w-14 h-14",
-                        isCanva ? 'rounded-full' : '',
-                        isSony ? 'scale-125' : ''
+                        isCanva ? 'rounded-full' : ''
                     )}
                 />
                 {isNetflix && (
