@@ -333,8 +333,6 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
             }
         };
 
-        service.plans.yearly['Basic']!.isAvailable = false;
-        
         service.plans.yearly['Standard']!.price = '320';
         service.plans.yearly['Standard']!.isAvailable = false;
         service.plans.yearly['Standard']!.features[2] = 'FHD Streaming Quality';
@@ -384,18 +382,21 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly = {};
         delete service.plans.monthly['Super Premium'];
         
+        service.plans.monthly['Basic']!.price = '60';
         service.plans.monthly['Basic']!.features = [
             '1 Device access',
             'Invite Login',
             'Ad-Free Experience',
             'Enjoy uninterrupted streaming'
         ];
+        service.plans.monthly['Standard']!.price = '80';
         service.plans.monthly['Standard']!.features = [
             'Upto 10 Device Access',
             'Activation On Mail',
             'Ad-Free Experience',
             'Enjoy uninterrupted streaming'
         ];
+        service.plans.monthly['Premium']!.price = '100';
         service.plans.monthly['Premium']!.features = [
             'Upto 10 Device Access',
             'Activation On Mail',
