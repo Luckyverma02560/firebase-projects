@@ -41,16 +41,12 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
 
         let gradient = 'from-blue-500 to-indigo-600';
         let shadow = 'shadow-blue-500/30';
-        let isPopular = false;
         let description = 'Ideal for individuals starting out';
 
         switch(planName) {
             case 'Standard':
                 gradient = 'from-purple-500 to-violet-600';
                 shadow = 'shadow-purple-500/30';
-                isPopular = serviceData.name === 'Netflix' ? 
-                    (billingCycle === 'monthly' || billingCycle === 'half-yearly' || billingCycle === 'yearly') : 
-                    billingCycle === 'monthly';
                 description = 'Perfect for families and small groups';
                 break;
             case 'Premium':
@@ -65,25 +61,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                 break;
         }
 
-        if (serviceData.name === 'Netflix') {
-            if (planName === 'Standard' && (billingCycle === 'half-yearly' || billingCycle === 'yearly')) {
-                isPopular = true;
-            }
-        }
-        
-        if (serviceData.name === 'Prime Video') {
-            if (planName === 'Premium' && billingCycle === 'half-yearly') {
-                isPopular = true;
-            }
-            if (planName === 'Super Premium' && billingCycle === 'yearly') {
-                isPopular = true;
-            }
-        }
-
-        if (serviceData.name === 'Jio Hotstar' && planName === 'Premium' && billingCycle === 'monthly') {
-            isPopular = true;
-        }
-
+        const isPopular = prices[billingCycle]?.isPopular || false;
 
         return {
             name: planName,
@@ -191,25 +169,23 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                         </RadioGroup>
 
                         {isJioHotstar && billingCycle === 'half-yearly' ? (
-                            <div className="flex flex-col lg:flex-row justify-center items-start gap-12 lg:gap-16">
+                            <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
                                 {/* 3 Months Branch */}
                                 <div className="flex flex-col items-center gap-4 w-full">
-                                    <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500">3 Months</div>
-                                    <div className="w-full lg:w-px h-px lg:h-8 bg-purple-500/50"></div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl">
+                                    <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500 w-full text-center">3 Months</div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
                                         {renderPlan(plansToShow.find(p => p.name === 'Premium'), '3 Months')}
                                         {renderPlan(plansToShow.find(p => p.name === 'Super Premium'), '3 Months')}
                                     </div>
                                 </div>
 
                                 <div className="w-full h-px bg-white/10 lg:hidden" />
-                                <div className="w-px h-auto bg-white/10 hidden lg:block self-stretch" />
-
+                                <div className="w-px h-auto bg-white/10 hidden lg:block self-stretch mx-4" />
+                                
                                 {/* 6 Months Branch */}
                                 <div className="flex flex-col items-center gap-4 w-full">
-                                    <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500">6 Months</div>
-                                    <div className="w-full lg:w-px h-px lg:h-8 bg-green-500/50"></div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl">
+                                    <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500 w-full text-center">6 Months</div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
                                         {renderPlan(plansToShow.find(p => p.name === 'Premium'), '6 Months')}
                                         {renderPlan(plansToShow.find(p => p.name === 'Super Premium'), '6 Months')}
                                     </div>
