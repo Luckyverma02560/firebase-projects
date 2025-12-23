@@ -380,10 +380,31 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     }
 
     if (p.description === 'Youtube Premium') {
-        delete service.plans.monthly['Super Premium'];
         service.plans['half-yearly'] = {};
         service.plans.yearly = {};
+        delete service.plans.monthly['Super Premium'];
+        
+        service.plans.monthly['Basic']!.features = [
+            '1 Device access',
+            'Invite Login',
+            'Ad-Free Experience',
+            'Enjoy uninterrupted streaming'
+        ];
+        service.plans.monthly['Standard']!.features = [
+            'Upto 10 Device Access',
+            'Activation On Mail',
+            'Ad-Free Experience',
+            'Enjoy uninterrupted streaming'
+        ];
+        service.plans.monthly['Premium']!.features = [
+            'Upto 10 Device Access',
+            'Activation On Mail',
+            'Ad-Free Experience',
+            '100% Guarenteed Service'
+        ];
     }
     
     return service;
 });
+
+    
