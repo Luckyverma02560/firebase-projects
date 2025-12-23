@@ -1,3 +1,4 @@
+
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const serviceLogoIds = [
@@ -266,14 +267,18 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
 
     if (p.description === 'ZEE5') {
         service.plans.monthly['Basic']!.price = '60';
+        service.plans.monthly['Basic']!.features[2] = 'FHD Streaming Quality';
         service.plans.monthly['Basic']!.isAvailable = false;
         service.plans.monthly['Standard']!.price = '70';
+        service.plans.monthly['Standard']!.features[2] = 'FHD Streaming Quality';
         service.plans.monthly['Premium']!.price = '80';
         service.plans.monthly['Premium']!.isPopular = true;
         service.plans.monthly['Premium']!.features[1] = 'No. Activation';
+        service.plans.monthly['Premium']!.features[2] = 'FHD Streaming Quality';
         service.plans.monthly['Premium']!.features[3] = 'Limited Sharing';
         service.plans.monthly['Super Premium']!.price = '120';
         service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
+        service.plans.monthly['Super Premium']!.features[2] = 'FHD Streaming Quality';
         
         // 3 & 6 Months for ZEE5
         service.plans['half-yearly'] = {};
@@ -284,7 +289,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 features: [
                     '1 Device Access',
                     'Profile Login',
-                    '4K  Streaming Quality',
+                    'FHD Streaming Quality',
                     'Limited Sharing'
                 ], 
                 isAvailable: true,
@@ -295,7 +300,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 features: [
                     '2 Device Access',
                     'Profile Login',
-                    '4K streaming quality',
+                    'FHD Streaming Quality',
                     'Private Account Access'
                 ],
                 isAvailable: false,
@@ -309,7 +314,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 features: [
                     '1 Device Access',
                     'Profile Login',
-                    '4K  Streaming Quality',
+                    'FHD Streaming Quality',
                     'Limited Sharing'
                 ], 
                 isAvailable: true,
@@ -320,7 +325,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 features: [
                     '2 Device Access',
                     'Profile Login',
-                    '4K streaming quality',
+                    'FHD Streaming Quality',
                     'Private Account Access'
                 ],
                 isAvailable: false,
@@ -329,13 +334,18 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         };
 
         service.plans.yearly['Basic']!.price = '300';
+        service.plans.yearly['Basic']!.features[2] = 'FHD Streaming Quality';
         service.plans.yearly['Basic']!.isAvailable = false;
-        service.plans.yearly['Standard']!.price = '350';
+        service.plans.yearly['Standard']!.price = '320';
+        service.plans.yearly['Standard']!.features[2] = 'FHD Streaming Quality';
         service.plans.yearly['Standard']!.isPopular = true;
-        service.plans.yearly['Premium']!.price = '400';
-        service.plans.yearly['Premium']!.isAvailable = false;
-        service.plans.yearly['Super Premium']!.price = '450';
-        service.plans.yearly['Super Premium']!.isAvailable = false;
+        service.plans.yearly['Standard']!.isAvailable = false;
+        service.plans.yearly['Premium']!.price = '350';
+        service.plans.yearly['Premium']!.features[2] = 'FHD Streaming Quality';
+        service.plans.yearly['Premium']!.isAvailable = true;
+        service.plans.yearly['Super Premium']!.price = '400';
+        service.plans.yearly['Super Premium']!.features[2] = 'FHD Streaming Quality';
+        service.plans.yearly['Super Premium']!.isAvailable = true;
     }
 
     if (p.description === 'Sony Liv') {
@@ -353,7 +363,20 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.yearly['Super Premium']!.isAvailable = false;
     }
 
+    if (p.description === 'Canva') {
+        service.plans.monthly['Basic']!.isAvailable = false;
+        service.plans.monthly['Standard']!.isAvailable = false;
+        service.plans.monthly['Premium']!.isAvailable = false;
+        service.plans.monthly['Super Premium']!.isAvailable = false;
+        service.plans['half-yearly']!['Basic']!.isAvailable = false;
+        service.plans['half-yearly']!['Standard']!.isAvailable = false;
+        service.plans['half-yearly']!['Premium']!.isAvailable = false;
+        service.plans['half-yearly']!['Super Premium']!.isAvailable = false;
+        service.plans.yearly['Basic']!.isAvailable = false;
+        service.plans.yearly['Standard']!.isAvailable = false;
+        service.plans.yearly['Premium']!.isAvailable = false;
+        service.plans.yearly['Super Premium']!.isAvailable = false;
+    }
+    
     return service;
 });
-
-    
