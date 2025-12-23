@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { Check, ShoppingCart } from 'lucide-react';
@@ -22,18 +21,17 @@ interface PricingCardProps {
     serviceName: string | null;
     billingCycle: string;
     isAvailable: boolean;
-    jioHotstarDuration?: '3 Months' | '6 Months';
 }
 
-export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false, serviceName, billingCycle, isAvailable, jioHotstarDuration }: PricingCardProps) => {
+export const PricingCard = ({ name, price, pricePeriod, description, features, buttonText, gradient, shadow, isPopular = false, serviceName, billingCycle, isAvailable }: PricingCardProps) => {
     const { addToCart } = useCart();
     const { toast } = useToast();
 
     const handleAddToCart = () => {
         if (!isAvailable) return;
         const item = {
-            id: `${serviceName}-${name}-${price}`,
-            name: `${serviceName} - ${name}`,
+            id: `${serviceName}-${name}-${billingCycle}`,
+            name: `${serviceName} - ${name} (${billingCycle})`,
             price: parseFloat(price.replace('INR ', '')),
             period: pricePeriod,
             quantity: 1,
@@ -41,7 +39,7 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
         addToCart(item);
         toast({
             title: "Added to cart",
-            description: `${name} has been added to your cart.`,
+            description: `${name} (${billingCycle}) has been added to your cart.`,
         });
     };
 
@@ -51,20 +49,7 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
 
     const whatsappNumber = "918600070638";
     
-    let billingCycleText = '';
-    if (serviceName === 'Netflix') {
-        if (billingCycle === 'monthly') billingCycleText = 'Monthly';
-        else if (billingCycle === 'half-yearly') billingCycleText = '3 Months';
-        else if (billingCycle === 'yearly') billingCycleText = 'Half Yearly';
-    } else if (serviceName === 'Jio Hotstar' && billingCycle === 'half-yearly' && jioHotstarDuration) {
-        billingCycleText = jioHotstarDuration;
-    } else {
-        if (billingCycle === 'monthly') billingCycleText = 'Monthly';
-        else if (billingCycle === 'half-yearly') billingCycleText = 'Half Yearly';
-        else if (billingCycle === 'yearly') billingCycleText = 'Yearly';
-    }
-
-    const message = `Hey, I Need the ${serviceName} ${name} (${billingCycleText}) plan. Kindly Reach Me Soon.`;
+    const message = `Hey, I Need the ${serviceName} ${name} (${billingCycle}) plan. Kindly Reach Me Soon.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     
     return (
@@ -143,7 +128,3 @@ export const PricingCard = ({ name, price, pricePeriod, description, features, b
         </div>
     );
 };
-
-    
-
-    

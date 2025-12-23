@@ -14,6 +14,7 @@ const serviceLogoIds = [
 
 export type PlanName = 'Basic' | 'Standard' | 'Premium' | 'Super Premium';
 export type BillingCycle = 'monthly' | 'half-yearly' | 'yearly';
+export type JioBillingCycle = '3-months' | '6-months';
 
 export interface PlanDetails {
     price: string;
@@ -22,7 +23,11 @@ export interface PlanDetails {
     isPopular?: boolean;
 }
 
-export type ServicePlans = Record<BillingCycle, Partial<Record<PlanName, PlanDetails>>>;
+export type ServicePlans = Record<BillingCycle, Partial<Record<PlanName, PlanDetails>>> & {
+    '3-months'?: Partial<Record<PlanName, PlanDetails>>;
+    '6-months'?: Partial<Record<PlanName, PlanDetails>>;
+};
+
 
 export interface Service {
     id: number;
@@ -169,9 +174,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
     if (p.description === 'Jio Hotstar') {
         service.plans.monthly['Basic']!.price = '60';
         service.plans.monthly['Basic']!.isAvailable = false;
-        service.plans.monthly['Basic']!.isPopular = false;
         service.plans.monthly['Standard']!.price = '70';
-        service.plans.monthly['Standard']!.isPopular = false;
         service.plans.monthly['Premium']!.price = '80';
         service.plans.monthly['Premium']!.isPopular = true;
         service.plans.monthly['Premium']!.features[1] = 'No. Activation';
@@ -180,35 +183,58 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Super Premium']!.features[0] = '1 Device Access';
         service.plans.monthly['Super Premium']!.isPopular = false;
         
-        // 3 & 6 Months
-        service.plans['half-yearly']['Premium']!.price = '300';
-        service.plans['half-yearly']['Super Premium']!.price = '350';
-        service.plans['half-yearly']['Premium']!.isPopular = true;
-        service.plans['half-yearly']['Super Premium']!.isAvailable = false;
-
-        // I am leaving this as a flexible structure for when you decide to have separate 3 and 6 month objects
-        const threeMonthPremium = service.plans['half-yearly']['Premium'];
-        if(threeMonthPremium) {
-            threeMonthPremium.price = '300';
-            threeMonthPremium.features[3] = 'Limited Sharing';
-        }
+        // Clear half-yearly and define 3-months/6-months
+        service.plans['half-yearly'] = {};
         
-        const threeMonthSuperPremium = service.plans['half-yearly']['Super Premium'];
-        if(threeMonthSuperPremium) {
-            threeMonthSuperPremium.price = '350';
-            threeMonthSuperPremium.features[0] = '1 Device Access';
-        }
+        service.plans['3-months'] = {
+            'Premium': { 
+                price: '300', 
+                features: [
+                    '1 Device Access',
+                    'Profile Login',
+                    '4K Streaming Quality',
+                    'Limited Sharing'
+                ], 
+                isAvailable: true, 
+                isPopular: true 
+            },
+            'Super Premium': { 
+                price: '350', 
+                features: [
+                    '1 Device Access',
+                    'Profile Login',
+                    '4K streaming quality',
+                    'Private Account Access'
+                ], 
+                isAvailable: true,
+                isPopular: false
+            }
+        };
         
-        // For the sake of the current structure, these will effectively overwrite the 3 month values when "6 months" is selected by logic, but the data setup is here.
-        const sixMonthPremium = service.plans['half-yearly']['Premium'];
-        if(sixMonthPremium) {
-             sixMonthPremium.price = '400';
-        }
-        
-        const sixMonthSuperPremium = service.plans['half-yearly']['Super Premium'];
-        if(sixMonthSuperPremium) {
-             sixMonthSuperPremium.price = '450';
-        }
+        service.plans['6-months'] = {
+            'Premium': { 
+                price: '400', 
+                features: [
+                    '1 Device Access',
+                    'Profile Login',
+                    '4K Streaming Quality',
+                    'Limited Sharing'
+                ], 
+                isAvailable: true, 
+                isPopular: true 
+            },
+            'Super Premium': { 
+                price: '450', 
+                features: [
+                    '2 Device Access',
+                    'Profile Login',
+                    '4K streaming quality',
+                    'Private Account Access'
+                ], 
+                isAvailable: true,
+                isPopular: false
+            }
+        };
 
     }
 

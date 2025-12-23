@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { useState } from 'react';
@@ -8,7 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { cn } from '@/lib/utils';
 import { ServiceCard } from './service-card';
-import { initialServices, type Service, type PlanName, type BillingCycle } from '@/lib/services';
+import { initialServices, type Service, type PlanName, type BillingCycle, type JioBillingCycle } from '@/lib/services';
 import Link from 'next/link';
 
 interface PlansSectionProps {
@@ -29,15 +28,11 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     
     const serviceData = currentServices.find(s => s.name === selectedService);
 
-    const plansToShow = serviceData ? (Object.keys(serviceData.plans.monthly) as PlanName[]).map(planName => {
-        const planDetails = serviceData.plans.monthly[planName];
+    const getPlanDetails = (planName: PlanName, cycle: BillingCycle | JioBillingCycle) => {
+        if (!serviceData) return null;
+        
+        const planDetails = (serviceData.plans as any)[cycle]?.[planName];
         if (!planDetails) return null;
-
-        const prices = {
-            monthly: serviceData.plans.monthly[planName],
-            'half-yearly': serviceData.plans['half-yearly'][planName],
-            yearly: serviceData.plans.yearly[planName],
-        };
 
         let gradient = 'from-blue-500 to-indigo-600';
         let shadow = 'shadow-blue-500/30';
@@ -60,60 +55,51 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                 description = 'For power users and large families';
                 break;
         }
-
-        const isPopular = prices[billingCycle]?.isPopular || false;
-
+        
         return {
             name: planName,
             description,
-            features: prices[billingCycle]?.features || [],
-            prices,
+            features: planDetails.features || [],
+            price: planDetails.price,
+            isAvailable: planDetails.isAvailable,
+            isPopular: planDetails.isPopular || false,
             buttonText: 'BUY NOW',
             gradient,
             shadow,
-            isPopular,
         };
-    }).filter(p => p !== null) as any[] : [];
+    };
     
-    const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
-
     const isNetflix = selectedService === 'Netflix';
     const isPrimeVideo = selectedService === 'Prime Video';
     const isJioHotstar = selectedService === 'Jio Hotstar';
 
-    const renderPlan = (plan: any, jioHotstarDuration?: '3 Months' | '6 Months') => {
-        const priceInfo = plan.prices[billingCycle];
-        if (!priceInfo) return null;
-        
-        const {price, isAvailable, features} = priceInfo;
-        let period = '/month';
-        if (billingCycle === 'half-yearly') {
-            if (isNetflix) {
-                period = '/3mo';
-            } else if (isJioHotstar) {
-                period = jioHotstarDuration === '3 Months' ? '/3mo' : '/6mo';
-            } else {
-                period = '/6mo';
-            }
-        } else if (billingCycle === 'yearly') {
-            period = isNetflix ? '/6mo' : '/12mo';
-        }
+    const renderPlan = (plan: any, period: string, billingCycleForMessage: string) => {
+        if (!plan) return null;
         
         return (
         <PricingCard 
-                key={`${plan.name}-${jioHotstarDuration || ''}`} 
+                key={`${plan.name}-${period}`} 
                 {...plan}
-                price={`INR ${price}`}
-                features={features}
+                price={`INR ${plan.price}`}
                 pricePeriod={period}
-                isAvailable={isAvailable}
                 serviceName={selectedService}
-                billingCycle={billingCycle}
-                jioHotstarDuration={jioHotstarDuration}
+                billingCycle={billingCycleForMessage}
             />
         )
     };
 
+    const monthlyPlans = serviceData ? (Object.keys(serviceData.plans.monthly) as PlanName[]).map(p => getPlanDetails(p, 'monthly')) : [];
+    const halfYearlyPlans = serviceData ? (Object.keys(serviceData.plans['half-yearly']) as PlanName[]).map(p => getPlanDetails(p, 'half-yearly')) : [];
+    const yearlyPlans = serviceData ? (Object.keys(serviceData.plans.yearly) as PlanName[]).map(p => getPlanDetails(p, 'yearly')) : [];
+
+    const jio3MonthPlans = serviceData && isJioHotstar ? (Object.keys(serviceData.plans['3-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '3-months')) : [];
+    const jio6MonthPlans = serviceData && isJioHotstar ? (Object.keys(serviceData.plans['6-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '6-months')) : [];
+
+    const plansToShow = billingCycle === 'monthly' ? monthlyPlans 
+        : billingCycle === 'half-yearly' ? halfYearlyPlans 
+        : yearlyPlans;
+    
+    const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
 
     return (
         <section className="relative w-full flex items-center justify-center py-20 md:py-32 px-4">
@@ -172,10 +158,9 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                             <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
                                 {/* 3 Months Branch */}
                                 <div className="flex flex-col items-center gap-4 w-full">
-                                    <div className="bg-gray-800 text-purple-400 font-bold text-lg px-8 py-2 rounded-full border-2 border-purple-500 w-auto text-center">3 Months</div>
+                                    <div className="w-auto bg-gray-800 text-purple-400 font-bold text-lg px-8 py-2 rounded-full border-2 border-purple-500 text-center">3 Months</div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
-                                        {renderPlan(plansToShow.find(p => p.name === 'Premium'), '3 Months')}
-                                        {renderPlan(plansToShow.find(p => p.name === 'Super Premium'), '3 Months')}
+                                        {jio3MonthPlans.map(plan => renderPlan(plan, '/3mo', '3 Months'))}
                                     </div>
                                 </div>
 
@@ -184,16 +169,27 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 
                                 {/* 6 Months Branch */}
                                 <div className="flex flex-col items-center gap-4 w-full">
-                                    <div className="bg-gray-800 text-green-400 font-bold text-lg px-8 py-2 rounded-full border-2 border-green-500 w-auto text-center">6 Months</div>
+                                    <div className="w-auto bg-gray-800 text-green-400 font-bold text-lg px-8 py-2 rounded-full border-2 border-green-500 text-center">6 Months</div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
-                                        {renderPlan(plansToShow.find(p => p.name === 'Premium'), '6 Months')}
-                                        {renderPlan(plansToShow.find(p => p.name === 'Super Premium'), '6 Months')}
+                                        {jio6MonthPlans.map(plan => renderPlan(plan, '/6mo', '6 Months'))}
                                     </div>
                                 </div>
                             </div>
                         ) : (
                             <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 justify-center", plansToShow.length >= 4 ? 'lg:grid-cols-4' : `lg:grid-cols-${plansToShow.length}`)}>
-                                {plansToShow.map((plan) => renderPlan(plan))}
+                                {plansToShow.map((plan) => {
+                                    if (!plan) return null;
+                                    let period = '/month';
+                                    let cycleForMessage = 'Monthly';
+                                    if (billingCycle === 'half-yearly') {
+                                        period = isNetflix ? '/3mo' : '/6mo';
+                                        cycleForMessage = isNetflix ? '3 Months' : 'Half Yearly';
+                                    } else if (billingCycle === 'yearly') {
+                                        period = isNetflix ? '/6mo' : '/12mo';
+                                        cycleForMessage = isNetflix ? 'Half Yearly' : 'Yearly';
+                                    }
+                                    return renderPlan(plan, period, cycleForMessage);
+                                })}
                             </div>
                         )}
                     </>
@@ -216,5 +212,3 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     );
 
 };
-
-    
