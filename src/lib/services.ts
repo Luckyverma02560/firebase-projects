@@ -191,19 +191,13 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         // that both 3-month and 6-month plans will share these properties.
         const sixMonthPremium = JSON.parse(JSON.stringify(service.plans['half-yearly']['Premium']));
         sixMonthPremium.price = '400';
+        sixMonthPremium.features[3] = 'Limited Sharing';
         sixMonthPremium.isPopular = true;
 
         const sixMonthSuperPremium = JSON.parse(JSON.stringify(service.plans['half-yearly']['Super Premium']));
         sixMonthSuperPremium.price = '450';
+        sixMonthSuperPremium.features[0] = '1 Device Access';
         sixMonthSuperPremium.isAvailable = false;
-
-        // Note: The UI logic in plans-section.tsx will render these as separate cards,
-        // but the underlying data for 'half-yearly' has been updated with the latest rules.
-        // A better long term solution would be a more flexible data structure.
-        
-        // Applying the changes for 6 months logic by overwriting is not ideal but works with current structure.
-        // Let's assume the UI will handle which price to show. The popularity and availability will be shared.
-
     }
 
     return service;
