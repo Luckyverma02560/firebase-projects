@@ -46,9 +46,15 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
-                <Link key={index} href={social.href} className="text-foreground/60 hover:text-accent transition-colors">
+                <a 
+                  key={index} 
+                  href={social.href} 
+                  className="text-foreground/60 hover:text-accent transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <social.icon size={20} />
-                </Link>
+                </a>
               ))}
             </div>
           </div>
