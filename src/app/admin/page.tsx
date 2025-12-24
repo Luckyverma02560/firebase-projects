@@ -17,8 +17,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Switch } from '@/components/ui/switch';
-import { initialServices, generateDefaultPlans, planNames, billingCycles, type Service, type PlanName, type BillingCycle, type ServicePlans } from '@/lib/services';
+import { generateDefaultPlans, planNames, billingCycles, type Service, type PlanName, type BillingCycle } from '@/lib/services';
 import { useToast } from '@/hooks/use-toast';
+import { useServices } from '@/context/service-context';
 
 
 // Mock data
@@ -53,11 +54,10 @@ export default function AdminPage() {
   const [currentView, setCurrentView] = useState<AdminView>('dashboard');
   const isMobile = useIsMobile();
   const { toast } = useToast();
+  const { services, setServices } = useServices();
 
   const [analyticsTimespan, setAnalyticsTimespan] = useState<'daily' | 'monthly' | 'yearly'>('monthly');
 
-  const [services, setServices] = useState<Service[]>(initialServices);
-  
   const [newService, setNewService] = useState<Omit<Service, 'id'>>({
       name: '',
       icon: '',
@@ -571,5 +571,3 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
-
-    

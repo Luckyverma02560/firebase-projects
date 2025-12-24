@@ -7,8 +7,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { cn } from '@/lib/utils';
 import { ServiceCard } from './service-card';
-import { initialServices, type Service, type PlanName, type BillingCycle, type JioBillingCycle } from '@/lib/services';
+import { type Service, type PlanName, type BillingCycle, type JioBillingCycle } from '@/lib/services';
 import Link from 'next/link';
+import { useServices } from '@/context/service-context';
 
 interface PlansSectionProps {
     showPlans: boolean;
@@ -17,7 +18,7 @@ interface PlansSectionProps {
 
 export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) => {
     const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
-    const [currentServices, setCurrentServices] = useState<Service[]>(initialServices);
+    const { services: currentServices } = useServices();
 
     const services = currentServices.map(s => ({
         id: s.id.toString(),

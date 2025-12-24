@@ -387,8 +387,8 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                     price: '150',
                     features: [
                         'Canva Pro features',
-                        'Invite based activation',
-                        'Full customer support',
+                        'Activation On Mail',
+                        'No Restrictions / Limits.',
                         'Private account access'
                     ],
                     isAvailable: true,
@@ -396,19 +396,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
                 }
             },
             'half-yearly': {},
-            yearly: {
-                 'Premium': {
-                    price: '500',
-                    features: [
-                        'Canva Pro features',
-                        'Invite based activation',
-                        'Full customer support',
-                        'Private account access'
-                    ],
-                    isAvailable: true,
-                    isPopular: true
-                }
-            }
+            yearly: {}
         };
     }
 
@@ -416,7 +404,7 @@ export const initialServices: Service[] = PlaceHolderImages.filter(p => serviceL
         service.plans.monthly['Basic']!.price = '60';
         service.plans.monthly['Basic']!.features = [
             '1 Device access',
-            'Invite Based Activation',
+            'Invite Login',
             'Ad-Free Experience',
             'Enjoy uninterrupted streaming'
         ];
