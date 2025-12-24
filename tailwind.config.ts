@@ -11,15 +11,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['"PT Sans"', 'sans-serif'],
-        headline: ['"Playfair Display"', 'serif'],
-        'headline-display': ['"Cinzel"', 'serif'],
+        body: ['var(--font-pt-sans)', 'sans-serif'],
+        headline: ['var(--font-playfair-display)', 'serif'],
+        'headline-display': ['var(--font-cinzel)', 'serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        'noto-serif': ['var(--font-noto-serif)', 'serif'],
         display: ['"Italiana"', 'serif'],
         code: ['monospace'],
-        inter: ['"Inter"', 'sans-serif'],
         handwriting: ['"Tangerine"', 'cursive'],
         helvetica: ['"Helvetica"', 'sans-serif'],
-        'noto-serif': ['"Noto Serif"', 'serif'],
         brillant: ['Brillant', 'cursive'],
         'orange-avenue': ['Orange Avenue', 'sans-serif'],
         'bebas-neue': ['Bebas Neue', 'sans-serif'],
