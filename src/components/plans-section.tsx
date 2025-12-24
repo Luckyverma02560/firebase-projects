@@ -230,14 +230,12 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                 ) : (
                     <div className="flex flex-col items-center gap-6 px-4 md:px-0">
                         {services.map((service) => (
-                           service && (
-                             <ServiceCard
+                           <ServiceCard
                                 key={service.id}
                                 name={service.name}
                                 logoUrl={service.logoUrl}
                                 logoHint={service.logoHint}
                             />
-                           )
                         ))}
                     </div>
                 )}

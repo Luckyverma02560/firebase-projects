@@ -2,12 +2,14 @@
 "use client";
 
 import { Suspense } from 'react';
-import { StarfieldAnimation } from '@/components/starfield-animation';
-import { HeroParticles } from '@/components/hero-particles';
-import { UpwardNeonParticles } from '@/components/upward-neon-particles';
+import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import { GoBackButton } from '@/components/go-back-button';
 import { PlansSection } from '@/components/plans-section';
-import { useSearchParams } from 'next/navigation';
+
+const StarfieldAnimation = dynamic(() => import('@/components/starfield-animation').then(m => m.StarfieldAnimation), { ssr: false });
+const HeroParticles = dynamic(() => import('@/components/hero-particles').then(m => m.HeroParticles), { ssr: false });
+const UpwardNeonParticles = dynamic(() => import('@/components/upward-neon-particles').then(m => m.UpwardNeonParticles), { ssr: false });
 
 interface AboutPageProps {
   searchParams?: {

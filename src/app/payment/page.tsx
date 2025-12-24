@@ -1,12 +1,16 @@
 
-import { PaymentIcons } from '@/components/payment-icons';
-import { HeroParticles } from '@/components/hero-particles';
-import { UpwardNeonParticles } from '@/components/upward-neon-particles';
+"use client";
+
+import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { AlertCircle } from 'lucide-react';
+import { PaymentIcons } from '@/components/payment-icons';
+
+const HeroParticles = dynamic(() => import('@/components/hero-particles').then(m => m.HeroParticles), { ssr: false });
+const UpwardNeonParticles = dynamic(() => import('@/components/upward-neon-particles').then(m => m.UpwardNeonParticles), { ssr: false });
 
 export default function PaymentPage() {
   const qrCodePlaceholder = PlaceHolderImages.find(p => p.id === 'qr-code-placeholder');

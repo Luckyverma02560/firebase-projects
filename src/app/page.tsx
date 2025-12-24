@@ -2,15 +2,16 @@
 "use client"
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { WhoWeAreSection } from '@/components/who-we-are-section';
 import { WhyChooseUsSection } from '@/components/our-story-section';
-import { HeroParticles } from '@/components/hero-particles';
-import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useIsMobile } from '@/hooks/use-mobile';
 
+const HeroParticles = dynamic(() => import('@/components/hero-particles').then(m => m.HeroParticles), { ssr: false });
+const UpwardNeonParticles = dynamic(() => import('@/components/upward-neon-particles').then(m => m.UpwardNeonParticles), { ssr: false });
 
 export default function Home() {
   const [rotation, setRotation] = useState({ rotateX: 0, rotateY: 0 });

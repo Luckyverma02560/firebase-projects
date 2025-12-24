@@ -2,14 +2,12 @@
 'use client';
 
 import { useState, useMemo, FormEvent } from 'react';
+import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { HeroParticles } from '@/components/hero-particles';
-import { UpwardNeonParticles } from '@/components/upward-neon-particles';
 import { Fingerprint, LogOut, ShieldCheck, BarChart3, LineChart, PieChartIcon, ArrowLeft, Settings, DollarSign, PlusCircle, Pencil, Trash2 } from 'lucide-react';
-import { ResponsiveContainer, BarChart as RechartsBarChart, LineChart as RechartsLineChart, PieChart as RechartsPieChart, XAxis, YAxis, Tooltip, Legend, Bar, Line, Pie, Cell } from 'recharts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -21,6 +19,22 @@ import { Switch } from '@/components/ui/switch';
 import { generateDefaultPlans, planNames, billingCycles, type Service, type PlanName, type BillingCycle } from '@/lib/services';
 import { useToast } from '@/hooks/use-toast';
 import { useServices } from '@/context/service-context';
+
+const HeroParticles = dynamic(() => import('@/components/hero-particles').then(m => m.HeroParticles), { ssr: false });
+const UpwardNeonParticles = dynamic(() => import('@/components/upward-neon-particles').then(m => m.UpwardNeonParticles), { ssr: false });
+
+const RechartsBarChart = dynamic(() => import('recharts').then(m => m.BarChart), { ssr: false });
+const RechartsLineChart = dynamic(() => import('recharts').then(m => m.LineChart), { ssr: false });
+const RechartsPieChart = dynamic(() => import('recharts').then(m => m.PieChart), { ssr: false });
+const XAxis = dynamic(() => import('recharts').then(m => m.XAxis), { ssr: false });
+const YAxis = dynamic(() => import('recharts').then(m => m.YAxis), { ssr: false });
+const Tooltip = dynamic(() => import('recharts').then(m => m.Tooltip), { ssr: false });
+const Legend = dynamic(() => import('recharts').then(m => m.Legend), { ssr: false });
+const Bar = dynamic(() => import('recharts').then(m => m.Bar), { ssr: false });
+const Line = dynamic(() => import('recharts').then(m => m.Line), { ssr: false });
+const Pie = dynamic(() => import('recharts').then(m => m.Pie), { ssr: false });
+const Cell = dynamic(() => import('recharts').then(m => m.Cell), { ssr: false });
+const ResponsiveContainer = dynamic(() => import('recharts').then(m => m.ResponsiveContainer), { ssr: false });
 
 
 // Mock data
@@ -239,8 +253,9 @@ export default function AdminPage() {
             };
             
             const renderPlanForm = (serviceData: Omit<Service, 'id'> | Service, isEditing: boolean) => {
-                const has3MonthPlan = serviceData.plans['3-months'] && Object.keys(serviceData.plans['3-months']).length > 0;
-                const has6MonthPlan = serviceData.plans['6-months'] && Object.keys(serviceData.plans['6-months']).length > 0;
+                const targetService = isEditing ? editingService : newService;
+                const has3MonthPlan = targetService?.plans['3-months'] && Object.keys(targetService.plans['3-months']).length > 0;
+                const has6MonthPlan = targetService?.plans['6-months'] && Object.keys(targetService.plans['6-months']).length > 0;
                 const showSpecialHalfYearly = has3MonthPlan || has6MonthPlan;
 
                 return (
