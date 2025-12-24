@@ -99,9 +99,12 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     const jio3MonthPlans = serviceData && (isJioHotstar || isZee5) ? (Object.keys(serviceData.plans['3-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '3-months')) : [];
     const jio6MonthPlans = serviceData && (isJioHotstar || isZee5) ? (Object.keys(serviceData.plans['6-months'] || {}) as PlanName[]).map(p => getPlanDetails(p, '6-months')) : [];
 
-
-    const plansToShow = billingCycle === 'monthly' ? monthlyPlans 
-        : billingCycle === 'half-yearly' ? halfYearlyPlans 
+    const plansToShow = isCanva
+        ? monthlyPlans
+        : billingCycle === 'monthly'
+        ? monthlyPlans
+        : billingCycle === 'half-yearly'
+        ? halfYearlyPlans
         : yearlyPlans;
     
     const gridColsClass = plansToShow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
