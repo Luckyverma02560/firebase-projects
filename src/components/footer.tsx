@@ -20,7 +20,7 @@ export default function Footer() {
     { href: '#', icon: Linkedin },
     { href: '#', icon: Twitter },
     { href: '#', icon: Facebook },
-    { href: '#', icon: Instagram },
+    { href: 'https://www.instagram.com/el11ven.hub/', icon: Instagram },
   ];
 
   return (
