@@ -19,7 +19,7 @@ export default function Footer() {
   const socialLinks = [
     { href: '#', icon: Linkedin },
     { href: '#', icon: Twitter },
-    { href: '#', icon: Facebook },
+    { href: 'https://www.facebook.com/people/El11ven-Hub/61585139540594', icon: Facebook },
     { href: 'https://www.instagram.com/el11ven.hub/', icon: Instagram },
   ];
 
