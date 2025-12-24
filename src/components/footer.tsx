@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Facebook, Instagram, Phone, Send } from 'lucide-react';
+import { Facebook, Instagram, MessageSquare, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Footer() {
@@ -21,7 +21,7 @@ export default function Footer() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   const socialLinks = [
-    { href: whatsappUrl, icon: Phone, 'aria-label': 'WhatsApp' },
+    { href: whatsappUrl, icon: MessageSquare, 'aria-label': 'WhatsApp' },
     { href: '#', icon: Send, 'aria-label': 'Telegram' },
     { href: 'https://www.facebook.com/people/El11ven-Hub/61585139540594', icon: Facebook, 'aria-label': 'Facebook' },
     { href: 'https://www.instagram.com/el11ven.hub/', icon: Instagram, 'aria-label': 'Instagram' },
