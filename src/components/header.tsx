@@ -15,7 +15,11 @@ import { SearchComponent } from './search-component';
 
 const homeLink = { href: '/', label: 'Home' };
 const plansLink = { href: '/about', label: 'Plans' };
-const getStartedLink = { href: '/about', label: 'Get Started' };
+
+const whatsappNumber = "918600070638";
+const message = "Hey, I want to know more about your Subsciption Plans";
+const getStartedLink = { href: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, label: 'Get Started' };
+
 const cartLink = { href: '/cart', label: 'View Cart' };
 
 
@@ -62,14 +66,14 @@ export default function Header() {
      const isActive = pathname === href;
     return (
         <SheetClose asChild>
-          <Link href={href} className={cn(
+          <a href={href} target={isGetStarted ? "_blank" : "_self"} rel={isGetStarted ? "noopener noreferrer" : ""} className={cn(
             "block py-3 text-lg text-center font-headline rounded-md",
             isButton ? "bg-gradient-plans-header text-white" : 
             (isGetStarted ? "bg-gradient-get-started text-white" : 
             (isActive ? "text-bright-accent" : "text-foreground"))
             )}>
               {label}
-          </Link>
+          </a>
         </SheetClose>
     );
   };
@@ -119,7 +123,7 @@ export default function Header() {
           <div className="hidden md:flex flex-shrink-0 justify-end items-center gap-2">
             <SearchComponent />
             <Button asChild size="sm" className="font-headline text-sm uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
-                <Link href={getStartedLink.href}>{getStartedLink.label}</Link>
+                <a href={getStartedLink.href} target="_blank" rel="noopener noreferrer">{getStartedLink.label}</a>
             </Button>
             <Button asChild variant="outline" size="icon" className="h-9 w-9 text-white border-gold-accent hover:bg-gold-accent/20 hover:text-white transition-colors duration-300">
                 <Link href={cartLink.href}>
