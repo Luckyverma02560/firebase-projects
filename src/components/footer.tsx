@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Phone, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Footer() {
@@ -16,11 +16,15 @@ export default function Footer() {
     { href: '/admin', label: 'Control Panel' },
   ];
 
+  const whatsappNumber = "918600070638";
+  const message = `Hello, I'm visiting your site and have a question.`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
   const socialLinks = [
-    { href: '#', icon: Linkedin },
-    { href: '#', icon: Twitter },
-    { href: 'https://www.facebook.com/people/El11ven-Hub/61585139540594', icon: Facebook },
-    { href: 'https://www.instagram.com/el11ven.hub/', icon: Instagram },
+    { href: whatsappUrl, icon: Phone, 'aria-label': 'WhatsApp' },
+    { href: '#', icon: Send, 'aria-label': 'Telegram' },
+    { href: 'https://www.facebook.com/people/El11ven-Hub/61585139540594', icon: Facebook, 'aria-label': 'Facebook' },
+    { href: 'https://www.instagram.com/el11ven.hub/', icon: Instagram, 'aria-label': 'Instagram' },
   ];
 
   return (
@@ -52,6 +56,7 @@ export default function Footer() {
                   className="text-foreground/60 hover:text-accent transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social['aria-label']}
                 >
                   <social.icon size={20} />
                 </a>
