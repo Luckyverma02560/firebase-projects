@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { WhoWeAreSection } from '@/components/who-we-are-section';
@@ -16,6 +16,11 @@ const UpwardNeonParticles = dynamic(() => import('@/components/upward-neon-parti
 export default function Home() {
   const [rotation, setRotation] = useState({ rotateX: 0, rotateY: 0 });
   const isMobile = useIsMobile();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isMobile || !e.currentTarget) return;
@@ -46,14 +51,14 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E10] to-[#1B1C1E] z-0" />
         <div className="absolute inset-0 z-1 pointer-events-none">
-            <HeroParticles />
-            {!isMobile && <UpwardNeonParticles />}
+            {isClient && <HeroParticles />}
+            {isClient && !isMobile && <UpwardNeonParticles />}
         </div>
         <div 
           className="relative z-2"
         >
           <section className="relative h-screen w-full flex items-center justify-center text-center text-white overflow-hidden">
-            <div className="relative z-10 p-4" style={isMobile ? {} : transformStyle}>
+            <div className="relative z-10 p-4" style={(isClient && !isMobile) ? transformStyle : {}}>
                 <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl font-medium tracking-[3px] uppercase opacity-0 animate-heading-in hero-heading-sweep">
                   EL<span className="text-[1.2em]">11</span>VEN HUB
                 </h1>
