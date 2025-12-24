@@ -74,6 +74,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     const isJioHotstar = selectedService === 'Jio Hotstar';
     const isZee5 = selectedService === 'ZEE5';
     const isYoutubePremium = selectedService === 'Youtube Premium';
+    const isCanva = selectedService === 'Canva';
 
     const renderPlan = (plan: any, period: string, billingCycleForMessage: string) => {
         if (!plan) return null;
@@ -131,7 +132,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
 
                 {showPlans ? (
                     <>
-                        {!isYoutubePremium && (
+                        {!isYoutubePremium && !isCanva && (
                             <RadioGroup
                                 defaultValue="monthly"
                                 onValueChange={(value: string) => setBillingCycle(value as BillingCycle)}
@@ -163,6 +164,15 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                 </div>
                             </RadioGroup>
                         )}
+                        
+                        {isCanva && (
+                            <div className="flex justify-center mb-12">
+                                 <div className="px-6 py-3 rounded-full bg-purple-600 text-white border-purple-400 shadow-lg">
+                                    Lifetime
+                                 </div>
+                            </div>
+                        )}
+
                         {(isJioHotstar || isZee5) && billingCycle === 'half-yearly' ? (
                             <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
                                 {/* 3 Months Branch */}
@@ -198,7 +208,10 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
                                     if (!plan) return null;
                                     let period = '/month';
                                     let cycleForMessage = 'Monthly';
-                                    if (billingCycle === 'half-yearly') {
+                                    if (isCanva) {
+                                        period = ' / Lifetime';
+                                        cycleForMessage = 'Lifetime';
+                                    } else if (billingCycle === 'half-yearly') {
                                         period = isNetflix ? '/3mo' : '/6mo';
                                         cycleForMessage = isNetflix ? '3 Months' : 'Half Yearly';
                                     } else if (billingCycle === 'yearly') {
