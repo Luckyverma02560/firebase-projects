@@ -155,7 +155,7 @@ export default function AdminPage() {
   };
 
 
-  const handleAddService = (e: FormEvent<HTMLFormEvent>) => {
+  const handleAddService = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newService.name || !newService.icon) {
         toast({ variant: 'destructive', title: 'Please fill out the service name and icon URL.'});
@@ -170,7 +170,7 @@ export default function AdminPage() {
     toast({ title: 'Service Added', description: `${serviceToAdd.name} has been successfully added.`});
   };
 
-  const handleUpdateService = (e: FormEvent<HTMLFormEvent>) => {
+  const handleUpdateService = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!editingService) return;
 
