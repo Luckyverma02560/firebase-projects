@@ -92,7 +92,7 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
         )
     };
 
-    const monthlyPlans = serviceData ? (Object.keys(serviceData.plans.monthly) as PlanName[]).map(p => getPlanDetails(p, 'monthly')) : [];
+    const monthlyPlans = serviceData ? (Object.keys(serviceData.plans.monthly || {}) as PlanName[]).map(p => getPlanDetails(p, 'monthly')) : [];
     const halfYearlyPlans = serviceData ? (Object.keys(serviceData.plans['half-yearly'] || {}) as PlanName[]).map(p => getPlanDetails(p, 'half-yearly')) : [];
     const yearlyPlans = serviceData ? (Object.keys(serviceData.plans.yearly || {}) as PlanName[]).map(p => getPlanDetails(p, 'yearly')) : [];
 
@@ -243,3 +243,5 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     );
 
 };
+
+    
