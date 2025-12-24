@@ -1,32 +1,41 @@
 
-'use client';
-import { useState, useEffect } from 'react';
+"use client";
 
-const PARTICLE_COUNT = 100;
-const GLOWING_COLORS = ['#C7A45B', '#23C6D9', '#FF00FF']; // Gold, Teal, Magenta
+import { useEffect, useState } from 'react';
+
+const NUM_PARTICLES = 40;
 
 export const WhoWeAreParticles = () => {
-    const [particles, setParticles] = useState<JSX.Element[]>([]);
+  const [particles, setParticles] = useState<any[]>([]);
 
-    useEffect(() => {
-        const generateParticles = () => {
-            return Array.from({ length: PARTICLE_COUNT }).map((_, i) => {
-                const size = Math.random() * 3 + 1;
-                const color = GLOWING_COLORS[Math.floor(Math.random() * GLOWING_COLORS.length)];
-                const style = {
-                    left: `${Math.random() * 100}%`,
-                    width: `${size}px`,
-                    height: `${size}px`,
-                    backgroundColor: color,
-                    boxShadow: `0 0 8px ${color}, 0 0 12px ${color}66`,
-                    animationDuration: `${Math.random() * 15 + 15}s`,
-                    animationDelay: `-${Math.random() * 20}s`,
-                };
-                return <div key={i} className="particle" style={style} />;
-            });
-        };
-        setParticles(generateParticles());
-    }, []);
+  useEffect(() => {
+    const newParticles = Array.from({ length: NUM_PARTICLES }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      size: `${Math.random() * 2.5 + 1}px`,
+      delay: `${Math.random() * 30}s`,
+      duration: `${Math.random() * 20 + 20}s`,
+      color: `rgba(35, 198, 217, ${Math.random() * 0.3 + 0.1})`,
+    }));
+    setParticles(newParticles);
+  }, []);
 
-    return <div className="particle-container">{particles}</div>;
+  return (
+    <div className="particle-container">
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="particle"
+          style={{
+            left: p.left,
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.color,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+            boxShadow: `0 0 10px ${p.color}`,
+          }}
+        />
+      ))}
+    </div>
+  );
 };

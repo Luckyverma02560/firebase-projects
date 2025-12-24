@@ -11,21 +11,36 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['"PT Sans"', 'sans-serif'],
-        headline: ['"Playfair Display"', 'serif'],
-        'headline-display': ['"Cinzel"', 'serif'],
+        body: ['var(--font-pt-sans)', 'sans-serif'],
+        headline: ['var(--font-playfair-display)', 'serif'],
+        'headline-display': ['var(--font-cinzel)', 'serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        'noto-serif': ['var(--font-noto-serif)', 'serif'],
         display: ['"Italiana"', 'serif'],
         code: ['monospace'],
-        inter: ['"Inter"', 'sans-serif'],
         handwriting: ['"Tangerine"', 'cursive'],
         helvetica: ['"Helvetica"', 'sans-serif'],
-        'noto-serif': ['"Noto Serif"', 'serif'],
+        brillant: ['Brillant', 'cursive'],
+        'orange-avenue': ['Orange Avenue', 'sans-serif'],
+        'bebas-neue': ['Bebas Neue', 'sans-serif'],
+        'sharp-sans': ['Sharp Sans', 'sans-serif'],
+        disney: ['Disney', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        clarendon: ['Clarendon', 'serif'],
+      },
+      spacing: {
+        '18': '4.5rem',
       },
       colors: {
         'gold-accent': 'hsl(var(--accent))',
         'subtle-text': 'hsl(var(--muted-foreground))',
         'heading-text': 'hsl(var(--foreground))',
         'secondary-panel': '#16171A',
+        'netflix-red': '#E50914',
+        'prime-blue': '#00A8E1',
+        'hotstar-blue': '#101c4f',
+        'zee-purple': '#7D00FF',
+        'youtube-red': '#FF0000',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -103,7 +118,7 @@ export default {
         'fade-in-up': {
           '0%': {
             opacity: '0',
-            transform: 'translateY(30px) scale(0.98)',
+            transform: 'translateY(20px) scale(0.98)',
           },
           '100%': {
             opacity: '1',
@@ -114,7 +129,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in-up': 'fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       perspective: {
         '1000': '1000px',

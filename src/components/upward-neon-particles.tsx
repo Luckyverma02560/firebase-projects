@@ -4,8 +4,8 @@
 import { useEffect, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-const NUM_PARTICLES_DESKTOP = 150;
-const NUM_PARTICLES_MOBILE = 50;
+const NUM_PARTICLES_DESKTOP = 80;
+const NUM_PARTICLES_MOBILE = 25;
 
 const NEON_COLORS = [
     '#39FF14', // Neon Green
@@ -16,11 +16,15 @@ const NEON_COLORS = [
     '#FF5F1F'  // Bright Orange
 ];
 
-export const HeroParticles = () => {
+export const UpwardNeonParticles = () => {
   const [particles, setParticles] = useState<any[]>([]);
   const isMobile = useIsMobile();
 
   useEffect(() => {
+    if (isMobile) {
+        setParticles([]);
+        return;
+    }
     const numParticles = isMobile ? NUM_PARTICLES_MOBILE : NUM_PARTICLES_DESKTOP;
     const newParticles = Array.from({ length: numParticles }).map(() => {
         const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
@@ -36,12 +40,14 @@ export const HeroParticles = () => {
     setParticles(newParticles);
   }, [isMobile]);
 
+  if (isMobile) return null;
+
   return (
     <div className="particle-container animate-particles-in">
       {particles.map((p, i) => (
         <div
           key={i}
-          className="particle down"
+          className="particle up"
           style={{
             left: p.left,
             width: p.size,
@@ -50,7 +56,7 @@ export const HeroParticles = () => {
             opacity: p.opacity,
             animationDelay: p.delay,
             animationDuration: p.duration,
-            boxShadow: `0 0 6px ${p.color}, 0 0 10px ${p.color}`,
+            boxShadow: `0 0 7px ${p.color}, 0 0 10px ${p.color}`,
           }}
         />
       ))}

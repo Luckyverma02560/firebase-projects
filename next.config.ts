@@ -1,3 +1,4 @@
+
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
@@ -46,9 +47,66 @@ const nextConfig: NextConfig = {
         hostname: 'i.postimg.cc',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'image.similarpng.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '1000logos.net',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https'
+        ,
+        hostname: 'www.citypng.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images-eu.ssl-images-amazon.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'downloadr2.apkmirror.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.vecteezy.com',
+        port: '',
+        pathname: '/**'
+      },
+      {
+          protocol: 'https',
+          hostname: 'pnghdpro.com',
+          port: '',
+          pathname: '/**'
+      },
+      {
+          protocol: 'https',
+          hostname: 'cdn-icons-png.flaticon.com',
+          port: '',
+          pathname: '/**'
       }
     ],
   },
 };
 
 export default nextConfig;
+
+    

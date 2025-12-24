@@ -5,41 +5,27 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { SearchComponent } from './search-component';
+
+
+const homeLink = { href: '/', label: 'Home' };
+const plansLink = { href: '/about', label: 'Plans' };
+
+const whatsappNumber = "918600070638";
+const message = "Hey, I want to know more about your Subsciption Plans";
+const getStartedLink = { href: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, label: 'Get Started' };
+
+const cartLink = { href: '/cart', label: 'View Cart' };
+
 
 const navLinks = [
-  { href: '#', label: 'Home' },
-  { href: '/', label: 'About Us' },
-  { href: '#', label: 'Services' },
-  { href: '#', label: 'Pricing' },
-  { href: '#', label: 'Payment' },
-  { href: '#', label: 'Investor Charter' },
-  { href: '#', label: 'Contact Us' },
-  { href: '#', label: 'Blog' },
+  { href: '/payment', label: 'Payment' },
 ];
-
-const moreLinksCol1 = [
-    { href: '#', label: 'Complaints' },
-    { href: '#', label: 'Disclaimer' },
-    { href: '#', label: 'Disclosure' },
-];
-
-const moreLinksCol2 = [
-    { href: '#', label: 'Performance & Reports' },
-    { href: '#', label: 'Refund Policy' },
-    { href: '#', label: 'Terms & Conditions' },
-];
-
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,6 +36,10 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
+    
+    // Set initial state
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -72,16 +62,18 @@ export default function Header() {
     );
   };
   
-  const MobileNavLink = ({ href, label }: { href: string; label: string; }) => {
+  const MobileNavLink = ({ href, label, isButton = false, isGetStarted = false }: { href: string; label: string; isButton?: boolean; isGetStarted?: boolean; }) => {
      const isActive = pathname === href;
     return (
         <SheetClose asChild>
-          <Link href={href} className={cn(
-            "block py-3 text-lg text-center font-headline font-headline",
-            isActive ? "text-bright-accent" : "text-foreground"
+          <a href={href} target={isGetStarted ? "_blank" : "_self"} rel={isGetStarted ? "noopener noreferrer" : ""} className={cn(
+            "block py-3 text-lg text-center font-headline rounded-md",
+            isButton ? "bg-gradient-plans-header text-white" : 
+            (isGetStarted ? "bg-gradient-get-started text-white" : 
+            (isActive ? "text-bright-accent" : "text-foreground"))
             )}>
               {label}
-          </Link>
+          </a>
         </SheetClose>
     );
   };
@@ -90,27 +82,35 @@ export default function Header() {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-black/40 shadow-md backdrop-blur-[20px]" : "bg-transparent"
+      isScrolled ? "bg-black/40 shadow-md backdrop-blur-[12px]" : "bg-transparent"
     )}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex-1">
+        <div className="flex items-center justify-between h-20 md:h-24">
+          <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               {logo && (
                 <Image
                   src={logo.imageUrl}
                   alt={logo.description}
                   data-ai-hint={logo.imageHint}
-                  width={40}
-                  height={40}
+                  width={96}
+                  height={96}
                   priority
-                  className={cn('brightness-0 invert rounded-full')}
+                  className={cn('rounded-full w-18 h-18 md:w-24 md:h-24')}
                 />
               )}
             </Link>
           </div>
 
           <nav className="hidden md:flex flex-1 justify-center items-center space-x-6">
+            <NavLink 
+                key={homeLink.label}
+                href={homeLink.href}
+                label={homeLink.label}
+              />
+            <Button asChild size="sm" className="font-headline text-sm uppercase tracking-wider bg-gradient-plans-header text-white font-bold shadow-[0_0_15px_rgba(252,70,107,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(252,70,107,0.8)] hover:scale-105">
+                <Link href={plansLink.href}>{plansLink.label}</Link>
+            </Button>
             {navLinks.map(link => (
               <NavLink 
                 key={link.label}
@@ -118,50 +118,43 @@ export default function Header() {
                 label={link.label}
               />
             ))}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative group font-headline text-sm uppercase tracking-wider transition-colors text-white hover:text-bright-accent font-normal focus-visible:ring-0 focus-visible:ring-offset-0 p-0 hover:bg-transparent">
-                  More
-                  <span className={cn(
-                      "absolute -bottom-1 left-0 h-0.5 bg-bright-accent transition-all duration-300 ease-in-out w-0 group-hover:w-full"
-                  )}></span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-black/70 border-gray-700 p-4 min-w-[30rem]">
-                <div className="grid grid-cols-2 gap-x-8">
-                    <ul className="space-y-2">
-                        {moreLinksCol1.map(link => (
-                            <li key={link.label}>
-                                <DropdownMenuItem asChild className="p-0 focus:bg-transparent">
-                                    <NavLink href={link.href} label={link.label} className="text-white"/>
-                                </DropdownMenuItem>
-                            </li>
-                        ))}
-                    </ul>
-                    <ul className="space-y-2">
-                        {moreLinksCol2.map(link => (
-                             <li key={link.label}>
-                                <DropdownMenuItem asChild className="p-0 focus:bg-transparent">
-                                    <NavLink href={link.href} label={link.label} className="text-white"/>
-                                </DropdownMenuItem>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </nav>
+          
+          <div className="hidden md:flex flex-shrink-0 justify-end items-center gap-2">
+            <SearchComponent />
+            <Button asChild size="sm" className="font-headline text-sm uppercase tracking-wider bg-gradient-get-started text-white font-bold shadow-[0_0_15px_rgba(52,148,230,0.5)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(236,110,173,0.8)] hover:scale-105">
+                <a href={getStartedLink.href} target="_blank" rel="noopener noreferrer">{getStartedLink.label}</a>
+            </Button>
+            <Button asChild variant="outline" size="icon" className="h-9 w-9 text-white border-gold-accent hover:bg-gold-accent/20 hover:text-white transition-colors duration-300">
+                <Link href={cartLink.href}>
+                    <ShoppingCart />
+                    <span className="sr-only">{cartLink.label}</span>
+                </Link>
+            </Button>
+          </div>
 
-          <div className="md:hidden flex-1 flex justify-end">
+          <div className="md:hidden flex-1 flex justify-end items-center gap-2">
+             <SearchComponent />
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className={cn('text-white hover:text-bright-accent hover:bg-transparent')}>
                   <Menu size={28} />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md">
-                 <div className="mt-12 flex flex-col gap-4">
-                    {[...navLinks, ...moreLinksCol1, ...moreLinksCol2].map(link => <MobileNavLink key={link.href} {...link} />)}
+              <SheetContent side="right" className="w-[80vw] bg-black/80 backdrop-blur-md flex flex-col justify-center">
+                 <div className="flex flex-col gap-4">
+                    <MobileNavLink key={homeLink.label} href={homeLink.href} label={homeLink.label} />
+                    <MobileNavLink key={plansLink.label} href={plansLink.href} label={plansLink.label} isButton />
+                    {navLinks.map(link => <MobileNavLink key={link.label} href={link.href} label={link.label} />)}
+                     <SheetClose asChild>
+                        <Link href={cartLink.href} className="flex items-center justify-center gap-2 py-3 text-lg text-center font-headline rounded-md text-foreground">
+                            <ShoppingCart />
+                            <span>{cartLink.label}</span>
+                        </Link>
+                    </SheetClose>
+                    <div className="pt-4">
+                      <MobileNavLink href={getStartedLink.href} label={getStartedLink.label} isGetStarted />
+                    </div>
                  </div>
               </SheetContent>
             </Sheet>

@@ -1,70 +1,126 @@
 
 "use client";
 
-import { useRef, useEffect } from 'react';
-import { AnimateOnScroll } from './animate-on-scroll';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useState, useRef, useLayoutEffect } from 'react';
+import { cn } from '@/lib/utils';
+import { Tv, Zap, HeartHandshake, Server } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-export const OurStorySection = () => {
+gsap.registerPlugin(ScrollTrigger);
+
+const advantageCards = [
+    {
+        icon: Tv,
+        title: 'Watch on Any Device',
+        description: 'Stream on your phone, tablet, laptop, or TV'
+    },
+    {
+        icon: Zap,
+        title: 'No Bandwidth Limits',
+        description: 'Unlimited streaming in crystal-clear 4K'
+    },
+    {
+        icon: HeartHandshake,
+        title: 'Family Sharing',
+        description: 'Share with family members safely'
+    },
+    {
+        icon: Server,
+        title: 'Indian Servers',
+        description: 'Faster streaming with local servers'
+    }
+];
+
+export const WhyChooseUsSection = () => {
+    const [selectedCard, setSelectedCard] = useState<number | null>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
-    const storyImage = PlaceHolderImages.find(p => p.id === 'our-story');
+    const headingRef = useRef<HTMLHeadingElement>(null);
+    const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-in-view');
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            const sectionEl = sectionRef.current;
+            const headingEl = headingRef.current;
+            const cardEls = cardsRef.current.filter(el => el !== null) as HTMLDivElement[];
+
+            if (!sectionEl || !headingEl || !cardEls.length) return;
+
+            gsap.fromTo(headingEl,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: sectionEl,
+                        start: 'top 60%',
+                        toggleActions: 'play none none none'
                     }
-                });
-            },
-            { threshold: 0.1 }
-        );
+                }
+            );
 
-        const currentRef = sectionRef.current;
-        if (currentRef) {
-            observer.observe(currentRef);
-        }
-
-        return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
+            if (selectedCard === null) {
+                gsap.fromTo(cardEls,
+                    { opacity: 0, y: 50, scale: 0.95 },
+                    {
+                        opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.4)', stagger: 0.15,
+                        scrollTrigger: {
+                            trigger: headingEl,
+                            start: 'bottom 80%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
             }
-        };
-    }, []);
+        }, sectionRef);
+
+        return () => ctx.revert();
+
+    }, [selectedCard]);
+
+    const handleCardClick = (e: React.MouseEvent, index: number) => {
+        e.stopPropagation();
+        setSelectedCard(prev => (prev === index ? null : index));
+    };
+
+    const handleBackgroundClick = () => {
+        setSelectedCard(null);
+    };
 
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden"
+            className="relative w-full flex items-center justify-center py-20 md:py-32 px-4 overflow-hidden bg-transparent"
+            onClick={handleBackgroundClick}
         >
-            <div className="absolute inset-0 bg-black/20 z-0">
-                {storyImage && (
-                    <Image
-                        src={storyImage.imageUrl}
-                        alt="Financial workspace"
-                        fill
-                        priority
-                        className="object-cover opacity-20 filter blur-[2px] scale-110 transition-transform duration-1000 ease-out [.is-in-view_&]:scale-100"
-                    />
-                )}
-                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
-            </div>
+            <div className="relative text-center max-w-5xl mx-auto z-10">
+                <h2 ref={headingRef} className={cn("section-heading mb-12 text-gradient-wiretap")}>Why Choose Us</h2>
 
-            <div className="relative text-center max-w-4xl mx-auto z-10">
-                <AnimateOnScroll animationClasses="animate-fade-in-up">
-                    <h2 className="section-label mb-4">
-                        <span className="inline-block relative overflow-hidden">
-                           <span className="inline-block heading-sweep">Our Story</span> 
-                        </span>
-                    </h2>
-                    <div className="w-24 h-0.5 bg-gold-accent mx-auto mb-8 shadow-[0_0_15px_2px_rgba(199,164,91,0.4)]" />
-                    <h3 className="section-heading mb-6">From Complexity to Clarity</h3>
-                    <p className="font-inter text-muted-foreground text-lg leading-relaxed">
-                        Founded in 2021 by a collective of seasoned investment bankers and research analysts, LoQ Capital Markets was born from a shared vision: to democratize access to institutional-grade financial intelligence. We witnessed firsthand the struggle for clear, independent insights amidst market noise. Our story is one of building a bridge—connecting ambition with actionable data and empowering financial institutions to navigate the complexities of capital markets with newfound confidence.
-                    </p>
-                </AnimateOnScroll>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {advantageCards.map((card, index) => {
+                        const Icon = card.icon;
+                        const isSelected = selectedCard === index;
+                        const isAnotherSelected = selectedCard !== null && !isSelected;
+
+                        return (
+                            <div
+                                key={card.title}
+                                ref={el => cardsRef.current[index] = el}
+                                onClick={(e) => handleCardClick(e, index)}
+                                className={cn(
+                                    "why-choose-us-card h-full flex flex-col items-center text-center text-white cursor-pointer",
+                                    isSelected ? "scale-110 z-20" : "hover:-translate-y-2",
+                                    isAnotherSelected ? "opacity-30 blur-sm" : "opacity-100"
+                                )}
+                            >
+                                <div className="bg-white/20 p-4 rounded-full mb-4 ring-2 ring-white/30">
+                                    <Icon className="w-8 h-8 text-white" />
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-2">{card.title}</h4>
+                                <p className="text-white/80 text-sm">{card.description}</p>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </section>
     );

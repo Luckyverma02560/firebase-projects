@@ -1,13 +1,49 @@
+
 import type {Metadata} from 'next';
+import { Cinzel, Inter, Noto_Serif, PT_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { ScrollToTopButton } from '@/components/scroll-to-top-button';
+import { CartProvider } from '@/context/cart-context';
+import { ServiceProvider } from '@/context/service-context';
+import { cn } from '@/lib/utils';
+
+const ptSans = PT_Sans({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-pt-sans',
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-playfair-display',
+});
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-cinzel',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-inter',
+});
+
+const notoSerif = Noto_Serif({
+    subsets: ['latin'],
+    weight: ['400', '700'],
+    variable: '--font-noto-serif',
+});
+
 
 export const metadata: Metadata = {
-  title: 'LoQ Capital Markets Clone',
-  description: 'A clone of the LoQ Capital Markets About Us page.',
+  title: 'EL11VEN HUB',
+  description: 'Your Gateway to Ultimate Streaming Experience',
 };
 
 export default function RootLayout({
@@ -17,16 +53,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="!scroll-smooth dark" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600&family=Noto+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-body antialiased" suppressHydrationWarning>
-          <Header />
-          <main>{children}</main>
-          <Toaster />
-          <ScrollToTopButton />
+      <body className={cn("font-body antialiased", ptSans.variable, playfairDisplay.variable, cinzel.variable, inter.variable, notoSerif.variable)} suppressHydrationWarning>
+        <ServiceProvider>
+          <CartProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <Toaster />
+            <ScrollToTopButton />
+          </CartProvider>
+        </ServiceProvider>
       </body>
     </html>
   );

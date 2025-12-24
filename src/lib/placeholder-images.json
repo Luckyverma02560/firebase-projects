@@ -2,20 +2,20 @@
   "placeholderImages": [
     {
       "id": "logo",
-      "description": "LoQ Capital Markets Logo",
-      "imageUrl": "https://i.postimg.cc/13f01z5y/demystify-logo.png",
-      "imageHint": "company logo"
+      "description": "EL11VEN HUB Logo",
+      "imageUrl": "https://i.postimg.cc/Qt6qtpH3/EL11Ven-Hub-cropped-processed-by-imagy.png",
+      "imageHint": "el11ven hub logo"
     },
     {
       "id": "about-us-hero",
       "description": "Advanced cryptocurrency trading setup with multiple monitors",
-      "imageUrl": "https://i.postimg.cc/nhFW57N2/pngtree-advanced-cryptocurrency-trading-setup-with-multiple-monitors-picture-image-16008018.png",
+      "imageUrl": "https://i.postimg.cc/pXfgzPYr/Screenshot-2025-12-06-205031.png",
       "imageHint": "stock chart"
     },
     {
       "id": "our-story",
-      "description": "Oil spill on brick wall surface texture",
-      "imageUrl": "https://i.postimg.cc/rFGpYK6V/oil-spill-brick-wall-surface-texture.jpg",
+      "description": "Abstract texture for the background",
+      "imageUrl": "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhYnN0cmFjdCUyMHRleHR1cmV8ZW58MHx8fHwxNzY0OTk3ODc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract texture"
     },
     {
@@ -33,50 +33,98 @@
     {
       "id": "team2",
       "description": "Team member Amit A.",
-      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team3",
       "description": "Team member Ankit M.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team4",
       "description": "Team member Riddhima B.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team5",
       "description": "Team member Nishant G.",
-      "imageUrl": "https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team6",
       "description": "Team member Ankit J.",
-      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team7",
       "description": "Team member Nupur A.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496358961-3c82861ab8f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496358961-3c82861ab8f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team8",
       "description": "Team member Aastha G.",
-      "imageUrl": "https://images.unsplash.com/photo-1595211877493-41a4e5f236b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1595211877493-41a4e5f236b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team9",
       "description": "Team member Poonam P.",
-      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjM4ODY0MzJ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
+    },
+    {
+      "id": "netflix-logo",
+      "description": "Netflix",
+      "imageUrl": "https://i.postimg.cc/KjD4FT6c/Netflix-icon-svg.png",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "prime-video-logo",
+      "description": "Prime Video",
+      "imageUrl": "https://i.postimg.cc/yxFdyGsS/amazon-prime-video-app-icon-hd.png",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "hotstar-logo",
+      "description": "Jio Hotstar",
+      "imageUrl": "https://i.postimg.cc/0jHnkr77/jiohotstar-logo-hd.webp",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "zee5-logo",
+      "description": "ZEE5",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Zee5-official-logo.jpeg",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "youtube-premium-logo",
+      "description": "Youtube Premium",
+      "imageUrl": "https://i.postimg.cc/pTm2XLTD/Untitled-ddddesign.png",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "sony-logo",
+      "description": "Sony Liv",
+      "imageUrl": "https://i.postimg.cc/YqDjczNh/unnamed.png",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "canva-logo",
+      "description": "Canva",
+      "imageUrl": "https://i.postimg.cc/02CNwcTT/canva-logo-hd.png",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "qr-code-placeholder",
+      "description": "QR Code Placeholder",
+      "imageUrl": "https://i.postimg.cc/tg9KywR2/Whats-App-Image-2025-12-14-at-4-21-15-PM.jpg",
+      "imageHint": "qr code"
     }
   ]
 }

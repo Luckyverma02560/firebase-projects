@@ -3,6 +3,55 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Brillant';
+  src: url('/fonts/brillant.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Orange Avenue';
+  src: url('/fonts/OrangeAvenueDEMO-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/fonts/bebasneue.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sharp Sans';
+  src: url('/fonts/sharp-sans.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Disney';
+  src: url('/fonts/disney.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Clarendon';
+  src: url('/fonts/clarendon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -94,6 +143,78 @@ body {
   .section-subheading {
     @apply font-inter text-muted-foreground max-w-3xl mx-auto;
   }
+
+  .text-gradient-wiretap {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #fc466b, #3f5efb);
+  }
+
+  .text-gradient-subscription {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #ee0979, #ff6a00);
+  }
+
+  .bg-gradient-plans-header {
+    background-image: linear-gradient(to right, #fc466b, #3f5efb);
+  }
+
+  .bg-gradient-plans {
+    background-image: linear-gradient(to right, #009fff, #ec2f4b);
+  }
+  
+  .bg-gradient-get-started {
+    background-image: linear-gradient(to right, #ee0979, #ff6a00);
+  }
+
+  .bg-gradient-view-plans {
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
+
+  .why-choose-us-card {
+    @apply relative bg-black/30 backdrop-blur-sm p-6 rounded-xl overflow-hidden transition-all duration-300 ease-in-out;
+  }
+
+  .why-choose-us-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.75rem; /* 12px */
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, #2575fc, #6a11cb) border-box;
+    mask: 
+       linear-gradient(#fff 0 0) padding-box, 
+       linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0.4;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .why-choose-us-card:hover::before {
+    opacity: 1;
+    animation: rotate-glow 3s linear infinite;
+  }
+
+  .why-choose-us-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 20px rgba(37, 117, 252, 0.3), 0 0 30px rgba(106, 17, 203, 0.2);
+  }
+
+  @keyframes rotate-glow {
+    0% {
+      background: linear-gradient(45deg, #2575fc, #6a11cb) border-box;
+    }
+    50% {
+      background: linear-gradient(45deg, #6a11cb, #2575fc) border-box;
+    }
+    100% {
+      background: linear-gradient(45deg, #2575fc, #6a11cb) border-box;
+    }
+  }
+
 }
 
 /* Particle animation styles */
@@ -116,14 +237,18 @@ body {
   animation-name: drift-down;
 }
 
-@keyframes drift {
-  0% { transform: translateY(110vh) scale(1); opacity: 1; }
-  100% { transform: translateY(-20vh) scale(0.2); opacity: 0; }
+.particle.up {
+  animation-name: drift-up;
 }
 
 @keyframes drift-down {
-  0% { transform: translateY(-20vh) scale(1); opacity: 1; }
+  0% { transform: translateY(-10vh) scale(1); opacity: 1; }
   100% { transform: translateY(110vh) scale(0.2); opacity: 0; }
+}
+
+@keyframes drift-up {
+  0% { transform: translateY(250vh) scale(1); opacity: 1; }
+  100% { transform: translateY(50vh) scale(0.2); opacity: 0; }
 }
 
 
@@ -137,20 +262,17 @@ body {
     background: linear-gradient(
       to right,
       transparent 0%,
-      rgba(173, 181, 189, 0.08) 50%,
+      rgba(255, 255, 255, 0.05) 50%,
       transparent 100%
     );
-    animation: sweep 10s linear infinite;
+    transform: skewX(-25deg);
+    transition: left 2.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@keyframes sweep {
-  0% {
-    transform: translateX(0) skewX(-20deg);
-  }
-  100% {
-    transform: translateX(250%) skewX(-20deg);
-  }
+.group:hover .light-streak {
+    left: 150%;
 }
+
 
 /* Gold Divider */
 .gold-divider {
@@ -232,12 +354,31 @@ body {
   }
 }
 
+.hero-heading-sweep {
+    position: relative;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(90deg, #8A2BE2, #CA2A30);
+}
+
+.hero-heading-sweep::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: sweep-light 2s ease-in-out 1.2s forwards;
+}
+
 .heading-light-sweep {
     position: relative;
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    background-image: linear-gradient(90deg, #C7A45B, #23C6D9);
+    background-image: linear-gradient(90deg, #8A2BE2, #1D97D2);
 }
 
 .heading-light-sweep::after {
@@ -332,25 +473,24 @@ body {
     100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.5); opacity: 0.3; }
 }
 
-.animate-pulse-slow {
-    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+/* Search Component */
+.search-container {
+    position: relative;
+    transition: width 0.4s ease-in-out;
 }
 
-@keyframes pulse-slow {
-  50% {
-    opacity: .7;
+/* Payment Icons Animation */
+.animate-scroll-x {
+  animation: scroll-x 20s linear infinite;
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
     
-.neon-divider {
-  height: 1px;
-  width: 100%;
-  background-color: hsl(var(--accent));
-  box-shadow: 0 0 5px hsl(var(--accent)), 0 0 10px hsl(var(--accent));
-}
     
-
-
-
-
-
