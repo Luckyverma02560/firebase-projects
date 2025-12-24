@@ -246,5 +246,3 @@ export const PlansSection = ({ showPlans, selectedService }: PlansSectionProps) 
     );
 
 };
-
-    
