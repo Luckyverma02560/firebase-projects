@@ -112,12 +112,19 @@ export default function AdminPage() {
     });
   };
     
-  const handlePlanChange = (billing: BillingCycle, plan: PlanName, field: string, value: string | boolean, isEditing: boolean) => {
+  const handlePlanChange = (billing: BillingCycle | '3-months' | '6-months', plan: PlanName, field: string, value: string | boolean, isEditing: boolean) => {
       const target = isEditing ? editingService : newService;
       const setter = isEditing ? setEditingService : setNewService;
       if (!target) return;
-
+  
       const updatedPlans = JSON.parse(JSON.stringify(target.plans)); // Deep copy
+  
+      if (!updatedPlans[billing]) {
+        updatedPlans[billing] = {};
+      }
+      if (!updatedPlans[billing][plan]) {
+        updatedPlans[billing][plan] = { price: '', features: [], isAvailable: false };
+      }
 
       if (field === 'price') {
           updatedPlans[billing][plan].price = value as string;
@@ -184,11 +191,11 @@ export default function AdminPage() {
             </div>
           );
         case 'services':
-            const renderPlanFields = (billing: BillingCycle, plan: PlanName, serviceData: Omit<Service, 'id'> | Service, isEditing: boolean, jioDuration?: string) => {
+            const renderPlanFields = (billing: BillingCycle | '3-months' | '6-months', plan: PlanName, serviceData: Omit<Service, 'id'> | Service, isEditing: boolean) => {
                 const planData = serviceData.plans[billing]?.[plan];
                 if (!planData) return null;
 
-                const idPrefix = jioDuration ? `${billing}-${plan}-${jioDuration}` : `${billing}-${plan}`;
+                const idPrefix = `${billing}-${plan}`;
 
                 return (
                     <div key={idPrefix} className="p-3 border border-white/20 rounded-lg">
@@ -230,49 +237,63 @@ export default function AdminPage() {
                     </div>
                 )
             };
+            
+            const renderPlanForm = (serviceData: Omit<Service, 'id'> | Service, isEditing: boolean) => {
+                const has3MonthPlan = serviceData.plans['3-months'] && Object.keys(serviceData.plans['3-months']).length > 0;
+                const has6MonthPlan = serviceData.plans['6-months'] && Object.keys(serviceData.plans['6-months']).length > 0;
+                const showSpecialHalfYearly = has3MonthPlan || has6MonthPlan;
 
-            const renderPlanForm = (serviceData: Omit<Service, 'id'> | Service, isEditing: boolean) => (
-                <Tabs defaultValue="monthly" className="w-full">
-                    <TabsList className="grid w-full grid-cols-3">
-                        <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                        <TabsTrigger value="half-yearly">
-                            {serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5' || serviceData.name === 'Sony Liv' ? '3/6 Months' : 
-                             serviceData.name === 'Netflix' ? '3 Months' : 'Half Yearly'}
-                        </TabsTrigger>
-                        <TabsTrigger value="yearly">
-                             {serviceData.name === 'Netflix' ? 'Half Yearly' : 'Yearly'}
-                        </TabsTrigger>
-                    </TabsList>
-                    {billingCycles.map(billing => (
-                        <TabsContent key={billing} value={billing} className="space-y-4">
-                            {(serviceData.name === 'Jio Hotstar' || serviceData.name === 'ZEE5' || serviceData.name === 'Sony Liv') && billing === 'half-yearly' ? (
-                                <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
-                                    {/* 3 Months Branch */}
-                                    <div className="flex flex-col items-center gap-4 w-full">
-                                        <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500 w-full text-center">3 Months</div>
-                                        <div className="space-y-4 w-full">
-                                            {planNames.map(plan => serviceData.plans['3-months']?.[plan] && renderPlanFields(billing, plan, serviceData, isEditing, '3-months'))}
-                                        </div>
-                                    </div>
+                return (
+                    <Tabs defaultValue="monthly" className="w-full">
+                        <TabsList className="grid w-full grid-cols-3">
+                            <TabsTrigger value="monthly">Monthly</TabsTrigger>
+                            <TabsTrigger value="half-yearly">
+                                {showSpecialHalfYearly ? '3/6 Months' : serviceData.name === 'Netflix' ? '3 Months' : 'Half Yearly'}
+                            </TabsTrigger>
+                            <TabsTrigger value="yearly">
+                                 {serviceData.name === 'Netflix' ? 'Half Yearly' : 'Yearly'}
+                            </TabsTrigger>
+                        </TabsList>
+                        {billingCycles.map(billing => (
+                            <TabsContent key={billing} value={billing} className="space-y-4">
+                                {showSpecialHalfYearly && billing === 'half-yearly' ? (
+                                    <div className="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-8">
+                                        {/* 3 Months Branch */}
+                                        {has3MonthPlan && (
+                                          <div className="flex flex-col items-center gap-4 w-full">
+                                              <div className="bg-gray-800 text-purple-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-purple-500 w-full text-center">3 Months</div>
+                                              <div className="space-y-4 w-full">
+                                                  {planNames.map(plan => serviceData.plans['3-months']?.[plan] && renderPlanFields('3-months', plan, serviceData, isEditing))}
+                                              </div>
+                                          </div>
+                                        )}
 
-                                    <div className="w-full h-px bg-white/10 lg:hidden" />
-                                    <div className="w-px h-auto bg-white/10 hidden lg:block self-stretch mx-4" />
-                                    
-                                    {/* 6 Months Branch */}
-                                    <div className="flex flex-col items-center gap-4 w-full">
-                                        <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500 w-full text-center">6 Months</div>
-                                        <div className="space-y-4 w-full">
-                                            {planNames.map(plan => serviceData.plans['6-months']?.[plan] && renderPlanFields(billing, plan, serviceData, isEditing, '6-months'))}
-                                        </div>
+                                        {has3MonthPlan && has6MonthPlan && (
+                                            <>
+                                              <div className="w-full h-px bg-white/10 lg:hidden" />
+                                              <div className="w-px h-auto bg-white/10 hidden lg:block self-stretch mx-4" />
+                                            </>
+                                        )}
+                                        
+                                        {/* 6 Months Branch */}
+                                        {has6MonthPlan && (
+                                          <div className="flex flex-col items-center gap-4 w-full">
+                                              <div className="bg-gray-800 text-green-400 font-bold text-lg px-6 py-2 rounded-full border-2 border-green-500 w-full text-center">6 Months</div>
+                                              <div className="space-y-4 w-full">
+                                                  {planNames.map(plan => serviceData.plans['6-months']?.[plan] && renderPlanFields('6-months', plan, serviceData, isEditing))}
+                                              </div>
+                                          </div>
+                                        )}
                                     </div>
-                                </div>
-                            ) : (
-                                planNames.map(plan => renderPlanFields(billing, plan, serviceData, isEditing))
-                            )}
-                        </TabsContent>
-                    ))}
-                </Tabs>
-            );
+                                ) : (
+                                    planNames.map(plan => renderPlanFields(billing, plan, serviceData, isEditing))
+                                )}
+                            </TabsContent>
+                        ))}
+                    </Tabs>
+                )
+            };
+
 
             return (
                 <Card className="bg-black/30 backdrop-blur-lg border border-white/10">
