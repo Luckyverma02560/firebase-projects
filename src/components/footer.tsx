@@ -22,7 +22,7 @@ export default function Footer() {
 
   const socialLinks = [
     { href: whatsappUrl, icon: MessageSquare, 'aria-label': 'WhatsApp' },
-    { href: '#', icon: Send, 'aria-label': 'Telegram' },
+    { href: 'https://t.me/el11ven_hub', icon: Send, 'aria-label': 'Telegram' },
     { href: 'https://www.facebook.com/people/El11ven-Hub/61585139540594', icon: Facebook, 'aria-label': 'Facebook' },
     { href: 'https://www.instagram.com/el11ven.hub/', icon: Instagram, 'aria-label': 'Instagram' },
   ];
