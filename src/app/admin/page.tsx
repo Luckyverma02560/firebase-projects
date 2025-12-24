@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, FormEvent } from 'react';
@@ -305,78 +306,84 @@ export default function AdminPage() {
                                         <TableRow>
                                             <TableHead>Icon</TableHead>
                                             <TableHead>Name</TableHead>
-                                            <TableHead>Sample Price (Monthly Basic)</TableHead>
+                                            <TableHead>Sample Price (Monthly)</TableHead>
                                             <TableHead className="text-right">Actions</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
-                                        {services.map(service => (
-                                            <TableRow key={service.id}>
-                                                <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
-                                                <TableCell className="font-medium">{service.name}</TableCell>
-                                                <TableCell>INR {service.plans.monthly.Basic.price}</TableCell>
-                                                <TableCell className="text-right flex justify-end gap-1 md:gap-2">
-                                                    <Dialog onOpenChange={(open) => !open && setEditingService(null)}>
-                                                        <DialogTrigger asChild>
-                                                            <Button variant="ghost" size="icon" onClick={() => setEditingService(JSON.parse(JSON.stringify(service)))}>
-                                                                <Pencil className="h-4 w-4" />
-                                                            </Button>
-                                                        </DialogTrigger>
-                                                        {editingService?.id === service.id && (
-                                                            <DialogContent className="bg-gray-900 border-purple-500 text-white max-w-4xl h-[90vh] flex flex-col">
-                                                                <DialogHeader>
-                                                                    <DialogTitle>Edit {editingService.name}</DialogTitle>
-                                                                </DialogHeader>
-                                                                <form onSubmit={handleUpdateService} className="space-y-4 overflow-y-auto flex-grow pr-2 sm:pr-6">
-                                                                    <div className="grid md:grid-cols-2 gap-4">
-                                                                        <div className="space-y-2">
-                                                                            <Label htmlFor="editOttName">OTT Name</Label>
-                                                                            <Input id="editOttName" value={editingService.name} onChange={(e) => setEditingService({...editingService, name: e.target.value})} className="bg-gray-800/50 border-white/20"/>
+                                        {services.map(service => {
+                                            const monthlyPlans = service.plans?.monthly;
+                                            const firstPlanKey = monthlyPlans ? (Object.keys(monthlyPlans)[0] as PlanName) : undefined;
+                                            const samplePrice = firstPlanKey && monthlyPlans?.[firstPlanKey] ? monthlyPlans[firstPlanKey]?.price : 'N/A';
+
+                                            return (
+                                                <TableRow key={service.id}>
+                                                    <TableCell><img src={service.icon} alt={service.name} className="w-8 h-8 object-contain" /></TableCell>
+                                                    <TableCell className="font-medium">{service.name}</TableCell>
+                                                    <TableCell>INR {samplePrice}</TableCell>
+                                                    <TableCell className="text-right flex justify-end gap-1 md:gap-2">
+                                                        <Dialog onOpenChange={(open) => !open && setEditingService(null)}>
+                                                            <DialogTrigger asChild>
+                                                                <Button variant="ghost" size="icon" onClick={() => setEditingService(JSON.parse(JSON.stringify(service)))}>
+                                                                    <Pencil className="h-4 w-4" />
+                                                                </Button>
+                                                            </DialogTrigger>
+                                                            {editingService?.id === service.id && (
+                                                                <DialogContent className="bg-gray-900 border-purple-500 text-white max-w-4xl h-[90vh] flex flex-col">
+                                                                    <DialogHeader>
+                                                                        <DialogTitle>Edit {editingService.name}</DialogTitle>
+                                                                    </DialogHeader>
+                                                                    <form onSubmit={handleUpdateService} className="space-y-4 overflow-y-auto flex-grow pr-2 sm:pr-6">
+                                                                        <div className="grid md:grid-cols-2 gap-4">
+                                                                            <div className="space-y-2">
+                                                                                <Label htmlFor="editOttName">OTT Name</Label>
+                                                                                <Input id="editOttName" value={editingService.name} onChange={(e) => setEditingService({...editingService, name: e.target.value})} className="bg-gray-800/50 border-white/20"/>
+                                                                            </div>
+                                                                            <div className="space-y-2">
+                                                                                <Label htmlFor="editIconUrl">Icon Image URL</Label>
+                                                                                <Input id="editIconUrl" value={editingService.icon} onChange={(e) => setEditingService({...editingService, icon: e.target.value})} className="bg-gray-800/50 border-white/20"/>
+                                                                            </div>
                                                                         </div>
-                                                                        <div className="space-y-2">
-                                                                            <Label htmlFor="editIconUrl">Icon Image URL</Label>
-                                                                            <Input id="editIconUrl" value={editingService.icon} onChange={(e) => setEditingService({...editingService, icon: e.target.value})} className="bg-gray-800/50 border-white/20"/>
-                                                                        </div>
-                                                                    </div>
-                                                                    {renderPlanForm(editingService, true)}
-                                                                    <DialogFooter className="sticky bottom-0 bg-gray-900 py-4">
-                                                                        <DialogClose asChild>
-                                                                            <Button type="submit" className="bg-gradient-to-r from-green-500 to-teal-600">Save Changes</Button>
-                                                                        </DialogClose>
-                                                                    </DialogFooter>
-                                                                </form>
-                                                            </DialogContent>
-                                                        )}
-                                                    </Dialog>
-                                                     <AlertDialog>
-                                                        <AlertDialogTrigger asChild>
-                                                          <Button variant="ghost" size="icon" className="text-red-500 hover:bg-red-500/10">
-                                                            <Trash2 className="h-4 w-4" />
-                                                          </Button>
-                                                        </AlertDialogTrigger>
-                                                        <AlertDialogContent className="bg-gray-900 border-red-500 text-white">
-                                                          <AlertDialogHeader>
-                                                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                                            <AlertDialogDescription>
-                                                              This action cannot be undone. This will permanently delete the
-                                                              <span className="font-bold"> {service.name} </span>
-                                                              service.
-                                                            </AlertDialogDescription>
-                                                          </AlertDialogHeader>
-                                                          <AlertDialogFooter>
-                                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                                            <AlertDialogAction
-                                                              className="bg-red-600 hover:bg-red-700"
-                                                              onClick={() => handleRemoveService(service.id)}
-                                                            >
-                                                              Delete
-                                                            </AlertDialogAction>
-                                                          </AlertDialogFooter>
-                                                        </AlertDialogContent>
-                                                      </AlertDialog>
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
+                                                                        {renderPlanForm(editingService, true)}
+                                                                        <DialogFooter className="sticky bottom-0 bg-gray-900 py-4">
+                                                                            <DialogClose asChild>
+                                                                                <Button type="submit" className="bg-gradient-to-r from-green-500 to-teal-600">Save Changes</Button>
+                                                                            </DialogClose>
+                                                                        </DialogFooter>
+                                                                    </form>
+                                                                </DialogContent>
+                                                            )}
+                                                        </Dialog>
+                                                         <AlertDialog>
+                                                            <AlertDialogTrigger asChild>
+                                                              <Button variant="ghost" size="icon" className="text-red-500 hover:bg-red-500/10">
+                                                                <Trash2 className="h-4 w-4" />
+                                                              </Button>
+                                                            </AlertDialogTrigger>
+                                                            <AlertDialogContent className="bg-gray-900 border-red-500 text-white">
+                                                              <AlertDialogHeader>
+                                                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                                                <AlertDialogDescription>
+                                                                  This action cannot be undone. This will permanently delete the
+                                                                  <span className="font-bold"> {service.name} </span>
+                                                                  service.
+                                                                </AlertDialogDescription>
+                                                              </AlertDialogHeader>
+                                                              <AlertDialogFooter>
+                                                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                                <AlertDialogAction
+                                                                  className="bg-red-600 hover:bg-red-700"
+                                                                  onClick={() => handleRemoveService(service.id)}
+                                                                >
+                                                                  Delete
+                                                                </AlertDialogAction>
+                                                              </AlertDialogFooter>
+                                                            </AlertDialogContent>
+                                                          </AlertDialog>
+                                                    </TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
                                     </TableBody>
                                 </Table>
                             </div>
@@ -571,3 +578,5 @@ function DashboardCard({ title, description, icon: Icon, onClick }: { title: str
         </Card>
     )
 }
+
+    
