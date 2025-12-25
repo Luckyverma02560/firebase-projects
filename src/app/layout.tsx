@@ -43,6 +43,9 @@ const notoSerif = Noto_Serif({
 
 export const metadata: Metadata = {
   title: 'EL11VEN HUB',
+  verification: {
+    google: 'googlec72ed27e2ad93960.html',
+  }
   description: 'Your Gateway to Ultimate Streaming Experience',
 };
 
