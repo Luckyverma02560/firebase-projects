@@ -44,6 +44,7 @@ export const metadata: Metadata = {
   title: 'EL11VEN HUB',
   description: 'Your Gateway to Ultimate Streaming Experience',
 };
+<meta name="google-site-verification" content="DWlSbvZKyN7Q0_5hhkF7yvoIIELBF1_alXzNmy9cQM0" />
 
 export default function RootLayout({
   children,
