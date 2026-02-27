@@ -8,6 +8,7 @@ import { ScrollToTopButton } from '@/components/scroll-to-top-button';
 import { CartProvider } from '@/context/cart-context';
 import { ServiceProvider } from '@/context/service-context';
 import { cn } from '@/lib/utils';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const ptSans = PT_Sans({
   subsets: ['latin'],
@@ -61,6 +62,7 @@ export default function RootLayout({
             <Footer />
             <Toaster />
             <ScrollToTopButton />
+            <SpeedInsights />
           </CartProvider>
         </ServiceProvider>
       </body>
